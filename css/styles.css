@@ -60,17 +60,13 @@ html {
 
 body {
     font-family: var(--font-body);
-    background:
-        radial-gradient(ellipse 120% 80% at 20% 10%, rgba(91, 181, 224, 0.08), transparent 50%),
-        radial-gradient(ellipse 80% 120% at 80% 90%, rgba(78, 205, 196, 0.06), transparent 50%),
-        radial-gradient(ellipse 60% 60% at 50% 50%, rgba(26, 64, 96, 0.15), transparent 70%),
-        linear-gradient(180deg, var(--ocean-deep) 0%, var(--night-0) 30%, var(--night-1) 60%, var(--night-2) 100%);
+    background: url('../assets/images/ocean-bg.jpg') center/cover no-repeat fixed;
     color: #e8eef8;
     overflow: hidden;
     -webkit-font-smoothing: antialiased;
 }
 
-/* Ocean caustics light effect */
+/* Subtle vignette + depth overlay over the background image */
 body::before {
     content: '';
     position: fixed;
@@ -78,40 +74,8 @@ body::before {
     pointer-events: none;
     z-index: 1;
     background:
-        radial-gradient(ellipse 40% 30% at 30% 20%, rgba(91, 181, 224, 0.05), transparent),
-        radial-gradient(ellipse 35% 25% at 70% 60%, rgba(78, 205, 196, 0.04), transparent),
-        radial-gradient(ellipse 45% 35% at 50% 40%, rgba(26, 95, 138, 0.06), transparent);
-    animation: caustics 12s ease-in-out infinite alternate;
-}
-
-@keyframes caustics {
-    0% { opacity: 0.6; transform: scale(1) translateY(0); }
-    50% { opacity: 0.8; transform: scale(1.02) translateY(-2%); }
-    100% { opacity: 0.6; transform: scale(1) translateY(0); }
-}
-
-/* Floating bubbles */
-body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-    background:
-        radial-gradient(circle 3px at 15% 80%, rgba(255, 255, 255, 0.15), transparent),
-        radial-gradient(circle 2px at 25% 70%, rgba(255, 255, 255, 0.1), transparent),
-        radial-gradient(circle 4px at 35% 85%, rgba(255, 255, 255, 0.12), transparent),
-        radial-gradient(circle 2px at 45% 75%, rgba(255, 255, 255, 0.08), transparent),
-        radial-gradient(circle 3px at 55% 90%, rgba(255, 255, 255, 0.1), transparent),
-        radial-gradient(circle 2px at 65% 65%, rgba(255, 255, 255, 0.12), transparent),
-        radial-gradient(circle 4px at 75% 80%, rgba(255, 255, 255, 0.08), transparent),
-        radial-gradient(circle 2px at 85% 70%, rgba(255, 255, 255, 0.1), transparent);
-    animation: bubbles 20s linear infinite;
-}
-
-@keyframes bubbles {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-20px); }
+        radial-gradient(ellipse 120% 100% at 50% 0%, rgba(91, 181, 224, .06), transparent 60%),
+        linear-gradient(180deg, rgba(7, 20, 34, .35) 0%, transparent 25%, transparent 75%, rgba(7, 20, 34, .55) 100%);
 }
 
 ::selection {
@@ -281,46 +245,6 @@ button {
 }
 
 /* Surface light ripples - sunlight filtering through water surface */
-.ripples {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    transform: translateX(-50%);
-}
-
-.ripples i {
-    position: absolute;
-    left: 50%;
-    top: -2vmin;
-    width: 80vmin;
-    height: 12vmin;
-    margin-left: -40vmin;
-    border-radius: 50%;
-    border: 1px solid rgba(91, 181, 224, .15);
-    background: radial-gradient(ellipse, rgba(91, 181, 224, .03), transparent 70%);
-    animation: ripple 9s linear infinite;
-}
-
-.ripples i:nth-child(2) {
-    animation-delay: 4.5s;
-}
-
-@keyframes ripple {
-    0% {
-        transform: scale(.15);
-        opacity: 0;
-    }
-
-    12% {
-        opacity: .4;
-    }
-
-    100% {
-        transform: scale(1);
-        opacity: 0;
-    }
-}
-
 /* Rising bubbles / plankton */
 .motes {
     position: absolute;
@@ -362,72 +286,6 @@ button {
         transform: translate3d(calc(var(--sx) * -.6), -110vh, 0);
         opacity: 0;
     }
-}
-
-/* Coral reef silhouettes at ocean floor */
-.coral-reef {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 18vh;
-    pointer-events: none;
-    z-index: 1;
-    opacity: .12;
-    background:
-        /* Coral cluster 1 - brain coral */
-        radial-gradient(ellipse 8vmin 6vmin at 8% 100%, rgba(232, 131, 107, .8), transparent 70%),
-        radial-gradient(ellipse 5vmin 4vmin at 12% 95%, rgba(232, 131, 107, .6), transparent 65%),
-        /* Coral cluster 2 - branching coral */
-        radial-gradient(ellipse 3vmin 12vmin at 22% 100%, rgba(192, 184, 224, .7), transparent 70%),
-        radial-gradient(ellipse 4vmin 10vmin at 26% 100%, rgba(192, 184, 224, .5), transparent 65%),
-        radial-gradient(ellipse 2vmin 8vmin at 20% 98%, rgba(192, 184, 224, .4), transparent 60%),
-        /* Coral cluster 3 - fan coral */
-        radial-gradient(ellipse 10vmin 8vmin at 40% 100%, rgba(232, 131, 107, .6), transparent 65%),
-        radial-gradient(ellipse 6vmin 5vmin at 44% 96%, rgba(240, 168, 146, .5), transparent 60%),
-        /* Coral cluster 4 - tube coral */
-        radial-gradient(ellipse 4vmin 14vmin at 55% 100%, rgba(78, 205, 196, .5), transparent 70%),
-        radial-gradient(ellipse 3vmin 11vmin at 58% 100%, rgba(78, 205, 196, .4), transparent 65%),
-        radial-gradient(ellipse 5vmin 12vmin at 60% 100%, rgba(91, 181, 224, .35), transparent 65%),
-        /* Coral cluster 5 - mushroom coral */
-        radial-gradient(ellipse 7vmin 5vmin at 72% 100%, rgba(232, 131, 107, .7), transparent 65%),
-        radial-gradient(ellipse 5vmin 3vmin at 76% 97%, rgba(240, 168, 146, .5), transparent 60%),
-        /* Coral cluster 6 - staghorn coral */
-        radial-gradient(ellipse 3vmin 15vmin at 85% 100%, rgba(192, 184, 224, .6), transparent 70%),
-        radial-gradient(ellipse 4vmin 13vmin at 88% 100%, rgba(192, 184, 224, .45), transparent 65%),
-        radial-gradient(ellipse 2vmin 10vmin at 82% 98%, rgba(192, 184, 224, .35), transparent 60%),
-        /* Seafloor gradient */
-        linear-gradient(0deg, rgba(7, 20, 34, .6) 0%, transparent 100%);
-    animation: coral-sway 8s ease-in-out infinite alternate;
-}
-
-@keyframes coral-sway {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(1vmin); }
-}
-
-/* Light rays from ocean surface */
-.light-rays {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-    opacity: .06;
-    background:
-        linear-gradient(175deg, rgba(91, 181, 224, .4) 0%, transparent 25%),
-        linear-gradient(170deg, rgba(200, 230, 255, .3) 0%, transparent 20%),
-        linear-gradient(185deg, rgba(78, 205, 196, .3) 0%, transparent 30%),
-        linear-gradient(165deg, rgba(200, 230, 255, .2) 0%, transparent 15%);
-    animation: rays-shift 15s ease-in-out infinite alternate;
-}
-
-@keyframes rays-shift {
-    0% { opacity: .05; transform: skewX(-2deg); }
-    50% { opacity: .08; transform: skewX(1deg); }
-    100% { opacity: .05; transform: skewX(-2deg); }
 }
 
 /* Deep water vignette - darker at edges like ocean depth */
