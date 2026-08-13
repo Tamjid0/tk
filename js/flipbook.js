@@ -81,6 +81,9 @@
             im.alt = "[" + art.token + "]";
             im.decoding = "sync";
             im.draggable = false;
+            // fit: "cover" (default) or "contain"
+            const fit = art.fit === "contain" ? "contain" : "cover";
+            im.style.objectFit = fit;
             // scale: 1-9 integer, 5 = default (no change).
             // Below 5 = zoomed out (more image visible), above 5 = zoomed in (cropped tighter).
             const sc = Math.min(9, Math.max(1, parseInt(art.scale, 10) || 5));

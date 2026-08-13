@@ -9,6 +9,9 @@
       left/right on wide screens, one-by-one on phones.
    4. Each art object supports a "scale" property (integer 1-9).
       5 = default. Below 5 = zoomed out, above 5 = zoomed in.
+   5. Each art object supports a "fit" property ("cover" or "contain").
+      "cover" = fills container, may crop edges (default).
+      "contain" = shows full image, may leave letterbox bars.
 =============================================================== */
 const IMG = (file) => `assets/images/${file}`;
 
@@ -17,7 +20,7 @@ const PAGES = [
     /* 1 · COVER ─────────────────────────────────────────────── */
     {
         type: "cover",
-        art: { token: "COVER_ART", src: IMG("lovers.jpg"), scale: 5 },
+        art: { token: "COVER_ART", src: IMG("lovers.jpg"), scale: 10 },
         title: "Heino x dolia",
         recipient: "Dolia",
         date: "15/08/2026"
