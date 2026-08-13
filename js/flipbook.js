@@ -372,21 +372,34 @@
         hideHint();
         lock = true;
         if (mqReduce.matches) { fadeSwap(target); return; }
-        /* 1. Build sheet FIRST — it reads cursor for the old page */
         const sheet = buildSheet(dir, target);
-        /* 2. Pre-render new page into the slot UNDER the sheet */
+        /* Pre-render ONLY the slot the sheet covers — the other
+           slot must stay unchanged until the flip completes. */
+        const v = views[target];
+        if (mode === "single") {
+            slotRight.replaceChildren(makePage(pageModel(v[0])));
+        } else if (dir > 0) {
+            /* forward: sheet covers right half */
+            slotRight.replaceChildren(makePage(pageModel(v[1])));
+        } else {
+            /* backward: sheet covers left half */
+            if (v[0] !== null) slotLeft.replaceChildren(makePage(pageModel(v[0])));
+            else slotLeft.replaceChildren(el("div", "empty-mark"));
+        }
         cursor = target;
-        renderView(cursor);
         updateUI();
-        /* 3. Start the flip animation */
         book.appendChild(sheet);
         book.classList.add("is-flipping");
         requestAnimationFrame(() => requestAnimationFrame(() => sheet.classList.add("turning")));
-        setTimeout(() => {
+        const cleanup = () => {
             sheet.remove();
             book.classList.remove("is-flipping");
+            /* Now update the OTHER slot that we didn't touch yet */
+            renderView(cursor);
             lock = false;
-        }, getFlipMs() + 80);
+        };
+        sheet.addEventListener("transitionend", cleanup, { once: true });
+        setTimeout(cleanup, getFlipMs() + 200);
     }
 
     function goTo(target) {
