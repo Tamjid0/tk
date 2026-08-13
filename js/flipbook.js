@@ -340,21 +340,6 @@
     /* ---------- page turning ---------- */
     function hideHint() { hint.classList.add("gone"); stage.classList.add("seen"); }
 
-    function commit(sheet, target) {
-        if (!sheet || !sheet.parentNode) return;
-        cursor = target;
-        renderView(cursor);
-        /* Wait one frame so the browser can decode and paint the
-           new slot content, THEN remove the sheet.  Without this
-           the slot shows old/blank images for up to 1 s. */
-        requestAnimationFrame(() => {
-            sheet.remove();
-            book.classList.remove("is-flipping");
-            updateUI();
-            lock = false;
-        });
-    }
-
     function fadeSwap(target) {
         book.classList.add("is-fading");
         setTimeout(() => {
@@ -387,11 +372,21 @@
         hideHint();
         lock = true;
         if (mqReduce.matches) { fadeSwap(target); return; }
+        /* 1. Build sheet FIRST — it reads cursor for the old page */
         const sheet = buildSheet(dir, target);
+        /* 2. Pre-render new page into the slot UNDER the sheet */
+        cursor = target;
+        renderView(cursor);
+        updateUI();
+        /* 3. Start the flip animation */
         book.appendChild(sheet);
         book.classList.add("is-flipping");
         requestAnimationFrame(() => requestAnimationFrame(() => sheet.classList.add("turning")));
-        setTimeout(() => commit(sheet, target), getFlipMs() + 80);
+        setTimeout(() => {
+            sheet.remove();
+            book.classList.remove("is-flipping");
+            lock = false;
+        }, getFlipMs() + 80);
     }
 
     function goTo(target) {
