@@ -4,22 +4,30 @@
 ================================================================ */
 
 :root {
-    /* Palette — night water + radiance */
-    --night-0: #070d1a;
-    --night-1: #0c1526;
-    --night-2: #13203a;
-    --aqua: #6fc3cf;
-    --aqua-deep: #3c8ba0;
-    --aqua-ink: #1b6079;
-    --gold: #d3ab5e;
-    --gold-soft: #ecd7a4;
-    --gold-deep: #96712c;
-    --paper: #f5eede;
-    --paper-hi: #faf5e9;
-    --paper-lo: #e8dcc1;
-    --ink: #2b3350;
-    --ink-soft: #5c6379;
-    --seal: #b0453a;
+    /* Palette — Dolia mermaid ocean theme */
+    --night-0: #0b1a2e;
+    --night-1: #0f2240;
+    --night-2: #162e52;
+    --aqua: #5bb5e0;
+    --aqua-deep: #3a8fbf;
+    --aqua-ink: #1a5f8a;
+    --gold: #f0d68a;
+    --gold-soft: #f7ecc8;
+    --gold-deep: #c9a84c;
+    --coral: #e8836b;
+    --coral-soft: #f0a892;
+    --paper: #f0f5fa;
+    --paper-hi: #f8fbff;
+    --paper-lo: #dce8f0;
+    --ink: #1a3050;
+    --ink-soft: #4a7090;
+    --seal: #d4715e;
+    --ocean-deep: #071422;
+    --ocean-mid: #0e2540;
+    --ocean-light: #1a4060;
+    --pearl: #e8eef8;
+    --lavender: #c0b8e0;
+    --teal: #4ecdc4;
 
     /* Type — distinctive display serif over a quiet book serif,
      system stacks only (no webfonts, no external requests) */
@@ -53,16 +61,61 @@ html {
 body {
     font-family: var(--font-body);
     background:
-        radial-gradient(60vmax 60vmax at 86% -12%, rgba(211, 171, 94, .13), transparent 60%),
-        radial-gradient(72vmax 52vmax at 10% 114%, rgba(111, 195, 207, .15), transparent 62%),
-        linear-gradient(180deg, #0a1322 0%, var(--night-0) 46%, #081120 100%);
-    color: #e8e2d2;
+        radial-gradient(ellipse 120% 80% at 20% 10%, rgba(91, 181, 224, 0.08), transparent 50%),
+        radial-gradient(ellipse 80% 120% at 80% 90%, rgba(78, 205, 196, 0.06), transparent 50%),
+        radial-gradient(ellipse 60% 60% at 50% 50%, rgba(26, 64, 96, 0.15), transparent 70%),
+        linear-gradient(180deg, var(--ocean-deep) 0%, var(--night-0) 30%, var(--night-1) 60%, var(--night-2) 100%);
+    color: #e8eef8;
     overflow: hidden;
     -webkit-font-smoothing: antialiased;
 }
 
+/* Ocean caustics light effect */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background:
+        radial-gradient(ellipse 40% 30% at 30% 20%, rgba(91, 181, 224, 0.05), transparent),
+        radial-gradient(ellipse 35% 25% at 70% 60%, rgba(78, 205, 196, 0.04), transparent),
+        radial-gradient(ellipse 45% 35% at 50% 40%, rgba(26, 95, 138, 0.06), transparent);
+    animation: caustics 12s ease-in-out infinite alternate;
+}
+
+@keyframes caustics {
+    0% { opacity: 0.6; transform: scale(1) translateY(0); }
+    50% { opacity: 0.8; transform: scale(1.02) translateY(-2%); }
+    100% { opacity: 0.6; transform: scale(1) translateY(0); }
+}
+
+/* Floating bubbles */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background:
+        radial-gradient(circle 3px at 15% 80%, rgba(255, 255, 255, 0.15), transparent),
+        radial-gradient(circle 2px at 25% 70%, rgba(255, 255, 255, 0.1), transparent),
+        radial-gradient(circle 4px at 35% 85%, rgba(255, 255, 255, 0.12), transparent),
+        radial-gradient(circle 2px at 45% 75%, rgba(255, 255, 255, 0.08), transparent),
+        radial-gradient(circle 3px at 55% 90%, rgba(255, 255, 255, 0.1), transparent),
+        radial-gradient(circle 2px at 65% 65%, rgba(255, 255, 255, 0.12), transparent),
+        radial-gradient(circle 4px at 75% 80%, rgba(255, 255, 255, 0.08), transparent),
+        radial-gradient(circle 2px at 85% 70%, rgba(255, 255, 255, 0.1), transparent);
+    animation: bubbles 20s linear infinite;
+}
+
+@keyframes bubbles {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-20px); }
+}
+
 ::selection {
-    background: rgba(211, 171, 94, .35);
+    background: rgba(91, 181, 224, .35);
 }
 
 img {
@@ -99,7 +152,7 @@ button {
 .masthead-line {
     flex: 0 1 120px;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(236, 215, 164, .4));
+    background: linear-gradient(90deg, transparent, rgba(91, 181, 224, .35));
 }
 
 .masthead-line:last-child {
@@ -157,25 +210,26 @@ button {
     background-repeat: no-repeat;
 }
 
+/* Bioluminescent particles floating in deep water */
 .stars-a {
     background-image:
-        radial-gradient(1.5px 1.5px at 11% 16%, rgba(255, 250, 235, .85), transparent 55%),
-        radial-gradient(1px 1px at 27% 8%, rgba(255, 250, 235, .6), transparent 55%),
-        radial-gradient(1.5px 1.5px at 43% 22%, rgba(214, 240, 244, .75), transparent 55%),
-        radial-gradient(1px 1px at 62% 12%, rgba(255, 250, 235, .55), transparent 55%),
-        radial-gradient(2px 2px at 78% 19%, rgba(255, 240, 214, .8), transparent 55%),
-        radial-gradient(1px 1px at 90% 9%, rgba(214, 240, 244, .6), transparent 55%),
-        radial-gradient(1px 1px at 52% 34%, rgba(255, 250, 235, .4), transparent 55%);
+        radial-gradient(2px 2px at 11% 16%, rgba(78, 205, 196, .7), transparent 55%),
+        radial-gradient(1.5px 1.5px at 27% 8%, rgba(91, 181, 224, .5), transparent 55%),
+        radial-gradient(2px 2px at 43% 22%, rgba(78, 205, 196, .6), transparent 55%),
+        radial-gradient(1px 1px at 62% 12%, rgba(200, 230, 255, .4), transparent 55%),
+        radial-gradient(2.5px 2.5px at 78% 19%, rgba(78, 205, 196, .65), transparent 55%),
+        radial-gradient(1.5px 1.5px at 90% 9%, rgba(91, 181, 224, .45), transparent 55%),
+        radial-gradient(1px 1px at 52% 34%, rgba(200, 230, 255, .3), transparent 55%);
     animation: twinkle 7s ease-in-out infinite alternate;
 }
 
 .stars-b {
     background-image:
-        radial-gradient(1px 1px at 18% 30%, rgba(214, 240, 244, .55), transparent 55%),
-        radial-gradient(1.5px 1.5px at 34% 14%, rgba(255, 240, 214, .6), transparent 55%),
-        radial-gradient(1px 1px at 70% 28%, rgba(255, 250, 235, .5), transparent 55%),
-        radial-gradient(1.5px 1.5px at 85% 34%, rgba(214, 240, 244, .6), transparent 55%),
-        radial-gradient(1px 1px at 6% 44%, rgba(255, 250, 235, .4), transparent 55%);
+        radial-gradient(1.5px 1.5px at 18% 30%, rgba(78, 205, 196, .45), transparent 55%),
+        radial-gradient(2px 2px at 34% 14%, rgba(91, 181, 224, .5), transparent 55%),
+        radial-gradient(1px 1px at 70% 28%, rgba(200, 230, 255, .4), transparent 55%),
+        radial-gradient(1.5px 1.5px at 85% 34%, rgba(78, 205, 196, .5), transparent 55%),
+        radial-gradient(1px 1px at 6% 44%, rgba(91, 181, 224, .35), transparent 55%);
     animation: twinkle 9s ease-in-out infinite alternate-reverse;
 }
 
@@ -194,21 +248,23 @@ button {
     border-radius: 50%;
 }
 
+/* Sunlight filtering from ocean surface - top right */
 .orb-gold {
-    width: 62vmax;
-    height: 62vmax;
-    right: -24vmax;
-    top: -26vmax;
-    background: radial-gradient(closest-side, rgba(211, 171, 94, .14), transparent 70%);
+    width: 80vmax;
+    height: 80vmax;
+    right: -30vmax;
+    top: -40vmax;
+    background: radial-gradient(closest-side, rgba(91, 181, 224, .1), transparent 60%);
     animation: drift-a 34s ease-in-out infinite alternate;
 }
 
+/* Deep ocean glow - bottom left */
 .orb-aqua {
-    width: 70vmax;
-    height: 70vmax;
-    left: -28vmax;
-    bottom: -32vmax;
-    background: radial-gradient(closest-side, rgba(111, 195, 207, .16), transparent 70%);
+    width: 90vmax;
+    height: 90vmax;
+    left: -35vmax;
+    bottom: -40vmax;
+    background: radial-gradient(closest-side, rgba(78, 205, 196, .08), transparent 55%);
     animation: drift-b 40s ease-in-out infinite alternate;
 }
 
@@ -224,22 +280,24 @@ button {
     }
 }
 
+/* Surface light ripples - sunlight filtering through water surface */
 .ripples {
     position: absolute;
     left: 50%;
-    bottom: 4.5vh;
+    top: 0;
     transform: translateX(-50%);
 }
 
 .ripples i {
     position: absolute;
     left: 50%;
-    bottom: 0;
-    width: 46vmin;
-    height: 9vmin;
-    margin-left: -23vmin;
+    top: -2vmin;
+    width: 80vmin;
+    height: 12vmin;
+    margin-left: -40vmin;
     border-radius: 50%;
-    border: 1px solid rgba(111, 195, 207, .28);
+    border: 1px solid rgba(91, 181, 224, .15);
+    background: radial-gradient(ellipse, rgba(91, 181, 224, .03), transparent 70%);
     animation: ripple 9s linear infinite;
 }
 
@@ -254,7 +312,7 @@ button {
     }
 
     12% {
-        opacity: .55;
+        opacity: .4;
     }
 
     100% {
@@ -263,6 +321,7 @@ button {
     }
 }
 
+/* Rising bubbles / plankton */
 .motes {
     position: absolute;
     inset: 0;
@@ -275,7 +334,7 @@ button {
     height: var(--sz);
     border-radius: 50%;
     background: var(--c);
-    box-shadow: 0 0 6px var(--c), 0 0 14px var(--c);
+    box-shadow: 0 0 8px var(--c), 0 0 16px var(--c);
     opacity: 0;
     animation: mote-rise var(--d) linear infinite;
     animation-delay: var(--delay);
@@ -288,7 +347,7 @@ button {
     }
 
     10% {
-        opacity: var(--o, .75);
+        opacity: var(--o, .6);
     }
 
     50% {
@@ -296,7 +355,7 @@ button {
     }
 
     88% {
-        opacity: var(--o, .75);
+        opacity: var(--o, .6);
     }
 
     100% {
@@ -305,10 +364,80 @@ button {
     }
 }
 
+/* Coral reef silhouettes at ocean floor */
+.coral-reef {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 18vh;
+    pointer-events: none;
+    z-index: 1;
+    opacity: .12;
+    background:
+        /* Coral cluster 1 - brain coral */
+        radial-gradient(ellipse 8vmin 6vmin at 8% 100%, rgba(232, 131, 107, .8), transparent 70%),
+        radial-gradient(ellipse 5vmin 4vmin at 12% 95%, rgba(232, 131, 107, .6), transparent 65%),
+        /* Coral cluster 2 - branching coral */
+        radial-gradient(ellipse 3vmin 12vmin at 22% 100%, rgba(192, 184, 224, .7), transparent 70%),
+        radial-gradient(ellipse 4vmin 10vmin at 26% 100%, rgba(192, 184, 224, .5), transparent 65%),
+        radial-gradient(ellipse 2vmin 8vmin at 20% 98%, rgba(192, 184, 224, .4), transparent 60%),
+        /* Coral cluster 3 - fan coral */
+        radial-gradient(ellipse 10vmin 8vmin at 40% 100%, rgba(232, 131, 107, .6), transparent 65%),
+        radial-gradient(ellipse 6vmin 5vmin at 44% 96%, rgba(240, 168, 146, .5), transparent 60%),
+        /* Coral cluster 4 - tube coral */
+        radial-gradient(ellipse 4vmin 14vmin at 55% 100%, rgba(78, 205, 196, .5), transparent 70%),
+        radial-gradient(ellipse 3vmin 11vmin at 58% 100%, rgba(78, 205, 196, .4), transparent 65%),
+        radial-gradient(ellipse 5vmin 12vmin at 60% 100%, rgba(91, 181, 224, .35), transparent 65%),
+        /* Coral cluster 5 - mushroom coral */
+        radial-gradient(ellipse 7vmin 5vmin at 72% 100%, rgba(232, 131, 107, .7), transparent 65%),
+        radial-gradient(ellipse 5vmin 3vmin at 76% 97%, rgba(240, 168, 146, .5), transparent 60%),
+        /* Coral cluster 6 - staghorn coral */
+        radial-gradient(ellipse 3vmin 15vmin at 85% 100%, rgba(192, 184, 224, .6), transparent 70%),
+        radial-gradient(ellipse 4vmin 13vmin at 88% 100%, rgba(192, 184, 224, .45), transparent 65%),
+        radial-gradient(ellipse 2vmin 10vmin at 82% 98%, rgba(192, 184, 224, .35), transparent 60%),
+        /* Seafloor gradient */
+        linear-gradient(0deg, rgba(7, 20, 34, .6) 0%, transparent 100%);
+    animation: coral-sway 8s ease-in-out infinite alternate;
+}
+
+@keyframes coral-sway {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(1vmin); }
+}
+
+/* Light rays from ocean surface */
+.light-rays {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: .06;
+    background:
+        linear-gradient(175deg, rgba(91, 181, 224, .4) 0%, transparent 25%),
+        linear-gradient(170deg, rgba(200, 230, 255, .3) 0%, transparent 20%),
+        linear-gradient(185deg, rgba(78, 205, 196, .3) 0%, transparent 30%),
+        linear-gradient(165deg, rgba(200, 230, 255, .2) 0%, transparent 15%);
+    animation: rays-shift 15s ease-in-out infinite alternate;
+}
+
+@keyframes rays-shift {
+    0% { opacity: .05; transform: skewX(-2deg); }
+    50% { opacity: .08; transform: skewX(1deg); }
+    100% { opacity: .05; transform: skewX(-2deg); }
+}
+
+/* Deep water vignette - darker at edges like ocean depth */
 .ambient-vignette {
     position: absolute;
     inset: 0;
-    box-shadow: inset 0 0 22vmin rgba(2, 5, 12, .75);
+    box-shadow: inset 0 0 22vmin rgba(7, 20, 34, .8);
+    background:
+        radial-gradient(ellipse 100% 100% at 50% 0%, rgba(91, 181, 224, .04), transparent 60%),
+        linear-gradient(180deg, rgba(7, 20, 34, .3), transparent 30%, transparent 70%, rgba(7, 20, 34, .5));
 }
 
 /* ---------------- Edge hints & first-open hint ---------------- */
@@ -367,7 +496,7 @@ button {
     font-size: .62rem;
     letter-spacing: .24em;
     text-transform: uppercase;
-    color: rgba(236, 215, 164, .75);
+    color: rgba(232, 238, 248, .75);
     white-space: nowrap;
     transition: opacity 1s ease;
     z-index: 3;
@@ -422,7 +551,7 @@ button {
     left: 3%;
     right: 3%;
     z-index: 0;
-    background: radial-gradient(50% 100% at 50% 50%, rgba(2, 5, 12, .6), transparent 72%);
+    background: radial-gradient(50% 100% at 50% 50%, rgba(7, 20, 34, .6), transparent 72%);
     transition: left .7s ease, right .7s ease;
 }
 
@@ -467,11 +596,11 @@ button {
 }
 
 .mode-double .slot-left::after {
-    background: linear-gradient(to left, rgba(15, 22, 40, .38), rgba(15, 22, 40, .05) 9%, transparent 20%);
+    background: linear-gradient(to left, rgba(11, 26, 46, .38), rgba(11, 26, 46, .05) 9%, transparent 20%);
 }
 
 .mode-double .slot-right::after {
-    background: linear-gradient(to right, rgba(15, 22, 40, .38), rgba(15, 22, 40, .05) 9%, transparent 20%);
+    background: linear-gradient(to right, rgba(11, 26, 46, .38), rgba(11, 26, 46, .05) 9%, transparent 20%);
 }
 
 .mode-double .slot-left::before,
@@ -582,19 +711,19 @@ button {
 }
 
 .sheet.dir-fwd .face--front::after {
-    background: linear-gradient(to left, rgba(8, 12, 24, .34), transparent 46%);
+    background: linear-gradient(to left, rgba(8, 15, 28, .34), transparent 46%);
 }
 
 .sheet.dir-fwd .face--back::after {
-    background: linear-gradient(to right, rgba(8, 12, 24, .30), transparent 46%);
+    background: linear-gradient(to right, rgba(8, 15, 28, .30), transparent 46%);
 }
 
 .sheet.dir-bwd .face--front::after {
-    background: linear-gradient(to right, rgba(8, 12, 24, .34), transparent 46%);
+    background: linear-gradient(to right, rgba(8, 15, 28, .34), transparent 46%);
 }
 
 .sheet.dir-bwd .face--back::after {
-    background: linear-gradient(to left, rgba(8, 12, 24, .30), transparent 46%);
+    background: linear-gradient(to left, rgba(8, 15, 28, .30), transparent 46%);
 }
 
 .sheet.turning .face::after {
@@ -659,7 +788,7 @@ button {
 }
 
 .page-inner::-webkit-scrollbar-thumb {
-    background: rgba(150, 113, 44, .3);
+    background: rgba(26, 95, 138, .3);
     border-radius: 2px;
 }
 
@@ -674,12 +803,12 @@ button {
 
 .page--framed .page-inner::before {
     inset: clamp(8px, 2.6cqi, 16px);
-    border: 1px solid rgba(150, 113, 44, .42);
+    border: 1px solid rgba(26, 95, 138, .42);
 }
 
 .page--framed .page-inner::after {
     inset: calc(clamp(8px, 2.6cqi, 16px) + 3px);
-    border: 1px solid rgba(150, 113, 44, .18);
+    border: 1px solid rgba(26, 95, 138, .18);
 }
 
 /* ---------------- Shared type ---------------- */
@@ -745,10 +874,10 @@ button {
     width: 100%;
     min-height: 0;
     overflow: hidden;
-    border: 1px solid rgba(150, 113, 44, .5);
-    outline: 1px solid rgba(150, 113, 44, .2);
+    border: 1px solid rgba(26, 95, 138, .5);
+    outline: 1px solid rgba(26, 95, 138, .2);
     outline-offset: 3px;
-    background: linear-gradient(140deg, #efe6d0, #e6d9bd);
+    background: linear-gradient(140deg, #d8e8f0, #c0d8e8);
 }
 
 .plate-media img {
@@ -810,13 +939,13 @@ figcaption::after {
 .ph--gold {
     background:
         radial-gradient(120% 90% at 50% 0%, rgba(255, 246, 224, .85), transparent 60%),
-        linear-gradient(150deg, rgba(211, 171, 94, .20), rgba(211, 171, 94, .05) 55%, rgba(150, 113, 44, .14));
+        linear-gradient(150deg, rgba(91, 181, 224, .20), rgba(91, 181, 224, .05) 55%, rgba(26, 95, 138, .14));
 }
 
 .ph--aqua {
     background:
         radial-gradient(120% 90% at 50% 100%, rgba(224, 248, 252, .8), transparent 60%),
-        linear-gradient(210deg, rgba(111, 195, 207, .22), rgba(111, 195, 207, .05) 55%, rgba(27, 96, 121, .16));
+        linear-gradient(210deg, rgba(78, 205, 196, .22), rgba(78, 205, 196, .05) 55%, rgba(27, 96, 121, .16));
 }
 
 .ph svg {
@@ -871,7 +1000,7 @@ figcaption::after {
 .cover-frame {
     position: absolute;
     inset: clamp(9px, 3cqi, 20px);
-    border: 1px solid rgba(236, 215, 164, .5);
+    border: 1px solid rgba(232, 238, 248, .5);
     pointer-events: none;
 }
 
@@ -879,14 +1008,14 @@ figcaption::after {
     content: "";
     position: absolute;
     inset: 4px;
-    border: 1px solid rgba(236, 215, 164, .2);
+    border: 1px solid rgba(232, 238, 248, .2);
 }
 
 .cover-corner {
     position: absolute;
     width: clamp(20px, 7cqi, 40px);
     height: clamp(20px, 7cqi, 40px);
-    color: rgba(236, 215, 164, .65);
+    color: rgba(232, 238, 248, .65);
     z-index: 3;
 }
 
@@ -939,7 +1068,7 @@ figcaption::after {
     flex: none;
     --sy-sun: var(--gold-soft);
     --sy-water: var(--aqua);
-    filter: drop-shadow(0 0 10px rgba(211, 171, 94, .25));
+    filter: drop-shadow(0 0 10px rgba(91, 181, 224, .25));
 }
 
 .cover-art {
@@ -949,10 +1078,10 @@ figcaption::after {
 
 .cover-art .plate-media {
     aspect-ratio: 4/5;
-    border-color: rgba(236, 215, 164, .55);
-    outline-color: rgba(236, 215, 164, .22);
+    border-color: rgba(232, 238, 248, .55);
+    outline-color: rgba(232, 238, 248, .22);
     border-radius: 50% 50% 6px 6px / 32% 32% 6px 6px;
-    background: linear-gradient(160deg, #16233d, #0d1729);
+    background: linear-gradient(160deg, var(--ocean-mid), var(--ocean-deep));
 }
 
 .cover-title {
@@ -980,7 +1109,7 @@ figcaption::after {
 }
 
 .cover-name .label {
-    color: rgba(236, 215, 164, .7);
+    color: rgba(232, 238, 248, .7);
 }
 
 .cover-name .tok {
@@ -997,7 +1126,7 @@ figcaption::after {
     text-transform: uppercase;
     font-size: .56rem;
     font-size: clamp(.54rem, 2.2cqi, .68rem);
-    color: rgba(236, 215, 164, .6);
+    color: rgba(232, 238, 248, .6);
 }
 
 .cover-title.tok,
@@ -1094,14 +1223,14 @@ figcaption::after {
 /* ---------------- Duo (water / radiance) ---------------- */
 .page--duo.side-water {
     background:
-        radial-gradient(120% 90% at 0% 100%, rgba(111, 195, 207, .16), transparent 55%),
+        radial-gradient(120% 90% at 0% 100%, rgba(78, 205, 196, .16), transparent 55%),
         linear-gradient(115deg, rgba(255, 255, 255, .5), transparent 40%),
         radial-gradient(130% 100% at 50% 0%, var(--paper-hi), var(--paper) 55%, var(--paper-lo));
 }
 
 .page--duo.side-light {
     background:
-        radial-gradient(120% 90% at 100% 0%, rgba(211, 171, 94, .18), transparent 55%),
+        radial-gradient(120% 90% at 100% 0%, rgba(91, 181, 224, .18), transparent 55%),
         linear-gradient(115deg, rgba(255, 255, 255, .5), transparent 40%),
         radial-gradient(130% 100% at 50% 0%, var(--paper-hi), var(--paper) 55%, var(--paper-lo));
 }
@@ -1168,7 +1297,7 @@ figcaption::after {
     bottom: 12%;
     width: 1px;
     z-index: 2;
-    border-left: 1px dotted rgba(150, 113, 44, .35);
+    border-left: 1px dotted rgba(26, 95, 138, .35);
 }
 
 .side-water .edge-lace {
@@ -1187,7 +1316,7 @@ figcaption::after {
     width: 5px;
     height: 5px;
     border-radius: 50%;
-    background: rgba(150, 113, 44, .5);
+    background: rgba(26, 95, 138, .5);
 }
 
 .edge-lace::before {
@@ -1233,7 +1362,7 @@ figcaption::after {
     content: "";
     position: absolute;
     inset: clamp(8px, 2.6cqi, 15px);
-    border: 1px solid rgba(236, 215, 164, .32);
+    border: 1px solid rgba(232, 238, 248, .32);
     pointer-events: none;
     z-index: 4;
     border-radius: inherit;
@@ -1382,8 +1511,8 @@ figcaption::after {
     display: grid;
     place-items: center;
     color: var(--gold-soft);
-    background: rgba(19, 32, 58, .55);
-    border: 1px solid rgba(236, 215, 164, .38);
+    background: rgba(14, 37, 64, .55);
+    border: 1px solid rgba(232, 238, 248, .38);
     transition: transform .18s ease, box-shadow .3s ease, border-color .3s ease;
     touch-action: manipulation;
 }
@@ -1396,8 +1525,8 @@ figcaption::after {
 }
 
 .ctrl-btn:hover:not(:disabled) {
-    border-color: rgba(236, 215, 164, .75);
-    box-shadow: 0 0 16px rgba(211, 171, 94, .28);
+    border-color: rgba(232, 238, 248, .75);
+    box-shadow: 0 0 16px rgba(91, 181, 224, .28);
 }
 
 .ctrl-btn:active:not(:disabled) {
@@ -1422,7 +1551,7 @@ figcaption::after {
     font-size: .64rem;
     letter-spacing: .26em;
     text-transform: uppercase;
-    color: rgba(236, 215, 164, .85);
+    color: rgba(232, 238, 248, .85);
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
 }
@@ -1430,7 +1559,7 @@ figcaption::after {
 .progress {
     width: 112px;
     height: 1px;
-    background: rgba(236, 215, 164, .18);
+    background: rgba(232, 238, 248, .18);
 }
 
 .progress span {

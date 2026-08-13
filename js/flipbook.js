@@ -457,7 +457,7 @@
             m.style.setProperty("--delay", (-Math.random() * 22).toFixed(1) + "s");
             m.style.setProperty("--sx", (Math.random() * 40 - 20).toFixed(0) + "px");
             m.style.setProperty("--o", (0.45 + Math.random() * 0.4).toFixed(2));
-            m.style.setProperty("--c", aqua ? "rgba(111,195,207,.9)" : "rgba(230,207,154,.9)");
+            m.style.setProperty("--c", aqua ? "rgba(78,205,196,.9)" : "rgba(91,181,224,.9)");
             host.appendChild(m);
         }
     })();
