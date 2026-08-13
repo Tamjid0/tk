@@ -79,8 +79,7 @@
             const im = document.createElement("img");
             im.src = String(art.src).replace(/\\/g, "/");   // tolerate Windows-style paths
             im.alt = "[" + art.token + "]";
-            im.loading = "lazy";
-            im.decoding = "async";
+            im.decoding = "sync";
             im.draggable = false;
             // scale: 1-9 integer, 5 = default (no change).
             // Below 5 = zoomed out (more image visible), above 5 = zoomed in (cropped tighter).
@@ -456,5 +455,12 @@
     setTimeout(hideHint, 9000);
 
     /* ---------- init ---------- */
+    /* Preload every image into browser cache so flips are instant */
+    PAGES.forEach(p => {
+        if (p && p.art && p.art.src) {
+            const im = new Image();
+            im.src = String(p.art.src).replace(/\\/g, "/");
+        }
+    });
     layout();
 })();
