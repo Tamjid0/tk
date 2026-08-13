@@ -344,13 +344,15 @@
         if (!sheet || !sheet.parentNode) return;
         cursor = target;
         renderView(cursor);
-        sheet.remove();
-        book.classList.remove("is-flipping");
-        /* Force a reflow so the browser paints the slot content,
-           then fade it in for a smooth handoff from the sheet. */
-        void stage.offsetHeight;
-        updateUI();
-        lock = false;
+        /* Wait one frame so the browser can decode and paint the
+           new slot content, THEN remove the sheet.  Without this
+           the slot shows old/blank images for up to 1 s. */
+        requestAnimationFrame(() => {
+            sheet.remove();
+            book.classList.remove("is-flipping");
+            updateUI();
+            lock = false;
+        });
     }
 
     function fadeSwap(target) {
