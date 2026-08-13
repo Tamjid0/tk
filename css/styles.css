@@ -400,6 +400,7 @@ button {
     position: relative;
     flex: none;
     perspective: 2800px;
+    overflow: hidden;
 }
 
 .book.mode-single {
@@ -598,21 +599,6 @@ button {
 
 .sheet.turning .face::after {
     opacity: 1;
-}
-
-.book.is-fading .slot {
-    opacity: 0;
-}
-
-/* Hide slot pages while the flip sheet is rotating — the sheet
-   carries both faces, so the underlying slot content is redundant.
-   Fading them in after the sheet is removed prevents a double-image. */
-.book.is-flipping .slot {
-    visibility: hidden;
-}
-
-.book:not(.is-flipping) .slot {
-    visibility: visible;
 }
 
 .slot {
