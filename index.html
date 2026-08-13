@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="referrer" content="no-referrer">
+    <meta name="theme-color" content="#070d1a">
+    <title>A Birthday Keepsake</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+    <!-- ======= Inline SVG ornament library (no external assets) ======= -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+        <defs>
+            <!-- Shared crest: radiance above, tide below -->
+            <symbol id="crest" viewBox="0 0 64 64">
+                <g class="sym-sun" fill="none" stroke="var(--sy-sun, currentColor)" stroke-width="1.6"
+                    stroke-linecap="round">
+                    <circle cx="32" cy="22" r="7.5" />
+                    <circle cx="32" cy="22" r="2" fill="var(--sy-sun, currentColor)" stroke="none" />
+                    <path
+                        d="M32 7v4M32 33v3M17 22h4M43 22h4M21.5 11.5l2.8 2.8M42.5 11.5l-2.8 2.8M21.5 32.5l2.8-2.8M42.5 32.5l-2.8-2.8" />
+                </g>
+                <g class="sym-water" fill="none" stroke="var(--sy-water, currentColor)" stroke-width="1.6"
+                    stroke-linecap="round">
+                    <path d="M16.5 45a15.5 15.5 0 0 0 31 0" />
+                    <path d="M21.5 45a10.5 10.5 0 0 0 21 0" />
+                    <path d="M15 52.5q4.25-3.5 8.5 0t8.5 0t8.5 0t8.5 0" />
+                </g>
+                <path fill="var(--sy-sun, currentColor)" opacity=".85"
+                    d="M51 5.5l1.5 3.3 3.3 1.5-3.3 1.5L51 15l-1.5-3.2-3.3-1.5 3.3-1.5z" />
+            </symbol>
+
+            <symbol id="sigil-sun" viewBox="0 0 48 48">
+                <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                    <circle cx="24" cy="24" r="6.5" />
+                    <circle cx="24" cy="24" r="12.5" opacity=".45" />
+                    <path
+                        d="M24 3v5M24 40v5M3 24h5M40 24h5M9.1 9.1l3.5 3.5M38.9 9.1l-3.5 3.5M9.1 38.9l3.5-3.5M38.9 38.9l-3.5-3.5" />
+                    <circle cx="24" cy="24" r="1.8" fill="currentColor" stroke="none" />
+                </g>
+            </symbol>
+
+            <symbol id="sigil-water" viewBox="0 0 48 48">
+                <g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                    <path d="M13 17a11 11 0 1 0 22 0" />
+                    <path d="M18 17a6 6 0 1 0 12 0" opacity=".55" />
+                    <path d="M7 32q4.25-3.6 8.5 0t8.5 0t8.5 0t8.5 0" />
+                    <path d="M10.5 38.5q3.6-3 7.2 0t7.2 0t7.2 0" opacity=".55" />
+                </g>
+            </symbol>
+
+            <symbol id="divider" viewBox="0 0 220 16">
+                <g fill="none" stroke="currentColor" stroke-width="1">
+                    <path d="M6 8h84M130 8h84" opacity=".45" />
+                    <path d="M96 8h12M112 8h12" opacity=".7" />
+                </g>
+                <path fill="currentColor" d="M110 3l3.5 5-3.5 5-3.5-5z" />
+                <circle cx="101" cy="8" r="1.4" fill="currentColor" opacity=".7" />
+                <circle cx="119" cy="8" r="1.4" fill="currentColor" opacity=".7" />
+            </symbol>
+
+            <symbol id="corner-flourish" viewBox="0 0 44 44">
+                <g fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+                    <path d="M3 41C3 20 20 3 41 3" />
+                    <path d="M10.5 41C10.5 24 24 10.5 41 10.5" opacity=".5" stroke-width="1" />
+                </g>
+                <circle cx="3.5" cy="40.5" r="1.8" fill="currentColor" />
+                <circle cx="40.5" cy="3.5" r="1.8" fill="currentColor" />
+            </symbol>
+
+            <symbol id="spark" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12 0l2.4 9.6L24 12l-9.6 2.4L12 24l-2.4-9.6L0 12l9.6-2.4z" />
+            </symbol>
+
+            <symbol id="chevron" viewBox="0 0 24 24">
+                <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                    stroke-linejoin="round" d="M9 4.5l7.5 7.5L9 19.5" />
+            </symbol>
+        </defs>
+    </svg>
+
+    <div class="app" id="app">
+
+        <header class="masthead">
+            <span class="masthead-line" aria-hidden="true"></span>
+            <svg class="masthead-crest" aria-hidden="true">
+                <use href="#crest" />
+            </svg>
+            <span class="masthead-text">A Birthday Keepsake</span>
+            <span class="masthead-line" aria-hidden="true"></span>
+        </header>
+
+        <main class="stage" id="stage" aria-label="Birthday keepsake flipbook">
+            <!-- Ambient scene -->
+            <div class="ambient" aria-hidden="true">
+                <div class="stars stars-a"></div>
+                <div class="stars stars-b"></div>
+                <div class="orb orb-gold"></div>
+                <div class="orb orb-aqua"></div>
+                <div class="ripples"><i></i><i></i></div>
+                <div class="motes" id="motes"></div>
+                <div class="ambient-vignette"></div>
+            </div>
+
+            <!-- Edge affordances -->
+            <div class="edge-hint edge-hint-left" aria-hidden="true">
+                <svg class="flip-flip">
+                    <use href="#chevron" transform="rotate(180 12 12)" />
+                </svg>
+            </div>
+            <div class="edge-hint edge-hint-right" aria-hidden="true">
+                <svg class="flip-flip">
+                    <use href="#chevron" />
+                </svg>
+            </div>
+
+            <div class="book-wrap">
+                <div class="book mode-single" id="book" style="--flip-dur:800ms">
+                    <div class="book-shadow" aria-hidden="true"></div>
+                    <div class="slot slot-left" id="slotLeft"></div>
+                    <div class="slot slot-right" id="slotRight"></div>
+                </div>
+            </div>
+
+            <p class="hint" id="hint" role="note">Swipe, tap the edges, or use the arrow keys</p>
+
+            <noscript>
+                <p class="noscript">This keepsake needs JavaScript to turn its pages.</p>
+            </noscript>
+        </main>
+
+        <footer class="deck">
+            <nav class="controls" aria-label="Page navigation">
+                <button type="button" class="ctrl-btn" id="btnPrev" aria-label="Previous page">
+                    <svg aria-hidden="true">
+                        <use href="#chevron" transform="rotate(180 12 12)" />
+                    </svg>
+                </button>
+                <div class="counter-wrap">
+                    <output class="counter" id="counter" aria-live="polite">Cover</output>
+                    <div class="progress" aria-hidden="true"><span id="progressFill"></span></div>
+                </div>
+                <button type="button" class="ctrl-btn" id="btnNext" aria-label="Next page">
+                    <svg aria-hidden="true">
+                        <use href="#chevron" />
+                    </svg>
+                </button>
+            </nav>
+        </footer>
+
+    </div>
+
+    <script src="js/content.js"></script>
+    <script src="js/flipbook.js"></script>
+</body>
+
+</html>
