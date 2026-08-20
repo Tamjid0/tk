@@ -66,6 +66,9 @@ const PAGES = [
         ]
     },
 
+    /* (blank page to align spreads correctly) */
+    null,
+
     /* ─── SPREAD 1: Karate ────────────────────────────────── */
     {
         type: "spread-left",
