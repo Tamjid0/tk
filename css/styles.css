@@ -676,8 +676,8 @@ button {
     position: absolute;
     pointer-events: none;
     z-index: 5;
-    opacity: .18;
-    filter: saturate(.7);
+    opacity: .35;
+    filter: saturate(.8) brightness(1.1);
 }
 
 .page-corner-decor img {
@@ -687,33 +687,33 @@ button {
 }
 
 .page-corner-decor.tl {
-    top: -2%;
-    left: -2%;
-    width: clamp(50px, 14cqi, 90px);
-    height: clamp(50px, 14cqi, 90px);
+    top: -4%;
+    left: -4%;
+    width: clamp(60px, 18cqi, 110px);
+    height: clamp(60px, 18cqi, 110px);
 }
 
 .page-corner-decor.tr {
-    top: -2%;
-    right: -2%;
-    width: clamp(50px, 14cqi, 90px);
-    height: clamp(50px, 14cqi, 90px);
+    top: -4%;
+    right: -4%;
+    width: clamp(60px, 18cqi, 110px);
+    height: clamp(60px, 18cqi, 110px);
     transform: scaleX(-1);
 }
 
 .page-corner-decor.bl {
-    bottom: -2%;
-    left: -2%;
-    width: clamp(50px, 14cqi, 90px);
-    height: clamp(50px, 14cqi, 90px);
+    bottom: -4%;
+    left: -4%;
+    width: clamp(60px, 18cqi, 110px);
+    height: clamp(60px, 18cqi, 110px);
     transform: scaleY(-1);
 }
 
 .page-corner-decor.br {
-    bottom: -2%;
-    right: -2%;
-    width: clamp(50px, 14cqi, 90px);
-    height: clamp(50px, 14cqi, 90px);
+    bottom: -4%;
+    right: -4%;
+    width: clamp(60px, 18cqi, 110px);
+    height: clamp(60px, 18cqi, 110px);
     transform: scale(-1, -1);
 }
 
@@ -723,14 +723,14 @@ button {
     bottom: 0;
     left: 0;
     right: 0;
-    height: clamp(40px, 12cqi, 80px);
+    height: clamp(50px, 15cqi, 100px);
     pointer-events: none;
     z-index: 4;
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    opacity: .12;
-    filter: saturate(.6);
+    opacity: .2;
+    filter: saturate(.7);
 }
 
 .page-coral-bottom img {
