@@ -669,158 +669,64 @@ button {
     border: 1px solid rgba(26, 95, 138, .18);
 }
 
-/* ---- Fantasy ocean decorative elements ---- */
-
-/* Page corner ornament images */
-.page-corner-decor {
+/* ---- Page corner image (set via content.js cornerImg) ---- */
+.page-corner-img {
     position: absolute;
+    top: 0;
+    right: 0;
+    width: clamp(70px, 18cqi, 130px);
+    height: clamp(70px, 18cqi, 130px);
     pointer-events: none;
     z-index: 5;
-    opacity: .35;
-    filter: saturate(.8) brightness(1.1);
+    overflow: hidden;
+    border-radius: 0 8px 0 0;
 }
 
-.page-corner-decor img {
+.page-corner-img img {
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
 
-.page-corner-decor.tl {
-    top: -4%;
-    left: -4%;
-    width: clamp(60px, 18cqi, 110px);
-    height: clamp(60px, 18cqi, 110px);
-}
-
-.page-corner-decor.tr {
-    top: -4%;
-    right: -4%;
-    width: clamp(60px, 18cqi, 110px);
-    height: clamp(60px, 18cqi, 110px);
-    transform: scaleX(-1);
-}
-
-.page-corner-decor.bl {
-    bottom: -4%;
-    left: -4%;
-    width: clamp(60px, 18cqi, 110px);
-    height: clamp(60px, 18cqi, 110px);
-    transform: scaleY(-1);
-}
-
-.page-corner-decor.br {
-    bottom: -4%;
-    right: -4%;
-    width: clamp(60px, 18cqi, 110px);
-    height: clamp(60px, 18cqi, 110px);
-    transform: scale(-1, -1);
-}
-
-/* Bottom coral decoration */
-.page-coral-bottom {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: clamp(50px, 15cqi, 100px);
-    pointer-events: none;
-    z-index: 4;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    opacity: .2;
-    filter: saturate(.7);
-}
-
-.page-coral-bottom img {
-    height: 100%;
-    width: auto;
-    object-fit: contain;
-}
-
-/* Decorative divider with shell */
-.divider-ocean {
+/* ---- 2-page spread: left=image, right=text ---- */
+.page--spread-left .page-inner {
+    padding: 0;
     display: flex;
     align-items: center;
-    gap: 8px;
-    width: 60%;
-    margin: 4px auto;
-    opacity: .4;
+    justify-content: center;
 }
 
-.divider-ocean::before,
-.divider-ocean::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--aqua-ink), transparent);
+.page--spread-left .plate-media {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
 }
 
-.divider-ocean img {
-    width: clamp(16px, 4cqi, 24px);
-    height: clamp(16px, 4cqi, 24px);
-    object-fit: contain;
-    flex-shrink: 0;
+.page--spread-left .plate-media img {
+    object-fit: cover;
+    cursor: pointer;
 }
 
-/* Glowing book edge */
-.book::before {
-    content: '';
-    position: absolute;
-    inset: -3px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, rgba(78, 205, 196, .15), rgba(91, 181, 224, .1), rgba(192, 184, 224, .08));
-    z-index: -1;
-    filter: blur(6px);
-    opacity: .6;
-    pointer-events: none;
-    animation: book-glow 4s ease-in-out infinite alternate;
+.page--spread-right .page-inner {
+    justify-content: center;
+    gap: clamp(10px, 3cqi, 20px);
+    padding: clamp(20px, 6cqi, 40px);
 }
 
-@keyframes book-glow {
-    0% { opacity: .4; filter: blur(6px); }
-    100% { opacity: .7; filter: blur(8px); }
+.spread-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1rem, 4cqi, 1.6rem);
+    color: var(--ink);
+    line-height: 1.3;
 }
 
-/* Cover ocean frame decoration */
-.cover-ocean-frame {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 4;
-}
-
-.cover-ocean-frame img {
-    position: absolute;
-    object-fit: contain;
-}
-
-.cover-ocean-frame .frame-anchor {
-    bottom: 5%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: clamp(40px, 12cqi, 70px);
-    height: auto;
-    opacity: .2;
-}
-
-.cover-ocean-frame .frame-shell-left {
-    bottom: 8%;
-    left: 5%;
-    width: clamp(30px, 8cqi, 50px);
-    height: auto;
-    opacity: .15;
-    transform: rotate(-15deg);
-}
-
-.cover-ocean-frame .frame-shell-right {
-    bottom: 8%;
-    right: 5%;
-    width: clamp(30px, 8cqi, 50px);
-    height: auto;
-    opacity: .15;
-    transform: rotate(15deg) scaleX(-1);
+.spread-body {
+    font-size: clamp(.8rem, 2.8cqi, 1rem);
+    line-height: 1.65;
+    color: var(--ink-soft);
+    max-width: 90%;
 }
 
 /* ---------------- Shared type ---------------- */
