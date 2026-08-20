@@ -110,10 +110,76 @@
     const divider = (cls = "divider") => use("divider", cls);
     const grain = () => el("div", "grain");
 
+    /* ---- Fantasy ocean decorations ---- */
+    const RES = "assets/resources/";
+
+    function cornerDecor(position) {
+        const d = el("div", "page-corner-decor " + position);
+        const img = document.createElement("img");
+        img.src = RES + "sea shell.png";
+        img.alt = "";
+        img.loading = "lazy";
+        d.appendChild(img);
+        return d;
+    }
+
+    function coralBottom() {
+        const d = el("div", "page-coral-bottom");
+        const img = document.createElement("img");
+        img.src = RES + "coral1.png";
+        img.alt = "";
+        img.loading = "lazy";
+        d.appendChild(img);
+        return d;
+    }
+
+    function oceanDivider() {
+        const d = el("div", "divider-ocean");
+        const img = document.createElement("img");
+        img.src = RES + "sea shell style 2.png";
+        img.alt = "";
+        img.loading = "lazy";
+        d.appendChild(img);
+        return d;
+    }
+
+    function addOceanDecor(pg, { corners = true, coral = false } = {}) {
+        if (corners) {
+            pg.appendChild(cornerDecor("tl"));
+            pg.appendChild(cornerDecor("tr"));
+            pg.appendChild(cornerDecor("bl"));
+            pg.appendChild(cornerDecor("br"));
+        }
+        if (coral) pg.appendChild(coralBottom());
+    }
+
     /* ---------- page builders ---------- */
     function buildCover(p) {
         const pg = el("div", "page page--cover");
         pg.appendChild(el("div", "cover-frame"));
+        /* Ocean decorations on cover */
+        addOceanDecor(pg, { corners: false, coral: false });
+        /* Anchor decoration at bottom */
+        const oceanFrame = el("div", "cover-ocean-frame");
+        const anchorImg = document.createElement("img");
+        anchorImg.src = RES + "anchor.png";
+        anchorImg.alt = "";
+        anchorImg.loading = "lazy";
+        anchorImg.classList.add("frame-anchor");
+        oceanFrame.appendChild(anchorImg);
+        const shellL = document.createElement("img");
+        shellL.src = RES + "sea shell style 2.png";
+        shellL.alt = "";
+        shellL.loading = "lazy";
+        shellL.classList.add("frame-shell-left");
+        oceanFrame.appendChild(shellL);
+        const shellR = document.createElement("img");
+        shellR.src = RES + "sea shell style 2.png";
+        shellR.alt = "";
+        shellR.loading = "lazy";
+        shellR.classList.add("frame-shell-right");
+        oceanFrame.appendChild(shellR);
+        pg.appendChild(oceanFrame);
         ["tl", "tr", "bl", "br"].forEach((c) => {
             const corner = el("span", "cover-corner " + c);
             corner.appendChild(use("corner-flourish"));
@@ -137,10 +203,11 @@
 
     function buildOpening(p) {
         const pg = el("div", "page page--opening page--framed");
+        addOceanDecor(pg, { corners: true, coral: false });
         const inner = el("div", "page-inner");
         const k = el("span", "label"); k.textContent = p.kicker; inner.appendChild(k);
         const h2 = el("h2", "opening-title"); h2.appendChild(tok(p.title)); inner.appendChild(h2);
-        inner.appendChild(divider());
+        inner.appendChild(oceanDivider());
         const body = el("div", "body");
         (p.body || []).forEach(line => {
             const para = el("p"); para.appendChild(tok(line));
@@ -158,6 +225,7 @@
 
     function buildFrontispiece(p) {
         const pg = el("div", "page page--frontispiece page--framed");
+        addOceanDecor(pg, { corners: true, coral: true });
         const inner = el("div", "page-inner");
         inner.appendChild(plate(p.art, { caption: p.caption, cls: "plate--tall" }));
         pg.appendChild(inner);
@@ -166,6 +234,7 @@
 
     function buildPhoto(p) {
         const pg = el("div", "page page--photo page--framed");
+        addOceanDecor(pg, { corners: true, coral: false });
         const inner = el("div", "page-inner");
         inner.appendChild(plate(p.art, { caption: p.caption, cls: "plate--wide" }));
         pg.appendChild(inner);
@@ -177,8 +246,9 @@
 
     function buildVignette(p) {
         const pg = el("div", "page page--vignette page--framed");
+        addOceanDecor(pg, { corners: true, coral: false });
         const inner = el("div", "page-inner");
-        inner.appendChild(divider());
+        inner.appendChild(oceanDivider());
         inner.appendChild(plate(p.art, { caption: p.caption, cls: "plate--small" }));
         const body = el("div", "body");
         (p.body || []).forEach(line => { const para = el("p"); para.appendChild(tok(line)); body.appendChild(para); });
@@ -206,6 +276,7 @@
 
     function buildFull(p) {
         const pg = el("div", "page page--full");
+        addOceanDecor(pg, { corners: false, coral: true });
         const inner = el("div", "page-inner");
         inner.appendChild(plate(p.art, { caption: p.caption, cls: "plate--full" }));
         pg.appendChild(inner);
@@ -214,6 +285,7 @@
 
     function buildMessage(p) {
         const pg = el("div", "page page--message page--framed");
+        addOceanDecor(pg, { corners: true, coral: false });
         const spots = [[14, 16, 0], [80, 12, 1.4], [86, 70, 2.8], [16, 78, 3.6], [50, 7, 2], [66, 88, 4.4]];
         spots.forEach(([x, y, d], i) => {
             const s = el("span", "spark" + (i % 3 === 1 ? " aqua" : ""));
@@ -223,20 +295,21 @@
         const inner = el("div", "page-inner");
         inner.appendChild(use("crest", "message-crest"));
         const k = el("span", "label"); k.textContent = p.kicker; inner.appendChild(k);
-        inner.appendChild(divider());
+        inner.appendChild(oceanDivider());
         const wish = el("div", "wish");
         (p.body || []).forEach(line => { wish.appendChild(tok(line)); wish.appendChild(document.createElement("br")); });
         inner.appendChild(wish);
-        inner.appendChild(divider());
+        inner.appendChild(oceanDivider());
         pg.appendChild(inner);
         return pg;
     }
 
     function buildClosing(p) {
         const pg = el("div", "page page--closing page--framed");
+        addOceanDecor(pg, { corners: true, coral: true });
         const inner = el("div", "page-inner");
         inner.appendChild(plate(p.art, { cls: "closing-art" }));
-        inner.appendChild(divider());
+        inner.appendChild(oceanDivider());
         const body = el("div", "closing-body");
         (p.body || []).forEach(line => { const para = el("p"); para.appendChild(tok(line)); body.appendChild(para); });
         inner.appendChild(body);
@@ -251,6 +324,7 @@
 
     function buildEnd(p) {
         const pg = el("div", "page page--end");
+        addOceanDecor(pg, { corners: true, coral: true });
         const inner = el("div", "page-inner");
         inner.appendChild(use("crest", "end-crest"));
         const note = el("p", "end-note"); note.appendChild(tok(p.note)); inner.appendChild(note);
@@ -466,6 +540,42 @@
     })();
 
     setTimeout(hideHint, 9000);
+
+    /* ---------- lightbox ---------- */
+    (function initLightbox() {
+        const lightbox = $("#lightbox");
+        const lightboxImg = $("#lightboxImg");
+        const lightboxClose = $("#lightboxClose");
+        if (!lightbox || !lightboxImg || !lightboxClose) return;
+
+        function openLightbox(src, alt) {
+            lightboxImg.src = src;
+            lightboxImg.alt = alt || "";
+            lightbox.classList.add("active");
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove("active");
+            lightboxImg.src = "";
+        }
+
+        /* Delegate click on any plate img */
+        document.addEventListener("click", (e) => {
+            const img = e.target.closest(".plate-media img");
+            if (img && img.src) {
+                e.stopPropagation();
+                openLightbox(img.src, img.alt);
+            }
+        });
+
+        lightboxClose.addEventListener("click", closeLightbox);
+        lightbox.addEventListener("click", (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") closeLightbox();
+        });
+    })();
 
     /* ---------- init ---------- */
     /* Preload every image into browser cache so flips are instant */

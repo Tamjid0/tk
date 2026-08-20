@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Abyssal Treasure</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --water-surface: #6dd4dc;
+            --water-mid: #1a7a8a;
+            --water-deep: #052435;
+            --water-abyss: #020c14;
+            --floor: #1a1814;
+
+            --coral-pink: #ff7a9c;
+            --coral-deep: #c8344c;
+            --coral-peach: #ffb074;
+            --coral-purple: #d670c5;
+            --coral-red: #d63a4a;
+            --coral-soft: #f8a8c0;
+
+            --wood-dark: #2a1408;
+            --wood-mid: #5c2e15;
+            --wood-light: #8a4a25;
+            --wood-highlight: #a86a35;
+            --gold: #c89a3a;
+            --gold-mid: #e8b850;
+            --gold-bright: #ffd966;
+            --gold-glow: #ffe9a8;
+
+            --pearl: #fff8e7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--pearl);
+            cursor: default
+        }
+
+        /* ===== OCEAN SCENE ===== */
+        .ocean {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background:
+                radial-gradient(ellipse 80% 60% at 50% 0%, rgba(180, 235, 250, 0.85) 0%, transparent 60%),
+                linear-gradient(180deg,
+                    #6dd4dc 0%,
+                    #4fb5c4 10%,
+                    #2d8a9e 22%,
+                    #1a6d82 36%,
+                    #0e4860 50%,
+                    #072d3e 66%,
+                    #041824 82%,
+                    #020c14 100%);
+        }
+
+        /* surface shimmer */
+        .surface {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 90px;
+            background:
+                linear-gradient(180deg, rgba(220, 250, 255, 0.6) 0%, rgba(160, 230, 245, 0.25) 50%, transparent 100%);
+            z-index: 2;
+            pointer-events: none;
+            mix-blend-mode: screen;
+        }
+
+        .surface::before,
+        .surface::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: repeating-linear-gradient(90deg,
+                    transparent 0px, transparent 18px,
+                    rgba(255, 255, 255, 0.35) 18px, rgba(255, 255, 255, 0.35) 22px,
+                    transparent 22px, transparent 40px,
+                    rgba(255, 255, 255, 0.2) 40px, rgba(255, 255, 255, 0.2) 44px);
+            filter: blur(2px);
+            animation: shimmerShift 9s linear infinite;
+        }
+
+        .surface::after {
+            top: 25px;
+            opacity: 0.5;
+            animation-duration: 14s;
+            animation-direction: reverse
+        }
+
+        @keyframes shimmerShift {
+            from {
+                transform: translateX(0)
+            }
+
+            to {
+                transform: translateX(80px)
+            }
+        }
+
+        /* god rays */
+        .rays {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 3;
+            overflow: hidden
+        }
+
+        .ray {
+            position: absolute;
+            top: -10%;
+            width: 260px;
+            height: 130%;
+            background: linear-gradient(180deg,
+                    rgba(200, 240, 250, 0.22) 0%,
+                    rgba(170, 225, 240, 0.12) 35%,
+                    rgba(150, 210, 230, 0.04) 65%,
+                    transparent 100%);
+            transform-origin: top center;
+            filter: blur(14px);
+            transform: rotate(8deg);
+            animation: raySway 11s ease-in-out infinite alternate;
+            mix-blend-mode: screen;
+        }
+
+        .ray:nth-child(1) {
+            left: -5%;
+            width: 200px;
+            animation-delay: 0s
+        }
+
+        .ray:nth-child(2) {
+            left: 15%;
+            width: 280px;
+            animation-delay: -2s;
+            transform: rotate(-6deg)
+        }
+
+        .ray:nth-child(3) {
+            left: 38%;
+            width: 240px;
+            animation-delay: -4s;
+            transform: rotate(4deg)
+        }
+
+        .ray:nth-child(4) {
+            left: 58%;
+            width: 300px;
+            animation-delay: -6s;
+            transform: rotate(-8deg)
+        }
+
+        .ray:nth-child(5) {
+            left: 80%;
+            width: 220px;
+            animation-delay: -8s;
+            transform: rotate(6deg)
+        }
+
+        @keyframes raySway {
+            0% {
+                opacity: 0.6;
+                transform: rotate(8deg) translateX(0)
+            }
+
+            100% {
+                opacity: 1;
+                transform: rotate(2deg) translateX(30px)
+            }
+        }
+
+        /* floor */
+        .floor {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 24%;
+            background:
+                radial-gradient(ellipse 60% 80% at 50% 100%, rgba(60, 40, 30, 0.6) 0%, transparent 60%),
+                linear-gradient(180deg, transparent 0%, rgba(15, 10, 6, 0.5) 40%, #1a1814 100%);
+            z-index: 5;
+        }
+
+        .floor::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 60%, rgba(120, 90, 60, 0.3) 0%, transparent 8%),
+                radial-gradient(circle at 35% 80%, rgba(80, 60, 40, 0.4) 0%, transparent 6%),
+                radial-gradient(circle at 65% 70%, rgba(100, 80, 50, 0.3) 0%, transparent 7%),
+                radial-gradient(circle at 85% 85%, rgba(90, 70, 45, 0.35) 0%, transparent 5%);
+        }
+
+        /* caustic light pattern on floor */
+        .caustics {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 24%;
+            z-index: 6;
+            pointer-events: none;
+            opacity: 0.5;
+            mix-blend-mode: screen;
+            background-image:
+                radial-gradient(ellipse 60px 12px at 20% 70%, rgba(200, 240, 250, 0.6), transparent),
+                radial-gradient(ellipse 80px 14px at 40% 85%, rgba(200, 240, 250, 0.5), transparent),
+                radial-gradient(ellipse 50px 10px at 70% 75%, rgba(200, 240, 250, 0.5), transparent),
+                radial-gradient(ellipse 70px 12px at 90% 90%, rgba(200, 240, 250, 0.4), transparent);
+            filter: blur(3px);
+            animation: causticMove 14s ease-in-out infinite alternate;
+        }
+
+        @keyframes causticMove {
+            0% {
+                transform: translateX(-20px) scale(1);
+                opacity: 0.4
+            }
+
+            100% {
+                transform: translateX(20px) scale(1.05);
+                opacity: 0.7
+            }
+        }
+
+        /* ===== CORALS LAYER ===== */
+        .coral-layer {
+            position: absolute;
+            inset: 0;
+            z-index: 7;
+            pointer-events: none
+        }
+
+        .coral {
+            position: absolute;
+            bottom: 0;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+            transform-origin: bottom center;
+            animation: sway 6s ease-in-out infinite alternate;
+        }
+
+        @keyframes sway {
+            0% {
+                transform: rotate(-1.5deg)
+            }
+
+            100% {
+                transform: rotate(1.5deg)
+            }
+        }
+
+        /* ===== FISH ===== */
+        .fish-layer {
+            position: absolute;
+            inset: 0;
+            z-index: 8;
+            pointer-events: none;
+            overflow: hidden
+        }
+
+        .fish {
+            position: absolute;
+            animation: swim 22s linear infinite;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+
+        .fish .reverse {
+            animation: swimRev 26s linear infinite
+        }
+
+        @keyframes swim {
+            0% {
+                transform: translateX(-200px) translateY(0)
+            }
+
+            50% {
+                transform: translateX(50vw) translateY(-20px)
+            }
+
+            100% {
+                transform: translateX(110vw) translateY(10px)
+            }
+        }
+
+        @keyframes swimRev {
+            0% {
+                transform: translateX(110vw) translateY(0) scaleX(-1)
+            }
+
+            50% {
+                transform: translateX(50vw) translateY(-30px) scaleX(-1)
+            }
+
+            100% {
+                transform: translateX(-200px) translateY(15px) scaleX(-1)
+            }
+        }
+
+        .fish-body {
+            animation: fishWiggle 0.6s ease-in-out infinite alternate;
+            display: block
+        }
+
+        @keyframes fishWiggle {
+            0% {
+                transform: skewY(-3deg)
+            }
+
+            100% {
+                transform: skewY(3deg)
+            }
+        }
+
+        /* ===== BUBBLES ===== */
+        .bubbles {
+            position: absolute;
+            inset: 0;
+            z-index: 9;
+            pointer-events: none;
+            overflow: hidden
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -30px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%,
+                    rgba(255, 255, 255, 0.9) 0%,
+                    rgba(200, 240, 250, 0.5) 40%,
+                    rgba(150, 210, 230, 0.2) 70%,
+                    transparent 100%);
+            box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.4);
+            animation: rise linear infinite;
+        }
+
+        @keyframes rise {
+            0% {
+                transform: translate(0, 0) scale(0.5);
+                opacity: 0
+            }
+
+            10% {
+                opacity: 0.8
+            }
+
+            50% {
+                transform: translate(20px, -50vh) scale(1)
+            }
+
+            100% {
+                transform: translate(-10px, -110vh) scale(1.1);
+                opacity: 0
+            }
+        }
+
+        /* ===== PLANKTON / DUST ===== */
+        .plankton {
+            position: absolute;
+            inset: 0;
+            z-index: 4;
+            pointer-events: none;
+            overflow: hidden
+        }
+
+        .dot {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 250, 200, 0.9), rgba(255, 220, 150, 0.2));
+            box-shadow: 0 0 6px rgba(255, 240, 180, 0.6);
+            animation: float linear infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0);
+                opacity: 0
+            }
+
+            20% {
+                opacity: 1
+            }
+
+            80% {
+                opacity: 1
+            }
+
+            100% {
+                transform: translate(40px, -80px);
+                opacity: 0
+            }
+        }
+
+        /* ===== TITLE ===== */
+        .title {
+            position: absolute;
+            top: 30px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            z-index: 20;
+            pointer-events: none;
+        }
+
+        .title h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(28px, 4vw, 52px);
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            background: linear-gradient(180deg, #fff 0%, #b8e8f0 50%, #5fa8b8 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 30px rgba(120, 200, 220, 0.4);
+            margin-bottom: 8px;
+        }
+
+        .title p {
+            font-size: 14px;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: rgba(200, 230, 240, 0.7);
+            font-weight: 300;
+        }
+
+        .title .ornament {
+            width: 120px;
+            height: 1px;
+            margin: 12px auto;
+            background: linear-gradient(90deg, transparent, rgba(200, 230, 240, 0.6), transparent);
+        }
+
+        /* ===== CHEST ===== */
+        .chest-container {
+            position: absolute;
+            left: 50%;
+            bottom: 14%;
+            transform: translateX(-50%);
+            z-index: 12;
+            perspective: 1200px;
+            cursor: pointer;
+        }
+
+        .chest-glow-ambient {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            background: radial-gradient(circle,
+                    rgba(255, 220, 140, 0.18) 0%,
+                    rgba(255, 200, 120, 0.08) 40%,
+                    transparent 70%);
+            filter: blur(20px);
+            animation: pulseGlow 3 s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                opacity: 0.5;
+                transform: translateX(-50%) scale(0.9)
+            }
+
+            100% {
+                opacity: 0.9;
+                transform: translateX(-50%) scale(1.1)
+            }
+        }
+
+        .chest {
+            position: relative;
+            width: 260px;
+            height: 170px;
+            transform-style: preserve-3d;
+            transform: rotateX(8deg);
+            transition: transform 0.4s ease;
+        }
+
+        .chest-container:hover .chest {
+            transform: rotateX(8deg) translateY(-6px)
+        }
+
+        .chest-shadow {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 280px;
+            height: 30px;
+            background: radial-gradient(ellipse, rgba(0, 0, 0, 0.55) 0%, transparent 70%);
+            filter: blur(8px);
+        }
+
+        /* treasure glow inside */
+        .treasure-glow {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            width: 200px;
+            height: 80px;
+            border-radius: 50%;
+            background: radial-gradient(ellipse,
+                    rgba(255, 230, 150, 0.95) 0%,
+                    rgba(255, 210, 100, 0.7) 30%,
+                    rgba(255, 180, 60, 0.3) 60%,
+                    transparent 100%);
+            filter: blur(8px);
+            opacity: 0;
+            transition: opacity 0.4s ease 0.3s, transform 0.5s ease 0.3s;
+            transform: scale(0.3);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .chest.opened .treasure-glow {
+            opacity: 1;
+            transform: scale(1.3);
+        }
+
+        /* treasure items inside chest */
+        .treasure-pile {
+            position: absolute;
+            top: 35px;
+            left: 25px;
+            width: 210px;
+            height: 70px;
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease 0.4s, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s;
+        }
+
+        .chest.opened .treasure-pile {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .coin {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%,
+                    #fff5d0 0%, #ffd966 30%, #d4a020 70%, #8a6010 100%);
+            box-shadow: 0 0 8px rgba(255, 210, 100, 0.8),
+                inset -2px -2px 3px rgba(120, 80, 10, 0.4),
+                inset 2px 2px 3px rgba(255, 250, 200, 0.6);
+        }
+
+        .coin::after {
+            content: "";
+            position: absolute;
+            inset: 15%;
+            border: 1px solid rgba(120, 80, 10, 0.5);
+            border-radius: 50%;
+        }
+
+        .gem {
+            position: absolute;
+            width: 18px;
+            height: 22px;
+            clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 20% 100%, 0% 35%);
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+        }
+
+        .gem.red {
+            background: linear-gradient(135deg, #ff8a8a 0%, #d63a4a 50%, #7a1020 100%)
+        }
+
+        .gem.blue {
+            background: linear-gradient(135deg, #8ae0ff 0%, #3a8ad6 50%, #103a7a 100%)
+        }
+
+        .gem.green {
+            background: linear-gradient(135deg, #a0ffa0 0%, #3ad680 50%, #107a3a 100%)
+        }
+
+        .gem.purple {
+            background: linear-gradient(135deg, #e8a0ff 0%, #a040d6 50%, #3a107a 100%)
+        }
+
+        /* CHEST BODY */
+        .chest-body {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 260px;
+            height: 120px;
+            transform-style: preserve-3d;
+            z-index: 3;
+        }
+
+        .body-front {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(180deg,
+                    rgba(255, 180, 100, 0.15) 0%,
+                    transparent 20%,
+                    transparent 70%,
+                    rgba(0, 0, 0, 0.3) 100%),
+                repeating-linear-gradient(180deg,
+                    transparent 0px, transparent 28px,
+                    rgba(0, 0, 0, 0.25) 28px, rgba(0, 0, 0, 0.25) 30px,
+                    transparent 30px, transparent 58px,
+                    rgba(0, 0, 0, 0.2) 58px, rgba(0, 0, 0, 0.2) 60px),
+                linear-gradient(180deg, #7a4525 0%, #5c2e15 50%, #3a1a0c 100%);
+            border-radius: 6px;
+            box-shadow:
+                inset 0 6px 8px rgba(255, 180, 100, 0.2),
+                inset 0 -8px 12px rgba(0, 0, 0, 0.4),
+                inset 4px 0 6px rgba(0, 0, 0, 0.3),
+                inset -4px 0 6px rgba(0, 0, 0, 0.3),
+                0 6px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* gold bands */
+        .gold-band {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(180deg,
+                    #ffe9a8 0%, #ffd966 25%, #c89a3a 60%, #8a6010 100%);
+            box-shadow:
+                inset 0 1px 2px rgba(255, 250, 200, 0.8),
+                inset 0 -2px 3px rgba(80, 50, 0, 0.6),
+                0 1px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        .gold-band::before {
+            content: "";
+            position: absolute;
+            inset: 2px 4px;
+            background: repeating-linear-gradient(90deg,
+                    transparent 0px, transparent 6px,
+                    rgba(120, 80, 10, 0.3) 6px, rgba(120, 80, 10, 0.3) 7px);
+        }
+
+        .band-top {
+            top: 8px
+        }
+
+        .band-bottom {
+            bottom: 8px
+        }
+
+        /* gold corners */
+        .gold-corner {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, #ffe9a8 0%, #ffd966 30%, #c89a3a 70%, #8a6010 100%);
+            box-shadow: inset 1px 1px 2px rgba(255, 250, 200, 0.7), inset -1px -1px 2px rgba(80, 50, 0, 0.6);
+            border-radius: 4px;
+        }
+
+        .gold-corner.tl {
+            top: 4px;
+            left: 4px
+        }
+
+        .gold-corner.tr {
+            top: 4px;
+            right: 4px
+        }
+
+        .gold-corner.bl {
+            bottom: 4px;
+            left: 4px
+        }
+
+        .gold-corner.br {
+            bottom: 4px;
+            right: 4px
+        }
+
+        .gold-corner::before {
+            content: "";
+            position: absolute;
+            inset: 30%;
+            border-radius: 50%;
+            background: radial-gradient(circle, #ffd966, #8a6010);
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+        }
+
+        /* lock */
+        .lock {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 42px;
+            height: 50px;
+            background: linear-gradient(180deg, #ffe9a8 0%, #ffd966 30%, #c89a3a 70%, #6a4008 100%);
+            border-radius: 8px 8px 6px 6px;
+            box-shadow:
+                inset 0 2px 3px rgba(255, 250, 200, 0.8),
+                inset 0 -3px 4px rgba(80, 50, 0, 0.6),
+                0 0 12px rgba(255, 210, 100, 0.5),
+                0 2px 6px rgba(0, 0, 0, 0.5);
+            transition: transform 0.4s ease, opacity 0.4s ease;
+            z-index: 4;
+        }
+
+        .lock::before {
+            content: "";
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 18px;
+            height: 14px;
+            border: 3px solid #6a4008;
+            border-bottom: none;
+            border-radius: 9px 9px 0 0;
+            background: transparent;
+        }
+
+        .lock-keyhole {
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 18px;
+            background: #3a2008;
+            border-radius: 5px 5px 3px 3px;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.8);
+        }
+
+        .lock-keyhole::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 14px;
+            height: 8px;
+            background: #3a2008;
+            border-radius: 0 0 50% 50%;
+        }
+
+        .chest.opened .lock {
+            transform: translate(-50%, -50%) translateY(180px) rotate(45deg);
+            opacity: 0;
+        }
+
+        /* CHEST LID */
+        .chest-lid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 260px;
+            height: 55px;
+            transform-origin: bottom center;
+            transform: rotateX(0deg);
+            transform-style: preserve-3d;
+            transition: transform 0.9s cubic-bezier(0.34, 1.4, 0.5, 1);
+            z-index: 5;
+        }
+
+        .chest.opened .chest-lid {
+            transform: rotateX(-118deg);
+        }
+
+        .lid-top {
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(180deg,
+                    rgba(255, 180, 100, 0.2) 0%,
+                    transparent 30%,
+                    transparent 60%,
+                    rgba(0, 0, 0, 0.4) 100%),
+                repeating-linear-gradient(180deg,
+                    transparent 0px, transparent 18px,
+                    rgba(0, 0, 0, 0.25) 18px, rgba(0, 0, 0, 0.25) 20px),
+                linear-gradient(180deg, #8a4a25 0%, #5c2e15 60%, #3a1a0c 100%);
+            border-radius: 10px 10px 4px 4px;
+            box-shadow:
+                inset 0 4px 6px rgba(255, 180, 100, 0.3),
+                inset 0 -4px 6px rgba(0, 0, 0, 0.4),
+                0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        .lid-band {
+            position: absolute;
+            top: 14px;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(180deg, #ffe9a8 0%, #ffd966 30%, #c89a3a 70%, #6a4008 100%);
+            box-shadow: inset 0 1px 2px rgba(255, 250, 200, 0.8), inset 0 -2px 3px rgba(80, 50, 0, 0.6);
+        }
+
+        .lid-corner {
+            position: absolute;
+            top: 4px;
+            width: 22px;
+            height: 22px;
+            background: linear-gradient(135deg, #ffe9a8 0%, #ffd966 30%, #c89a3a 70%, #6a4008 100%);
+            border-radius: 3px;
+            box-shadow: inset 1px 1px 2px rgba(255, 250, 200, 0.7);
+        }
+
+        .lid-corner.tl {
+            left: 4px
+        }
+
+        .lid-corner.tr {
+            right: 4px
+        }
+
+        .lid-arch-front {
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(180deg, #5c2e15 0%, #2a1408 100%);
+            border-radius: 0 0 4px 4px;
+            box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* hint */
+        .hint {
+            position: absolute;
+            left: 50%;
+            bottom: -40px;
+            transform: translateX(-50%);
+            font -family: 'Cinzel', serif;
+            font-size: 12px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: rgba(255, 230, 150, 0.8);
+            text-shadow: 0 0 12px rgba(255, 200, 100, 0.6);
+            white-space: nowrap;
+            animation: hintPulse 2.5s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes hintPulse {
+
+            0%,
+            100% {
+                opacity: 0.6;
+                transform: translateX(-50%) translateY(0)
+            }
+
+            50% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(-3px)
+            }
+        }
+
+        .chest-container.opened-state .hint {
+            opacity: 0;
+            transition: opacity 0.5s
+        }
+
+        /* light burst when opening */
+        .light-burst {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle,
+                    rgba(255, 250, 200, 0.8) 0%,
+                    rgba(255, 220, 120, 0.4) 20%,
+                    rgba(255, 180, 60, 0.15) 50%,
+                    transparent 80%);
+            pointer-events: none;
+            z-index: 11;
+            opacity: 0;
+        }
+
+        .light-burst.active {
+            animation: burst 1.4s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+        }
+
+        @keyframes burst {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 0
+            }
+
+            20% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(0.6)
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(2.5);
+                opacity: 0
+            }
+        }
+
+        /* gold particles flying out */
+        .gold-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #fff5d0 0%, #ffd966 50%, #c89a3a 100%);
+            box-shadow: 0 0 8px rgba(255, 210, 100, 0.9);
+            pointer-events: none;
+            z-index: 13;
+        }
+
+        /* light beam from opened chest */
+
+        .treasure-beam {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%) scaleY(0);
+            transform-origin: bottom center;
+            width: 180px;
+            height: 100vh;
+            background: linear-gradient(180deg,
+                    rgba(255, 230, 150, 0) 0%,
+                    rgba(255, 220, 120, 0.15) 30%,
+                    rgba(255, 200, 80, 0.3) 70%,
+                    rgba(255, 230, 150, 0.6) 100%);
+            filter: blur(15px);
+            mix-blend-mode: screen;
+            pointer-events: none;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 0.6s ease 0.3s, transform 0.8s cubic-bezier(0.2, 0.8, 0.3, 1) 0.3s;
+        }
+
+        .chest-container.opened-state .treasure-beam {
+            opacity: 1;
+            transform: translateX(-50%) scaleY(1);
+        }
+
+        /* footer hint */
+        .credits {
+            position: absolute;
+            bottom: 14px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 11px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: rgba(200, 230, 240, 0.4);
+            z-index: 20;
+            pointer-events: none;
+            font-family: 'Cinzel', serif;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="ocean">
+
+        <!-- Surface shimmer -->
+        <div class="surface"></div>
+
+        <!-- God rays -->
+        <div class="rays">
+            <div class="ray"></div>
+            <div class="ray"></div>
+            <div class="ray"></div>
+            <div class="ray"></div>
+            <div class="ray"></div>
+        </div>
+
+        <!-- Plankton dust -->
+        <div class="plankton" id="plankton"></div>
+
+        <!-- Background distant corals (silhouettes) -->
+        <svg class="coral-layer" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMax slice"
+            style="opacity:0.35;filter:blur(2px)">
+            <path d="M0,1080 L0,900 Q50,820 100,860 Q150,810 200,870 Q260,830 320,880 Q400,840 480,890 L480,1080 Z
+" fill="#0a3a48" />
+            <path d="M1400,1080 L1400,920 Q1480,860 1560,900 Q1640,850 1720,910 Q1800,870 1880,920 L1920,1080 Z"
+                fill="#0a3a48" />
+        </svg>
+
+        <!-- CORALS - SVG styled, layered -->
+        <svg class="coral-layer" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMax slice">
+            <defs>
+                <!-- Gradients -->
+                <linearGradient id="coralPink" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#ffb3cc" />
+                    <stop offset="0.5" stop-color="#ff6a8c" />
+                    <stop offset="1" stop-color="#7a2040" />
+                </linearGradient>
+                <linearGradient id="coralPeach" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#ffd0a0" />
+                    <stop offset="0.5" stop-color="#ff9558" />
+                    <stop offset="1" stop-color="#7a3010" />
+                </linearGradient>
+                <linearGradient id="coralPurple" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#f0a8e8" />
+                    <stop offset="0.5" stop-color="#c850c8" />
+                    <stop offset="1" stop-color="#4a1840" />
+                </linearGradient>
+                <linearGradient id="coralRed" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#ff9090" />
+                    <stop offset="0.5" stop-color="#d63a4a" />
+                    <stop offset="1" stop-color="#5a1020" />
+                </linearGradient>
+                <linearGradient id="grassGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#a0d090" />
+                    <stop offset="0.5" stop-color="#4a8060" />
+                    <stop offset="1" stop-color="#102820" />
+                </linearGradient>
+                <radialGradient id="anemoneGrad" cx="0.5" cy="0.7" r="0.6">
+                    <stop offset="0" stop-color="#ffcc70" />
+                    <stop offset="0.5" stop-color="#d634a0" />
+                    <stop offset="1" stop-color="#4a0a3a" />
+                </radialGradient>
+                <radialGradient id="tipGlow" cx="0.5" cy="0.5" r="0.5">
+                    <stop offset="0" stop-color="#fff5d0" />
+                    <stop offset="1" stop-color="#ff9bbf" stop-opacity="0" />
+                </radialGradient>
+
+                <!-- Filters for soft glow -->
+                <filter id="softShadow">
+                    <feGaussianBlur stdDeviation="3" />
+                </filter>
+            </defs>
+
+            <!-- LEFT SIDE CORALS -->
+
+            <!-- Big branching coral (Acropora) left -->
+            <g class="coral" style="left:3%;bottom:22%;width:240px;height:320px;animation-delay:-1s">
+                <path d="M120,320 L115,260 L108,200 Q100,160 90,140 Q78,120 70,95 Q66,75 80,65 Q98,60 108,80 Q115,110 118,150 L122,180 L128,130 Q132,90 145,70 Q160,55 175,68 Q180,90 168,115 Q155,140 148,170 L142,210 L150,170 Q160,140 175,125 Q190,115 195,135 Q192,155 178,175 Q165,200 162,230 L160,260 L170,220 Q180,190
+195,180 Q210,180 212,200 Q205,220 190,240 Q175,260 172,290 L168,320 Z" fill="url(#coralPink)" />
+                <!-- tip highlights -->
+                <circle cx="75" cy="68" r="7" fill="url(#tipGlow)" />
+                <circle cx="170" cy="65" r="6" fill="url(#tipGlow)" />
+                <circle cx="198" cy="135" r="5" fill="url(#tipGlow)" />
+                <circle cx="213" cy="200" r="4" fill="url(#tipGlow)" />
+                <circle cx="148" cy="170" r="4" fill="url(#tipGlow)" />
+            </g>
+
+            <!-- Fan coral left -->
+            <g class="coral" style="left:14%;bottom:21%;width:200px;height:220px;animation-delay:-3s">
+                <path
+                    d="M100,220 L95,200 Q60,180 40,150 Q25,120 30,90 Q40,65 70,55 Q100,40 130,55 Q165,65 180,95 Q190,125 175,155 Q160,180 110,200 L105,220 Z"
+                    fill="url(#coralPurple)" opacity="0.92" />
+                <!-- mesh pattern -->
+                <path
+                    d="M100,210 Q70,180 55,140 M100,210 Q90,160 90,100 M100,210 Q130,170 145,120 M100,210 Q160,180 175,140 M65,90 Q100,80 140,90 M50,120 Q100,110 160,120 M55,150 Q100,140 165,150"
+                    stroke="#4a1840" stroke-width="1.5" fill="none" opacity="0.6
+" />
+                <circle cx="70" cy="70" r="3" fill="#fff5d0" />
+                <circle cx="140" cy="80" r="3" fill="#fff5d0" />
+                <circle cx="170" cy="120" r="3" fill="#fff5d0" />
+            </g>
+
+            <!-- Sea grass left -->
+            <g class="coral"
+                style="left:6%;bottom:22%;width:180px;height:240px;animation-delay:-1.5s;animation-duration:5s">
+                <path d="M30,240 Q25,180 35,120 Q40,80 50,40 L55,45 Q45,90 40,140 Q40,200 45,240 Z"
+                    fill="url(#grassGrad)" />
+                <path d="M55,240 Q50,190 60,140 Q70,100 80,60 L85,65 Q72,110 65,160 Q60,210 65,240 Z"
+                    fill="url(#grassGrad)" opacity="0.9" />
+                <path d="M85,240 Q80,200 95,150 Q105,110 115,70 L120,75 Q108,120 100,170 Q95,210 100,240 Z"
+                    fill="url(#grassGrad)" opacity="0.85" />
+                <path d="M115,240 Q110,200 120,160 Q130,120 140,90 L145,95 Q132,140 125,180 Q120,210 125,240 Z"
+                    fill="url(#grassGrad)" opacity="0.8" />
+                <path d="M145,240 Q140,210 150,180 Q158,150 165,120 L170,125 Q160,160 155,200 Q150,220 155,240 Z"
+                    fill="url(#grassGrad)" opacity="0.75" />
+            </g>
+
+            <!-- Anemone left -->
+            <g class="coral" style="left:24%;bottom:22%;width:140px;height:120px;animation-delay:-2.5s;animation
+-duration:7s">
+                <ellipse cx="70" cy="105" rx="55" ry="15" fill="#3a1830" />
+                <g>
+                    <path d="M30,100 Q25,60 35,30 Q40,15 45,10 Q48,30 45,55 Q42,80 40,100 Z" fill="url(#anemoneGrad)" />
+                    <path d="M45,100 Q40,55 50,25 Q55,8 60,5 Q60,30 58,60 Q55,85 52,100 Z" fill="url(#anemoneGrad)" />
+                    <path d="M60,100 Q55,50 65,15 Q70,0 75,5 Q72,35 70,65 Q68,90 65,100 Z" fill="url(#anemoneGrad)" />
+                    <path d="M75,100 Q70,40 80,10 Q85,0 90,5 Q87,35 85,65 Q82,90 80,100 Z" fill="url(#anemoneGrad)" />
+                    <path d="M90,100 Q85,55 95,25 Q100,10 105,15 Q102,45 100,75 Q98,95 95,100 Z"
+                        fill="url(#anemoneGrad)" />
+                    <path d="M105,100 Q100,65 110,35 Q115,20 120,25 Q117,55 115,85 Q112,98 110,100 Z"
+                        fill="url(#anemoneGrad)" />
+                </g>
+                <circle cx="37" cy="15" r="3" fill="#fff5d0" />
+                <circle cx="60" cy="10" r="3" fill="#fff5d0" />
+                <circle cx="85" cy="8" r="3" fill="#fff5d0" />
+                <circle cx="110" cy="25" r="3" fill="#fff5d0" />
+            </g>
+
+            <!-- Brain coral left -->
+            <g class="coral"
+                style="left:30%;bottom:21.5%;width:160px;height:90px;animation-delay:-4s;animation-duration:9s">
+                <ellipse cx="80" cy="80" rx="75" ry="25" fill="url(#coralPeach)" />
+                <path
+                    d="M15,75 Q40,55 65,72 Q90,90 115,68 Q140,55 150,72 M15,82 Q40,65 65,80 Q90,95 115,75 Q140,62 150,80 M20,68 Q45,50 70,65 Q95,80 120,58 Q140,48 145,62"
+                    stroke="#7a3010" stroke-width="2.5" fill="none" opacity="0.7" />
+            </g>
+
+            <!-- RIGHT SIDE CORALS -->
+
+            <!-- Big branching coral right -->
+            <g class="coral" style="right:5%;bottom:22%;width:240px;height:340px;animation-delay:-2s">
+                <path d="M120,340 L118,280 L112,220 Q105,180 95,155 Q85,130 78,105 Q72,80 88,70 Q108,65 118,85 Q125,115 128,155 L132,185 L138,135 Q142,95 155,75 Q170,60 185,73 Q190,95 178,120 Q165,145 158,175 L152,215 L160,175 Q170,145 185,130 Q200,120 205,140 Q202,160 188,180 Q175,200 172
+,230 L170,260 L180,225 Q190,195 205,185 Q220,185 222,205 Q215,225 200,245 Q185,265 182,295 L178,340 Z"
+                    fill="url(#coralRed)" />
+                <circle cx="83" cy="73" r="7" fill="url(#tipGlow)" />
+                <circle cx="180" cy="70" r="6" fill="url(#tipGlow)" />
+                <circle cx="208" cy="140" r="5" fill="url(#tipGlow)" />
+                <circle cx="223" cy="205" r="4" fill="url(#tipGlow)" />
+            </g>
+
+            <!-- Fan coral right -->
+            <g class="coral" style="right:13%;bottom:21%;width:210px;height:230px;animation-delay:-3.5s">
+                <path
+                    d="M105,230 L100,210 Q60,190 40,160 Q25,130 30,100 Q40,70 75,58 Q105,42 140,58 Q175,70 190,100 Q200,130 185,160 Q170,190 115,210 L110,230 Z"
+                    fill="url(#coralPink)" opacity="0.95" />
+                <path
+                    d="M105,220 Q70,190 55,150 M105,220 Q95,170 95,110 M105,220 Q135,180 150,130 M105,220 Q165,190 180,150 M70,95 Q105,85 145,95 M55,130 Q105,120 165,130 M60,160 Q105,150 170,160"
+                    stroke="#7a2040" stroke-width="1.5" fill="none" opacity="0.6" />
+                <circle cx="75" cy="75" r="3" fill="#fff5d0" />
+                <circle cx="145" cy="85" r="3" fill="#fff5d0" />
+                <circle cx="180" cy="130" r="3" fill="#fff5d0" />
+            </g>
+
+            <!-- Sea grass right -->
+            <g class="coral" style="right:7
+%;bottom:22%;width:200px;height:260px;animation-delay:-2s;animation-duration:5.5s">
+                <path d="M30,260 Q25,210 35,150 Q40,100 50,55 L55,60 Q45,110 40,170 Q40,220 45,260 Z"
+                    fill="url(#grassGrad)" />
+                <path d="M55,260 Q50,210 60,150 Q70,110 80,70 L85,75 Q72,130 65,180 Q60,230 65,260 Z"
+                    fill="url(#grassGrad)" opacity="0.9" />
+                <path d="M85,260 Q80,210 95,160 Q105,120 115,80 L120,85 Q108,140 100,190 Q95,230 100,260 Z"
+                    fill="url(#grassGrad)" opacity="0.85" />
+                <path d="M115,260 Q110,220 120,180 Q130,140 140,110 L145,115 Q132,160 125,200 Q120,230 125,260 Z"
+                    fill="url(#grassGrad)" opacity="0.8" />
+                <path d="M145,260 Q140,230 150,200 Q158,170 165,140 L170,145 Q160,180 155,220 Q150,240 155,260 Z"
+                    fill="url(#grassGrad)" opacity="0.75" />
+            </g>
+
+            <!-- Anemone right -->
+            <g class="coral"
+                style="right:24%;bottom:22%;width:140px;height:120px;animation-delay:-4.5s;animation-duration:7s">
+                <ellipse cx="70" cy="105" rx="55" ry="15" fill="#3a1830" />
+                <g>
+                    <path d="M30,100 Q25,60 35,30 Q40,15 45,10 Q48,30 45,55 Q42,80 40,100 Z" fill="url(#anemoneGrad)" />
+                    <path d="M45,100 Q40,55 50,25 Q55,8 60,5 Q60,30 58,60 Q55
+,85 52,100 Z" fill="url(#anemoneGrad)" />
+                    <path d="M60,100 Q55,50 65,15 Q70,0 75,5 Q72,35 70,65 Q68,90 65,100 Z" fill="url(#anemoneGrad)" />
+                    <path d="M75,100 Q70,40 80,10 Q85,0 90,5 Q87,35 85,65 Q82,90 80,100 Z" fill="url(#anemoneGrad)" />
+                    <path d="M90,100 Q85,55 95,25 Q100,10 105,15 Q102,45 100,75 Q98,95 95,100 Z"
+                        fill="url(#anemoneGrad)" />
+                    <path d="M105,100 Q100,65 110,35 Q115,20 120,25 Q117,55 115,85 Q112,98 110,100 Z"
+                        fill="url(#anemoneGrad)" />
+                </g>
+                <circle cx="37" cy="15" r="3" fill="#fff5d0" />
+                <circle cx="60" cy="10" r="3" fill="#fff5d0" />
+                <circle cx="85" cy="8" r="3" fill="#fff5d0" />
+                <circle cx="110" cy="25" r="3" fill="#fff5d0" />
+            </g>
+
+            <!-- Soft coral (mushroom shape) right small -->
+            <g class="coral"
+                style="right:30%;bottom:21.5%;width:130px;height:100px;animation-delay:-1s;animation-duration:8s">
+                <path d="M65,100 L60,70 Q40,60 35,40 Q30,15 65,10 Q100,15 95,40 Q90,60 70,70 L65,100 Z"
+                    fill="url(#coralPeach)" />
+                <ellipse cx="65" cy="15" rx="32" ry="8" fill="#ffd0a0" opacity="0.7" />
+                <circle cx="50" cy="20" r="2" fill="#fff5d0" />
+                <circle cx="65" cy="15" r="2" fill="#fff
+5d0" />
+                <circle cx="80" cy="22" r="2" fill="#fff5d0" />
+            </g>
+
+            <!-- Small branching corals near chest -->
+            <g class="coral" style="left:35%;bottom:21%;width:130px;height:140px;animation-delay:-2s">
+                <path
+                    d="M65,140 L62,100 Q58,75 50,55 Q42,38 50,28 Q60,25 65,40 Q70,60 70,85 L72,110 L75,80 Q80,55 92,42 Q105,32 110,45 Q108,65 95,85 Q85,105 82,125 L80,140 Z"
+                    fill="url(#coralPurple)" />
+                <circle cx="52" cy="32" r="4" fill="url(#tipGlow)" />
+                <circle cx="108" cy="45" r="4" fill="url(#tipGlow)" />
+            </g>
+
+            <g class="coral" style="right:35%;bottom:21%;width:130px;height:140px;animation-delay:-3s">
+                <path
+                    d="M65,140 L62,100 Q58,75 50,55 Q42,38 50,28 Q60,25 65,40 Q70,60 70,85 L72,110 L75,80 Q80,55 92,42 Q105,32 110,45 Q108,65 95,85 Q85,105 82,125 L80,140 Z"
+                    fill="url(#coralPeach)" />
+                <circle cx="52" cy="32" r="4" fill="url(#tipGlow)" />
+                <circle cx="108" cy="45" r="4" fill="url(#tipGlow)" />
+            </g>
+
+            <!-- urchins on floor -->
+            <g style="position:absolute;bottom:21%;left:18%">
+                <ellipse cx="0" cy="0" rx="25" ry="8" fill="#1a0a14" opacity="0.5" />
+                <g>
+                    <line x1="0" y1="0" x2="-22" y2="-18" stroke="#2a0a20" stroke-width="2" />
+                    <line x 1="0" y1="0" x2="-15" y2="-25" stroke="#2a0a20" stroke-width="2" />
+                    <line x1="0" y1="0" x2="-5" y2="-28" stroke="#2a0a20" stroke-width="2" />
+                    <line x1="0" y1="0" x2="5" y2="-28" stroke="#2a0a20" stroke-width="2" />
+                    <line x1="0" y1="0" x2="15" y2="-25" stroke="#2a0a20" stroke-width="2" />
+                    <line x1="0" y1="0" x2="22" y2="-18" stroke="#2a0a20" stroke-width="2" />
+                    <line x1="0" y1="0" x2="-25" y2="-10" stroke="#2a0a20" stroke-width="2" />
+                    <line x1="0" y1="0" x2="25" y2="-10" stroke="#2a0a20" stroke-width="2" />
+                    <line x1="0" y1="0" x2="-28" y2="-2" stroke="#2a0a20" stroke-width="2" />
+                    <line x1="0" y1="0" x2="28" y2="-2" stroke="#2a0a20" stroke-width="2" />
+                </g>
+                <circle cx="0" cy="0" r="12" fill="#3a0a30" />
+                <circle cx="-3" cy="-3" r="3" fill="#5a1070" opacity="0.6" />
+            </g>
+
+        </svg>
+
+        <!-- Floor and caustics -->
+        <div class="floor"></div>
+        <div class="caustics"></div>
+
+        <!-- FISH LAYER -->
+        <div class="fish-layer">
+
+            <!-- School of small fish -->
+            <svg class="fish" style="top:55%;width:40px;height:25px;animation-duration:28s;animation-delay:0s"
+                viewBox="0 0 60 30">
+                <defs>
+                    <linearGradient id="fishOrange" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0" stop-color="#ffb
+070" />
+                        <stop offset="0.5" stop-color="#ff7838" />
+                        <stop offset="1" stop-color="#a03010" />
+                    </linearGradient>
+                </defs>
+                <g class="fish-body">
+                    <path d="M5,15 Q15,5
+
+35,10 Q45,12 55,15 Q45,18 35,20 Q15,25 5,15 Z" fill="url(#fishOrange)" />
+                    <path d="M50,15 L60,8 L58,15 L60,22 Z" fill="#ff7838" />
+                    <circle cx="15" cy="13" r="1.5" fill="#1a0a04" />
+                    <path d="M20,12 Q30,14 40,13" stroke="#a03010" stroke-width="0.5" fill="none" />
+                </g>
+            </svg>
+
+            <svg class="fish reverse" style="top:38%;width:50px;height:32px;animation-duration:32s;animation-delay:-8s"
+                viewBox="0 0 60 30">
+                <defs>
+                    <linearGradient id="fishYellow" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0" stop-color="#fff0a0" />
+                        <stop offset="0.5" stop-color="#ffd840" />
+                        <stop offset="1" stop-color="#a07010" />
+                    </linearGradient>
+                </defs>
+                <g class="fish-body">
+                    <path d="M5,15 Q15,4 35,9 Q46,11 55,15 Q46,19 35,21 Q15,26 5,15 Z" fill="url(#fishYellow)" />
+                    <path d="M50,15 L60,7 L58,15 L60,23 Z" fill="#ffd840" />
+                    <path d="M20,8 Q25,5 35,8" stroke="#a07010" stroke-width="1" fill="none" />
+                    <path d="M20,22 Q25,25 35,22" stroke="#a07010" stroke-width="1" fill="none" />
+                    <circle cx="15" cy="13" r="1.5" fill="#1a0a04" />
+                </g>
+            </svg>
+
+            <svg class="fish" style="top:62%;width:35px;height:22px;animation-duration:24s;animation-delay:-12s"
+                viewBox="0 0 60 30">
+                <g class="fish-body">
+                    <path d="M5,15 Q15,5 35,10 Q45,12 55,15 Q45,18 35,20 Q15,25 5,15 Z" fill="url(#fishOrange)" />
+                    <path d="M50,15 L60,8 L58,15 L60,22 Z" fill="#ff7838" />
+                    <circle cx="15" cy="13" r="1.5" fill="#1a0a04" />
+                </g>
+            </svg>
+
+            <svg class="fish reverse" style="top:48%;width:45px;height:28px;animation-duration:30s;animation-delay:-15s"
+                viewBox="0 0 60 30">
+                <defs>
+                    <linearGradient id="fishBlue" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0" stop-color="#a0e0ff" />
+                        <stop offset="0.5" stop-color="#3898d8" />
+                        <stop offset="1" stop-color="#104070" />
+                    </linearGradient>
+                </defs>
+                <g class="fish-body">
+                    <path d="M5,15 Q15,4 35,9 Q46,11 55,15 Q46,19 35,21 Q15,26 5,15 Z" fill="url(#fishBlue)" />
+                    <path d="M50,15 L60,7 L58,15 L60,23 Z" fill="#3898d8" />
+                    <path d="M20,8 Q25,5 35,8" stroke="#104070" stroke-width="1" fill="none" />
+                    <circle cx="15" cy="13" r="1.5" fill="#1a0a04" />
+                </g>
+            </svg>
+
+            <svg class="fish" style="top:70%;width:30px;height:20px;animation-duration:20s;animation-delay:-5s"
+                viewBox="0 0 60 30">
+                <g class="fish-body">
+                    <path d="M5,15 Q15,5 35,10 Q45,12 55,15 Q45,18 35,20 Q15,25 5,15 Z" fill="url(#fishOrange)" />
+                    <path d="M50,15 L60,8 L58,15 L60,22 Z" fill="#ff7838" />
+                    <circle cx="15" cy="13" r="1.5" fill="#1a0a04" />
+                </g>
+            </svg>
+
+            <!-- Jellyfish floating -->
+            <svg class="fish"
+                style="top:25%;left:30%;width:60px;height:80px;animation-duration:45s;animation-delay:-10s"
+                viewBox="0 0 60 80">
+                <defs>
+                    <radialGradient id="jellyGrad" cx="0.5" cy="0.3" r="0.6">
+                        <stop offset="0" stop-color="#ffe0f0" stop-opacity="0.9" />
+                        <stop offset="0.6" stop-color="#ff90c8" stop-opacity="0.6" />
+                        <stop offset="1" stop-color="#c830a0" stop-opacity="0.3" />
+                    </radialGradient>
+                </defs>
+                <g class="fish-body" style="animation-name:fishWiggle;animation-duration:2s">
+                    <path
+                        d="M10,30 Q5,15 30,8 Q55,15 50,30 Q50,38 45,35 Q40,32 35,35 Q30,38 25,35 Q20,32 15,35 Q10,38 10,30 Z"
+                        fill="url(#jellyGrad)" />
+                    <path d="M15,38 Q14,50 16,70 M25,38 Q24,55 26,75 M35,38 Q36,55 34,75 M45,38 Q46,50 44,70"
+                        stroke="#ff90c8" stroke-width="1.5" fill="none" opacity="0.6" />
+                    <ellipse cx="25" cy="22" rx="3" ry="2" fill="#fff" opacity="0.7" />
+                    <ellipse cx="35" cy="22" rx="3" ry="2" fill="#fff" opacity="0.7" />
+                </g>
+            </svg>
+        </div>
+
+        <!-- BUBBLES -->
+        <div class="bubbles" id="bubbles"></div>
+
+        <!-- TITLE -->
+        <div class="title">
+            <h1>The Abyssal Treasure</h1>
+            <div class="ornament"></div>
+            <p>Beneath the Coral Veil</p>
+        </div>
+
+        <!-- TREASURE BEAM (revealed on open) -->
+        <div class="treasure-beam" id="beam"></div>
+
+        <!-- CHEST -->
+        <div class="chest-container" id="chestContainer">
+
+            <div class="light-burst" id="burst"></div>
+
+            <div class="chest-glow-ambient"></div>
+
+            <div class="chest" id="chest">
+
+                <div class="chest-shadow"></div>
+
+                <div class="treasure-glow"></div>
+
+                <div class="treasure-pile">
+                    <!-- coins -->
+                    <div class="coin" style="left:20px;bottom:5px;width:22px;height:22px"></div>
+                    <div class="coin" style="left:45px;bottom:8px;width:20px;height:20px"></div>
+                    <div class="coin" style="left:70px;bottom:4px;width:24px;height:24px"></div>
+                    <div class="coin" style="left:95px;bottom:9px;width:21px;height:21px"></div>
+                    <div class="coin" style="left:120px;bottom:5px;width:23px;height:23px"></div>
+                    <div class="coin" style="left:145px;bottom:8px;width:20px;height:20px"></div>
+                    <div class="coin" style="left:170px;bottom:4px;width:22px;height:22px"></div>
+                    <div class="coin" style="left:32px;bottom:24px;width:22px;height:22px"></div>
+                    <div class="coin" style="left:58px;bottom:28px;width:20px;height:20px"></div>
+                    <div class="coin" style="left:85px;bottom:26px;width:23px;height:23px"></div>
+                    <div class="coin" style="left:112px;bottom:28px;width:21px;height:21px"></div>
+                    <div class="coin" style="left:138px;bottom:24px;width:22px;height:22px"></div>
+                    <div class="coin" style="left:162px;bottom:28px;width:20px;height:20px"></div>
+                    <div class="coin" style="left:50px;bottom:48px;width:20px;height:20px"></div>
+                    <div class="coin" style="left:75px;bottom:50px;width:22px;height:22px"></div>
+                    <div class="coin" style="left:100px;bottom:48px;width:21px;height:21px"></div>
+                    <div class="coin" style="left:125px;bottom:50px;width:20px;height:20px"></div>
+                    <div class="coin" style="left:150px;bottom:48px;width:22px;height:22px"></div>
+
+                    <!-- gems -->
+                    <div class="gem red" style="left:40px;bottom:54px"></div>
+                    <div class="gem blue" style="left:80px;bottom:60px"></div>
+                    <div class="gem green" style="left:120px;bottom:54px"></div>
+                    <div class="gem purple" style="left:160px;bottom:58px"></div>
+                    <div class="gem red" style="left:65px;bottom:72px;width:14px;height:18px"></div>
+                    <div class="gem blue" style="left:110px;bottom:74px;width:14px;height:18px"></div>
+                </div>
+
+                <div class="chest-body">
+                    <div class="body-front">
+                        <div class="gold-band band-top"></div>
+                        <div class="gold-band band-bottom"></div>
+                        <div class="gold-corner tl"></div>
+                        <div class="gold-corner tr"></div>
+                        <div class="gold-corner bl"></div>
+                        <div class="gold-corner br"></div>
+                        <div class="lock" id="lock">
+                            <div class="lock-keyhole"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chest-lid" id="lid">
+                    <div class="lid-top">
+                        <div class="lid-band"></div>
+                        <div class="lid-corner tl"></div>
+                        <div class="lid-corner tr"></div>
+                        <div class="lid-arch-front"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="hint" id="hint">Click to reveal</div>
+        </div>
+
+        <div class="credits">A still moment beneath the tide</div>
+
+    </div>
+
+    <script>
+        // ===== Bubbles generation =====
+        const bubbleContainer = document.getElementById('bubbles');
+        const bubbleCount = 28;
+        for (let i = 0; i < bubbleCount; i++) {
+            const b = document.createElement('div');
+            b.className = 'bubble';
+            const size = Math.random() * 16 + 4;
+            b.style.width = size + 'px';
+            b.style.height = size + 'px';
+            b.style.left = (Math.random() * 100) + '%';
+            b.style.animationDuration = (Math.random() * 10 + 8) + 's';
+            b.style.animationDelay = (Math.random() * -15) + 's';
+            b.style.opacity = Math.random() * 0.5 + 0.3;
+            bubbleContainer.appendChild(b);
+        }
+
+        // ===== Plankton dust =====
+        const plankton = document.getElementById('plankton');
+        const dotCount = 45;
+        for (let i = 0; i < dotCount; i++) {
+            const d = document.createElement('div');
+            d.className = 'dot';
+            d.style.left = (Math.random() * 100) + '%';
+            d.style.top = (Math.random() * 100) + '%';
+            d.style.animationDuration = (Math.random() * 12 + 8) + 's';
+            d.style.animationDelay = (Math.random() * -15) + 's';
+            d.style.opacity = Math.random() * 0.7 + 0.3;
+            const s = Math.random() * 2 + 1;
+            d.style.width = s + 'px';
+            d.style.height = s + 'px';
+            plankton.appendChild(d);
+        }
+
+        // ===== Chest open interaction =====
+        const chestContainer = document.getElementById('chestContainer');
+        const chest = document.getElementById('chest');
+        const burst = document.getElementById('burst');
+
+        let opened = false;
+
+        function openChest() {
+            if (opened) return;
+            opened = true;
+            chest.classList.add('opened');
+            chestContainer.classList.add('opened-state');
+            burst.classList.add('active');
+
+            // Emit gold particles
+            const rect = chestContainer.getBoundingClientRect();
+            for (let i = 0; i < 30; i++) {
+                const p = document.createElement('div');
+                p.className = 'gold-particle';
+                const startX = rect.left + rect.width / 2;
+                const startY = rect.top + rect.height * 0.4;
+                p.style.left = startX + 'px';
+                p.style.top = startY + 'px';
+                p.style.position = 'fixed';
+                p.style.zIndex = 50;
+                document.body.appendChild(p);
+
+                const angle = (Math.random() * Math.PI - Math.PI / 2);
+                const distance = Math.random() * 180 + 80;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance - Math.random() * 100;
+                const dur = Math.random() * 800 + 1000;
+
+                p.animate([
+                    { transform: 'translate(0,0) scale(1)', opacity: 1 },
+                    { transform: `translate(${tx}px, ${ty}px) scale(0.3)`, opacity: 0 }
+                ], { duration: dur, easing: 'cubic-bezier(0.2,0.6,0.4,1)' });
+
+                setTimeout(() => p.remove(), dur);
+            }
+
+            // Reset burst after animation
+            setTimeout(() => {
+                burst.classList.remove('active');
+            }, 1500);
+        }
+
+        chestContainer.addEventListener('click', openChest);
+        chestContainer.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openChest(); }
+        });
+        chestContainer.setAttribute('tabindex', '0');
+        chestContainer.setAttribute('role', 'button');
+        chestContainer.setAttribute('aria-label', 'Open the treasure chest');
+    </script>
+
+</body>
+
+</html>
