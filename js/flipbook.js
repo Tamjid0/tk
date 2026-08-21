@@ -108,6 +108,7 @@
     }
 
     const divider = (cls = "divider") => use("divider", cls);
+    const grain = () => el("div", "grain");
     const RES = "assets/resources/";
 
     function cornerImg(src) {
