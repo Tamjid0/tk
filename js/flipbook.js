@@ -126,8 +126,14 @@
         return d;
     }
 
+    function randRot() {
+        return (Math.random() * 6 - 3).toFixed(1);
+    }
+
     function imgCell(src, caption, cls) {
         const cell = el("div", cls);
+        cell.style.setProperty("--rot", randRot() + "deg");
+        cell.style.setProperty("--tape-rot", (Math.random() * 6 - 3).toFixed(1) + "deg");
         const im = document.createElement("img");
         im.src = src; im.alt = caption || ""; im.loading = "lazy";
         cell.appendChild(im);
@@ -137,6 +143,8 @@
 
     function imgCellTag(src, tag, cls) {
         const cell = el("div", cls);
+        cell.style.setProperty("--rot", randRot() + "deg");
+        cell.style.setProperty("--tape-rot", (Math.random() * 6 - 3).toFixed(1) + "deg");
         const im = document.createElement("img");
         im.src = src; im.alt = ""; im.loading = "lazy";
         cell.appendChild(im);
@@ -146,6 +154,8 @@
 
     function imgCellSpan(src, span2, cls) {
         const cell = el("div", cls + (span2 ? " span-2" : ""));
+        cell.style.setProperty("--rot", randRot() + "deg");
+        cell.style.setProperty("--tape-rot", (Math.random() * 6 - 3).toFixed(1) + "deg");
         const im = document.createElement("img");
         im.src = src; im.alt = ""; im.loading = "lazy";
         cell.appendChild(im);

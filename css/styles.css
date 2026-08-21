@@ -809,9 +809,36 @@ button {
 
 .page--hobbies-left .hobby-cell {
     position: relative;
-    overflow: hidden;
-    border-radius: 6px;
-    background: var(--paper-lo);
+    overflow: visible;
+    border-radius: 2px;
+    background: #fff;
+    padding: clamp(3px, .8cqi, 6px);
+    padding-bottom: clamp(12px, 3cqi, 22px);
+    box-shadow:
+        2px 3px 8px rgba(0, 0, 0, .15),
+        0 1px 3px rgba(0, 0, 0, .1);
+    transform: rotate(var(--rot, 0deg));
+    transition: transform .2s ease, box-shadow .2s ease;
+    z-index: 1;
+}
+
+.page--hobbies-left .hobby-cell:hover {
+    transform: rotate(0deg) scale(1.04);
+    box-shadow: 3px 5px 14px rgba(0, 0, 0, .22);
+    z-index: 10;
+}
+
+.page--hobbies-left .hobby-cell::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%) rotate(var(--tape-rot, 2deg));
+    width: clamp(20px, 6cqi, 36px);
+    height: clamp(8px, 2cqi, 14px);
+    background: rgba(255, 230, 150, .55);
+    border-radius: 1px;
+    z-index: 2;
 }
 
 .page--hobbies-left .hobby-cell img {
@@ -820,18 +847,19 @@ button {
     object-fit: cover;
     cursor: pointer;
     display: block;
+    border-radius: 1px;
 }
 
 .page--hobbies-left .hobby-cell .hobby-caption {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 4px 8px;
-    background: linear-gradient(transparent, rgba(0, 0, 0, .5));
-    color: #fff;
+    bottom: clamp(3px, .8cqi, 6px);
+    left: clamp(3px, .8cqi, 6px);
+    right: clamp(3px, .8cqi, 6px);
+    text-align: center;
+    color: var(--ink-soft);
     font-size: clamp(.5rem, 1.8cqi, .7rem);
     font-family: var(--font-ui);
+    font-style: italic;
 }
 
 .page--hobbies-right .page-inner {
@@ -863,9 +891,35 @@ button {
 
 .page--editorial-left .editorial-cell {
     position: relative;
-    overflow: hidden;
-    border-radius: 6px;
-    background: var(--paper-lo);
+    overflow: visible;
+    border-radius: 2px;
+    background: #fff;
+    padding: clamp(3px, .8cqi, 6px);
+    box-shadow:
+        2px 3px 8px rgba(0, 0, 0, .15),
+        0 1px 3px rgba(0, 0, 0, .1);
+    transform: rotate(var(--rot, 0deg));
+    transition: transform .2s ease, box-shadow .2s ease;
+    z-index: 1;
+}
+
+.page--editorial-left .editorial-cell:hover {
+    transform: rotate(0deg) scale(1.04);
+    box-shadow: 3px 5px 14px rgba(0, 0, 0, .22);
+    z-index: 10;
+}
+
+.page--editorial-left .editorial-cell::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%) rotate(var(--tape-rot, -3deg));
+    width: clamp(20px, 6cqi, 36px);
+    height: clamp(8px, 2cqi, 14px);
+    background: rgba(255, 230, 150, .55);
+    border-radius: 1px;
+    z-index: 2;
 }
 
 .page--editorial-left .editorial-cell img {
@@ -874,6 +928,7 @@ button {
     object-fit: cover;
     cursor: pointer;
     display: block;
+    border-radius: 1px;
 }
 
 /* ---- Spread 4: Gaming Memories (scrapbook) ---- */
@@ -895,10 +950,35 @@ button {
 
 .page--gaming-left .gaming-cell {
     position: relative;
-    overflow: hidden;
-    border-radius: 6px;
-    background: var(--paper-lo);
-    border: 2px solid rgba(26, 95, 138, .15);
+    overflow: visible;
+    border-radius: 2px;
+    background: #fff;
+    padding: clamp(3px, .8cqi, 6px);
+    box-shadow:
+        2px 3px 8px rgba(0, 0, 0, .15),
+        0 1px 3px rgba(0, 0, 0, .1);
+    transform: rotate(var(--rot, 0deg));
+    transition: transform .2s ease, box-shadow .2s ease;
+    z-index: 1;
+}
+
+.page--gaming-left .gaming-cell:hover {
+    transform: rotate(0deg) scale(1.04);
+    box-shadow: 3px 5px 14px rgba(0, 0, 0, .22);
+    z-index: 10;
+}
+
+.page--gaming-left .gaming-cell::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%) rotate(var(--tape-rot, 1deg));
+    width: clamp(20px, 6cqi, 36px);
+    height: clamp(8px, 2cqi, 14px);
+    background: rgba(255, 230, 150, .55);
+    border-radius: 1px;
+    z-index: 2;
 }
 
 .page--gaming-left .gaming-cell img {
@@ -907,6 +987,7 @@ button {
     object-fit: cover;
     cursor: pointer;
     display: block;
+    border-radius: 1px;
 }
 
 .page--gaming-left .gaming-cell .gaming-tag {
@@ -946,9 +1027,35 @@ button {
 
 .page--cinematic-left .cinema-cell {
     position: relative;
-    overflow: hidden;
-    border-radius: 6px;
-    background: var(--paper-lo);
+    overflow: visible;
+    border-radius: 2px;
+    background: #fff;
+    padding: clamp(3px, .8cqi, 6px);
+    box-shadow:
+        2px 3px 8px rgba(0, 0, 0, .15),
+        0 1px 3px rgba(0, 0, 0, .1);
+    transform: rotate(var(--rot, 0deg));
+    transition: transform .2s ease, box-shadow .2s ease;
+    z-index: 1;
+}
+
+.page--cinematic-left .cinema-cell:hover {
+    transform: rotate(0deg) scale(1.04);
+    box-shadow: 3px 5px 14px rgba(0, 0, 0, .22);
+    z-index: 10;
+}
+
+.page--cinematic-left .cinema-cell::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%) rotate(var(--tape-rot, -2deg));
+    width: clamp(20px, 6cqi, 36px);
+    height: clamp(8px, 2cqi, 14px);
+    background: rgba(255, 230, 150, .55);
+    border-radius: 1px;
+    z-index: 2;
 }
 
 .page--cinematic-left .cinema-cell img {
@@ -957,6 +1064,7 @@ button {
     object-fit: cover;
     cursor: pointer;
     display: block;
+    border-radius: 1px;
 }
 
 /* ---- Spread 6: Wishes for the Year Ahead ---- */
