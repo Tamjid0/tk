@@ -1,5 +1,5 @@
-/* ================================================================
-   Flipbook engine — vanilla JS, no dependencies, no network.
+﻿/* ================================================================
+   Flipbook engine â€” vanilla JS, no dependencies, no network.
    You should not need to edit this file.
 ================================================================ */
 (() => {
@@ -11,7 +11,7 @@
         const wrap = document.querySelector(".book-wrap");
         if (wrap) {
             const msg = document.createElement("p");
-            msg.textContent = "The keepsake could not load its content — js/content.js has a syntax error (see console).";
+            msg.textContent = "The keepsake could not load its content â€” js/content.js has a syntax error (see console).";
             msg.style.cssText = "position:relative;z-index:5;max-width:34ch;text-align:center;color:#ecd7a4;font-size:.85rem;line-height:1.7;padding:0 16px";
             wrap.appendChild(msg);
         }
@@ -88,7 +88,7 @@
             // Below 5 = zoomed out (more image visible), above 5 = zoomed in (cropped tighter).
             const sc = Math.min(9, Math.max(1, parseInt(art.scale, 10) || 5));
             if (sc !== 5) {
-                const factor = 0.55 + (sc - 1) * 0.125;   // 1→0.55 … 5→1.05 … 9→1.55
+                const factor = 0.55 + (sc - 1) * 0.125;   // 1â†’0.55 â€¦ 5â†’1.05 â€¦ 9â†’1.55
                 im.style.transform = "scale(" + factor.toFixed(3) + ")";
                 im.style.transformOrigin = "center center";
             }
@@ -108,23 +108,49 @@
     }
 
     const divider = (cls = "divider") => use("divider", cls);
-    const grain = () => el("div", "grain");
-
     const RES = "assets/resources/";
 
-    /* ---- Corner image from content.js ---- */
     function cornerImg(src) {
         if (!src) return null;
         const d = el("div", "page-corner-img");
         const img = document.createElement("img");
-        img.src = src;
-        img.alt = "";
-        img.loading = "lazy";
+        img.src = src; img.alt = ""; img.loading = "lazy";
         d.appendChild(img);
         return d;
     }
 
-    /* ---------- page builders ---------- */
+    function accentDivider() {
+        const d = el("div", "divider-accent");
+        d.appendChild(el("span", "dot"));
+        return d;
+    }
+
+    function imgCell(src, caption, cls) {
+        const cell = el("div", cls);
+        const im = document.createElement("img");
+        im.src = src; im.alt = caption || ""; im.loading = "lazy";
+        cell.appendChild(im);
+        if (caption) { const c = el("span", "hobby-caption"); c.textContent = caption; cell.appendChild(c); }
+        return cell;
+    }
+
+    function imgCellTag(src, tag, cls) {
+        const cell = el("div", cls);
+        const im = document.createElement("img");
+        im.src = src; im.alt = ""; im.loading = "lazy";
+        cell.appendChild(im);
+        if (tag) { const t = el("span", "gaming-tag"); t.textContent = tag; cell.appendChild(t); }
+        return cell;
+    }
+
+    function imgCellSpan(src, span2, cls) {
+        const cell = el("div", cls + (span2 ? " span-2" : ""));
+        const im = document.createElement("img");
+        im.src = src; im.alt = ""; im.loading = "lazy";
+        cell.appendChild(im);
+        return cell;
+    }
+
     function buildCover(p) {
         const pg = el("div", "page page--cover");
         pg.appendChild(el("div", "cover-frame"));
@@ -135,7 +161,6 @@
             pg.appendChild(corner);
         });
         const wm = el("div", "cover-watermark"); wm.appendChild(use("crest")); pg.appendChild(wm);
-
         const inner = el("div", "page-inner");
         inner.appendChild(use("crest", "cover-crest"));
         inner.appendChild(plate(p.art, { cls: "cover-art" }));
@@ -143,117 +168,149 @@
         inner.appendChild(divider("divider cover-rule"));
         const name = el("p", "cover-name");
         const lbl = el("span", "label"); lbl.textContent = "for"; name.appendChild(lbl);
-        name.appendChild(tok(p.recipient));
-        inner.appendChild(name);
+        name.appendChild(tok(p.recipient)); inner.appendChild(name);
         const date = el("p", "cover-date"); date.appendChild(tok(p.date)); inner.appendChild(date);
         pg.appendChild(inner);
         return pg;
     }
 
-    function buildOpening(p) {
-        const pg = el("div", "page page--opening page--framed");
-        if (p.cornerImg) { const c = cornerImg(p.cornerImg); if (c) pg.appendChild(c); }
-        const inner = el("div", "page-inner");
-        const k = el("span", "label"); k.textContent = p.kicker; inner.appendChild(k);
-        const h2 = el("h2", "opening-title"); h2.appendChild(tok(p.title)); inner.appendChild(h2);
-        inner.appendChild(divider());
-        const body = el("div", "body");
-        (p.body || []).forEach(line => {
-            const para = el("p"); para.appendChild(tok(line));
-            if (isTok(line)) para.classList.add("has-tok");
-            body.appendChild(para);
-        });
-        inner.appendChild(body);
-        const pair = el("div", "sigil-pair");
-        pair.appendChild(use("sigil-water", "s-water"));
-        pair.appendChild(use("sigil-sun", "s-sun"));
-        inner.appendChild(pair);
-        pg.appendChild(inner);
-        return pg;
-    }
-
-    function buildFrontispiece(p) {
-        const pg = el("div", "page page--frontispiece page--framed");
-        if (p.cornerImg) { const c = cornerImg(p.cornerImg); if (c) pg.appendChild(c); }
-        const inner = el("div", "page-inner");
-        inner.appendChild(plate(p.art, { caption: p.caption, cls: "plate--tall" }));
-        pg.appendChild(inner);
-        return pg;
-    }
-
-    function buildPhoto(p) {
-        const pg = el("div", "page page--photo page--framed");
-        if (p.cornerImg) { const c = cornerImg(p.cornerImg); if (c) pg.appendChild(c); }
-        const inner = el("div", "page-inner");
-        inner.appendChild(plate(p.art, { caption: p.caption, cls: "plate--wide" }));
-        pg.appendChild(inner);
-        ["a", "b"].forEach((c) => {
-            const s = el("span", "sparkle-mini " + c); s.appendChild(use("spark")); pg.appendChild(s);
-        });
-        return pg;
-    }
-
-    function buildVignette(p) {
-        const pg = el("div", "page page--vignette page--framed");
-        if (p.cornerImg) { const c = cornerImg(p.cornerImg); if (c) pg.appendChild(c); }
-        const inner = el("div", "page-inner");
-        inner.appendChild(divider());
-        inner.appendChild(plate(p.art, { caption: p.caption, cls: "plate--small" }));
-        const body = el("div", "body");
-        (p.body || []).forEach(line => { const para = el("p"); para.appendChild(tok(line)); body.appendChild(para); });
-        inner.appendChild(body);
-        inner.appendChild(divider());
-        pg.appendChild(inner);
-        return pg;
-    }
-
-    function buildSpreadLeft(p) {
-        const pg = el("div", "page page--spread-left");
+    function buildIntroLeft(p) {
+        const pg = el("div", "page page--intro-left");
         const inner = el("div", "page-inner");
         inner.appendChild(plate(p.art, { cls: "plate--full" }));
         pg.appendChild(inner);
         return pg;
     }
 
-    function buildSpreadRight(p) {
-        const pg = el("div", "page page--spread-right page--framed");
+    function buildIntroRight(p) {
+        const pg = el("div", "page page--intro-right page--text-page page--framed");
         if (p.cornerImg) { const c = cornerImg(p.cornerImg); if (c) pg.appendChild(c); }
         const inner = el("div", "page-inner");
-        if (p.title) { const h2 = el("h2", "spread-title"); h2.appendChild(tok(p.title)); inner.appendChild(h2); }
-        inner.appendChild(divider());
-        const body = el("div", "spread-body");
+        if (p.kicker) { const k = el("span", "text-subtitle"); k.textContent = p.kicker; inner.appendChild(k); }
+        if (p.title) { const h2 = el("h2", "text-title"); h2.appendChild(tok(p.title)); inner.appendChild(h2); }
+        inner.appendChild(accentDivider());
+        const body = el("div", "text-body");
         (p.body || []).forEach(line => { const para = el("p"); para.appendChild(tok(line)); body.appendChild(para); });
         inner.appendChild(body);
         pg.appendChild(inner);
         return pg;
     }
 
-    function buildFull(p) {
-        const pg = el("div", "page page--full");
-        if (p.cornerImg) { const c = cornerImg(p.cornerImg); if (c) pg.appendChild(c); }
+    function buildHobbiesLeft(p) {
+        const pg = el("div", "page page--hobbies-left");
         const inner = el("div", "page-inner");
-        inner.appendChild(plate(p.art, { caption: p.caption, cls: "plate--full" }));
+        const grid = el("div", "hobby-grid " + (p.gridClass || "cols-2"));
+        (p.images || []).forEach(img => grid.appendChild(imgCell(img.src, img.caption, "hobby-cell")));
+        inner.appendChild(grid);
         pg.appendChild(inner);
         return pg;
     }
 
-    function buildMessage(p) {
-        const pg = el("div", "page page--message page--framed");
+    function buildHobbiesRight(p) {
+        const pg = el("div", "page page--hobbies-right page--text-page page--framed");
         if (p.cornerImg) { const c = cornerImg(p.cornerImg); if (c) pg.appendChild(c); }
-        const spots = [[14, 16, 0], [80, 12, 1.4], [86, 70, 2.8], [16, 78, 3.6], [50, 7, 2], [66, 88, 4.4]];
-        spots.forEach(([x, y, d], i) => {
-            const s = el("span", "spark" + (i % 3 === 1 ? " aqua" : ""));
-            s.style.left = x + "%"; s.style.top = y + "%"; s.style.setProperty("--sd", d + "s");
-            s.appendChild(use("spark")); pg.appendChild(s);
-        });
         const inner = el("div", "page-inner");
-        inner.appendChild(use("crest", "message-crest"));
-        const k = el("span", "label"); k.textContent = p.kicker; inner.appendChild(k);
-        inner.appendChild(divider());
-        const wish = el("div", "wish");
-        (p.body || []).forEach(line => { wish.appendChild(tok(line)); wish.appendChild(document.createElement("br")); });
-        inner.appendChild(wish);
-        inner.appendChild(divider());
+        if (p.title) { const h2 = el("h2", "text-title"); h2.appendChild(tok(p.title)); inner.appendChild(h2); }
+        inner.appendChild(accentDivider());
+        const body = el("div", "text-body");
+        (p.body || []).forEach(line => { const para = el("p"); para.appendChild(tok(line)); body.appendChild(para); });
+        inner.appendChild(body);
+        pg.appendChild(inner);
+        return pg;
+    }
+
+    function buildEditorialLeft(p) {
+        const pg = el("div", "page page--editorial-left");
+        const inner = el("div", "page-inner");
+        const grid = el("div", "editorial-grid");
+        (p.images || []).forEach(img => grid.appendChild(imgCellSpan(img.src, img.span2, "editorial-cell")));
+        inner.appendChild(grid);
+        pg.appendChild(inner);
+        return pg;
+    }
+
+    function buildEditorialRight(p) {
+        const pg = el("div", "page page--editorial-right page--text-page page--framed");
+        if (p.cornerImg) { const c = cornerImg(p.cornerImg); if (c) pg.appendChild(c); }
+        const inner = el("div", "page-inner");
+        if (p.title) { const h2 = el("h2", "text-title"); h2.appendChild(tok(p.title)); inner.appendChild(h2); }
+        inner.appendChild(accentDivider());
+        const body = el("div", "text-large");
+        (p.body || []).forEach(line => { const para = el("p"); para.appendChild(tok(line)); body.appendChild(para); });
+        inner.appendChild(body);
+        pg.appendChild(inner);
+        return pg;
+    }
+
+    function buildGamingLeft(p) {
+        const pg = el("div", "page page--gaming-left");
+        const inner = el("div", "page-inner");
+        const grid = el("div", "gaming-grid");
+        (p.images || []).forEach(img => grid.appendChild(imgCellTag(img.src, img.tag, "gaming-cell")));
+        inner.appendChild(grid);
+        pg.appendChild(inner);
+        return pg;
+    }
+
+    function buildGamingRight(p) {
+        const pg = el("div", "page page--gaming-right page--text-page page--framed");
+        if (p.cornerImg) { const c = cornerImg(p.cornerImg); if (c) pg.appendChild(c); }
+        const inner = el("div", "page-inner");
+        if (p.title) { const h2 = el("h2", "text-title"); h2.appendChild(tok(p.title)); inner.appendChild(h2); }
+        if (p.date) { const d = el("span", "date-tag"); d.textContent = p.date; inner.appendChild(d); }
+        inner.appendChild(accentDivider());
+        const body = el("div", "text-body");
+        (p.body || []).forEach(line => { const para = el("p"); para.appendChild(tok(line)); body.appendChild(para); });
+        inner.appendChild(body);
+        pg.appendChild(inner);
+        return pg;
+    }
+
+    function buildCinematicLeft(p) {
+        const pg = el("div", "page page--cinematic-left");
+        const inner = el("div", "page-inner");
+        const grid = el("div", "cinema-grid");
+        (p.images || []).forEach(img => grid.appendChild(imgCellSpan(img.src, img.span2, "cinema-cell")));
+        inner.appendChild(grid);
+        pg.appendChild(inner);
+        return pg;
+    }
+
+    function buildCinematicRight(p) {
+        const pg = el("div", "page page--cinematic-right page--text-page page--framed");
+        if (p.cornerImg) { const c = cornerImg(p.cornerImg); if (c) pg.appendChild(c); }
+        const inner = el("div", "page-inner");
+        if (p.title) { const h2 = el("h2", "text-title"); h2.appendChild(tok(p.title)); inner.appendChild(h2); }
+        inner.appendChild(accentDivider());
+        const body = el("div", "text-body");
+        (p.body || []).forEach(line => { const para = el("p"); para.appendChild(tok(line)); body.appendChild(para); });
+        inner.appendChild(body);
+        pg.appendChild(inner);
+        return pg;
+    }
+
+    function buildWishesLeft(p) {
+        const pg = el("div", "page page--wishes-left");
+        const inner = el("div", "page-inner");
+        inner.appendChild(plate(p.art, { cls: "plate--full" }));
+        pg.appendChild(inner);
+        return pg;
+    }
+
+    function buildWishesRight(p) {
+        const pg = el("div", "page page--wishes-right page--text-page page--framed");
+        if (p.cornerImg) { const c = cornerImg(p.cornerImg); if (c) pg.appendChild(c); }
+        const inner = el("div", "page-inner");
+        if (p.title) { const h2 = el("h2", "text-title"); h2.appendChild(tok(p.title)); inner.appendChild(h2); }
+        inner.appendChild(accentDivider());
+        const body = el("div", "text-body");
+        (p.body || []).forEach(line => { const para = el("p"); para.appendChild(tok(line)); body.appendChild(para); });
+        inner.appendChild(body);
+        if (p.tags && p.tags.length) {
+            const tags = el("div", "wish-categories");
+            p.tags.forEach(t => { const tag = el("span", "wish-tag"); tag.textContent = t; tags.appendChild(tag); });
+            inner.appendChild(tags);
+        }
         pg.appendChild(inner);
         return pg;
     }
@@ -269,7 +326,7 @@
         inner.appendChild(body);
         const row = el("div", "closing-row");
         const seal = el("span", "seal"); seal.setAttribute("aria-hidden", "true");
-        seal.textContent = "生辰";
+        seal.textContent = "\u751F\u8FB0";
         row.appendChild(seal);
         inner.appendChild(row);
         pg.appendChild(inner);
@@ -282,7 +339,7 @@
         const inner = el("div", "page-inner");
         inner.appendChild(use("crest", "end-crest"));
         const note = el("p", "end-note"); note.appendChild(tok(p.note)); inner.appendChild(note);
-        const mark = el("span", "end-mark"); mark.textContent = "✦"; inner.appendChild(mark);
+        const mark = el("span", "end-mark"); mark.textContent = "\u2726"; inner.appendChild(mark);
         pg.appendChild(inner);
         return pg;
     }
@@ -299,14 +356,18 @@
         let pg;
         switch (model.type) {
             case "cover": pg = buildCover(model); break;
-            case "opening": pg = buildOpening(model); break;
-            case "frontispiece": pg = buildFrontispiece(model); break;
-            case "photo": pg = buildPhoto(model); break;
-            case "vignette": pg = buildVignette(model); break;
-            case "spread-left": pg = buildSpreadLeft(model); break;
-            case "spread-right": pg = buildSpreadRight(model); break;
-            case "full": pg = buildFull(model); break;
-            case "message": pg = buildMessage(model); break;
+            case "intro-left": pg = buildIntroLeft(model); break;
+            case "intro-right": pg = buildIntroRight(model); break;
+            case "hobbies-left": pg = buildHobbiesLeft(model); break;
+            case "hobbies-right": pg = buildHobbiesRight(model); break;
+            case "editorial-left": pg = buildEditorialLeft(model); break;
+            case "editorial-right": pg = buildEditorialRight(model); break;
+            case "gaming-left": pg = buildGamingLeft(model); break;
+            case "gaming-right": pg = buildGamingRight(model); break;
+            case "cinematic-left": pg = buildCinematicLeft(model); break;
+            case "cinematic-right": pg = buildCinematicRight(model); break;
+            case "wishes-left": pg = buildWishesLeft(model); break;
+            case "wishes-right": pg = buildWishesRight(model); break;
             case "closing": pg = buildClosing(model); break;
             case "end": pg = buildEnd(model); break;
             default: pg = buildBlank();
@@ -314,7 +375,6 @@
         pg.appendChild(grain());
         return pg;
     }
-
     /* ---------- views & layout ---------- */
     function buildViews() {
         views = [];
@@ -351,7 +411,7 @@
         const v = views[cursor];
         const nums = v.filter(x => x !== null).map(x => x + 1);
         counterEl.textContent = nums.length === 2
-            ? `Pages ${nums[0]} · ${nums[1]} / ${PAGES.length}`
+            ? `Pages ${nums[0]} Â· ${nums[1]} / ${PAGES.length}`
             : `Page ${nums[0]} / ${PAGES.length}`;
         progressEl.style.width = (views.length > 1 ? (cursor / (views.length - 1)) * 100 : 0) + "%";
         btnPrev.disabled = cursor === 0;
@@ -405,7 +465,7 @@
         lock = true;
         if (mqReduce.matches) { fadeSwap(target); return; }
         const sheet = buildSheet(dir, target);
-        /* Pre-render ONLY the slot the sheet covers — the other
+        /* Pre-render ONLY the slot the sheet covers â€” the other
            slot must stay unchanged until the flip completes. */
         const v = views[target];
         if (mode === "single") {
@@ -514,9 +574,9 @@
             lightboxImg.src = "";
         }
 
-        /* Delegate click on any plate img */
+        /* Delegate click on any clickable image */
         document.addEventListener("click", (e) => {
-            const img = e.target.closest(".plate-media img");
+            const img = e.target.closest(".plate-media img, .hobby-cell img, .editorial-cell img, .gaming-cell img, .cinema-cell img");
             if (img && img.src) {
                 e.stopPropagation();
                 openLightbox(img.src, img.alt);

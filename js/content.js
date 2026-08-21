@@ -1,31 +1,33 @@
 /* ================================================================
-   ✦  EDIT THIS FILE ONLY  ✦
+   BIRTHDAY BOOK — Content Template
+
+   6 spreads (12 pages) + cover + end = 14 pages
 
    PAGE TYPES:
-     "cover"        — title page with art, title, recipient, date
-     "opening"      — prologue text page
-     "spread-left"  — left page of a 2-page spread (image only)
-     "spread-right" — right page of a 2-page spread (text + corner image)
-     "full"         — full-page image
-     "message"      — special wish/message page
-     "closing"      — closing page with art + text
-     "end"          — final end-paper
+     "cover"           — front cover
+     "intro-left"      — Spread 1 left: birthday image
+     "intro-right"     — Spread 1 right: birthday message
+     "hobbies-left"    — Spread 2 left: image grid
+     "hobbies-right"   — Spread 2 right: wishes
+     "editorial-left"  — Spread 3 left: varied image layout
+     "editorial-right" — Spread 3 right: combined message
+     "gaming-left"     — Spread 4 left: gaming screenshots grid
+     "gaming-right"    — Spread 4 right: captions + message
+     "cinematic-left"  — Spread 5 left: cinematic moments
+     "cinematic-right" — Spread 5 right: observations
+     "wishes-left"     — Spread 6 left: beautiful image
+     "wishes-right"    — Spread 6 right: final wishes + tags
+     "closing"         — closing page
+     "end"             — end paper
 
-   ART OBJECT:
-     { token, src, scale(1-9), fit("cover"|"contain") }
-
-   CORNER IMAGE (right page top-right corner):
-     cornerImg: "assets/resources/filename.png"
-     Set to null or omit to skip.
-
-   ADDING PAGES:
-     Just add more entries to the PAGES array below.
-     Spread pairs: put spread-left then spread-right in sequence.
+   FIELDS PER TYPE:
+     All types:   cornerImg (optional)
+     Left types:  art {token, src, scale, fit} OR images [{src, caption, tag, span2}]
+     Right types: title, body[], kicker, date, tags[]
 =============================================================== */
 const IMG = (file) => `assets/images/${file}`;
 const RES = (file) => `assets/resources/${file}`;
 
-/* Corner images — randomly assigned or explicitly set */
 const CORNERS = [
     RES("adorable dolia heart.png"),
     RES("Dolia-celebrating.png"),
@@ -39,109 +41,151 @@ const CORNERS = [
     RES("Dolia-crying 2.png"),
     RES("Dolia-valantine day.png"),
 ];
-let _cornerIdx = 0;
-const nextCorner = () => CORNERS[_cornerIdx++ % CORNERS.length];
+let _ci = 0;
+const nextCorner = () => CORNERS[_ci++ % CORNERS.length];
 
 const PAGES = [
 
-    /* 1 · COVER ─────────────────────────────────────────────── */
+    /* ═══ COVER ═══════════════════════════════════════════════ */
     {
         type: "cover",
-        art: { token: "COVER_ART", src: IMG("lovers.jpg"), scale: 10 },
-        title: "Heino x dolia",
+        art: { token: "COVER", src: IMG("lovers.jpg"), scale: 10 },
+        title: "Heino x Dolia",
         recipient: "Dolia",
         date: "15/08/2026"
     },
 
-    /* 2 · OPENING ───────────────────────────────────────────── */
+    /* ═══ SPREAD 1: Birthday Introduction ════════════════════ */
     {
-        type: "opening",
-        kicker: "Prologue",
-        title: "Hello",
+        type: "intro-left",
+        art: { token: "BIRTHDAY", src: IMG("Dolia-celebrating.png"), scale: 5 }
+    },
+    {
+        type: "intro-right",
+        kicker: "Happy Birthday",
+        title: "This Book Is For You",
         body: [
-            "This little book is a collection of moments —",
-            "the hobbies you love, the memories we share,",
-            "and all the little things that make you, you.",
+            "A collection of moments, memories,",
+            "and the little things that make you, you.",
+            "",
             "Happy birthday, Dolia."
+        ],
+        cornerImg: nextCorner()
+    },
+
+    /* ═══ SPREAD 2: Her Interests / Hobbies ══════════════════ */
+    {
+        type: "hobbies-left",
+        gridClass: "cols-2",
+        images: [
+            { src: IMG("dolia doing karate.png"), caption: "Karate" },
+            { src: IMG("dolia doing makup.png"), caption: "Makeup" },
+            { src: IMG("dolia doing makeup day.png"), caption: "Makeup Day" },
+            { src: IMG("dolia listening to music.png"), caption: "Music" }
         ]
     },
-
-    /* (blank page to align spreads correctly) */
-    null,
-
-    /* ─── SPREAD 1: Karate ────────────────────────────────── */
     {
-        type: "spread-left",
-        art: { token: "HOBBY_KARATE", src: IMG("dolia doing karate.png"), scale: 5 }
-    },
-    {
-        type: "spread-right",
-        title: "Karate",
-        body: ["Write your wishes for this hobby here..."],
+        type: "hobbies-right",
+        title: "The Things You Love",
+        body: [
+            "I remembered the things you told me about.",
+            "Every hobby, every passion — they all make you who you are."
+        ],
         cornerImg: nextCorner()
     },
 
-    /* ─── SPREAD 2: Makeup ────────────────────────────────── */
+    /* ═══ SPREAD 3: More of Her World ════════════════════════ */
     {
-        type: "spread-left",
-        art: { token: "HOBBY_MAKEUP", src: IMG("dolia doing makup.png"), scale: 6 }
+        type: "editorial-left",
+        images: [
+            { src: IMG("dolia doing karate.png"), span2: false },
+            { src: IMG("dolia listening to music.png"), span2: true },
+            { src: IMG("dolia doing makup.png"), span2: false }
+        ]
     },
     {
-        type: "spread-right",
-        title: "Makeup",
-        body: ["Write your wishes for this hobby here..."],
+        type: "editorial-right",
+        title: "Discovering Your World",
+        body: [
+            "There is always more to learn about the people we care about.",
+            "Your interests paint a beautiful picture of who you are."
+        ],
         cornerImg: nextCorner()
     },
 
-    /* ─── SPREAD 3: Makeup Day ────────────────────────────── */
+    /* ═══ SPREAD 4: Shared Gaming Memories ═══════════════════ */
     {
-        type: "spread-left",
-        art: { token: "HOBBY_MAKEUP_DAY", src: IMG("dolia doing makeup day.png"), scale: 4 }
+        type: "gaming-left",
+        images: [
+            { src: IMG("dolia singing on karoke heino sitting behind.png"), tag: "Karaoke Night" },
+            { src: IMG("dolia doing karate.png"), tag: "Achievement" },
+            { src: IMG("dolia doing makeup day.png"), tag: "Screenshot" },
+            { src: IMG("dolia listening to music.png"), tag: "Milestone" },
+            { src: IMG("dolia doing makup.png"), tag: "Victory" },
+            { src: IMG("Dolia-celebrating.png"), tag: "Level Up" }
+        ]
     },
     {
-        type: "spread-right",
-        title: "Makeup Day",
-        body: ["Write your wishes for this hobby here..."],
+        type: "gaming-right",
+        title: "Our Shared Memories",
+        date: "2024 - 2026",
+        body: [
+            "Every match, every win, every laugh —",
+            "these are the experiences we built together."
+        ],
         cornerImg: nextCorner()
     },
 
-    /* ─── SPREAD 4: Music ─────────────────────────────────── */
+    /* ═══ SPREAD 5: Favorite Shared Moments ══════════════════ */
     {
-        type: "spread-left",
-        art: { token: "HOBBY_MUSIC", src: IMG("dolia listening to music.png"), scale: 7 }
+        type: "cinematic-left",
+        images: [
+            { src: IMG("dolia singing on karoke heino sitting behind.png"), span2: true },
+            { src: IMG("Dolia-celebrating.png"), span2: false },
+            { src: IMG("dolia resisting.png"), span2: false }
+        ]
     },
     {
-        type: "spread-right",
-        title: "Music",
-        body: ["Write your wishes for this hobby here..."],
+        type: "cinematic-right",
+        title: "Moments I Hold Close",
+        body: [
+            "The video call that turned into a three-hour conversation.",
+            "The night we stayed up talking until sunrise.",
+            "These moments are why I am grateful for you."
+        ],
         cornerImg: nextCorner()
     },
 
-    /* ─── SPREAD 5: Karaoke ───────────────────────────────── */
+    /* ═══ SPREAD 6: Wishes for the Year Ahead ════════════════ */
     {
-        type: "spread-left",
-        art: { token: "HERO_MEMORY", src: IMG("dolia singing on karoke heino sitting behind.png"), scale: 5 }
+        type: "wishes-left",
+        art: { token: "WISHES", src: IMG("dolia x heino sitting on water dolia on marmaid form.jpg"), scale: 5 }
     },
     {
-        type: "spread-right",
-        title: "Karaoke",
-        body: ["Write your wishes for this hobby here..."],
+        type: "wishes-right",
+        title: "Wishes for Your Year Ahead",
+        body: [
+            "May this new year bring you everything you deserve.",
+            "Happiness, creativity, adventure, and endless fun.",
+            "Keep being the wonderful person you are."
+        ],
+        tags: ["Happiness", "Creativity", "Adventure", "Fun", "Memories", "Growth"],
         cornerImg: nextCorner()
     },
 
-    /* ─── CLOSING ─────────────────────────────────────────── */
+    /* ═══ CLOSING ════════════════════════════════════════════ */
     {
         type: "closing",
-        art: { token: "CLOSING_ART", src: IMG("lovers.jpg"), scale: 5 },
+        art: { token: "CLOSING", src: IMG("lovers.jpg"), scale: 5 },
         body: [
             "This book is yours to keep —",
-            "a small reminder of the big and small moments",
+            "a small reminder of the moments",
             "that make our friendship what it is.",
             "Happy birthday, dear Dolia."
         ]
     },
 
-    /* ─── END PAPER ───────────────────────────────────────── */
+    /* ═══ END PAPER ═════════════════════════════════════════ */
     {
         type: "end",
         note: "Made with love, for Dolia — 15 August 2026"
