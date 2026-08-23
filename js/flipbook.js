@@ -586,7 +586,18 @@
     btnNext.addEventListener("click", () => flip(1));
 
     document.addEventListener("click", (e) => {
-        if (e.target.closest(".back-cover-link")) autoFlipToFront();
+        if (e.target.closest(".back-cover-link")) {
+            e.preventDefault();
+            e.stopPropagation();
+            autoFlipToFront();
+        }
+    });
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && e.target.closest(".back-cover-link")) {
+            e.preventDefault();
+            autoFlipToFront();
+        }
     });
 
     document.addEventListener("keydown", (e) => {
@@ -600,7 +611,7 @@
 
     let px = 0, py = 0, tracking = false;
     stage.addEventListener("pointerdown", (e) => {
-        if (e.target.closest("button")) return;
+        if (e.target.closest("button, .back-cover-link")) return;
         tracking = true; px = e.clientX; py = e.clientY;
         try { stage.setPointerCapture(e.pointerId); } catch (_) { }
     });
