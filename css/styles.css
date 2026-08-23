@@ -420,6 +420,37 @@ button {
     right: -2%;
 }
 
+/* Persistent fold shadow. Keeping this on the book instead of a slot
+   prevents the spine from blinking when a page is replaced or lifted. */
+.mode-double .book::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    background:
+        linear-gradient(to right,
+            transparent 0,
+            transparent calc(50% - 34px),
+            rgba(7, 20, 34, .025) calc(50% - 24px),
+            rgba(7, 20, 34, .09) calc(50% - 9px),
+            rgba(7, 20, 34, .18) 50%,
+            rgba(7, 20, 34, .09) calc(50% + 9px),
+            rgba(7, 20, 34, .025) calc(50% + 24px),
+            transparent calc(50% + 34px),
+            transparent 100%),
+        linear-gradient(to right,
+            transparent calc(50% - 1px),
+            rgba(255, 255, 255, .18) 50%,
+            transparent calc(50% + 1px));
+    mix-blend-mode: multiply;
+    opacity: .9;
+}
+
+.mode-double .book.is-closed::after {
+    opacity: 0;
+}
+
 .slot {
     position: absolute;
     top: 0;
@@ -456,13 +487,13 @@ button {
 }
 
 .mode-double .slot-left::after {
-    background: linear-gradient(to left, rgba(11, 26, 46, .28) 0, rgba(11, 26, 46, .16) 5px, rgba(11, 26, 46, .07) 14px, rgba(11, 26, 46, .025) 26px, transparent 42px);
-    box-shadow: inset -1px 0 rgba(255, 255, 255, .2);
+    background: none;
+    box-shadow: none;
 }
 
 .mode-double .slot-right::after {
-    background: linear-gradient(to right, rgba(11, 26, 46, .28) 0, rgba(11, 26, 46, .16) 5px, rgba(11, 26, 46, .07) 14px, rgba(11, 26, 46, .025) 26px, transparent 42px);
-    box-shadow: inset 1px 0 rgba(255, 255, 255, .2);
+    background: none;
+    box-shadow: none;
 }
 
 .mode-double .slot-left::before,
@@ -944,6 +975,7 @@ button {
     display: grid;
     gap: clamp(6px, 1.5cqi, 10px);
     align-content: center;
+    overflow: hidden;
 }
 
 .page--gaming-left .gaming-grid {
@@ -953,6 +985,8 @@ button {
     gap: clamp(6px, 1.5cqi, 10px);
     width: 100%;
     height: 100%;
+    min-height: 0;
+    overflow: hidden;
 }
 
 .page--gaming-left .gaming-cell {
@@ -967,6 +1001,7 @@ button {
     transform: rotate(var(--rot, 0deg));
     transition: transform .2s ease, box-shadow .2s ease;
     z-index: 1;
+    min-height: 0;
 }
 
 .page--gaming-left .gaming-cell:hover {
