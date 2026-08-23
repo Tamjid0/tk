@@ -52,13 +52,14 @@ const PAGES = [
         art: { token: "COVER", src: IMG("lovers.jpg"), scale: 10 },
         title: "Heino x Dolia",
         recipient: "Dolia",
-        date: "15/08/2026"
+        date: "15/08/2026",
+        sticker: RES("adorable dolia heart.png")
     },
 
     /* ═══ SPREAD 1: Birthday Introduction ════════════════════ */
     {
         type: "intro-left",
-        art: { token: "BIRTHDAY", src: IMG("Dolia-celebrating.png"), scale: 5 }
+        art: { token: "BIRTHDAY", src: RES("Dolia-celebrating.png"), scale: 5, fit: "contain" }
     },
     {
         type: "intro-right",

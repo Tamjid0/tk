@@ -2087,3 +2087,212 @@ figcaption::after {
 .lightbox-close:hover {
     background: rgba(255, 255, 255, .2);
 }
+
+/* ================================================================
+   PILOT SCRAPBOOK PAGES
+   Cover + birthday introduction only. The remaining spreads keep
+   their existing layouts until this visual direction is approved.
+   ================================================================ */
+
+.scrap-sticker {
+    position: absolute;
+    pointer-events: none;
+    z-index: 8;
+}
+
+.scrap-sticker img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(2px 4px 4px rgba(7, 20, 34, .22));
+}
+
+.cover-sticker {
+    top: 7%;
+    right: 8%;
+    width: clamp(48px, 17cqi, 92px);
+    height: clamp(48px, 17cqi, 92px);
+    transform: rotate(8deg);
+}
+
+.page--cover {
+    background:
+        radial-gradient(ellipse 90% 55% at 50% 0%, rgba(91, 181, 224, .2), transparent 68%),
+        radial-gradient(ellipse 70% 80% at 12% 100%, rgba(78, 205, 196, .14), transparent 70%),
+        linear-gradient(160deg, #123457 0%, #0b1a2e 48%, #071422 100%);
+}
+
+.page--cover::before {
+    content: "";
+    position: absolute;
+    inset: 7%;
+    border: 1px solid rgba(200, 230, 255, .18);
+    border-radius: 12px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.page--cover .page-inner {
+    padding: 9% 10%;
+    gap: clamp(7px, 2.2cqi, 14px);
+}
+
+.page--cover .cover-crest {
+    width: clamp(30px, 10cqi, 56px);
+    height: clamp(30px, 10cqi, 56px);
+    opacity: .55;
+}
+
+.page--cover .cover-art {
+    position: relative;
+    width: min(76%, 280px);
+    padding: clamp(5px, 1.5cqi, 9px) clamp(5px, 1.5cqi, 9px) clamp(15px, 4cqi, 24px);
+    background: #f8fbff;
+    border-radius: 3px;
+    transform: rotate(-2.5deg);
+    box-shadow: 4px 7px 16px rgba(0, 0, 0, .3), 0 0 0 1px rgba(255, 255, 255, .4);
+}
+
+.page--cover .cover-art::before,
+.page--pilot-photo .intro-photo::before {
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    width: clamp(34px, 11cqi, 62px);
+    height: clamp(10px, 3cqi, 17px);
+    background: rgba(255, 231, 159, .72);
+    transform: translateX(-50%) rotate(-3deg);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .08);
+    z-index: 2;
+}
+
+.page--cover .cover-art .plate-media {
+    aspect-ratio: 4 / 3;
+    border: 1px solid rgba(26, 95, 138, .24);
+    outline: none;
+    border-radius: 2px;
+    background: #d8e8f0;
+    box-shadow: inset 0 0 18px rgba(7, 20, 34, .12);
+}
+
+.page--cover .cover-art .plate-media img {
+    border-radius: 2px;
+}
+
+.page--cover .cover-title {
+    font-size: clamp(1.35rem, 8cqi, 2.5rem);
+    letter-spacing: .06em;
+    color: #f8fbff;
+    text-shadow: 0 2px 14px rgba(0, 0, 0, .28);
+}
+
+.page--cover .cover-rule {
+    color: var(--gold-soft);
+    opacity: .7;
+}
+
+.page--cover .cover-name .tok {
+    color: var(--gold-soft);
+    text-shadow: 0 1px 10px rgba(240, 214, 138, .2);
+}
+
+.page--cover .cover-date {
+    color: rgba(232, 238, 248, .72);
+}
+
+.page--pilot-photo {
+    background:
+        radial-gradient(ellipse 75% 65% at 25% 15%, rgba(192, 184, 224, .2), transparent 70%),
+        linear-gradient(145deg, #f9f7ff 0%, #eef4fb 55%, #dce8f0 100%);
+}
+
+.page--pilot-photo .page-inner {
+    padding: 8%;
+    overflow: hidden;
+}
+
+.page--pilot-photo .intro-photo {
+    position: relative;
+    width: min(88%, 330px);
+    height: auto;
+    padding: clamp(6px, 1.8cqi, 11px) clamp(6px, 1.8cqi, 11px) clamp(8px, 2.4cqi, 15px);
+    background: #fff;
+    border-radius: 3px;
+    transform: rotate(-2deg);
+    box-shadow: 5px 8px 18px rgba(7, 20, 34, .2), 0 0 0 1px rgba(255, 255, 255, .6);
+}
+
+.page--pilot-photo .intro-photo .plate-media {
+    aspect-ratio: 4 / 5;
+    border: 1px solid rgba(26, 95, 138, .18);
+    outline: none;
+    border-radius: 2px;
+    background: linear-gradient(160deg, #d8e8f0, #c5ddec);
+}
+
+.page--pilot-message {
+    background:
+        radial-gradient(ellipse 75% 50% at 80% 0%, rgba(91, 181, 224, .12), transparent 70%),
+        linear-gradient(145deg, #fffdf7 0%, #f6f2ff 52%, #e7f1f7 100%);
+}
+
+.page--pilot-message .page-inner {
+    padding: 9% 10%;
+    overflow: hidden;
+}
+
+.page--pilot-message .page-corner-img {
+    top: 4%;
+    right: 4%;
+    width: clamp(74px, 22cqi, 132px);
+    height: clamp(74px, 22cqi, 132px);
+    transform: rotate(6deg);
+    filter: drop-shadow(2px 4px 4px rgba(7, 20, 34, .18));
+}
+
+.page--pilot-message .intro-message-inner {
+    justify-content: center;
+}
+
+.intro-message-card {
+    position: relative;
+    width: min(94%, 360px);
+    padding: clamp(24px, 9cqi, 52px) clamp(14px, 6cqi, 32px);
+    background: rgba(255, 255, 255, .74);
+    border: 1px solid rgba(26, 95, 138, .16);
+    border-radius: 3px;
+    box-shadow: 3px 6px 15px rgba(7, 20, 34, .1), inset 0 0 24px rgba(255, 255, 255, .45);
+    transform: rotate(1.2deg);
+}
+
+.intro-message-card::before {
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: 17%;
+    width: clamp(42px, 14cqi, 78px);
+    height: clamp(11px, 3.5cqi, 20px);
+    background: rgba(255, 231, 159, .62);
+    transform: rotate(-4deg);
+}
+
+.intro-message-card .text-title {
+    color: var(--ink);
+    font-size: clamp(1.15rem, 5cqi, 2rem);
+}
+
+.intro-message-card .text-subtitle {
+    color: var(--coral);
+    font-weight: 600;
+}
+
+.intro-message-card .divider-accent {
+    opacity: .6;
+}
+
+.intro-message-card .text-body {
+    color: var(--ink);
+    max-width: 30ch;
+}

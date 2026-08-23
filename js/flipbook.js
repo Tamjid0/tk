@@ -120,6 +120,17 @@
         return d;
     }
 
+    function stickerImg(src, cls) {
+        if (!src) return null;
+        const d = el("div", "scrap-sticker " + (cls || ""));
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = "";
+        img.loading = "lazy";
+        d.appendChild(img);
+        return d;
+    }
+
     function accentDivider() {
         const d = el("div", "divider-accent");
         d.appendChild(el("span", "dot"));
@@ -172,6 +183,10 @@
             pg.appendChild(corner);
         });
         const wm = el("div", "cover-watermark"); wm.appendChild(use("crest")); pg.appendChild(wm);
+        if (p.sticker) {
+            const sticker = stickerImg(p.sticker, "cover-sticker");
+            if (sticker) pg.appendChild(sticker);
+        }
         const inner = el("div", "page-inner");
         inner.appendChild(use("crest", "cover-crest"));
         inner.appendChild(plate(p.art, { cls: "cover-art" }));
@@ -186,23 +201,25 @@
     }
 
     function buildIntroLeft(p) {
-        const pg = el("div", "page page--intro-left");
+        const pg = el("div", "page page--intro-left page--pilot-photo");
         const inner = el("div", "page-inner");
-        inner.appendChild(plate(p.art, { cls: "plate--full" }));
+        inner.appendChild(plate(p.art, { cls: "intro-photo" }));
         pg.appendChild(inner);
         return pg;
     }
 
     function buildIntroRight(p) {
-        const pg = el("div", "page page--intro-right page--text-page page--framed");
+        const pg = el("div", "page page--intro-right page--text-page page--framed page--pilot-message");
         if (p.cornerImg) { const c = cornerImg(p.cornerImg); if (c) pg.appendChild(c); }
-        const inner = el("div", "page-inner");
-        if (p.kicker) { const k = el("span", "text-subtitle"); k.textContent = p.kicker; inner.appendChild(k); }
-        if (p.title) { const h2 = el("h2", "text-title"); h2.appendChild(tok(p.title)); inner.appendChild(h2); }
-        inner.appendChild(accentDivider());
+        const inner = el("div", "page-inner intro-message-inner");
+        const note = el("div", "intro-message-card");
+        if (p.kicker) { const k = el("span", "text-subtitle"); k.textContent = p.kicker; note.appendChild(k); }
+        if (p.title) { const h2 = el("h2", "text-title"); h2.appendChild(tok(p.title)); note.appendChild(h2); }
+        note.appendChild(accentDivider());
         const body = el("div", "text-body");
         (p.body || []).forEach(line => { const para = el("p"); para.appendChild(tok(line)); body.appendChild(para); });
-        inner.appendChild(body);
+        note.appendChild(body);
+        inner.appendChild(note);
         pg.appendChild(inner);
         return pg;
     }
