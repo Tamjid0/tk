@@ -378,7 +378,15 @@
         const mark = el("div", "back-cover-mark");
         mark.textContent = p.mark || "";
         inner.appendChild(mark);
+        const link = el("span", "back-cover-link");
+        link.textContent = "Read again";
+        link.setAttribute("role", "button");
+        link.setAttribute("tabindex", "0");
+        inner.appendChild(link);
         pg.appendChild(inner);
+        pg.addEventListener("click", (e) => {
+            if (e.target.closest(".back-cover-link")) autoFlipToFront();
+        });
         return pg;
     }
 
@@ -531,6 +539,44 @@
         };
         sheet.addEventListener("transitionend", cleanup, { once: true });
         setTimeout(cleanup, getFlipMs() + 200);
+    }
+
+    function autoFlipToFront() {
+        if (lock || cursor === 0) return;
+        lock = true;
+        function step() {
+            if (cursor <= 0 || mqReduce.matches) {
+                lock = false;
+                renderView(cursor);
+                updateUI();
+                return;
+            }
+            const target = cursor - 1;
+            const sheet = buildSheet(-1, target);
+            const v = views[target];
+            if (mode === "single") {
+                slotRight.replaceChildren(makePage(pageModel(v[0])));
+            } else {
+                if (v[0] !== null) slotLeft.replaceChildren(makePage(pageModel(v[0])));
+                else slotLeft.replaceChildren(el("div", "empty-mark"));
+            }
+            cursor = target;
+            updateUI();
+            book.appendChild(sheet);
+            book.classList.add("is-flipping");
+            requestAnimationFrame(() => requestAnimationFrame(() => sheet.classList.add("turning")));
+            const cleanup = () => {
+                sheet.remove();
+                book.classList.remove("is-flipping");
+                renderView(cursor);
+                lock = false;
+                if (cursor > 0) setTimeout(step, 180);
+            };
+            sheet.addEventListener("transitionend", cleanup, { once: true });
+            setTimeout(cleanup, getFlipMs() + 200);
+            lock = true;
+        }
+        step();
     }
 
     function goTo(target) {

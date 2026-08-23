@@ -2687,6 +2687,21 @@ figcaption::after {
     text-indent: .42em;
 }
 
+.back-cover-link {
+    margin-top: clamp(12px, 4cqi, 24px);
+    color: rgba(200, 230, 255, .5);
+    font-family: var(--font-ui);
+    font-size: clamp(.5rem, 1.8cqi, .72rem);
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color .2s ease;
+}
+
+.back-cover-link:hover {
+    color: rgba(200, 230, 255, .9);
+}
+
 /* Blank page after back cover — fully invisible, shows ocean background */
 .mode-double .page--blank {
     background: transparent !important;
