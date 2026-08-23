@@ -388,6 +388,7 @@ button {
     flex: none;
     perspective: 2800px;
     overflow: hidden;
+    isolation: isolate;
 }
 
 .book.mode-single {
@@ -404,12 +405,13 @@ button {
 
 .book-shadow {
     position: absolute;
-    bottom: -4%;
-    height: 8%;
-    left: 3%;
-    right: 3%;
+    bottom: -5%;
+    height: 12%;
+    left: 1%;
+    right: 1%;
     z-index: 0;
-    background: radial-gradient(50% 100% at 50% 50%, rgba(7, 20, 34, .6), transparent 72%);
+    background: radial-gradient(58% 100% at 50% 42%, rgba(7, 20, 34, .48) 0%, rgba(7, 20, 34, .24) 38%, transparent 74%);
+    filter: blur(1px);
     transition: left .7s ease, right .7s ease;
 }
 
@@ -454,11 +456,13 @@ button {
 }
 
 .mode-double .slot-left::after {
-    background: linear-gradient(to left, rgba(11, 26, 46, .38), rgba(11, 26, 46, .05) 9%, transparent 20%);
+    background: linear-gradient(to left, rgba(11, 26, 46, .28) 0, rgba(11, 26, 46, .16) 5px, rgba(11, 26, 46, .07) 14px, rgba(11, 26, 46, .025) 26px, transparent 42px);
+    box-shadow: inset -1px 0 rgba(255, 255, 255, .2);
 }
 
 .mode-double .slot-right::after {
-    background: linear-gradient(to right, rgba(11, 26, 46, .38), rgba(11, 26, 46, .05) 9%, transparent 20%);
+    background: linear-gradient(to right, rgba(11, 26, 46, .28) 0, rgba(11, 26, 46, .16) 5px, rgba(11, 26, 46, .07) 14px, rgba(11, 26, 46, .025) 26px, transparent 42px);
+    box-shadow: inset 1px 0 rgba(255, 255, 255, .2);
 }
 
 .mode-double .slot-left::before,
@@ -467,10 +471,10 @@ button {
     position: absolute;
     top: 1.5%;
     bottom: 1.5%;
-    width: 4px;
+    width: 3px;
     z-index: 4;
     pointer-events: none;
-    background: repeating-linear-gradient(to bottom, rgba(60, 50, 30, .16) 0 1px, transparent 1px 3px);
+    background: repeating-linear-gradient(to bottom, rgba(60, 80, 96, .18) 0 1px, transparent 1px 3px);
 }
 
 .mode-double .slot-left::before {
@@ -600,17 +604,20 @@ button {
     container-type: inline-size;
     color: var(--ink);
     background:
-        linear-gradient(115deg, rgba(255, 255, 255, .5), transparent 40%),
+        linear-gradient(115deg, rgba(255, 255, 255, .32), transparent 40%),
         radial-gradient(130% 100% at 50% 0%, var(--paper-hi) 0%, var(--paper) 55%, var(--paper-lo) 100%);
     border-radius: 8px;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .22), inset 0 -3px 7px rgba(7, 20, 34, .08);
 }
 
 .mode-double .slot-left .page {
     border-radius: 10px 2px 2px 10px;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .22), inset -10px 0 18px -17px rgba(7, 20, 34, .5), inset 0 -3px 7px rgba(7, 20, 34, .08);
 }
 
 .mode-double .slot-right .page {
     border-radius: 2px 10px 10px 2px;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .22), inset 10px 0 18px -17px rgba(7, 20, 34, .5), inset 0 -3px 7px rgba(7, 20, 34, .08);
 }
 
 .mode-double .book.is-closed .slot-right .page {
