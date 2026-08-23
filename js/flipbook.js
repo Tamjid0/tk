@@ -540,9 +540,18 @@
 
     function autoFlipToFront() {
         if (lock || cursor <= 0) return;
+        const savedDur = book.style.getPropertyValue("--flip-dur");
+        const savedEase = book.style.getPropertyValue("--flip-ease");
+        const autoDur = Math.floor(800 / Math.max(1, cursor));
+        book.style.setProperty("--flip-dur", autoDur + "ms");
+        book.style.setProperty("--flip-ease", "linear");
         function step() {
-            if (cursor <= 0) return;
-            if (lock) { setTimeout(step, 80); return; }
+            if (cursor <= 0) {
+                book.style.setProperty("--flip-dur", savedDur);
+                book.style.setProperty("--flip-ease", savedEase);
+                return;
+            }
+            if (lock) { setTimeout(step, 10); return; }
             const target = cursor - 1;
             const sheet = buildSheet(-1, target);
             const v = views[target];
@@ -565,10 +574,10 @@
                 book.classList.remove("is-flipping");
                 renderView(cursor);
                 lock = false;
-                if (cursor > 0) setTimeout(step, 150);
+                if (cursor > 0) setTimeout(step, 20);
             };
             sheet.addEventListener("transitionend", cleanup, { once: true });
-            setTimeout(cleanup, getFlipMs() + 300);
+            setTimeout(cleanup, autoDur + 100);
             lock = true;
         }
         step();
