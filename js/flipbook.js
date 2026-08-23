@@ -538,22 +538,19 @@
         setTimeout(cleanup, getFlipMs() + 200);
     }
 
+    const AUTO_FLIP_TOTAL_MS = 200;
+
     function autoFlipToFront() {
         if (lock || cursor <= 0) return;
-        const savedDur = book.style.getPropertyValue("--flip-dur");
-        const savedEase = book.style.getPropertyValue("--flip-ease");
-        const autoDur = Math.floor(800 / Math.max(1, cursor));
-        book.style.setProperty("--flip-dur", autoDur + "ms");
-        book.style.setProperty("--flip-ease", "linear");
+        const steps = cursor;
+        const autoDur = Math.max(40, Math.floor(AUTO_FLIP_TOTAL_MS / steps));
         function step() {
-            if (cursor <= 0) {
-                book.style.setProperty("--flip-dur", savedDur);
-                book.style.setProperty("--flip-ease", savedEase);
-                return;
-            }
+            if (cursor <= 0) return;
             if (lock) { setTimeout(step, 10); return; }
             const target = cursor - 1;
             const sheet = buildSheet(-1, target);
+            sheet.style.setProperty("--flip-dur", autoDur + "ms");
+            sheet.style.setProperty("--flip-ease", "linear");
             const v = views[target];
             if (mode === "single") {
                 slotRight.replaceChildren(makePage(pageModel(v[0])));
