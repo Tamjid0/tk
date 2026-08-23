@@ -2689,20 +2689,29 @@ figcaption::after {
 
 /* Blank page after back cover — fully invisible, shows ocean background */
 .mode-double .page--blank {
-    background: transparent;
-    box-shadow: none;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    outline: none !important;
 }
 
-.mode-double .page--blank svg {
-    display: none;
-}
-
+.mode-double .page--blank svg,
 .mode-double .page--blank .grain {
     display: none;
 }
 
 .mode-double .slot-right:has(.page--blank) {
     pointer-events: none;
+}
+
+.mode-double .slot-right:has(.page--blank)::after,
+.mode-double .slot-right:has(.page--blank)::before {
+    display: none;
+}
+
+.mode-double .book.is-closed .slot-right .page {
+    box-shadow: none;
+    border: none;
 }
 
 /* ---- Spread 6: final postcard and wishes ---- */
