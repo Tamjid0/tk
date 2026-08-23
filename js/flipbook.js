@@ -384,9 +384,6 @@
         link.setAttribute("tabindex", "0");
         inner.appendChild(link);
         pg.appendChild(inner);
-        pg.addEventListener("click", (e) => {
-            if (e.target.closest(".back-cover-link")) autoFlipToFront();
-        });
         return pg;
     }
 
@@ -589,6 +586,10 @@
     /* ---------- input: buttons, keyboard, swipe/tap ---------- */
     btnPrev.addEventListener("click", () => flip(-1));
     btnNext.addEventListener("click", () => flip(1));
+
+    document.addEventListener("click", (e) => {
+        if (e.target.closest(".back-cover-link")) autoFlipToFront();
+    });
 
     document.addEventListener("keydown", (e) => {
         switch (e.key) {
