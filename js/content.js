@@ -1,7 +1,7 @@
 /* ================================================================
    BIRTHDAY BOOK — Content Template
 
-   6 spreads (12 pages) + cover + end = 14 pages
+   6 spreads (12 pages) + cover + back-cover partner = 15 entries
 
    PAGE TYPES:
      "cover"           — front cover
@@ -17,8 +17,7 @@
      "cinematic-right" — Spread 5 right: observations
      "wishes-left"     — Spread 6 left: beautiful image
      "wishes-right"    — Spread 6 right: final wishes + tags
-     "closing"         — closing page
-     "end"             — end paper
+     "back-cover"      — final back cover, placed on the left
 
    FIELDS PER TYPE:
      All types:   cornerImg (optional)
@@ -174,21 +173,14 @@ const PAGES = [
         cornerImg: nextCorner()
     },
 
-    /* ═══ CLOSING ════════════════════════════════════════════ */
+    /* ═══ BACK COVER ═════════════════════════════════════════ */
+    /* This is index 13, so the normal spread engine places it on
+       the left side after the final wishes page is turned. */
     {
-        type: "closing",
-        art: { token: "CLOSING", src: IMG("lovers.jpg"), scale: 5 },
-        body: [
-            "This book is yours to keep —",
-            "a small reminder of the moments",
-            "that make our friendship what it is.",
-            "Happy birthday, dear Dolia."
-        ]
+        type: "back-cover",
+        mark: "DOLIA"
     },
 
-    /* ═══ END PAPER ═════════════════════════════════════════ */
-    {
-        type: "end",
-        note: "Made with love, for Dolia — 15 August 2026"
-    },
+    /* Blank partner page keeps the back cover on the left. */
+    null,
 ];

@@ -127,3 +127,7 @@ The first implementation contains only these three redesigned pages:
 - Every page-specific option should have a documented field.
 - Missing assets must show the existing placeholder instead of silently breaking the book.
 - Do not reuse placeholder hobby images for gaming or shared-memory sections once real assets are supplied.
+
+## Back Cover
+
+After the final wishes spread, the user turns one normal page. The back cover is index 13, so the existing spread engine places it on the left side with a blank partner page on the right. There is no special closing animation or extra button. Normal previous-page navigation remains available from the back-cover view.

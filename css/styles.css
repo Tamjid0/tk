@@ -2644,6 +2644,49 @@ figcaption::after {
     transform: rotate(-7deg);
 }
 
+/* ---- Normal final page: back cover on the left ---- */
+.page--back-cover {
+    color: rgba(240, 214, 138, .8);
+    background:
+        radial-gradient(ellipse 80% 60% at 70% 18%, rgba(91, 181, 224, .18), transparent 70%),
+        linear-gradient(155deg, #123457 0%, #0b1a2e 54%, #071422 100%);
+    box-shadow: inset 0 0 0 5px rgba(7, 20, 34, .2), inset 0 0 28px rgba(0, 0, 0, .2);
+}
+
+.page--back-cover::before {
+    content: "";
+    position: absolute;
+    inset: 4%;
+    border: 1px solid rgba(200, 230, 255, .22);
+    border-radius: 5px;
+    pointer-events: none;
+}
+
+.page--back-cover::after {
+    content: "";
+    position: absolute;
+    width: 60%;
+    height: 60%;
+    left: 20%;
+    top: 20%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(78, 205, 196, .12), transparent 68%);
+    pointer-events: none;
+}
+
+.page--back-cover .page-inner {
+    justify-content: center;
+    z-index: 2;
+}
+
+.page--back-cover .back-cover-mark {
+    color: rgba(240, 214, 138, .76);
+    font-family: var(--font-ui);
+    font-size: clamp(.55rem, 2cqi, .8rem);
+    letter-spacing: .42em;
+    text-indent: .42em;
+}
+
 /* ---- Spread 6: final postcard and wishes ---- */
 .page--wishes-left {
     background:

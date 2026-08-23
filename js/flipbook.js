@@ -372,6 +372,16 @@
         return pg;
     }
 
+    function buildBackCover(p) {
+        const pg = el("div", "page page--back-cover");
+        const inner = el("div", "page-inner");
+        const mark = el("div", "back-cover-mark");
+        mark.textContent = p.mark || "";
+        inner.appendChild(mark);
+        pg.appendChild(inner);
+        return pg;
+    }
+
     function buildBlank() {
         const pg = el("div", "page page--blank");
         pg.appendChild(use("crest"));
@@ -398,6 +408,7 @@
             case "wishes-right": pg = buildWishesRight(model); break;
             case "closing": pg = buildClosing(model); break;
             case "end": pg = buildEnd(model); break;
+            case "back-cover": pg = buildBackCover(model); break;
             default: pg = buildBlank();
         }
         pg.appendChild(grain());
