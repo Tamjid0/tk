@@ -2687,6 +2687,24 @@ figcaption::after {
     text-indent: .42em;
 }
 
+/* Blank page after back cover — fully invisible, shows ocean background */
+.mode-double .page--blank {
+    background: transparent;
+    box-shadow: none;
+}
+
+.mode-double .page--blank svg {
+    display: none;
+}
+
+.mode-double .page--blank .grain {
+    display: none;
+}
+
+.mode-double .slot-right:has(.page--blank) {
+    pointer-events: none;
+}
+
 /* ---- Spread 6: final postcard and wishes ---- */
 .page--wishes-left {
     background:
