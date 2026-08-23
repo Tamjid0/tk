@@ -539,39 +539,12 @@
     }
 
     function autoFlipToFront() {
-        if (lock || cursor === 0) return;
-        lock = true;
+        if (lock || cursor <= 0) return;
+        const interval = Math.max(getFlipMs() + 120, 700);
         function step() {
-            if (cursor <= 0 || mqReduce.matches) {
-                lock = false;
-                renderView(cursor);
-                updateUI();
-                return;
-            }
-            const target = cursor - 1;
-            const sheet = buildSheet(-1, target);
-            const v = views[target];
-            if (mode === "single") {
-                slotRight.replaceChildren(makePage(pageModel(v[0])));
-            } else {
-                if (v[0] !== null) slotLeft.replaceChildren(makePage(pageModel(v[0])));
-                else slotLeft.replaceChildren(el("div", "empty-mark"));
-            }
-            cursor = target;
-            updateUI();
-            book.appendChild(sheet);
-            book.classList.add("is-flipping");
-            requestAnimationFrame(() => requestAnimationFrame(() => sheet.classList.add("turning")));
-            const cleanup = () => {
-                sheet.remove();
-                book.classList.remove("is-flipping");
-                renderView(cursor);
-                lock = false;
-                if (cursor > 0) setTimeout(step, 180);
-            };
-            sheet.addEventListener("transitionend", cleanup, { once: true });
-            setTimeout(cleanup, getFlipMs() + 200);
-            lock = true;
+            if (cursor <= 0) return;
+            flip(-1);
+            setTimeout(step, interval);
         }
         step();
     }
