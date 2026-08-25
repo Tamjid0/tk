@@ -58,7 +58,8 @@ const PAGES = [
     /* ═══ SPREAD 1: Birthday Introduction ════════════════════ */
     {
         type: "intro-left",
-        art: { token: "BIRTHDAY", src: RES("Dolia-celebrating.png"), scale: 5, fit: "contain" }
+        art: { token: "BIRTHDAY", src: RES("Dolia-celebrating.png"), scale: 5, fit: "contain" },
+        sticker: RES("Dolia-celebrating.png")
     },
     {
         type: "intro-right",
@@ -91,7 +92,8 @@ const PAGES = [
             "I remembered the things you told me about.",
             "Every hobby, every passion — they all make you who you are."
         ],
-        cornerImg: nextCorner()
+        cornerImg: nextCorner(),
+        sticker: RES("Dolia-surprised.png")
     },
 
     /* ═══ SPREAD 3: More of Her World ════════════════════════ */
@@ -110,7 +112,8 @@ const PAGES = [
             "There is always more to learn about the people we care about.",
             "Your interests paint a beautiful picture of who you are."
         ],
-        cornerImg: nextCorner()
+        cornerImg: nextCorner(),
+        sticker: RES("Dolia-thinking.png")
     },
 
     /* ═══ SPREAD 4: Shared Gaming Memories ═══════════════════ */
@@ -133,7 +136,8 @@ const PAGES = [
             "Every match, every win, every laugh —",
             "these are the experiences we built together."
         ],
-        cornerImg: nextCorner()
+        cornerImg: nextCorner(),
+        sticker: RES("Dolia-determined.png")
     },
 
     /* ═══ SPREAD 5: Favorite Shared Moments ══════════════════ */
@@ -153,7 +157,8 @@ const PAGES = [
             "The night we stayed up talking until sunrise.",
             "These moments are why I am grateful for you."
         ],
-        cornerImg: nextCorner()
+        cornerImg: nextCorner(),
+        sticker: RES("Dolia-valantine day.png")
     },
 
     /* ═══ SPREAD 6: Wishes for the Year Ahead ════════════════ */
@@ -170,7 +175,8 @@ const PAGES = [
             "Keep being the wonderful person you are."
         ],
         tags: ["Happiness", "Creativity", "Adventure", "Fun", "Memories", "Growth"],
-        cornerImg: nextCorner()
+        cornerImg: nextCorner(),
+        sticker: RES("adorable dolia heart.png")
     },
 
     /* ═══ BACK COVER ═════════════════════════════════════════ */
@@ -178,7 +184,8 @@ const PAGES = [
        the left side after the final wishes page is turned. */
     {
         type: "back-cover",
-        mark: "DOLIA"
+        mark: "DOLIA",
+        secret: "You are the ocean's favorite princess. Happy Birthday, Dolia."
     },
 
     /* Blank partner page keeps the back cover on the left. */

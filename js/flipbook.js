@@ -111,6 +111,20 @@
     const grain = () => el("div", "grain");
     const RES = "assets/resources/";
 
+    function addBubbles(sheet) {
+        const count = 5 + Math.floor(Math.random() * 4);
+        for (let i = 0; i < count; i++) {
+            const b = el("div", "bubble");
+            b.style.left = 10 + Math.random() * 80 + "%";
+            b.style.animationDelay = (Math.random() * 0.6) + "s";
+            b.style.animationDuration = (1.2 + Math.random() * 0.8) + "s";
+            const size = 4 + Math.random() * 8;
+            b.style.width = size + "px";
+            b.style.height = size + "px";
+            sheet.appendChild(b);
+        }
+    }
+
     function cornerImg(src) {
         if (!src) return null;
         const d = el("div", "page-corner-img");
@@ -368,6 +382,7 @@
         inner.appendChild(use("crest", "end-crest"));
         const note = el("p", "end-note"); note.appendChild(tok(p.note)); inner.appendChild(note);
         const mark = el("span", "end-mark"); mark.textContent = "\u2726"; inner.appendChild(mark);
+        const sig = el("p", "end-sig"); sig.textContent = "From Heino"; inner.appendChild(sig);
         pg.appendChild(inner);
         return pg;
     }
@@ -378,6 +393,19 @@
         const mark = el("div", "back-cover-mark");
         mark.textContent = p.mark || "";
         inner.appendChild(mark);
+        const bottle = el("div", "bottle-wrap");
+        const bottleImg = document.createElement("img");
+        bottleImg.src = RES + "bottle message.png";
+        bottleImg.alt = "Message in a bottle";
+        bottleImg.loading = "lazy";
+        bottle.appendChild(bottleImg);
+        const secret = el("div", "bottle-secret");
+        secret.textContent = p.secret || "";
+        bottle.appendChild(secret);
+        bottle.addEventListener("click", () => {
+            bottle.classList.toggle("bottle-open");
+        });
+        inner.appendChild(bottle);
         const link = el("span", "back-cover-link");
         link.textContent = "Read again";
         link.setAttribute("role", "button");
@@ -417,6 +445,10 @@
             default: pg = buildBlank();
         }
         pg.appendChild(grain());
+        if (model && model.sticker) {
+            const s = stickerImg(model.sticker, "page-accent-sticker");
+            if (s) pg.appendChild(s);
+        }
         return pg;
     }
     /* ---------- views & layout ---------- */
@@ -524,6 +556,7 @@
         }
         cursor = target;
         updateUI();
+        addBubbles(sheet);
         book.appendChild(sheet);
         book.classList.add("is-flipping");
         requestAnimationFrame(() => requestAnimationFrame(() => sheet.classList.add("turning")));
@@ -560,6 +593,7 @@
             }
             cursor = target;
             updateUI();
+            addBubbles(sheet);
             book.appendChild(sheet);
             book.classList.add("is-flipping");
             requestAnimationFrame(() => requestAnimationFrame(() => sheet.classList.add("turning")));
