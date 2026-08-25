@@ -111,20 +111,6 @@
     const grain = () => el("div", "grain");
     const RES = "assets/resources/";
 
-    function addBubbles(sheet) {
-        const count = 6 + Math.floor(Math.random() * 5);
-        for (let i = 0; i < count; i++) {
-            const b = el("div", "bubble");
-            b.style.left = 5 + Math.random() * 90 + "%";
-            b.style.animationDelay = (Math.random() * 0.5) + "s";
-            b.style.animationDuration = (1.5 + Math.random() * 1) + "s";
-            const size = 8 + Math.random() * 14;
-            b.style.width = size + "px";
-            b.style.height = size + "px";
-            sheet.appendChild(b);
-        }
-    }
-
     function cornerImg(src) {
         if (!src) return null;
         const d = el("div", "page-corner-img");
@@ -186,6 +172,98 @@
         cell.appendChild(im);
         return cell;
     }
+
+    /* ── Bubble cursor system ── */
+    (function initBubbles() {
+        const POOL = 50;
+        const bubbles = [];
+        let bx = [], by = [], bvx = [], bvy = [], bsize = [], live = [];
+        const colors = [
+            "rgba(91,181,224,0.55)",
+            "rgba(78,205,196,0.50)",
+            "rgba(232,238,248,0.45)",
+            "rgba(192,184,224,0.40)",
+            "rgba(255,255,255,0.50)"
+        ];
+
+        for (let i = 0; i < POOL; i++) {
+            const d = document.createElement("div");
+            d.className = "cur-bubble";
+            d.style.cssText = "position:fixed;border-radius:50%;pointer-events:none;z-index:9999;display:none;";
+            document.body.appendChild(d);
+            bubbles.push(d);
+            bx[i] = by[i] = bvx[i] = bvy[i] = bsize[i] = 0;
+            live[i] = false;
+        }
+
+        function spawn(cx, cy, count) {
+            let spawned = 0;
+            for (let i = 0; i < POOL && spawned < count; i++) {
+                if (!live[i]) {
+                    const sz = 10 + Math.random() * 18;
+                    bx[i] = cx - sz / 2 + (Math.random() - 0.5) * 20;
+                    by[i] = cy - sz / 2 + (Math.random() - 0.5) * 20;
+                    bvx[i] = (Math.random() - 0.5) * 1.5;
+                    bvy[i] = -(1.5 + Math.random() * 2.5);
+                    bsize[i] = sz;
+                    live[i] = true;
+                    const b = bubbles[i];
+                    b.style.width = sz + "px";
+                    b.style.height = sz + "px";
+                    b.style.background = "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.6), " + colors[Math.floor(Math.random() * colors.length)] + " 60%, transparent)";
+                    b.style.border = "1px solid rgba(255,255,255,0.25)";
+                    b.style.left = bx[i] + "px";
+                    b.style.top = by[i] + "px";
+                    b.style.display = "block";
+                    b.style.opacity = "1";
+                    spawned++;
+                }
+            }
+        }
+
+        let lastMx = 0, lastMy = 0, frameId = null;
+        function tick() {
+            for (let i = 0; i < POOL; i++) {
+                if (!live[i]) continue;
+                by[i] += bvy[i];
+                bx[i] += bvx[i];
+                bvy[i] *= 0.98;
+                bsize[i] *= 0.995;
+                const b = bubbles[i];
+                const op = parseFloat(b.style.opacity) - 0.012;
+                if (op <= 0 || by[i] < -50) {
+                    b.style.display = "none";
+                    live[i] = false;
+                    continue;
+                }
+                b.style.opacity = op;
+                b.style.left = bx[i] + "px";
+                b.style.top = by[i] + "px";
+                b.style.width = bsize[i] + "px";
+                b.style.height = bsize[i] + "px";
+            }
+            frameId = requestAnimationFrame(tick);
+        }
+        tick();
+
+        document.addEventListener("mousemove", function(e) {
+            const dx = e.clientX - lastMx, dy = e.clientY - lastMy;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist > 12) {
+                spawn(e.clientX, e.clientY, 1);
+                lastMx = e.clientX;
+                lastMy = e.clientY;
+            }
+        });
+
+        document.addEventListener("mousedown", function(e) {
+            spawn(e.clientX, e.clientY, 5);
+        });
+
+        window.spawnBubbles = function(x, y, count) {
+            spawn(x, y, count || 8);
+        };
+    })();
 
     function buildCover(p) {
         const pg = el("div", "page page--cover");
@@ -556,9 +634,12 @@
         }
         cursor = target;
         updateUI();
-        addBubbles(sheet);
         book.appendChild(sheet);
         book.classList.add("is-flipping");
+        if (typeof spawnBubbles === "function") {
+            const r = book.getBoundingClientRect();
+            spawnBubbles(r.left + r.width / 2, r.top + r.height / 2, 8);
+        }
         requestAnimationFrame(() => requestAnimationFrame(() => sheet.classList.add("turning")));
         const cleanup = () => {
             sheet.remove();
@@ -593,9 +674,12 @@
             }
             cursor = target;
             updateUI();
-            addBubbles(sheet);
             book.appendChild(sheet);
             book.classList.add("is-flipping");
+            if (typeof spawnBubbles === "function") {
+                const r = book.getBoundingClientRect();
+                spawnBubbles(r.left + r.width / 2, r.top + r.height / 2, 6);
+            }
             requestAnimationFrame(() => requestAnimationFrame(() => sheet.classList.add("turning")));
             let cleaned = false;
             const cleanup = () => {
