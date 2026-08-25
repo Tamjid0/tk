@@ -218,24 +218,27 @@ button {
 
 @keyframes bubbleRise {
     0% {
-        transform: translateY(0) scale(1);
+        transform: translateY(0) translateX(0) scale(1);
+        opacity: .7;
+    }
+    50% {
         opacity: .5;
     }
     100% {
-        transform: translateY(-120%) scale(.4);
+        transform: translateY(-300%) translateX(20px) scale(.3);
         opacity: 0;
     }
 }
 
 .bubble {
     position: absolute;
-    bottom: 10%;
+    bottom: 20%;
     border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, .35), rgba(91, 181, 224, .15) 60%, transparent);
-    border: 1px solid rgba(255, 255, 255, .15);
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, .6), rgba(91, 181, 224, .3) 60%, transparent);
+    border: 1px solid rgba(255, 255, 255, .3);
     pointer-events: none;
     z-index: 10;
-    animation: bubbleRise 1.5s ease-out forwards;
+    animation: bubbleRise 1.8s ease-out forwards;
 }
 
 .orb {

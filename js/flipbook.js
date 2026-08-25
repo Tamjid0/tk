@@ -112,13 +112,13 @@
     const RES = "assets/resources/";
 
     function addBubbles(sheet) {
-        const count = 5 + Math.floor(Math.random() * 4);
+        const count = 6 + Math.floor(Math.random() * 5);
         for (let i = 0; i < count; i++) {
             const b = el("div", "bubble");
-            b.style.left = 10 + Math.random() * 80 + "%";
-            b.style.animationDelay = (Math.random() * 0.6) + "s";
-            b.style.animationDuration = (1.2 + Math.random() * 0.8) + "s";
-            const size = 4 + Math.random() * 8;
+            b.style.left = 5 + Math.random() * 90 + "%";
+            b.style.animationDelay = (Math.random() * 0.5) + "s";
+            b.style.animationDuration = (1.5 + Math.random() * 1) + "s";
+            const size = 8 + Math.random() * 14;
             b.style.width = size + "px";
             b.style.height = size + "px";
             sheet.appendChild(b);
@@ -651,7 +651,7 @@
 
     let px = 0, py = 0, tracking = false;
     stage.addEventListener("pointerdown", (e) => {
-        if (e.target.closest("button, .back-cover-link")) return;
+        if (e.target.closest("button, .back-cover-link, .bottle-wrap")) return;
         tracking = true; px = e.clientX; py = e.clientY;
         try { stage.setPointerCapture(e.pointerId); } catch (_) { }
     });
