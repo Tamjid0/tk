@@ -180,7 +180,7 @@ const PAGES = [
     },
 
     /* Empty right page — add a photo here later */
-    null,
+    { type: "empty" },
 
     /* ═══ BACK COVER ═════════════════════════════════════════ */
     {

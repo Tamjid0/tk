@@ -500,6 +500,12 @@
         return pg;
     }
 
+    function buildEmpty() {
+        const pg = el("div", "page");
+        pg.appendChild(grain());
+        return pg;
+    }
+
     function makePage(model) {
         if (model == null) return buildBlank();
         let pg;
@@ -520,6 +526,7 @@
             case "closing": pg = buildClosing(model); break;
             case "end": pg = buildEnd(model); break;
             case "back-cover": pg = buildBackCover(model); break;
+            case "empty": pg = buildEmpty(); break;
             default: pg = buildBlank();
         }
         pg.appendChild(grain());
