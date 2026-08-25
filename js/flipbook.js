@@ -203,13 +203,13 @@
                     const b = bubbles[i];
                     b.style.width = sz + "px";
                     b.style.height = sz + "px";
-                    b.style.background = "radial-gradient(ellipse 40% 35% at 35% 30%, rgba(255,255,255,0.85), rgba(255,255,255,0.15) 40%, rgba(91,181,224,0.08) 65%, transparent 80%)";
-                    b.style.border = "1px solid rgba(255,255,255,0.3)";
-                    b.style.boxShadow = "inset 0 -2px 4px rgba(91,181,224,0.15), 0 0 3px rgba(255,255,255,0.1)";
+                    b.style.background = "rgba(255,255,255,0.08)";
+                    b.style.border = "1.5px solid rgba(200,225,255,0.6)";
+                    b.style.boxShadow = "inset 2px 2px 0 rgba(255,255,255,0.5), inset -1px -1px 0 rgba(180,210,240,0.2)";
                     b.style.left = bx[i] + "px";
                     b.style.top = by[i] + "px";
                     b.style.display = "block";
-                    b.style.opacity = "0.8";
+                    b.style.opacity = "0.85";
                     spawned++;
                 }
             }
