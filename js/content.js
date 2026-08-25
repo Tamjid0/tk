@@ -179,9 +179,10 @@ const PAGES = [
         note: "This book was made with love, just for you."
     },
 
+    /* Empty right page — add a photo here later */
+    null,
+
     /* ═══ BACK COVER ═════════════════════════════════════════ */
-    /* This is index 13, so the normal spread engine places it on
-       the left side after the final wishes page is turned. */
     {
         type: "back-cover",
         mark: "DOLIA",
