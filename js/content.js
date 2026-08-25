@@ -188,7 +188,4 @@ const PAGES = [
         mark: "DOLIA",
         secret: "You are the ocean's favorite princess. Happy Birthday, Dolia."
     },
-
-    /* Blank partner page keeps the back cover on the left. */
-    null,
 ];
