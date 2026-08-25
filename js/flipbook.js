@@ -178,13 +178,6 @@
         const POOL = 50;
         const bubbles = [];
         let bx = [], by = [], bvx = [], bvy = [], bsize = [], live = [];
-        const colors = [
-            "rgba(91,181,224,0.55)",
-            "rgba(78,205,196,0.50)",
-            "rgba(232,238,248,0.45)",
-            "rgba(192,184,224,0.40)",
-            "rgba(255,255,255,0.50)"
-        ];
 
         for (let i = 0; i < POOL; i++) {
             const d = document.createElement("div");
@@ -200,37 +193,38 @@
             let spawned = 0;
             for (let i = 0; i < POOL && spawned < count; i++) {
                 if (!live[i]) {
-                    const sz = 10 + Math.random() * 18;
-                    bx[i] = cx - sz / 2 + (Math.random() - 0.5) * 20;
-                    by[i] = cy - sz / 2 + (Math.random() - 0.5) * 20;
-                    bvx[i] = (Math.random() - 0.5) * 1.5;
-                    bvy[i] = -(1.5 + Math.random() * 2.5);
+                    const sz = 10 + Math.random() * 16;
+                    bx[i] = cx - sz / 2 + (Math.random() - 0.5) * 16;
+                    by[i] = cy - sz / 2 + (Math.random() - 0.5) * 16;
+                    bvx[i] = (Math.random() - 0.5) * 1.2;
+                    bvy[i] = -(1.8 + Math.random() * 2.2);
                     bsize[i] = sz;
                     live[i] = true;
                     const b = bubbles[i];
                     b.style.width = sz + "px";
                     b.style.height = sz + "px";
-                    b.style.background = "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.6), " + colors[Math.floor(Math.random() * colors.length)] + " 60%, transparent)";
-                    b.style.border = "1px solid rgba(255,255,255,0.25)";
+                    b.style.background = "radial-gradient(ellipse 40% 35% at 35% 30%, rgba(255,255,255,0.85), rgba(255,255,255,0.15) 40%, rgba(91,181,224,0.08) 65%, transparent 80%)";
+                    b.style.border = "1px solid rgba(255,255,255,0.3)";
+                    b.style.boxShadow = "inset 0 -2px 4px rgba(91,181,224,0.15), 0 0 3px rgba(255,255,255,0.1)";
                     b.style.left = bx[i] + "px";
                     b.style.top = by[i] + "px";
                     b.style.display = "block";
-                    b.style.opacity = "1";
+                    b.style.opacity = "0.8";
                     spawned++;
                 }
             }
         }
 
-        let lastMx = 0, lastMy = 0, frameId = null;
+        let lastMx = 0, lastMy = 0;
         function tick() {
             for (let i = 0; i < POOL; i++) {
                 if (!live[i]) continue;
                 by[i] += bvy[i];
                 bx[i] += bvx[i];
-                bvy[i] *= 0.98;
-                bsize[i] *= 0.995;
+                bvy[i] *= 0.985;
+                bsize[i] *= 0.997;
                 const b = bubbles[i];
-                const op = parseFloat(b.style.opacity) - 0.012;
+                const op = parseFloat(b.style.opacity) - 0.01;
                 if (op <= 0 || by[i] < -50) {
                     b.style.display = "none";
                     live[i] = false;
@@ -242,14 +236,14 @@
                 b.style.width = bsize[i] + "px";
                 b.style.height = bsize[i] + "px";
             }
-            frameId = requestAnimationFrame(tick);
+            requestAnimationFrame(tick);
         }
         tick();
 
         document.addEventListener("mousemove", function(e) {
             const dx = e.clientX - lastMx, dy = e.clientY - lastMy;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist > 12) {
+            if (dist > 14) {
                 spawn(e.clientX, e.clientY, 1);
                 lastMx = e.clientX;
                 lastMy = e.clientY;
@@ -257,12 +251,8 @@
         });
 
         document.addEventListener("mousedown", function(e) {
-            spawn(e.clientX, e.clientY, 5);
+            spawn(e.clientX, e.clientY, 4);
         });
-
-        window.spawnBubbles = function(x, y, count) {
-            spawn(x, y, count || 8);
-        };
     })();
 
     function buildCover(p) {
@@ -643,10 +633,6 @@
         updateUI();
         book.appendChild(sheet);
         book.classList.add("is-flipping");
-        if (typeof spawnBubbles === "function") {
-            const r = book.getBoundingClientRect();
-            spawnBubbles(r.left + r.width / 2, r.top + r.height / 2, 8);
-        }
         requestAnimationFrame(() => requestAnimationFrame(() => sheet.classList.add("turning")));
         const cleanup = () => {
             sheet.remove();
@@ -683,10 +669,6 @@
             updateUI();
             book.appendChild(sheet);
             book.classList.add("is-flipping");
-            if (typeof spawnBubbles === "function") {
-                const r = book.getBoundingClientRect();
-                spawnBubbles(r.left + r.width / 2, r.top + r.height / 2, 6);
-            }
             requestAnimationFrame(() => requestAnimationFrame(() => sheet.classList.add("turning")));
             let cleaned = false;
             const cleanup = () => {
