@@ -5,6 +5,47 @@
 (() => {
     "use strict";
 
+    /* ── Splash screen ── */
+    (function initSplash() {
+        const splash = document.getElementById("splash");
+        const chest = document.getElementById("splashChest");
+        const sparkles = document.getElementById("splashSparkles");
+        if (!splash || !chest) return;
+
+        let opened = false;
+        chest.addEventListener("click", function() {
+            if (opened) return;
+            opened = true;
+
+            /* Spawn sparkles */
+            const rect = chest.getBoundingClientRect();
+            const cx = rect.left + rect.width / 2;
+            const cy = rect.top + rect.height / 2;
+            for (let i = 0; i < 24; i++) {
+                const sp = document.createElement("div");
+                sp.className = "splash-spark";
+                const angle = (Math.PI * 2 * i) / 24 + (Math.random() - 0.5) * 0.4;
+                const dist = 60 + Math.random() * 120;
+                sp.style.left = cx + "px";
+                sp.style.top = cy + "px";
+                sp.style.setProperty("--sx", Math.cos(angle) * dist + "px");
+                sp.style.setProperty("--sy", Math.sin(angle) * dist + "px");
+                sp.style.animationDelay = (Math.random() * 0.15) + "s";
+                sp.style.width = (3 + Math.random() * 5) + "px";
+                sp.style.height = sp.style.width;
+                sparkles.appendChild(sp);
+            }
+
+            /* Animate chest */
+            chest.classList.add("opening");
+
+            /* Hide splash after animation */
+            setTimeout(function() {
+                splash.classList.add("hidden");
+            }, 800);
+        });
+    })();
+
     // ---- Content guard: fail loudly if js/content.js is broken ----
     if (typeof PAGES === "undefined" || !Array.isArray(PAGES) || PAGES.length === 0) {
         console.error("[flipbook] PAGES is missing or empty. Check js/content.js for a syntax error (usually a missing comma, quote, or bracket).");
