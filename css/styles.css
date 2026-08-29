@@ -72,18 +72,17 @@
 .splash-bg {
     position: absolute;
     inset: 0;
-    background-color: #0b1a2e;
-    background-image: url('../assets/images/ocean-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background:
+        radial-gradient(ellipse 80% 60% at 50% 30%, rgba(91, 181, 224, .12), transparent 70%),
+        radial-gradient(ellipse 60% 80% at 20% 80%, rgba(78, 205, 196, .08), transparent 60%),
+        linear-gradient(170deg, #0e2540 0%, #0b1a2e 35%, #081422 65%, #060e1a 100%);
 }
 
 .splash-bg::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 60% 40% at 50% 70%, transparent 30%, rgba(7, 20, 34, .4) 100%);
+    background: radial-gradient(ellipse 50% 40% at 50% 65%, rgba(91, 181, 224, .08), transparent 70%);
 }
 
 .splash-scene {
