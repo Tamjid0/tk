@@ -55,10 +55,12 @@
     inset: 0;
     z-index: 10000;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     overflow: hidden;
     transition: opacity .8s ease, visibility .8s ease;
+    padding-bottom: 12vh;
 }
 
 .splash.hidden {
@@ -70,27 +72,19 @@
 .splash-bg {
     position: absolute;
     inset: 0;
-    background:
-        radial-gradient(ellipse 80% 60% at 50% 30%, rgba(91, 181, 224, .15), transparent 70%),
-        radial-gradient(ellipse 60% 80% at 20% 80%, rgba(78, 205, 196, .1), transparent 60%),
-        linear-gradient(170deg, #0e2540 0%, #0b1a2e 35%, #081422 65%, #060e1a 100%);
+    background: url('../assets/images/ocean-bg.jpg') center/cover no-repeat;
 }
 
-.splash-content {
+.splash-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 40% at 50% 70%, transparent 30%, rgba(7, 20, 34, .4) 100%);
+}
+
+.splash-scene {
     position: relative;
     z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
-
-.splash-dolia {
-    width: min(80vw, 400px);
-    height: auto;
-    border-radius: 12px;
-    opacity: .35;
-    filter: blur(1px);
 }
 
 .splash-chest {
@@ -101,32 +95,35 @@
 }
 
 .splash-chest:hover {
-    transform: scale(1.08);
+    transform: scale(1.06);
 }
 
 .splash-chest img {
-    width: clamp(120px, 30vw, 220px);
+    width: clamp(140px, 28vw, 240px);
     height: auto;
-    filter: drop-shadow(0 4px 20px rgba(91, 181, 224, .4));
+    filter: drop-shadow(0 8px 30px rgba(0, 0, 0, .5));
     position: relative;
     z-index: 2;
 }
 
 .splash-chest-glow {
     position: absolute;
-    inset: -20%;
+    inset: -30%;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(91, 181, 224, .3), transparent 70%);
-    animation: glowPulse 2s ease-in-out infinite;
+    background: radial-gradient(circle, rgba(255, 220, 100, .25), transparent 60%);
+    animation: glowPulse 2.5s ease-in-out infinite;
     z-index: 1;
 }
 
 .splash-hint {
+    position: relative;
+    z-index: 2;
     font-family: var(--font-ui);
-    color: rgba(200, 230, 255, .5);
+    color: rgba(200, 230, 255, .55);
     font-size: clamp(.65rem, 2.5cqi, .85rem);
     letter-spacing: .1em;
     animation: hintFade 2.5s ease-in-out infinite;
+    margin-bottom: 24px;
 }
 
 @keyframes chestFloat {
