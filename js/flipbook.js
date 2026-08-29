@@ -10,7 +10,20 @@
         const splash = document.getElementById("splash");
         const chest = document.getElementById("splashChest");
         const sparkles = document.getElementById("splashSparkles");
+        const scene = splash ? splash.querySelector(".splash-scene") : null;
         if (!splash || !chest) return;
+
+        /* Hide chest/hint until ocean bg is decoded to prevent dark flicker */
+        const bgImg = new Image();
+        bgImg.src = "assets/images/ocean-bg.jpg";
+        if (bgImg.decode) {
+            bgImg.decode().then(function() { if (scene) scene.classList.add("ready"); }).catch(function() { if (scene) scene.classList.add("ready"); });
+        } else {
+            bgImg.onload = function() { if (scene) scene.classList.add("ready"); };
+            bgImg.onerror = function() { if (scene) scene.classList.add("ready"); };
+        }
+        /* fallback: show anyway after 1.2s */
+        setTimeout(function() { if (scene && !scene.classList.contains("ready")) scene.classList.add("ready"); }, 1200);
 
         let opened = false;
         chest.addEventListener("click", function() {

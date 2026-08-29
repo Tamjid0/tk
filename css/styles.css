@@ -72,17 +72,8 @@
 .splash-bg {
     position: absolute;
     inset: 0;
-    background:
-        radial-gradient(ellipse 80% 60% at 50% 30%, rgba(91, 181, 224, .12), transparent 70%),
-        radial-gradient(ellipse 60% 80% at 20% 80%, rgba(78, 205, 196, .08), transparent 60%),
-        linear-gradient(170deg, #0e2540 0%, #0b1a2e 35%, #081422 65%, #060e1a 100%);
-}
-
-.splash-bg::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 50% 40% at 50% 65%, rgba(91, 181, 224, .08), transparent 70%);
+    background: url('../assets/images/ocean-bg.jpg') center/cover no-repeat;
+    background-color: #4fa8d3;
 }
 
 .splash-scene {
@@ -91,6 +82,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    opacity: 0;
+    transition: opacity .4s ease;
+}
+
+.splash-scene.ready {
+    opacity: 1;
 }
 
 .splash-chest {
@@ -244,7 +241,7 @@
 html,
 body {
     height: 100%;
-    background: #0b1a2e;
+    background-color: #4fa8d3;
 }
 
 html {
@@ -254,21 +251,10 @@ html {
 body {
     font-family: var(--font-body);
     background: url('../assets/images/ocean-bg.jpg') center/cover no-repeat fixed;
+    background-color: #4fa8d3;
     color: #e8eef8;
     overflow: hidden;
     -webkit-font-smoothing: antialiased;
-}
-
-/* Subtle vignette + depth overlay over the background image */
-body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-    background:
-        radial-gradient(ellipse 120% 100% at 50% 0%, rgba(91, 181, 224, .06), transparent 60%),
-        linear-gradient(180deg, rgba(7, 20, 34, .35) 0%, transparent 25%, transparent 75%, rgba(7, 20, 34, .55) 100%);
 }
 
 ::selection {
@@ -493,14 +479,8 @@ button {
     }
 }
 
-/* Deep water vignette - darker at edges like ocean depth */
 .ambient-vignette {
-    position: absolute;
-    inset: 0;
-    box-shadow: inset 0 0 22vmin rgba(7, 20, 34, .8);
-    background:
-        radial-gradient(ellipse 100% 100% at 50% 0%, rgba(91, 181, 224, .04), transparent 60%),
-        linear-gradient(180deg, rgba(7, 20, 34, .3), transparent 30%, transparent 70%, rgba(7, 20, 34, .5));
+    display: none;
 }
 
 /* ---------------- Edge hints & first-open hint ---------------- */
@@ -609,15 +589,23 @@ button {
 }
 
 .book-shadow {
+    display: none;
+}
+
+.book-wrap::before {
+    content: "";
     position: absolute;
-    bottom: -5%;
-    height: 12%;
-    left: 1%;
-    right: 1%;
-    z-index: 0;
-    background: radial-gradient(58% 100% at 50% 42%, rgba(7, 20, 34, .48) 0%, rgba(7, 20, 34, .24) 38%, transparent 74%);
-    filter: blur(1px);
-    transition: left .7s ease, right .7s ease;
+    top: 50%;
+    left: 50%;
+    width: min(92%, 900px);
+    height: 88%;
+    transform: translate(-50%, -50%);
+    background:
+        radial-gradient(ellipse 55% 45% at 50% 50%, rgba(91, 181, 224, .20), transparent 68%),
+        radial-gradient(ellipse 75% 65% at 50% 50%, rgba(78, 205, 196, .12), transparent 72%);
+    filter: blur(22px);
+    pointer-events: none;
+    z-index: 1;
 }
 
 .book.is-closed .book-shadow {
