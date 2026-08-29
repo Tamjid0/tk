@@ -120,12 +120,13 @@
 .splash-hint {
     position: relative;
     z-index: 2;
-    font-family: var(--font-ui);
-    color: rgba(200, 230, 255, .55);
-    font-size: clamp(.65rem, 2.5cqi, .85rem);
-    letter-spacing: .1em;
+    font-family: var(--font-display);
+    color: rgba(232, 238, 248, .85);
+    font-size: clamp(.85rem, 3.5cqi, 1.2rem);
+    letter-spacing: .08em;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, .6);
     animation: hintFade 2.5s ease-in-out infinite;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
 }
 
 @keyframes chestFloat {
