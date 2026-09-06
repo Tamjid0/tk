@@ -25,6 +25,41 @@
         /* fallback: show anyway after 1.2s */
         setTimeout(function() { if (scene && !scene.classList.contains("ready")) scene.classList.add("ready"); }, 1200);
 
+        /* Ambient rising bubbles on the splash scene too */
+        const splashBubbles = document.getElementById("splashBubbles");
+        if (splashBubbles) {
+            for (let i = 0; i < 14; i++) {
+                const m = el("span", "mote");
+                m.style.left = (4 + Math.random() * 92) + "%";
+                m.style.setProperty("--sz", (7 + Math.random() * 9).toFixed(1) + "px");
+                m.style.setProperty("--d", (8 + Math.random() * 9).toFixed(1) + "s");
+                m.style.setProperty("--delay", (-Math.random() * 16).toFixed(1) + "s");
+                m.style.setProperty("--sx", (Math.random() * 60 - 30).toFixed(0) + "px");
+                m.style.setProperty("--o", (0.6 + Math.random() * 0.35).toFixed(2));
+                splashBubbles.appendChild(m);
+            }
+        }
+
+        /* Big breath bubbles from the chest when opened */
+        function breathBurst(x, y) {
+            const count = 10 + Math.floor(Math.random() * 6);
+            for (let i = 0; i < count; i++) {
+                const b = el("span", "splash-breath");
+                const sz = 14 + Math.random() * 26;
+                b.style.width = sz + "px";
+                b.style.height = sz + "px";
+                b.style.left = (x - sz / 2 + (Math.random() - 0.5) * 70) + "px";
+                b.style.top = (y - sz / 2 + (Math.random() - 0.5) * 20) + "px";
+                b.style.setProperty("--sx", (Math.random() * 90 - 45).toFixed(0) + "px");
+                b.style.animationDuration = (1.6 + Math.random() * 1.6).toFixed(2) + "s";
+                b.style.animationDelay = (Math.random() * 0.25).toFixed(2) + "s";
+                (splashBubbles || document.body).appendChild(b);
+                (function(el2) {
+                    setTimeout(function() { el2.remove(); }, 3800);
+                })(b);
+            }
+        }
+
         let opened = false;
         chest.addEventListener("click", function() {
             if (opened) return;
@@ -34,6 +69,7 @@
             const rect = chest.getBoundingClientRect();
             const cx = rect.left + rect.width / 2;
             const cy = rect.top + rect.height / 2;
+            breathBurst(cx, cy - rect.height * 0.25);
             for (let i = 0; i < 24; i++) {
                 const sp = document.createElement("div");
                 sp.className = "splash-spark";
@@ -802,16 +838,15 @@
     /* ---------- ambient motes ---------- */
     (function spawnMotes() {
         const host = $("#motes");
-        for (let i = 0; i < 14; i++) {
+        for (let i = 0; i < 16; i++) {
             const m = el("span", "mote");
-            const aqua = i % 3 === 0;
             m.style.left = (4 + Math.random() * 92) + "%";
-            m.style.setProperty("--sz", (2.5 + Math.random() * 3.5).toFixed(1) + "px");
-            m.style.setProperty("--d", (12 + Math.random() * 12).toFixed(1) + "s");
-            m.style.setProperty("--delay", (-Math.random() * 22).toFixed(1) + "s");
-            m.style.setProperty("--sx", (Math.random() * 40 - 20).toFixed(0) + "px");
-            m.style.setProperty("--o", (0.45 + Math.random() * 0.4).toFixed(2));
-            m.style.setProperty("--c", aqua ? "rgba(78,205,196,.9)" : "rgba(91,181,224,.9)");
+            m.style.setProperty("--sz", (6 + Math.random() * 8).toFixed(1) + "px");
+            m.style.setProperty("--d", (9 + Math.random() * 9).toFixed(1) + "s");
+            m.style.setProperty("--delay", (-Math.random() * 18).toFixed(1) + "s");
+            m.style.setProperty("--sx", (Math.random() * 60 - 30).toFixed(0) + "px");
+            m.style.setProperty("--o", (0.6 + Math.random() * 0.35).toFixed(2));
+            m.style.setProperty("--c", "rgba(190,230,255,.85)");
             host.appendChild(m);
         }
     })();
