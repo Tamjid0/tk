@@ -11,6 +11,7 @@
         const chest = document.getElementById("splashChest");
         const sparkles = document.getElementById("splashSparkles");
         const scene = splash ? splash.querySelector(".splash-scene") : null;
+        const mk = (tag, cls) => { const n = document.createElement(tag); if (cls) n.className = cls; return n; };
         if (!splash || !chest) return;
 
         /* Hide chest/hint until ocean bg is decoded to prevent dark flicker */
@@ -29,7 +30,7 @@
         const splashBubbles = document.getElementById("splashBubbles");
         if (splashBubbles) {
             for (let i = 0; i < 14; i++) {
-                const m = el("span", "mote");
+                const m = mk("span", "mote");
                 m.style.left = (4 + Math.random() * 92) + "%";
                 m.style.setProperty("--sz", (7 + Math.random() * 9).toFixed(1) + "px");
                 m.style.setProperty("--d", (8 + Math.random() * 9).toFixed(1) + "s");
@@ -44,7 +45,7 @@
         function breathBurst(x, y) {
             const count = 10 + Math.floor(Math.random() * 6);
             for (let i = 0; i < count; i++) {
-                const b = el("span", "splash-breath");
+                const b = mk("span", "splash-breath");
                 const sz = 14 + Math.random() * 26;
                 b.style.width = sz + "px";
                 b.style.height = sz + "px";
