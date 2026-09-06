@@ -266,71 +266,26 @@
 
     /* ── Bubble cursor system ── */
     (function initBubbles() {
-        const POOL = 50;
-        const bubbles = [];
-        let bx = [], by = [], bvx = [], bvy = [], bsize = [], live = [];
-
-        for (let i = 0; i < POOL; i++) {
-            const d = document.createElement("div");
-            d.className = "cur-bubble";
-            d.style.cssText = "position:fixed;border-radius:50%;pointer-events:none;z-index:9999;display:none;";
-            document.body.appendChild(d);
-            bubbles.push(d);
-            bx[i] = by[i] = bvx[i] = bvy[i] = bsize[i] = 0;
-            live[i] = false;
-        }
+        const colors = ["rgba(200,225,255,0.6)", "rgba(190,230,255,0.55)", "rgba(220,240,255,0.65)", "rgba(205,232,255,0.6)"];
 
         function spawn(cx, cy, count) {
-            let spawned = 0;
-            for (let i = 0; i < POOL && spawned < count; i++) {
-                if (!live[i]) {
-                    const sz = 10 + Math.random() * 16;
-                    bx[i] = cx - sz / 2 + (Math.random() - 0.5) * 16;
-                    by[i] = cy - sz / 2 + (Math.random() - 0.5) * 16;
-                    bvx[i] = (Math.random() - 0.5) * 1.2;
-                    bvy[i] = -(1.8 + Math.random() * 2.2);
-                    bsize[i] = sz;
-                    live[i] = true;
-                    const b = bubbles[i];
-                    b.style.width = sz + "px";
-                    b.style.height = sz + "px";
-                    b.style.background = "rgba(255,255,255,0.08)";
-                    b.style.border = "1.5px solid rgba(200,225,255,0.6)";
-                    b.style.boxShadow = "inset 2px 2px 0 rgba(255,255,255,0.5), inset -1px -1px 0 rgba(180,210,240,0.2)";
-                    b.style.left = bx[i] + "px";
-                    b.style.top = by[i] + "px";
-                    b.style.display = "block";
-                    b.style.opacity = "0.85";
-                    spawned++;
-                }
+            for (let k = 0; k < count; k++) {
+                const d = document.createElement("div");
+                d.className = "cur-bubble";
+                const sz = 10 + Math.random() * 18;
+                d.style.width = sz + "px";
+                d.style.height = sz + "px";
+                d.style.left = (cx - sz / 2 + (Math.random() - 0.5) * 20) + "px";
+                d.style.top = (cy - sz / 2 + (Math.random() - 0.5) * 12) + "px";
+                d.style.borderColor = colors[Math.floor(Math.random() * colors.length)];
+                d.style.setProperty("--sx", (Math.random() * 80 - 40).toFixed(0) + "px");
+                d.style.setProperty("--dur", (1.6 + Math.random() * 1.6).toFixed(2) + "s");
+                document.body.appendChild(d);
+                setTimeout(function(el) { el.remove(); }, 3600);
             }
         }
 
         let lastMx = 0, lastMy = 0;
-        function tick() {
-            for (let i = 0; i < POOL; i++) {
-                if (!live[i]) continue;
-                by[i] += bvy[i];
-                bx[i] += bvx[i];
-                bvy[i] *= 0.985;
-                bsize[i] *= 0.997;
-                const b = bubbles[i];
-                const op = parseFloat(b.style.opacity) - 0.01;
-                if (op <= 0 || by[i] < -50) {
-                    b.style.display = "none";
-                    live[i] = false;
-                    continue;
-                }
-                b.style.opacity = op;
-                b.style.left = bx[i] + "px";
-                b.style.top = by[i] + "px";
-                b.style.width = bsize[i] + "px";
-                b.style.height = bsize[i] + "px";
-            }
-            requestAnimationFrame(tick);
-        }
-        tick();
-
         document.addEventListener("mousemove", function(e) {
             const dx = e.clientX - lastMx, dy = e.clientY - lastMy;
             const dist = Math.sqrt(dx * dx + dy * dy);
