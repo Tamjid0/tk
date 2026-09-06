@@ -616,7 +616,7 @@
         const v = views[cursor];
         const nums = v.filter(x => x !== null).map(x => x + 1);
         counterEl.textContent = nums.length === 2
-            ? `Pages ${nums[0]} Â· ${nums[1]} / ${PAGES.length}`
+            ? `Pages ${nums[0]} \u00B7 ${nums[1]} / ${PAGES.length}`
             : `Page ${nums[0]} / ${PAGES.length}`;
         progressEl.style.width = (views.length > 1 ? (cursor / (views.length - 1)) * 100 : 0) + "%";
         btnPrev.disabled = cursor === 0;

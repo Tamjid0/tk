@@ -335,7 +335,10 @@ button {
 
 .deck {
     flex: 0 0 auto;
-    padding: 6px 18px calc(12px + env(safe-area-inset-bottom));
+    padding: 10px 18px calc(14px + env(safe-area-inset-bottom));
+    background: linear-gradient(to top, rgba(7, 20, 34, .6), transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
 /* ---------------- Ambient scene ---------------- */
@@ -2155,41 +2158,45 @@ figcaption::after {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: clamp(16px, 6vw, 36px);
+    gap: clamp(20px, 6vw, 40px);
 }
 
 .ctrl-btn {
-    width: 46px;
-    height: 46px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
     cursor: pointer;
     display: grid;
     place-items: center;
-    color: var(--gold-soft);
-    background: rgba(14, 37, 64, .55);
-    border: 1px solid rgba(232, 238, 248, .38);
-    transition: transform .18s ease, box-shadow .3s ease, border-color .3s ease;
+    color: rgba(232, 238, 248, .8);
+    background: rgba(255, 255, 255, .06);
+    border: 1px solid rgba(255, 255, 255, .15);
+    transition: transform .2s ease, box-shadow .3s ease, border-color .3s ease, background .3s ease;
     touch-action: manipulation;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
 }
 
 .ctrl-btn svg {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     fill: none;
     stroke: currentColor;
+    stroke-width: 2;
 }
 
 .ctrl-btn:hover:not(:disabled) {
-    border-color: rgba(232, 238, 248, .75);
-    box-shadow: 0 0 16px rgba(91, 181, 224, .28);
+    border-color: rgba(232, 238, 248, .4);
+    background: rgba(255, 255, 255, .1);
+    box-shadow: 0 0 20px rgba(91, 181, 224, .15);
 }
 
 .ctrl-btn:active:not(:disabled) {
-    transform: scale(.94);
+    transform: scale(.92);
 }
 
 .ctrl-btn:disabled {
-    opacity: .28;
+    opacity: .2;
     cursor: default;
 }
 
@@ -2197,31 +2204,34 @@ figcaption::after {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 7px;
-    min-width: 132px;
+    gap: 6px;
+    min-width: 140px;
 }
 
 .counter {
-    font-family: var(--font-ui);
-    font-size: .64rem;
-    letter-spacing: .26em;
+    font-family: var(--font-display);
+    font-size: .58rem;
+    letter-spacing: .18em;
     text-transform: uppercase;
-    color: rgba(232, 238, 248, .85);
+    color: rgba(232, 238, 248, .6);
     font-variant-numeric: tabular-nums;
     white-space: nowrap;
 }
 
 .progress {
-    width: 112px;
-    height: 1px;
-    background: rgba(232, 238, 248, .18);
+    width: 100px;
+    height: 2px;
+    background: rgba(255, 255, 255, .1);
+    border-radius: 1px;
+    overflow: hidden;
 }
 
 .progress span {
     display: block;
     height: 100%;
     width: 0;
-    background: linear-gradient(90deg, var(--aqua), var(--gold));
+    background: linear-gradient(90deg, var(--aqua), var(--gold-soft));
+    border-radius: 1px;
     transition: width .5s ease;
 }
 
