@@ -16,7 +16,7 @@
 
         /* Hide chest/hint until ocean bg is decoded to prevent dark flicker */
         const bgImg = new Image();
-        bgImg.src = "assets/images/ocean-bg.jpg";
+        bgImg.src = assetPath("assets/images/ocean-bg.jpg");
         if (bgImg.decode) {
             bgImg.decode().then(function() { if (scene) scene.classList.add("ready"); }).catch(function() { if (scene) scene.classList.add("ready"); });
         } else {
@@ -214,7 +214,6 @@
 
     const divider = (cls = "divider") => use("divider", cls);
     const grain = () => el("div", "grain");
-    const RES = "assets/resources/";
 
     function cornerImg(src) {
         if (!src) return null;
@@ -313,6 +312,28 @@
         document.addEventListener("mousedown", function(e) {
             spawn(e.clientX, e.clientY, 4);
         });
+
+        /* Touch: generate bubbles while dragging (swipe) and on tap */
+        let lastTx = 0, lastTy = 0;
+        document.addEventListener("touchmove", function(e) {
+            const t = e.touches[0];
+            if (!t) return;
+            const dx = t.clientX - lastTx, dy = t.clientY - lastTy;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist > 14) {
+                spawn(t.clientX, t.clientY, 1);
+                lastTx = t.clientX;
+                lastTy = t.clientY;
+            }
+        }, { passive: true });
+
+        document.addEventListener("touchstart", function(e) {
+            const t = e.touches[0];
+            if (!t) return;
+            spawn(t.clientX, t.clientY, 4);
+            lastTx = t.clientX;
+            lastTy = t.clientY;
+        }, { passive: true });
     })();
 
     function buildCover(p) {
@@ -523,7 +544,7 @@
         inner.appendChild(mark);
         const bottle = el("div", "bottle-wrap");
         const bottleImg = document.createElement("img");
-        bottleImg.src = RES + "bottle message.png";
+        bottleImg.src = assetPath("assets/resources/bottle message.png");
         bottleImg.alt = "Message in a bottle";
         bottleImg.loading = "lazy";
         bottle.appendChild(bottleImg);
@@ -802,11 +823,13 @@
 
     let px = 0, py = 0, tracking = false;
     stage.addEventListener("pointerdown", (e) => {
+        if (e.pointerType === "touch") return;
         if (e.target.closest("button, .back-cover-link, .bottle-wrap")) return;
         tracking = true; px = e.clientX; py = e.clientY;
         try { stage.setPointerCapture(e.pointerId); } catch (_) { }
     });
     stage.addEventListener("pointerup", (e) => {
+        if (e.pointerType === "touch") return;
         if (!tracking) return;
         tracking = false;
         const dx = e.clientX - px, dy = e.clientY - py;
@@ -820,6 +843,32 @@
         }
     });
     stage.addEventListener("pointercancel", () => { tracking = false; });
+
+    /* ---------- touch swipe (mobile) ---------- */
+    let tsX = 0, tsY = 0, tsT = 0, tTracking = false;
+    stage.addEventListener("touchstart", (e) => {
+        if (e.target.closest("button, .back-cover-link, .bottle-wrap")) return;
+        const t = e.touches[0];
+        tsX = t.clientX; tsY = t.clientY; tsT = Date.now();
+        tTracking = true;
+    }, { passive: true });
+
+    stage.addEventListener("touchend", (e) => {
+        if (!tTracking) return;
+        tTracking = false;
+        const t = e.changedTouches[0];
+        const dx = t.clientX - tsX, dy = t.clientY - tsY;
+        if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+            flip(dx < 0 ? 1 : -1);
+        } else if (Math.hypot(dx, dy) < 12 && Date.now() - tsT < 400) {
+            const r = stage.getBoundingClientRect();
+            const xr = (t.clientX - r.left) / r.width;
+            if (xr > 0.72) flip(1);
+            else if (xr < 0.28) flip(-1);
+        }
+    }, { passive: true });
+
+    stage.addEventListener("touchcancel", () => { tTracking = false; }, { passive: true });
 
     mqDouble.addEventListener("change", layout);
 

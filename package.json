@@ -1,0 +1,13 @@
+{
+  "name": "dolia-birthday-book",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Build tooling for the single-file gift version",
+  "scripts": {
+    "build:gift": "node build-single.js"
+  },
+  "devDependencies": {
+    "ffmpeg-static": "^5.2.0",
+    "sharp": "^0.33.5"
+  }
+}

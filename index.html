@@ -8,6 +8,11 @@
     <meta name="referrer" content="no-referrer">
     <meta name="theme-color" content="#0b1a2e">
     <title>A Birthday Keepsake</title>
+    <script>
+        /* Resolves asset paths to embedded data URIs when present (single-file gift build).
+           Falls back to the normal relative path on the hosted multi-file site. */
+        window.assetPath = function (p) { return (window.__ASSETS__ && window.__ASSETS__[p]) || p; };
+    </script>
     <link rel="preload" as="image" href="assets/images/ocean-bg.jpg">
     <link rel="stylesheet" href="css/styles.css">
 </head>

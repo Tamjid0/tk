@@ -24,8 +24,8 @@
      Left types:  art {token, src, scale, fit} OR images [{src, caption, tag, span2}]
      Right types: title, body[], kicker, date, tags[]
 =============================================================== */
-const IMG = (file) => `assets/images/${file}`;
-const RES = (file) => `assets/resources/${file}`;
+const IMG = (file) => assetPath(`assets/images/${file}`);
+const RES = (file) => assetPath(`assets/resources/${file}`);
 
 const CORNERS = [
     RES("adorable dolia heart.png"),
@@ -122,7 +122,7 @@ const PAGES = [
             { src: IMG("dolia doing makeup day.png"), tag: "Screenshot" },
             { src: IMG("dolia listening to music.png"), tag: "Milestone" },
             { src: IMG("dolia doing makup.png"), tag: "Victory" },
-            { src: IMG("Dolia-celebrating.png"), tag: "Level Up" }
+            { src: RES("Dolia-celebrating.png"), tag: "Level Up" }
         ]
     },
     {
@@ -141,8 +141,8 @@ const PAGES = [
         type: "cinematic-left",
         images: [
             { src: IMG("dolia singing on karoke heino sitting behind.png"), span2: true },
-            { src: IMG("Dolia-celebrating.png"), span2: false },
-            { src: IMG("dolia resisting.png"), span2: false }
+            { src: RES("Dolia-celebrating.png"), span2: false },
+            { src: RES("dolia resisting.png"), span2: false }
         ]
     },
     {
