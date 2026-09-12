@@ -89,6 +89,20 @@
             /* Animate chest */
             chest.classList.add("opening");
 
+            /* Start background music (user gesture, so autoplay is allowed) */
+            const music = document.getElementById("bgMusic");
+            if (music) {
+                music.volume = 0;
+                const p = music.play();
+                if (p && p.catch) p.catch(function() { });
+                let v = 0;
+                const fade = setInterval(function() {
+                    v = Math.min(1, v + 0.05);
+                    music.volume = Math.min(0.55, v * 0.55);
+                    if (v >= 1) clearInterval(fade);
+                }, 120);
+            }
+
             /* Hide splash after animation */
             setTimeout(function() {
                 splash.classList.add("hidden");
@@ -743,6 +757,24 @@
     /* ---------- input: buttons, keyboard, swipe/tap ---------- */
     btnPrev.addEventListener("click", () => flip(-1));
     btnNext.addEventListener("click", () => flip(1));
+
+    /* ---------- music toggle ---------- */
+    (function initMusicToggle() {
+        const btn = $("#btnMusic");
+        const music = document.getElementById("bgMusic");
+        if (!btn || !music) return;
+        btn.addEventListener("click", function() {
+            if (music.paused) {
+                music.play().catch(function() { });
+                btn.classList.remove("muted");
+                btn.setAttribute("aria-pressed", "true");
+            } else {
+                music.pause();
+                btn.classList.add("muted");
+                btn.setAttribute("aria-pressed", "false");
+            }
+        });
+    })();
 
     document.addEventListener("click", (e) => {
         if (e.target.closest(".back-cover-link")) {

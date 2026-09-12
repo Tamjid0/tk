@@ -2287,6 +2287,54 @@ figcaption::after {
     transition: width .5s ease;
 }
 
+/* ---------------- Music toggle ---------------- */
+.music-btn {
+    position: fixed;
+    right: 14px;
+    bottom: calc(14px + env(safe-area-inset-bottom));
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    color: rgba(232, 238, 248, .75);
+    background: rgba(255, 255, 255, .06);
+    border: 1px solid rgba(255, 255, 255, .15);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    transition: transform .2s ease, border-color .3s ease, background .3s ease;
+    z-index: 50;
+}
+
+.music-btn svg {
+    width: 16px;
+    height: 16px;
+    grid-area: 1 / 1;
+    transition: opacity .3s ease;
+}
+
+.music-btn .icon-off {
+    opacity: 0;
+}
+
+.music-btn.muted .icon-on {
+    opacity: 0;
+}
+
+.music-btn.muted .icon-off {
+    opacity: 1;
+}
+
+.music-btn:hover {
+    border-color: rgba(232, 238, 248, .4);
+    background: rgba(255, 255, 255, .1);
+}
+
+.music-btn:active {
+    transform: scale(.92);
+}
+
 /* ---------------- Larger screens: two-page spread ---------------- */
 @media (min-width:768px) {
     :root {
