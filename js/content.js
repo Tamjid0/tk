@@ -21,11 +21,14 @@
       "wishes-right"    — Spread 7 right: final wishes + tags
       "back-cover"      — final back cover, placed on the left
 
-   FIELDS PER TYPE:
-     All types:   cornerImg (optional)
-     Left types:  art {token, src, scale, fit} OR images [{src, caption, tag, span2}]
-     Right types: title, body[], kicker, date, tags[]
-=============================================================== */
+    FIELDS PER TYPE:
+      All types:   cornerImg (optional), decor[] (optional scrapbook stickers)
+      Left types:  art {token, src, scale, fit} OR images [{src, caption, tag, span2}]
+      Right types: title, body[], kicker, date, tags[]
+      decor item:  {src, x, y, w, rot, behind, flip, o, tape, z}
+                   x/y = % left/top, w = % of page width, rot = degrees.
+                   behind=true tucks behind photos/text; tape=true adds washi tape.
+ =============================================================== */
 const IMG = (file) => assetPath(`assets/images/${file}`);
 const RES = (file) => assetPath(`assets/resources/${file}`);
 
@@ -60,7 +63,11 @@ const PAGES = [
     /* ═══ SPREAD 1: Birthday Introduction ════════════════════ */
     {
         type: "intro-left",
-        art: { token: "BIRTHDAY", src: RES("Dolia-celebrating.png"), scale: 5, fit: "contain" }
+        art: { token: "BIRTHDAY", src: RES("Dolia-celebrating.png"), scale: 5, fit: "contain" },
+        decor: [
+            { src: RES("png/fish.png"), x: 82, y: 5, w: 12, rot: 12 },
+            { src: RES("png/seaweed/yello coral.png"), x: 2, y: 82, w: 13, rot: -8 }
+        ]
     },
     {
         type: "intro-right",
@@ -72,10 +79,14 @@ const PAGES = [
             "",
             "Happy birthday, Dolia."
         ],
-        cornerImg: nextCorner()
+        cornerImg: nextCorner(),
+        decor: [
+            { src: RES("png/shell/normal single shell.png"), x: 80, y: 82, w: 12, rot: 14 },
+            { src: RES("png/paste color sea squid.png"), x: 4, y: 6, w: 10, rot: -10 }
+        ]
     },
 
-    /* ═══ SPREAD 2: Her Interests / Hobbies ══════════════════ */
+    /* ═══ SPREAD 2: ART — The Artist In You ══════════════════ */
     {
         type: "hobbies-left",
         gridClass: "cols-2",
@@ -84,35 +95,58 @@ const PAGES = [
             { src: IMG("dolia doing makup.png"), caption: "Makeup" },
             { src: IMG("dolia doing makeup day.png"), caption: "Makeup Day" },
             { src: IMG("dolia listening to music.png"), caption: "Music" }
+        ],
+        decor: [
+            { src: RES("svg/art/art-brush-general-svgrepo-com.svg"), x: -3, y: 2, w: 14, rot: -16, behind: true },
+            { src: RES("svg/art/art-palette-svgrepo-com.svg"), x: 3, y: 83, w: 12, rot: -9 },
+            { src: RES("svg/art/pencil.svg"), x: 82, y: 84, w: 17, rot: 24 }
         ]
     },
     {
         type: "hobbies-right",
-        title: "The Things You Love",
+        title: "The Artist In You",
         body: [
-            "I remembered the things you told me about.",
-            "Every hobby, every passion — they all make you who you are."
+            "Every blank page is a new little world,",
+            "and you fill each one with color.",
+            "",
+            "Keep drawing — your imagination is",
+            "my favorite gallery."
         ],
-        cornerImg: nextCorner()
+        cornerImg: nextCorner(),
+        decor: [
+            { src: RES("svg/art/art-brush-general-svgrepo-com.svg"), x: 84, y: 3, w: 9, rot: 12 },
+            { src: RES("svg/art/art-palette-svgrepo-com.svg"), x: 2, y: 88, w: 8, rot: -6 }
+        ]
     },
 
-    /* ═══ SPREAD 3: More of Her World ════════════════════════ */
+    /* ═══ SPREAD 3: GAMING — Your Player Two ═════════════════ */
     {
         type: "editorial-left",
         images: [
             { src: IMG("dolia doing karate.png"), span2: false },
             { src: IMG("dolia listening to music.png"), span2: true },
             { src: IMG("dolia doing makup.png"), span2: false }
+        ],
+        decor: [
+            { src: RES("svg/gaming/game-controller-2.svg"), x: -2, y: 78, w: 24, rot: -9, behind: true },
+            { src: RES("svg/gaming/game heart.svg"), x: 86, y: 4, w: 10, rot: 12 },
+            { src: RES("png/gaming/dolia x heino gaming dolia crying.png"), x: 2, y: 3, w: 26, rot: -5, tape: true }
         ]
     },
     {
         type: "editorial-right",
-        title: "Discovering Your World",
+        title: "Your Player Two",
         body: [
-            "There is always more to learn about the people we care about.",
-            "Your interests paint a beautiful picture of who you are."
+            "Side by side, controllers in hand —",
+            "win or lose, every round with you is fun.",
+            "",
+            "Heino will always be your player two."
         ],
-        cornerImg: nextCorner()
+        cornerImg: nextCorner(),
+        decor: [
+            { src: RES("svg/gaming/game-controller-svgrepo-com.svg"), x: 82, y: 86, w: 12, rot: 8 },
+            { src: RES("svg/gaming/game heart.svg"), x: 5, y: 5, w: 7, rot: -10 }
+        ]
     },
 
     /* ═══ SPREAD 4: The Music In You ════════════════════════ */
@@ -126,6 +160,12 @@ const PAGES = [
         notes: [
             "Always humming a tune",
             "Karaoke nights!"
+        ],
+        decor: [
+            { src: RES("png/music/music note violet.png"), x: 68, y: 1, w: 8, rot: 15 },
+            { src: RES("png/music/karaoke mic.png"), x: -4, y: 30, w: 13, rot: -7, behind: true },
+            { src: RES("png/music/music note purple.png"), x: 86, y: 66, w: 9, rot: -10 },
+            { src: RES("png/music/headphone colorful.png"), x: 78, y: 30, w: 19, rot: 10, behind: true }
         ]
     },
     {
@@ -141,10 +181,14 @@ const PAGES = [
             "karaoke nights with you are my favorite."
         ],
         tags: ["Playlists", "Karaoke", "Singing", "Daydreams"],
-        cornerImg: nextCorner()
+        cornerImg: nextCorner(),
+        decor: [
+            { src: RES("svg/music/music.svg"), x: 83, y: 4, w: 10, rot: 10 },
+            { src: RES("png/music/music note purple.png"), x: 4, y: 88, w: 7, rot: -8 }
+        ]
     },
 
-    /* ═══ SPREAD 5: Shared Gaming Memories ═══════════════════ */
+    /* ═══ SPREAD 5: Mixed Hobbies — Little Things You Love ══ */
     {
         type: "gaming-left",
         images: [
@@ -154,20 +198,33 @@ const PAGES = [
             { src: IMG("dolia listening to music.png"), tag: "Milestone" },
             { src: IMG("dolia doing makup.png"), tag: "Victory" },
             { src: RES("Dolia-celebrating.png"), tag: "Level Up" }
+        ],
+        decor: [
+            { src: RES("svg/art/pencil.svg"), x: 0, y: 1, w: 9, rot: -12 },
+            { src: RES("svg/gaming/game heart.svg"), x: 90, y: 2, w: 8, rot: 10 },
+            { src: RES("png/music/music note purple.png"), x: 1, y: 90, w: 8, rot: -8 },
+            { src: RES("png/shell/spiral shell and normal shell.png"), x: 88, y: 89, w: 10, rot: 13 }
         ]
     },
     {
         type: "gaming-right",
-        title: "Our Shared Memories",
+        title: "Little Things You Love",
         date: "2024 - 2026",
         body: [
-            "Every match, every win, every laugh —",
-            "these are the experiences we built together."
+            "Karaoke nights, little doodles,",
+            "games, songs, and everything between —",
+            "",
+            "this page is a pocket full of",
+            "your favorite things."
         ],
-        cornerImg: nextCorner()
+        cornerImg: nextCorner(),
+        decor: [
+            { src: RES("png/music/music note violet.png"), x: 84, y: 4, w: 8, rot: 12 },
+            { src: RES("svg/gaming/game heart.svg"), x: 3, y: 87, w: 9, rot: -8 }
+        ]
     },
 
-    /* ═══ SPREAD 5: Favorite Shared Moments ══════════════════ */
+    /* ═══ SPREAD 6: Favorite Shared Moments ══════════════════ */
     {
         type: "cinematic-left",
         marquee: "MOVIE TIME",
@@ -176,6 +233,10 @@ const PAGES = [
             { src: IMG("dolia singing on karoke heino sitting behind.png") },
             { src: RES("Dolia-celebrating.png") },
             { src: RES("dolia resisting.png") }
+        ],
+        decor: [
+            { src: RES("png/fish.png"), x: 2, y: 1, w: 10, rot: -12 },
+            { src: RES("sea shell.png"), x: 85, y: 86, w: 11, rot: 10 }
         ]
     },
     {
@@ -186,13 +247,20 @@ const PAGES = [
             "The night we stayed up talking until sunrise.",
             "These moments are why I am grateful for you."
         ],
-        cornerImg: nextCorner()
+        cornerImg: nextCorner(),
+        decor: [
+            { src: RES("png/seaweed/green sea weed.png"), x: -2, y: 60, w: 12, rot: 4 }
+        ]
     },
 
-    /* ═══ SPREAD 6: Wishes for the Year Ahead ════════════════ */
+    /* ═══ SPREAD 7: Wishes for the Year Ahead ════════════════ */
     {
         type: "wishes-left",
-        art: { token: "WISHES", src: IMG("dolia x heino sitting on water dolia on marmaid form.jpg"), scale: 5 }
+        art: { token: "WISHES", src: IMG("dolia x heino sitting on water dolia on marmaid form.jpg"), scale: 5 },
+        decor: [
+            { src: RES("png/seaweed/long sea weed long pink.png"), x: 86, y: 20, w: 14, rot: -4 },
+            { src: RES("anchor.png"), x: 2, y: 84, w: 13, rot: -10 }
+        ]
     },
     {
         type: "wishes-right",
@@ -203,13 +271,20 @@ const PAGES = [
             "Keep being the wonderful person you are."
         ],
         tags: ["Happiness", "Creativity", "Adventure", "Fun", "Memories", "Growth"],
-        cornerImg: nextCorner()
+        cornerImg: nextCorner(),
+        decor: [
+            { src: RES("png/coral/blue coral.png"), x: 84, y: 30, w: 15, rot: 5 },
+            { src: RES("svg/starfish.svg"), x: 3, y: 87, w: 10, rot: -12 }
+        ]
     },
 
     /* ═══ END PAGE — signature ═══════════════════════════════ */
     {
         type: "end",
-        note: "This book was made with love, just for you."
+        note: "This book was made with love, just for you.",
+        decor: [
+            { src: RES("png/coral/read corsal.png"), x: 82, y: 4, w: 11, rot: 12 }
+        ]
     },
 
     /* Empty right page — add a photo here later */
@@ -219,6 +294,9 @@ const PAGES = [
     {
         type: "back-cover",
         mark: "DOLIA",
-        secret: "You are the ocean's favorite princess. Happy Birthday, Dolia."
+        secret: "You are the ocean's favorite princess. Happy Birthday, Dolia.",
+        decor: [
+            { src: RES("png/fish.png"), x: 4, y: 8, w: 9, rot: -8 }
+        ]
     },
 ];

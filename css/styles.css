@@ -1036,7 +1036,7 @@ button {
 .page--text-page .page-inner {
     justify-content: center;
     gap: clamp(10px, 3cqi, 20px);
-    padding: clamp(20px, 6cqi, 40px);
+    padding: clamp(14px, 4.5cqi, 30px);
 }
 
 .text-title {
@@ -1060,7 +1060,7 @@ button {
     font-size: clamp(.8rem, 2.8cqi, 1rem);
     line-height: 1.65;
     color: var(--ink-soft);
-    max-width: 90%;
+    max-width: 100%;
 }
 
 .text-body p+p {
@@ -1073,7 +1073,95 @@ button {
     line-height: 1.5;
     color: var(--ink);
     font-style: italic;
-    max-width: 85%;
+    max-width: 100%;
+}
+
+/* ---- Scrapbook paper card: text sits on a taped-down sheet ---- */
+.paper-card {
+    position: relative;
+    width: 100%;
+    max-width: 58ch;
+    margin: 0 auto;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, .5), transparent 30%),
+        radial-gradient(120% 100% at 50% 0%, #fffdf6 0%, #fdf8ec 60%, #f7ecd9 100%);
+    border: 1px solid rgba(26, 95, 138, .14);
+    border-radius: 3px;
+    box-shadow:
+        0 1px 2px rgba(7, 20, 34, .08),
+        0 6px 18px rgba(7, 20, 34, .1);
+    padding: clamp(14px, 4.5cqi, 30px) clamp(14px, 5cqi, 32px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: clamp(8px, 2.4cqi, 14px);
+    transform: rotate(-.5deg);
+}
+
+.paper-card::before {
+    content: "";
+    position: absolute;
+    top: -9px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+    width: clamp(52px, 16cqi, 96px);
+    height: clamp(14px, 3.6cqi, 22px);
+    background: linear-gradient(180deg, rgba(255, 236, 170, .85), rgba(255, 222, 130, .75));
+    border-left: 1px dashed rgba(160, 120, 40, .25);
+    border-right: 1px dashed rgba(160, 120, 40, .25);
+    border-radius: 1px;
+    box-shadow: 0 1px 2px rgba(7, 20, 34, .12);
+    z-index: 2;
+}
+
+.paper-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 3px;
+    background: #f3ead6;
+    transform: rotate(1.1deg) translate(3px, 4px);
+    z-index: -1;
+    box-shadow: 0 4px 12px rgba(7, 20, 34, .1);
+}
+
+/* ---- Floating scrapbook decorations ---- */
+.page-decor {
+    position: absolute;
+    left: var(--x, 0%);
+    top: var(--y, 0%);
+    width: var(--w, 10%);
+    transform: rotate(var(--rot, 0deg)) scaleX(var(--flip, 1));
+    opacity: var(--o, 1);
+    pointer-events: none;
+    z-index: 5;
+    filter: drop-shadow(1px 2px 3px rgba(7, 20, 34, .28));
+}
+
+.page-decor.behind {
+    z-index: 1;
+}
+
+.page-decor img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.page-decor.taped::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-4deg);
+    width: 56%;
+    height: 22%;
+    min-height: 8px;
+    max-height: 16px;
+    background: rgba(255, 230, 150, .6);
+    border-radius: 1px;
+    z-index: 2;
 }
 
 /* ---- Spread 1: Birthday Introduction ---- */
@@ -2216,7 +2304,7 @@ figcaption::after {
 }
 
 .body {
-    max-width: 44ch;
+    max-width: 56ch;
     line-height: 1.95;
     font-size: .85rem;
     font-size: clamp(.8rem, 3.5cqi, 1rem);

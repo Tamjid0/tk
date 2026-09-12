@@ -401,11 +401,13 @@
         const pg = el("div", "page page--hobbies-right page--text-page page--framed");
         if (p.cornerImg) { const c = cornerImg(p.cornerImg); if (c) pg.appendChild(c); }
         const inner = el("div", "page-inner");
-        if (p.title) { const h2 = el("h2", "text-title"); h2.appendChild(tok(p.title)); inner.appendChild(h2); }
-        inner.appendChild(accentDivider());
+        const card = el("div", "paper-card");
+        if (p.title) { const h2 = el("h2", "text-title"); h2.appendChild(tok(p.title)); card.appendChild(h2); }
+        card.appendChild(accentDivider());
         const body = el("div", "text-body");
         (p.body || []).forEach(line => { const para = el("p"); para.appendChild(tok(line)); body.appendChild(para); });
-        inner.appendChild(body);
+        card.appendChild(body);
+        inner.appendChild(card);
         pg.appendChild(inner);
         return pg;
     }
@@ -424,11 +426,13 @@
         const pg = el("div", "page page--editorial-right page--text-page page--framed");
         if (p.cornerImg) { const c = cornerImg(p.cornerImg); if (c) pg.appendChild(c); }
         const inner = el("div", "page-inner");
-        if (p.title) { const h2 = el("h2", "text-title"); h2.appendChild(tok(p.title)); inner.appendChild(h2); }
-        inner.appendChild(accentDivider());
+        const card = el("div", "paper-card");
+        if (p.title) { const h2 = el("h2", "text-title"); h2.appendChild(tok(p.title)); card.appendChild(h2); }
+        card.appendChild(accentDivider());
         const body = el("div", "text-large");
         (p.body || []).forEach(line => { const para = el("p"); para.appendChild(tok(line)); body.appendChild(para); });
-        inner.appendChild(body);
+        card.appendChild(body);
+        inner.appendChild(card);
         pg.appendChild(inner);
         return pg;
     }
@@ -470,17 +474,19 @@
         const pg = el("div", "page page--collage-right page--text-page page--framed");
         if (p.cornerImg) { const c = cornerImg(p.cornerImg); if (c) pg.appendChild(c); }
         const inner = el("div", "page-inner");
-        if (p.kicker) { const k = el("span", "text-subtitle"); k.textContent = p.kicker; inner.appendChild(k); }
-        if (p.title) { const h2 = el("h2", "text-title"); h2.appendChild(tok(p.title)); inner.appendChild(h2); }
-        inner.appendChild(accentDivider());
+        const card = el("div", "paper-card");
+        if (p.kicker) { const k = el("span", "text-subtitle"); k.textContent = p.kicker; card.appendChild(k); }
+        if (p.title) { const h2 = el("h2", "text-title"); h2.appendChild(tok(p.title)); card.appendChild(h2); }
+        card.appendChild(accentDivider());
         const body = el("div", "text-body");
         (p.body || []).forEach(line => { const para = el("p"); para.appendChild(tok(line)); body.appendChild(para); });
-        inner.appendChild(body);
+        card.appendChild(body);
         if (p.tags && p.tags.length) {
             const wrap = el("div", "wish-categories");
             p.tags.forEach(t => { const tag = el("span", "wish-tag"); tag.textContent = t; wrap.appendChild(tag); });
-            inner.appendChild(wrap);
+            card.appendChild(wrap);
         }
+        inner.appendChild(card);
         pg.appendChild(inner);
         return pg;
     }
@@ -499,12 +505,14 @@
         const pg = el("div", "page page--gaming-right page--text-page page--framed");
         if (p.cornerImg) { const c = cornerImg(p.cornerImg); if (c) pg.appendChild(c); }
         const inner = el("div", "page-inner");
-        if (p.title) { const h2 = el("h2", "text-title"); h2.appendChild(tok(p.title)); inner.appendChild(h2); }
-        if (p.date) { const d = el("span", "date-tag"); d.textContent = p.date; inner.appendChild(d); }
-        inner.appendChild(accentDivider());
+        const card = el("div", "paper-card");
+        if (p.title) { const h2 = el("h2", "text-title"); h2.appendChild(tok(p.title)); card.appendChild(h2); }
+        if (p.date) { const d = el("span", "date-tag"); d.textContent = p.date; card.appendChild(d); }
+        card.appendChild(accentDivider());
         const body = el("div", "text-body");
         (p.body || []).forEach(line => { const para = el("p"); para.appendChild(tok(line)); body.appendChild(para); });
-        inner.appendChild(body);
+        card.appendChild(body);
+        inner.appendChild(card);
         pg.appendChild(inner);
         return pg;
     }
@@ -608,11 +616,13 @@
         const pg = el("div", "page page--cinematic-right page--text-page page--framed");
         if (p.cornerImg) { const c = cornerImg(p.cornerImg); if (c) pg.appendChild(c); }
         const inner = el("div", "page-inner");
-        if (p.title) { const h2 = el("h2", "text-title"); h2.appendChild(tok(p.title)); inner.appendChild(h2); }
-        inner.appendChild(accentDivider());
+        const card = el("div", "paper-card");
+        if (p.title) { const h2 = el("h2", "text-title"); h2.appendChild(tok(p.title)); card.appendChild(h2); }
+        card.appendChild(accentDivider());
         const body = el("div", "text-body");
         (p.body || []).forEach(line => { const para = el("p"); para.appendChild(tok(line)); body.appendChild(para); });
-        inner.appendChild(body);
+        card.appendChild(body);
+        inner.appendChild(card);
         pg.appendChild(inner);
         return pg;
     }
@@ -629,16 +639,18 @@
         const pg = el("div", "page page--wishes-right page--text-page page--framed");
         if (p.cornerImg) { const c = cornerImg(p.cornerImg); if (c) pg.appendChild(c); }
         const inner = el("div", "page-inner");
-        if (p.title) { const h2 = el("h2", "text-title"); h2.appendChild(tok(p.title)); inner.appendChild(h2); }
-        inner.appendChild(accentDivider());
+        const card = el("div", "paper-card");
+        if (p.title) { const h2 = el("h2", "text-title"); h2.appendChild(tok(p.title)); card.appendChild(h2); }
+        card.appendChild(accentDivider());
         const body = el("div", "text-body");
         (p.body || []).forEach(line => { const para = el("p"); para.appendChild(tok(line)); body.appendChild(para); });
-        inner.appendChild(body);
+        card.appendChild(body);
         if (p.tags && p.tags.length) {
             const tags = el("div", "wish-categories");
             p.tags.forEach(t => { const tag = el("span", "wish-tag"); tag.textContent = t; tags.appendChild(tag); });
-            inner.appendChild(tags);
+            card.appendChild(tags);
         }
+        inner.appendChild(card);
         pg.appendChild(inner);
         return pg;
     }
@@ -714,6 +726,29 @@
         return pg;
     }
 
+    /* ---------- scrapbook decorations ----------
+       decor: [{src, x, y, w, rot, behind, flip, o, tape}]
+       x/y = % left/top of page, w = % of page width.
+       behind=true tucks it behind photos/text, otherwise it sits on top. */
+    function renderDecor(pg, decor) {
+        (decor || []).forEach((d) => {
+            if (!d || !d.src) return;
+            const w = el("div", "page-decor" + (d.behind ? " behind" : "") + (d.tape ? " taped" : ""));
+            w.style.setProperty("--x", (d.x || 0) + "%");
+            w.style.setProperty("--y", (d.y || 0) + "%");
+            w.style.setProperty("--w", (d.w || 10) + "%");
+            w.style.setProperty("--rot", (d.rot || 0) + "deg");
+            w.style.setProperty("--flip", d.flip ? "-1" : "1");
+            w.style.setProperty("--o", d.o != null ? d.o : 1);
+            if (d.z != null) w.style.zIndex = d.z;
+            const im = document.createElement("img");
+            im.src = d.src; im.alt = ""; im.loading = "lazy";
+            im.draggable = false;
+            w.appendChild(im);
+            pg.appendChild(w);
+        });
+    }
+
     function makePage(model) {
         if (model == null) return buildBlank();
         let pg;
@@ -744,6 +779,7 @@
             const s = stickerImg(model.sticker, "page-accent-sticker");
             if (s) pg.appendChild(s);
         }
+        if (model && model.decor) renderDecor(pg, model.decor);
         return pg;
     }
     /* ---------- views & layout ---------- */
