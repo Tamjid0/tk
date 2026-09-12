@@ -1,23 +1,25 @@
 /* ================================================================
    BIRTHDAY BOOK — Content Template
 
-   6 spreads (12 pages) + cover + back-cover partner = 15 entries
+    7 spreads (14 pages) + cover + end + back-cover = 18 entries
 
-   PAGE TYPES:
-     "cover"           — front cover
-     "intro-left"      — Spread 1 left: birthday image
-     "intro-right"     — Spread 1 right: birthday message
-     "hobbies-left"    — Spread 2 left: image grid
-     "hobbies-right"   — Spread 2 right: wishes
-     "editorial-left"  — Spread 3 left: varied image layout
-     "editorial-right" — Spread 3 right: combined message
-     "gaming-left"     — Spread 4 left: gaming screenshots grid
-     "gaming-right"    — Spread 4 right: captions + message
-     "cinematic-left"  — Spread 5 left: cinematic moments
-     "cinematic-right" — Spread 5 right: observations
-     "wishes-left"     — Spread 6 left: beautiful image
-     "wishes-right"    — Spread 6 right: final wishes + tags
-     "back-cover"      — final back cover, placed on the left
+    PAGE TYPES:
+      "cover"           — front cover
+      "intro-left"      — Spread 1 left: birthday image
+      "intro-right"     — Spread 1 right: birthday message
+      "hobbies-left"    — Spread 2 left: image grid
+      "hobbies-right"   — Spread 2 right: wishes
+      "editorial-left"  — Spread 3 left: varied image layout
+      "editorial-right" — Spread 3 right: combined message
+      "collage-left"    — Spread 4 left: scattered collage, 3 photos + balloon notes
+      "collage-right"   — Spread 4 right: message + tags
+      "gaming-left"     — Spread 5 left: gaming screenshots grid
+      "gaming-right"    — Spread 5 right: captions + message
+      "cinematic-left"  — Spread 6 left: cinematic moments
+      "cinematic-right" — Spread 6 right: observations
+      "wishes-left"     — Spread 7 left: beautiful image
+      "wishes-right"    — Spread 7 right: final wishes + tags
+      "back-cover"      — final back cover, placed on the left
 
    FIELDS PER TYPE:
      All types:   cornerImg (optional)
@@ -113,7 +115,36 @@ const PAGES = [
         cornerImg: nextCorner()
     },
 
-    /* ═══ SPREAD 4: Shared Gaming Memories ═══════════════════ */
+    /* ═══ SPREAD 4: The Music In You ════════════════════════ */
+    {
+        type: "collage-left",
+        images: [
+            { src: IMG("dolia listening to music.png"), caption: "Always listening" },
+            { src: IMG("dolia singing on karoke heino sitting behind.png"), caption: "Karaoke nights" },
+            { src: IMG("little dolia.webp"), caption: "Lost in a melody" }
+        ],
+        notes: [
+            "Always humming a tune",
+            "Karaoke nights!"
+        ]
+    },
+    {
+        type: "collage-right",
+        kicker: "Music",
+        title: "The Music In You",
+        body: [
+            "Wherever you go, a melody follows —",
+            "your headphones, your playlists, your quiet humming.",
+            "",
+            "You carry music with you like a little light.",
+            "And of all the songs in the world,",
+            "karaoke nights with you are my favorite."
+        ],
+        tags: ["Playlists", "Karaoke", "Singing", "Daydreams"],
+        cornerImg: nextCorner()
+    },
+
+    /* ═══ SPREAD 5: Shared Gaming Memories ═══════════════════ */
     {
         type: "gaming-left",
         images: [

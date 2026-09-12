@@ -433,6 +433,58 @@
         return pg;
     }
 
+    function buildCollageLeft(p) {
+        const pg = el("div", "page page--collage-left");
+        const inner = el("div", "page-inner");
+        const stage = el("div", "collage-stage");
+
+        (p.notes || []).forEach((note, i) => {
+            const balloon = el("div", "collage-balloon balloon-" + (i + 1));
+            const txt = el("span", "balloon-text");
+            txt.textContent = note;
+            balloon.appendChild(txt);
+            balloon.appendChild(el("span", "balloon-string"));
+            stage.appendChild(balloon);
+        });
+
+        (p.images || []).forEach((img, i) => {
+            const cell = el("div", "collage-shot shot-" + (i + 1));
+            cell.style.setProperty("--tape-rot", (Math.random() * 6 - 3).toFixed(1) + "deg");
+            const im = document.createElement("img");
+            im.src = img.src; im.alt = img.caption || ""; im.loading = "lazy";
+            cell.appendChild(im);
+            if (img.caption) { const c = el("span", "collage-cap"); c.textContent = img.caption; cell.appendChild(c); }
+            stage.appendChild(cell);
+        });
+
+        stage.appendChild(use("spark", "collage-spark a"));
+        stage.appendChild(use("spark", "collage-spark b"));
+        stage.appendChild(el("div", "collage-tapebit t1"));
+        stage.appendChild(el("div", "collage-tapebit t2"));
+        inner.appendChild(stage);
+        pg.appendChild(inner);
+        return pg;
+    }
+
+    function buildCollageRight(p) {
+        const pg = el("div", "page page--collage-right page--text-page page--framed");
+        if (p.cornerImg) { const c = cornerImg(p.cornerImg); if (c) pg.appendChild(c); }
+        const inner = el("div", "page-inner");
+        if (p.kicker) { const k = el("span", "text-subtitle"); k.textContent = p.kicker; inner.appendChild(k); }
+        if (p.title) { const h2 = el("h2", "text-title"); h2.appendChild(tok(p.title)); inner.appendChild(h2); }
+        inner.appendChild(accentDivider());
+        const body = el("div", "text-body");
+        (p.body || []).forEach(line => { const para = el("p"); para.appendChild(tok(line)); body.appendChild(para); });
+        inner.appendChild(body);
+        if (p.tags && p.tags.length) {
+            const wrap = el("div", "wish-categories");
+            p.tags.forEach(t => { const tag = el("span", "wish-tag"); tag.textContent = t; wrap.appendChild(tag); });
+            inner.appendChild(wrap);
+        }
+        pg.appendChild(inner);
+        return pg;
+    }
+
     function buildGamingLeft(p) {
         const pg = el("div", "page page--gaming-left");
         const inner = el("div", "page-inner");
@@ -588,6 +640,8 @@
             case "hobbies-right": pg = buildHobbiesRight(model); break;
             case "editorial-left": pg = buildEditorialLeft(model); break;
             case "editorial-right": pg = buildEditorialRight(model); break;
+            case "collage-left": pg = buildCollageLeft(model); break;
+            case "collage-right": pg = buildCollageRight(model); break;
             case "gaming-left": pg = buildGamingLeft(model); break;
             case "gaming-right": pg = buildGamingRight(model); break;
             case "cinematic-left": pg = buildCinematicLeft(model); break;
@@ -910,7 +964,7 @@
 
         /* Delegate click on any clickable image */
         document.addEventListener("click", (e) => {
-            const img = e.target.closest(".plate-media img, .hobby-cell img, .editorial-cell img, .gaming-cell img, .cinema-cell img");
+            const img = e.target.closest(".plate-media img, .hobby-cell img, .editorial-cell img, .gaming-cell img, .cinema-cell img, .collage-shot img");
             if (img && img.src) {
                 e.stopPropagation();
                 openLightbox(img.src, img.alt);

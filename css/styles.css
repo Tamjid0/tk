@@ -1251,6 +1251,210 @@ button {
     border-radius: 1px;
 }
 
+/* ---- Spread 4: The Music In You (scatter collage) ---- */
+.page--collage-left .page-inner {
+    display: block;
+    padding: 0;
+    overflow: hidden;
+}
+
+.collage-stage {
+    position: absolute;
+    inset: 0;
+}
+
+.collage-shot {
+    position: absolute;
+    background: #fff;
+    padding: clamp(4px, 1.1cqi, 8px);
+    padding-bottom: clamp(13px, 3.8cqi, 22px);
+    box-shadow:
+        2px 3px 10px rgba(7, 20, 34, .16),
+        0 1px 3px rgba(7, 20, 34, .1);
+    transform: rotate(var(--rot, 0deg));
+    transition: transform .2s ease, box-shadow .2s ease;
+    z-index: 1;
+}
+
+.collage-shot:hover {
+    transform: rotate(0deg) scale(1.03);
+    box-shadow: 3px 5px 16px rgba(7, 20, 34, .24);
+    z-index: 10;
+}
+
+.collage-shot img {
+    width: 100%;
+    display: block;
+    border-radius: 1px;
+    cursor: pointer;
+}
+
+.collage-cap {
+    position: absolute;
+    bottom: clamp(3px, .8cqi, 6px);
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-family: var(--font-ui);
+    font-style: italic;
+    font-size: clamp(.5rem, 1.8cqi, .7rem);
+    color: var(--ink-soft);
+}
+
+/* scattered positions: top-right, mid-left, bottom-right (no overlap) */
+.collage-shot.shot-1 {
+    top: 3%;
+    right: 3%;
+    width: 46%;
+    --rot: 2.5deg;
+}
+
+.collage-shot.shot-2 {
+    top: 36.5%;
+    left: 3%;
+    width: 48%;
+    --rot: -3deg;
+    padding: clamp(8px, 2.2cqi, 14px);
+    padding-bottom: clamp(16px, 4.4cqi, 24px);
+    border-radius: 3px;
+    background:
+        linear-gradient(#fff, #fff) padding-box,
+        repeating-linear-gradient(0deg, rgba(91, 181, 224, .32) 0 6px, rgba(91, 181, 224, 0) 6px 12px) border-box,
+        repeating-linear-gradient(90deg, rgba(91, 181, 224, .32) 0 6px, rgba(91, 181, 224, 0) 6px 12px) border-box,
+        #f4fafe border-box;
+    border: 1.6cqi solid transparent;
+}
+
+.collage-shot.shot-3 {
+    bottom: 2.5%;
+    right: 3%;
+    width: 44%;
+    --rot: 3.5deg;
+}
+
+.collage-shot.shot-1::before,
+.collage-shot.shot-3::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%) rotate(var(--tape-rot, 2deg));
+    width: clamp(22px, 6.5cqi, 38px);
+    height: clamp(9px, 2.2cqi, 15px);
+    background: rgba(255, 230, 150, .6);
+    border-radius: 1px;
+    z-index: 2;
+}
+
+/* balloon notes */
+.collage-balloon {
+    position: absolute;
+    width: clamp(56px, 15cqi, 80px);
+    height: clamp(56px, 15cqi, 80px);
+    display: grid;
+    place-items: center;
+    padding: 18% 14%;
+    text-align: center;
+    border-radius: 50%;
+    font-family: "Segoe Script", "Apple Chancery", "Comic Sans MS", cursive;
+    font-size: clamp(.5rem, 1.9cqi, .68rem);
+    line-height: 1.4;
+    color: #f7fbff;
+    text-shadow: 0 1px 3px rgba(7, 20, 34, .28);
+    box-shadow:
+        inset -5px -7px 14px rgba(7, 20, 34, .2),
+        inset 4px 5px 12px rgba(255, 255, 255, .22),
+        3px 5px 14px rgba(7, 20, 34, .18);
+    transform: rotate(var(--brot, -3deg));
+    z-index: 2;
+}
+
+.collage-balloon::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 8px solid var(--balloon-knot, #2a6f99);
+}
+
+.collage-balloon .balloon-string {
+    position: absolute;
+    top: calc(100% + 3px);
+    left: 50%;
+    width: 1.5px;
+    height: clamp(22px, 7cqi, 48px);
+    background: linear-gradient(rgba(58, 143, 191, .55), rgba(58, 143, 191, 0));
+    transform: translateX(-50%) rotate(var(--string-rot, 4deg));
+    transform-origin: top center;
+    border-radius: 2px;
+}
+
+.collage-balloon.balloon-1 {
+    left: 2%;
+    top: 3%;
+    background: radial-gradient(circle at 32% 28%, #6fc3e8, #3a8fbf 55%, #2a6f99 100%);
+    --balloon-knot: #2a6f99;
+    --brot: -3deg;
+    --string-rot: 7deg;
+}
+
+.collage-balloon.balloon-2 {
+    left: 25%;
+    top: 9.5%;
+    background: radial-gradient(circle at 32% 28%, #b9b0e8, #8f83c9 55%, #6f63a8 100%);
+    --balloon-knot: #6f63a8;
+    --brot: 4deg;
+    --string-rot: -6deg;
+    z-index: 3;
+}
+
+.collage-spark {
+    position: absolute;
+    width: clamp(14px, 4cqi, 22px);
+    height: clamp(14px, 4cqi, 22px);
+    color: var(--gold);
+    opacity: .75;
+    z-index: 1;
+}
+
+.collage-spark.a {
+    right: 6%;
+    top: 43%;
+}
+
+.collage-spark.b {
+    left: 9%;
+    bottom: 11%;
+}
+
+/* washi tape strips filling the empty zones */
+.collage-tapebit {
+    position: absolute;
+    width: clamp(40px, 11cqi, 64px);
+    height: clamp(12px, 3.2cqi, 18px);
+    border-radius: 1px;
+    opacity: .8;
+    z-index: 1;
+    box-shadow: 0 1px 2px rgba(7, 20, 34, .08);
+}
+
+.collage-tapebit.t1 {
+    right: 12%;
+    top: 52%;
+    transform: rotate(-14deg);
+    background: rgba(240, 214, 138, .55);
+}
+
+.collage-tapebit.t2 {
+    left: 14%;
+    bottom: 6%;
+    transform: rotate(9deg);
+    background: rgba(91, 181, 224, .4);
+}
+
 /* ---- Spread 4: Gaming Memories (scrapbook) ---- */
 .page--gaming-left .page-inner {
     padding: clamp(10px, 3cqi, 18px);
