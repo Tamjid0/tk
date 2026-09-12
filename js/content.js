@@ -15,7 +15,7 @@
       "collage-right"   — Spread 4 right: message + tags
       "gaming-left"     — Spread 5 left: gaming screenshots grid
       "gaming-right"    — Spread 5 right: captions + message
-      "cinematic-left"  — Spread 6 left: cinematic moments
+      "cinematic-left"  — Spread 6 left: movie-night scrapbook (marquee + ticket)
       "cinematic-right" — Spread 6 right: observations
       "wishes-left"     — Spread 7 left: beautiful image
       "wishes-right"    — Spread 7 right: final wishes + tags
@@ -170,10 +170,12 @@ const PAGES = [
     /* ═══ SPREAD 5: Favorite Shared Moments ══════════════════ */
     {
         type: "cinematic-left",
+        marquee: "MOVIE TIME",
+        ticket: "DolIa x Heino",
         images: [
-            { src: IMG("dolia singing on karoke heino sitting behind.png"), span2: true },
-            { src: RES("Dolia-celebrating.png"), span2: false },
-            { src: RES("dolia resisting.png"), span2: false }
+            { src: IMG("dolia singing on karoke heino sitting behind.png") },
+            { src: RES("Dolia-celebrating.png") },
+            { src: RES("dolia resisting.png") }
         ]
     },
     {

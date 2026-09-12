@@ -512,9 +512,94 @@
     function buildCinematicLeft(p) {
         const pg = el("div", "page page--cinematic-left");
         const inner = el("div", "page-inner");
-        const grid = el("div", "cinema-grid");
-        (p.images || []).forEach(img => grid.appendChild(imgCellSpan(img.src, img.span2, "cinema-cell")));
-        inner.appendChild(grid);
+        const stage = el("div", "cinema-stage");
+        const imgs = p.images || [];
+
+        /* torn hero photo (top-left) */
+        if (imgs[0]) {
+            const hero = el("div", "cinema-hero");
+            const him = document.createElement("img");
+            him.src = imgs[0].src; him.alt = imgs[0].caption || ""; him.loading = "lazy";
+            hero.appendChild(him);
+            stage.appendChild(hero);
+        }
+
+        /* vertical film strip with 3 frames (top-right) */
+        const strip = el("div", "cinema-strip");
+        for (let i = 0; i < 3; i++) {
+            const fr = el("div", "cinema-frame");
+            const src = imgs[i] ? imgs[i].src : (imgs[0] ? imgs[0].src : "");
+            if (src) {
+                const fim = document.createElement("img");
+                fim.src = src; fim.alt = ""; fim.loading = "lazy";
+                fr.appendChild(fim);
+            }
+            strip.appendChild(fr);
+        }
+        stage.appendChild(strip);
+
+        /* big 3D marquee letters */
+        if (p.marquee) {
+            const mq = el("div", "cinema-marquee");
+            [...p.marquee].forEach((ch) => {
+                const s = el("span", "cinema-letter" + (ch === " " ? " sp" : ""));
+                s.textContent = ch === " " ? "\u00A0" : ch;
+                mq.appendChild(s);
+            });
+            stage.appendChild(mq);
+        }
+
+        /* gold star sticker */
+        const starNS = "http://www.w3.org/2000/svg";
+        const starSvg = document.createElementNS(starNS, "svg");
+        starSvg.setAttribute("class", "cinema-star");
+        starSvg.setAttribute("viewBox", "0 0 100 100");
+        const starPath = document.createElementNS(starNS, "polygon");
+        starPath.setAttribute("points", "50,4 63,36 97,36 70,56 80,90 50,70 20,90 30,56 3,36 37,36");
+        starSvg.appendChild(starPath);
+        stage.appendChild(starSvg);
+
+        /* hibiscus flower sticker */
+        const flSvg = document.createElementNS(starNS, "svg");
+        flSvg.setAttribute("class", "cinema-flower");
+        flSvg.setAttribute("viewBox", "0 0 100 100");
+        const petalCols = ["#f06a8a", "#ef7ba0", "#f492b4", "#ef7ba0", "#f06a8a"];
+        for (let i = 0; i < 5; i++) {
+            const pet = document.createElementNS(starNS, "ellipse");
+            const ang = (i * 72 - 90) * Math.PI / 180;
+            pet.setAttribute("cx", 50 + Math.cos(ang) * 26);
+            pet.setAttribute("cy", 50 + Math.sin(ang) * 26);
+            pet.setAttribute("rx", 17);
+            pet.setAttribute("ry", 26);
+            pet.setAttribute("fill", petalCols[i]);
+            pet.setAttribute("transform", `rotate(${i * 72} 50 50)`);
+            flSvg.appendChild(pet);
+        }
+        const stamen = document.createElementNS(starNS, "circle");
+        stamen.setAttribute("cx", 50); stamen.setAttribute("cy", 50);
+        stamen.setAttribute("r", 9); stamen.setAttribute("fill", "#ffd94d");
+        flSvg.appendChild(stamen);
+        stage.appendChild(flSvg);
+
+        /* cinema ticket stub (bottom-left) */
+        const ticket = el("div", "cinema-ticket");
+        const t1 = el("span", "ticket-big"); t1.textContent = "ADMIT ONE";
+        const t2 = el("span", "ticket-small"); t2.textContent = p.ticket || "DolIa x Heino";
+        ticket.appendChild(t1); ticket.appendChild(t2);
+        stage.appendChild(ticket);
+
+        /* bottom-right polaroid */
+        if (imgs[2] || imgs[0]) {
+            const pol = el("div", "cinema-polaroid");
+            const pim = document.createElement("img");
+            const psrc = imgs[2] ? imgs[2].src : imgs[0].src;
+            pim.src = psrc; pim.alt = ""; pim.loading = "lazy";
+            pol.appendChild(pim);
+            if (imgs[2] && imgs[2].caption) { const c = el("span", "cinema-cap"); c.textContent = imgs[2].caption; pol.appendChild(c); }
+            stage.appendChild(pol);
+        }
+
+        inner.appendChild(stage);
         pg.appendChild(inner);
         return pg;
     }
@@ -964,7 +1049,7 @@
 
         /* Delegate click on any clickable image */
         document.addEventListener("click", (e) => {
-            const img = e.target.closest(".plate-media img, .hobby-cell img, .editorial-cell img, .gaming-cell img, .cinema-cell img, .collage-shot img");
+            const img = e.target.closest(".plate-media img, .hobby-cell img, .editorial-cell img, .gaming-cell img, .collage-shot img, .cinema-hero img, .cinema-frame img, .cinema-polaroid img");
             if (img && img.src) {
                 e.stopPropagation();
                 openLightbox(img.src, img.alt);
