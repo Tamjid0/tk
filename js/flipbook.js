@@ -18,13 +18,13 @@
         const bgImg = new Image();
         bgImg.src = assetPath("assets/images/ocean-bg.jpg");
         if (bgImg.decode) {
-            bgImg.decode().then(function() { if (scene) scene.classList.add("ready"); }).catch(function() { if (scene) scene.classList.add("ready"); });
+            bgImg.decode().then(function () { if (scene) scene.classList.add("ready"); }).catch(function () { if (scene) scene.classList.add("ready"); });
         } else {
-            bgImg.onload = function() { if (scene) scene.classList.add("ready"); };
-            bgImg.onerror = function() { if (scene) scene.classList.add("ready"); };
+            bgImg.onload = function () { if (scene) scene.classList.add("ready"); };
+            bgImg.onerror = function () { if (scene) scene.classList.add("ready"); };
         }
         /* fallback: show anyway after 1.2s */
-        setTimeout(function() { if (scene && !scene.classList.contains("ready")) scene.classList.add("ready"); }, 1200);
+        setTimeout(function () { if (scene && !scene.classList.contains("ready")) scene.classList.add("ready"); }, 1200);
 
         /* Ambient rising bubbles on the splash scene too */
         const splashBubbles = document.getElementById("splashBubbles");
@@ -55,14 +55,14 @@
                 b.style.animationDuration = (1.6 + Math.random() * 1.6).toFixed(2) + "s";
                 b.style.animationDelay = (Math.random() * 0.25).toFixed(2) + "s";
                 (splashBubbles || document.body).appendChild(b);
-                (function(el2) {
-                    setTimeout(function() { el2.remove(); }, 3800);
+                (function (el2) {
+                    setTimeout(function () { el2.remove(); }, 3800);
                 })(b);
             }
         }
 
         let opened = false;
-        chest.addEventListener("click", function() {
+        chest.addEventListener("click", function () {
             if (opened) return;
             opened = true;
 
@@ -94,9 +94,9 @@
             if (music) {
                 music.volume = 0;
                 const p = music.play();
-                if (p && p.catch) p.catch(function() { });
+                if (p && p.catch) p.catch(function () { });
                 let v = 0;
-                const fade = setInterval(function() {
+                const fade = setInterval(function () {
                     v = Math.min(1, v + 0.05);
                     music.volume = Math.min(0.55, v * 0.55);
                     if (v >= 1) clearInterval(fade);
@@ -104,7 +104,7 @@
             }
 
             /* Hide splash after animation */
-            setTimeout(function() {
+            setTimeout(function () {
                 splash.classList.add("hidden");
             }, 800);
         });
@@ -294,12 +294,12 @@
                 d.style.setProperty("--sx", (Math.random() * 80 - 40).toFixed(0) + "px");
                 d.style.setProperty("--dur", (1.6 + Math.random() * 1.6).toFixed(2) + "s");
                 document.body.appendChild(d);
-                setTimeout(function(el) { el.remove(); }, 3600);
+                setTimeout(function (el) { el.remove(); }, 3600);
             }
         }
 
         let lastMx = 0, lastMy = 0;
-        document.addEventListener("mousemove", function(e) {
+        document.addEventListener("mousemove", function (e) {
             const dx = e.clientX - lastMx, dy = e.clientY - lastMy;
             const dist = Math.sqrt(dx * dx + dy * dy);
             if (dist > 14) {
@@ -309,13 +309,13 @@
             }
         });
 
-        document.addEventListener("mousedown", function(e) {
+        document.addEventListener("mousedown", function (e) {
             spawn(e.clientX, e.clientY, 4);
         });
 
         /* Touch: generate bubbles while dragging (swipe) and on tap */
         let lastTx = 0, lastTy = 0;
-        document.addEventListener("touchmove", function(e) {
+        document.addEventListener("touchmove", function (e) {
             const t = e.touches[0];
             if (!t) return;
             const dx = t.clientX - lastTx, dy = t.clientY - lastTy;
@@ -327,7 +327,7 @@
             }
         }, { passive: true });
 
-        document.addEventListener("touchstart", function(e) {
+        document.addEventListener("touchstart", function (e) {
             const t = e.touches[0];
             if (!t) return;
             spawn(t.clientX, t.clientY, 4);
@@ -780,6 +780,7 @@
             if (s) pg.appendChild(s);
         }
         if (model && model.decor) renderDecor(pg, model.decor);
+        if (model && model.texture) pg.classList.add("tex-" + model.texture);
         return pg;
     }
     /* ---------- views & layout ---------- */
@@ -799,7 +800,9 @@
         const v = views[idx];
         if (mode === "single") {
             slotLeft.replaceChildren();
-            slotRight.replaceChildren(makePage(pageModel(v[0])));
+            const sp = makePage(pageModel(v[0]));
+            sp.classList.add("tex-side-r");
+            slotRight.replaceChildren(sp);
             anchor = v[0];
         } else {
             if (v[0] === null) {
@@ -808,7 +811,9 @@
             } else {
                 slotLeft.replaceChildren(makePage(pageModel(v[0])));
             }
-            slotRight.replaceChildren(makePage(pageModel(v[1])));
+            const rp = makePage(pageModel(v[1]));
+            rp.classList.add("tex-side-r");
+            slotRight.replaceChildren(rp);
             anchor = v[0] !== null ? v[0] : v[1];
         }
         book.classList.toggle("is-closed", mode === "double" && v[0] === null);
@@ -858,8 +863,16 @@
         else { frontIdx = cur[0]; backIdx = tgt[1]; }
 
         const sheet = el("div", "sheet " + (dir > 0 ? "dir-fwd" : "dir-bwd"));
-        const front = el("div", "face face--front"); front.appendChild(makePage(pageModel(frontIdx)));
-        const back = el("div", "face face--back"); back.appendChild(makePage(pageModel(backIdx)));
+        const frontPg = makePage(pageModel(frontIdx));
+        const backPg = makePage(pageModel(backIdx));
+        /* keep right-side texture phase stable mid-flip: the sheet lives
+           outside .slot-right, so the side must ride on the page itself */
+        const frontIsRight = mode === "single" || (mode === "double" && dir > 0);
+        const backIsRight = mode === "single" || (mode === "double" && dir < 0);
+        if (frontIsRight) frontPg.classList.add("tex-side-r");
+        if (backIsRight) backPg.classList.add("tex-side-r");
+        const front = el("div", "face face--front"); front.appendChild(frontPg);
+        const back = el("div", "face face--back"); back.appendChild(backPg);
         sheet.append(front, back);
         return sheet;
     }
@@ -959,9 +972,9 @@
         const btn = $("#btnMusic");
         const music = document.getElementById("bgMusic");
         if (!btn || !music) return;
-        btn.addEventListener("click", function() {
+        btn.addEventListener("click", function () {
             if (music.paused) {
-                music.play().catch(function() { });
+                music.play().catch(function () { });
                 btn.classList.remove("muted");
                 btn.setAttribute("aria-pressed", "true");
             } else {

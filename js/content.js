@@ -53,7 +53,7 @@ const PAGES = [
     /* ═══ COVER ═══════════════════════════════════════════════ */
     {
         type: "cover",
-        art: { token: "COVER", src: IMG("lovers.jpg"), scale: 10 },
+        art: { token: "COVER", src: IMG("lovers.jpg"), scale: 6 },
         title: "Heino x Dolia",
         recipient: "Dolia",
         date: "15/08/2026",
@@ -63,6 +63,7 @@ const PAGES = [
     /* ═══ SPREAD 1: Birthday Introduction ════════════════════ */
     {
         type: "intro-left",
+        texture: "dots",
         art: { token: "BIRTHDAY", src: RES("Dolia-celebrating.png"), scale: 5, fit: "contain" },
         decor: [
             { src: RES("png/fish.png"), x: 82, y: 5, w: 12, rot: 12 },
@@ -71,6 +72,7 @@ const PAGES = [
     },
     {
         type: "intro-right",
+        texture: "dots",
         kicker: "Happy Birthday",
         title: "This Book Is For You",
         body: [
@@ -89,6 +91,7 @@ const PAGES = [
     /* ═══ SPREAD 2: ART — The Artist In You ══════════════════ */
     {
         type: "hobbies-left",
+        texture: "stars",
         gridClass: "cols-2",
         images: [
             { src: IMG("dolia doing karate.png"), caption: "Karate" },
@@ -98,12 +101,13 @@ const PAGES = [
         ],
         decor: [
             { src: RES("svg/art/art-brush-general-svgrepo-com.svg"), x: -3, y: 2, w: 14, rot: -16, behind: true },
-            { src: RES("svg/art/art-palette-svgrepo-com.svg"), x: 3, y: 83, w: 12, rot: -9 },
-            { src: RES("svg/art/pencil.svg"), x: 82, y: 84, w: 17, rot: 24 }
+            { src: RES("svg/art/art-palette-svgrepo-com.svg"), x: 60, y: 40, w: 35, rot: -9 },
+            { src: RES("svg/art/pencil.svg"), x: 75, y: 90, w: 17, rot: 24 }
         ]
     },
     {
         type: "hobbies-right",
+        texture: "stars",
         title: "The Artist In You",
         body: [
             "Every blank page is a new little world,",
@@ -122,6 +126,7 @@ const PAGES = [
     /* ═══ SPREAD 3: GAMING — Your Player Two ═════════════════ */
     {
         type: "editorial-left",
+        texture: "diamonds",
         images: [
             { src: IMG("dolia doing karate.png"), span2: false },
             { src: IMG("dolia listening to music.png"), span2: true },
@@ -135,6 +140,7 @@ const PAGES = [
     },
     {
         type: "editorial-right",
+        texture: "diamonds",
         title: "Your Player Two",
         body: [
             "Side by side, controllers in hand —",
@@ -144,7 +150,7 @@ const PAGES = [
         ],
         cornerImg: nextCorner(),
         decor: [
-            { src: RES("svg/gaming/game-controller-svgrepo-com.svg"), x: 82, y: 86, w: 12, rot: 8 },
+            { src: RES("svg/gaming/game-controller-svgrepo-com.svg"), x: 82, y: 68, w: 12, rot: 8 },
             { src: RES("svg/gaming/game heart.svg"), x: 5, y: 5, w: 7, rot: -10 }
         ]
     },
@@ -152,6 +158,7 @@ const PAGES = [
     /* ═══ SPREAD 4: The Music In You ════════════════════════ */
     {
         type: "collage-left",
+        texture: "notes",
         images: [
             { src: IMG("dolia listening to music.png"), caption: "Always listening" },
             { src: IMG("dolia singing on karoke heino sitting behind.png"), caption: "Karaoke nights" },
@@ -170,6 +177,7 @@ const PAGES = [
     },
     {
         type: "collage-right",
+        texture: "notes",
         kicker: "Music",
         title: "The Music In You",
         body: [
@@ -191,6 +199,7 @@ const PAGES = [
     /* ═══ SPREAD 5: Mixed Hobbies — Little Things You Love ══ */
     {
         type: "gaming-left",
+        texture: "confetti",
         images: [
             { src: IMG("dolia singing on karoke heino sitting behind.png"), tag: "Karaoke Night" },
             { src: IMG("dolia doing karate.png"), tag: "Achievement" },
@@ -208,6 +217,7 @@ const PAGES = [
     },
     {
         type: "gaming-right",
+        texture: "confetti",
         title: "Little Things You Love",
         date: "2024 - 2026",
         body: [
@@ -227,6 +237,7 @@ const PAGES = [
     /* ═══ SPREAD 6: Favorite Shared Moments ══════════════════ */
     {
         type: "cinematic-left",
+        texture: "sparkles",
         marquee: "MOVIE TIME",
         ticket: "DolIa x Heino",
         images: [
@@ -241,6 +252,7 @@ const PAGES = [
     },
     {
         type: "cinematic-right",
+        texture: "sparkles",
         title: "Moments I Hold Close",
         body: [
             "The video call that turned into a three-hour conversation.",
@@ -249,13 +261,14 @@ const PAGES = [
         ],
         cornerImg: nextCorner(),
         decor: [
-            { src: RES("png/seaweed/green sea weed.png"), x: -2, y: 60, w: 12, rot: 4 }
+            { src: RES("png/seaweed/green sea weed.png"), x: 85, y: 90, w: 12, rot: 4 }
         ]
     },
 
     /* ═══ SPREAD 7: Wishes for the Year Ahead ════════════════ */
     {
         type: "wishes-left",
+        texture: "wishes",
         art: { token: "WISHES", src: IMG("dolia x heino sitting on water dolia on marmaid form.jpg"), scale: 5 },
         decor: [
             { src: RES("png/seaweed/long sea weed long pink.png"), x: 86, y: 20, w: 14, rot: -4 },
@@ -264,6 +277,7 @@ const PAGES = [
     },
     {
         type: "wishes-right",
+        texture: "wishes",
         title: "Wishes for Your Year Ahead",
         body: [
             "May this new year bring you everything you deserve.",
@@ -273,14 +287,15 @@ const PAGES = [
         tags: ["Happiness", "Creativity", "Adventure", "Fun", "Memories", "Growth"],
         cornerImg: nextCorner(),
         decor: [
-            { src: RES("png/coral/blue coral.png"), x: 84, y: 30, w: 15, rot: 5 },
-            { src: RES("svg/starfish.svg"), x: 3, y: 87, w: 10, rot: -12 }
+            { src: RES("png/coral/blue coral.png"), x: 84, y: 50, w: 15, rot: 5 },
+            { src: RES("svg/starfish.svg"), x: 6, y: 29, w: 10, rot: -12 }
         ]
     },
 
     /* ═══ END PAGE — signature ═══════════════════════════════ */
     {
         type: "end",
+        texture: "dots",
         note: "This book was made with love, just for you.",
         decor: [
             { src: RES("png/coral/read corsal.png"), x: 82, y: 4, w: 11, rot: 12 }
