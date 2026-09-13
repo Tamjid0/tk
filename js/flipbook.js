@@ -174,6 +174,31 @@
     try { window.clearFlipbookPersist = () => { try { localStorage.removeItem(DEV_PERSIST_KEY); } catch (_) {} location.hash = ""; console.log("[flipbook] persist cleared"); }; } catch (_) {}
     try { window._flipbookDevPersist = { key: DEV_PERSIST_KEY, load: _loadPersist, save: _savePersist }; } catch (_) {}
 
+    /* DEV PERSIST: auto-bypass chest/splash when reloading on a persisted page (revertable).
+       Without this, reload always shows the chest even though the book underneath is already
+       at the correct page. Enabled only when a non-zero page is persisted; disable with ?nopersist. */
+    try {
+        const _persistedForSplash = _loadPersist();
+        const _shouldBypass = _persistEnabled && _persistedForSplash !== null && _persistedForSplash !== 0;
+        if (_shouldBypass) {
+            const _bypassSplash = () => {
+                const sp = document.getElementById("splash");
+                if (sp) sp.classList.add("hidden");
+                // also ensure splash scene is marked ready so it doesn't flash later
+                const sc = sp && sp.querySelector(".splash-scene");
+                if (sc) sc.classList.add("ready");
+            };
+            if (document.readyState === "loading") {
+                document.addEventListener("DOMContentLoaded", () => setTimeout(_bypassSplash, 50), { once: true });
+            } else {
+                // DOM already ready (script at end of body) — hide on next tick
+                setTimeout(_bypassSplash, 50);
+            }
+            // fallback: hide again after bg decode timeout in case splash re-shows
+            setTimeout(() => { const sp = document.getElementById("splash"); if (sp && _loadPersist() !== null) sp.classList.add("hidden"); }, 1300);
+        }
+    } catch (_) {}
+
     /* ---------- tiny DOM helpers ---------- */
     const el = (tag, cls) => { const n = document.createElement(tag); if (cls) n.className = cls; return n; };
     const isTok = (s) => typeof s === "string" && /^\[.+\]$/.test(s.trim());
