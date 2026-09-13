@@ -871,6 +871,7 @@
             anchor = v[0] !== null ? v[0] : v[1];
         }
         book.classList.toggle("is-closed", mode === "double" && v[0] === null);
+        _savePersist(); // DEV PERSIST: remember page after render (revertable) — saved here, not in updateUI
     }
 
     function updateUI() {
@@ -882,7 +883,6 @@
         progressEl.style.width = (views.length > 1 ? (cursor / (views.length - 1)) * 100 : 0) + "%";
         btnPrev.disabled = cursor === 0;
         btnNext.disabled = cursor === views.length - 1;
-        _savePersist(); // DEV PERSIST: remember page (revertable)
     }
 
     function layout() {
