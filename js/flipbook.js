@@ -145,6 +145,35 @@
     let anchor = 0;          // page index we try to keep visible across resizes
     let lock = false;
 
+    /* ── DEV PERSIST: keep book on last viewed page across reloads ──
+       Revertable: delete this block or `git revert` the commit that adds it.
+       Usage: reload stays on same page. Disable with `?nopersist` in URL.
+       Clear stored page: run `clearFlipbookPersist()` in console or add `?clearPersist`. */
+    const DEV_PERSIST_KEY = "dev:flipbook:anchor";
+    const _devParams = new URLSearchParams(location.search);
+    const _persistEnabled = !_devParams.has("nopersist");
+    if (_devParams.has("clearPersist")) { try { localStorage.removeItem(DEV_PERSIST_KEY); } catch (_) {} }
+    function _savePersist() {
+        if (!_persistEnabled) return;
+        try { localStorage.setItem(DEV_PERSIST_KEY, String(anchor)); } catch (_) {}
+        try { history.replaceState(null, "", location.pathname + location.search + "#p" + anchor); } catch (_) {}
+    }
+    function _loadPersist() {
+        if (!_persistEnabled) return null;
+        try {
+            const qp = _devParams.get("page");
+            if (qp !== null) { const n = parseInt(qp, 10); if (!isNaN(n)) return n; }
+            const hs = (location.hash.match(/#p(\d+)/) || [])[1];
+            if (hs != null) { const n = parseInt(hs, 10); if (!isNaN(n)) return n; }
+            const ls = localStorage.getItem(DEV_PERSIST_KEY);
+            if (ls !== null) { const n = parseInt(ls, 10); if (!isNaN(n)) return n; }
+        } catch (_) {}
+        return null;
+    }
+    // expose for console: clearFlipbookPersist()
+    try { window.clearFlipbookPersist = () => { try { localStorage.removeItem(DEV_PERSIST_KEY); } catch (_) {} location.hash = ""; console.log("[flipbook] persist cleared"); }; } catch (_) {}
+    try { window._flipbookDevPersist = { key: DEV_PERSIST_KEY, load: _loadPersist, save: _savePersist }; } catch (_) {}
+
     /* ---------- tiny DOM helpers ---------- */
     const el = (tag, cls) => { const n = document.createElement(tag); if (cls) n.className = cls; return n; };
     const isTok = (s) => typeof s === "string" && /^\[.+\]$/.test(s.trim());
@@ -828,11 +857,15 @@
         progressEl.style.width = (views.length > 1 ? (cursor / (views.length - 1)) * 100 : 0) + "%";
         btnPrev.disabled = cursor === 0;
         btnNext.disabled = cursor === views.length - 1;
+        _savePersist(); // DEV PERSIST: remember page (revertable)
     }
 
     function layout() {
         mode = mqDouble.matches ? "double" : "single";
         buildViews();
+        // DEV PERSIST: restore last page on reload (revertable block)
+        const _persisted = _loadPersist();
+        if (_persisted !== null && _persisted >= 0 && _persisted < PAGES.length) anchor = _persisted;
         let idx = views.findIndex(v => v[0] === anchor || v[1] === anchor);
         cursor = idx < 0 ? 0 : idx;
         book.classList.toggle("mode-double", mode === "double");
