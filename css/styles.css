@@ -1555,6 +1555,7 @@ button {
         radial-gradient(circle at 77% 88%, #ffe9a0 0 .8px, transparent 3.2px),
         radial-gradient(circle at 84.5% 88.5%, #fff 0 .9px, transparent 3.4px),
         radial-gradient(circle at 93% 93%, #ffd0e8 0 .7px, transparent 3px);
+    animation: collageTwinkle 5.5s ease-in-out infinite alternate;
 }
 
 /* string lights top + bottom — warm bokeh with neon halo (premade glow: layered radial + box glow) */
@@ -1582,8 +1583,8 @@ button {
 }
 
 /* top edge + bottom fairy lights breathe with the wires (helper 3 glow pulse) */
-.collage-stage::after { animation: wireBreathe 2.9s ease-in-out infinite alternate; }
-.collage-lights-b { animation: wireBreathe 3.1s ease-in-out infinite alternate; animation-delay: -1.2s; }
+.collage-stage::after { animation: wireBreathe 2.5s ease-in-out infinite alternate; }
+.collage-lights-b { animation: wireBreathe 2.8s ease-in-out infinite alternate; animation-delay: -1s; }
 
 /* bottom fairy lights on torn paper */
 .collage-lights-b {
@@ -1613,15 +1614,15 @@ button {
     z-index: 2;
     pointer-events: none;
     filter: drop-shadow(0 0 5px rgba(255, 215, 110, .9)) drop-shadow(0 0 10px rgba(255, 190, 60, .4));
-    animation: wireBreathe 2.6s ease-in-out infinite alternate;
+    animation: wireBreathe 2.2s ease-in-out infinite alternate;
 }
 
-.collage-wire.w2 { animation-delay: -.9s; }
-.collage-wire.w3 { animation-delay: -1.7s; }
+.collage-wire.w2 { animation-delay: -.7s; }
+.collage-wire.w3 { animation-delay: -1.4s; }
 
 /* helper 3 adapted: whole-strand breathing glow (bulbs are baked into the strand bg) */
 @keyframes wireBreathe {
-    from { opacity: .72; }
+    from { opacity: .5; }
     to { opacity: 1; }
 }
 
@@ -2310,7 +2311,7 @@ button {
 }
 
 @keyframes starPulse {
-    from { opacity: .75; transform: rotate(var(--sr, 0deg)) scale(.94); }
+    from { opacity: .55; transform: rotate(var(--sr, 0deg)) scale(.94); }
     to { opacity: 1; transform: rotate(var(--sr, 0deg)) scale(1.06); }
 }
 
