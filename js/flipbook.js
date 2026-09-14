@@ -496,29 +496,104 @@
         const inner = el("div", "page-inner");
         const stage = el("div", "collage-stage");
 
+        // twinkle star layer (premade parallax-star technique) + torn edge highlight + torn lavender
+        stage.appendChild(el("div", "collage-twinkle"));
+        stage.appendChild(el("div", "collage-torn-edge"));
+        stage.appendChild(el("div", "collage-torn"));
+
+        // jelly balloons with bow + star confetti (reference top)
         (p.notes || []).forEach((note, i) => {
             const balloon = el("div", "collage-balloon balloon-" + (i + 1));
             const txt = el("span", "balloon-text");
-            txt.textContent = note;
+            // allow \n line breaks from content.js
+            txt.innerHTML = String(note).replace(/\n/g, "<br>");
             balloon.appendChild(txt);
+            balloon.appendChild(el("span", "balloon-bow"));
             balloon.appendChild(el("span", "balloon-string"));
             stage.appendChild(balloon);
         });
 
+        // 3 holographic polaroids with clips
         (p.images || []).forEach((img, i) => {
             const cell = el("div", "collage-shot shot-" + (i + 1));
-            cell.style.setProperty("--tape-rot", (Math.random() * 6 - 3).toFixed(1) + "deg");
             const im = document.createElement("img");
             im.src = img.src; im.alt = img.caption || ""; im.loading = "lazy";
             cell.appendChild(im);
             if (img.caption) { const c = el("span", "collage-cap"); c.textContent = img.caption; cell.appendChild(c); }
+            // paper clips like reference
+            if (i === 0) cell.appendChild(el("div", "shot-clip c1"));
+            if (i === 1) cell.appendChild(el("div", "shot-clip c2"));
+            if (i === 2) cell.appendChild(el("div", "shot-clip c3"));
             stage.appendChild(cell);
         });
 
-        stage.appendChild(use("spark", "collage-spark a"));
-        stage.appendChild(use("spark", "collage-spark b"));
-        stage.appendChild(el("div", "collage-tapebit t1"));
-        stage.appendChild(el("div", "collage-tapebit t2"));
+        // holographic headphone center (reference)
+        const hp = el("div", "collage-headphone");
+        const hpi = document.createElement("img");
+        hpi.src = assetPath("assets/resources/png/music/headphone colorful.png");
+        hpi.alt = "Headphones";
+        hpi.loading = "lazy";
+        hp.appendChild(hpi);
+        stage.appendChild(hp);
+
+        // sound bars above headphone
+        const bars = el("div", "collage-bars");
+        for (let b = 0; b < 5; b++) bars.appendChild(el("span", "bar-" + b));
+        stage.appendChild(bars);
+
+        // scattered gradient music notes like reference
+        const notes = ["♪", "♫", "♩", "♪", "♫", "♩", "♪"];
+        const noteClasses = ["n1", "n2", "n3", "n4", "n5", "n6", "n7"];
+        notes.forEach((ch, idx) => {
+            const n = el("span", "collage-note " + noteClasses[idx]);
+            n.textContent = ch;
+            stage.appendChild(n);
+        });
+
+        // pink crystal mic bottom left
+        const mic = el("div", "collage-mic");
+        const mi = document.createElement("img");
+        mi.src = assetPath("assets/resources/png/music/karaoke mic.png");
+        mi.alt = "Mic";
+        mi.loading = "lazy";
+        mic.appendChild(mi);
+        stage.appendChild(mic);
+
+        // notebook + sheet music on right edge (uses your music page.png)
+        const nb = el("div", "collage-notebook");
+        const nbi = document.createElement("img");
+        nbi.src = assetPath("assets/resources/png/music/music page.png");
+        nbi.alt = "Sheet music";
+        nbi.loading = "lazy";
+        nb.appendChild(nbi);
+        stage.appendChild(nb);
+
+        // starry washi tapes — 5 slices (w5 = bottom holo strip)
+        for (let w = 1; w <= 5; w++) {
+            stage.appendChild(el("div", "collage-washi w" + w));
+        }
+
+        // hollow glowing gold stars like reference (outlined ★ with neon halo)
+        for (let s = 1; s <= 6; s++) {
+            const star = el("span", "collage-star s" + s);
+            star.textContent = "★";
+            stage.appendChild(star);
+        }
+
+        // ticket stub + moon sticker like reference
+        const ticket = el("div", "collage-ticket");
+        ticket.textContent = "Sing your heart out!";
+        stage.appendChild(ticket);
+        stage.appendChild(el("div", "collage-moon"));
+
+        // bottom fairy lights on torn paper
+        stage.appendChild(el("div", "collage-lights-b"));
+
+        // push pins
+        for (let pp = 1; pp <= 3; pp++) {
+            stage.appendChild(el("div", "collage-pin p" + pp));
+        }
+
         inner.appendChild(stage);
         pg.appendChild(inner);
         return pg;

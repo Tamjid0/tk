@@ -155,28 +155,21 @@ const PAGES = [
         ]
     },
 
-    /* ═══ SPREAD 4: The Music In You ════════════════════════ */
+    /* ═══ SPREAD 4: The Music In You — GALAXY (reference 1:1) ═══ */
     {
         type: "collage-left",
-        texture: "notes",
+        texture: "", // galaxy handled in CSS, no paper texture
         images: [
-            { src: IMG("dolia listening to music.png"), caption: "Always listening" },
-            { src: IMG("dolia singing on karoke heino sitting behind.png"), caption: "Karaoke nights" },
-            { src: IMG("little dolia.webp"), caption: "Lost in a melody" }
+            { src: IMG("dolia listening to music.png"), caption: "Always listening ♡" },
+            { src: IMG("dolia singing on karoke heino sitting behind.png"), caption: "Karaoke nights!" },
+            { src: IMG("little dolia.webp"), caption: "Lost in a melody ☆" }
         ],
         notes: [
-            "Always humming a tune",
-            "Karaoke nights!"
+            "Always humming\na tune",
+            "Karaoke\nnights!"
         ],
-        decor: [
-            { src: RES("png/music/music note violet.png"), x: 68, y: 1, w: 8, rot: 15 },
-            { src: RES("png/music/karaoke mic.png"), x: 12, y: 75, w: 19, rot: -7, behind: true },
-            { src: RES("png/music/music note purple.png"), x: 86, y: 66, w: 9, rot: -10 },
-            { src: RES("png/music/headphone colorful.png"), x: 55, y: 45, w: 28, rot: 10, behind: true },
-            { src: RES("svg/music/music5.svg"), x: 66, y: 35, w: 27, rot: 10 },
-            { src: RES("svg/music/music2.svg"), x: 33, y: 55, w: 18, rot: -10 },
-            { src: RES("svg/music/music3.svg"), x: 45, y: 53, w: 16, rot: -10 }
-        ]
+        // mic/headphone/washi/notebook are built inside buildCollageLeft itself (galaxy scrapbook), not via generic decor
+        decor: []
     },
     {
         type: "collage-right",
@@ -194,8 +187,9 @@ const PAGES = [
         tags: ["Playlists", "Karaoke", "Singing", "Daydreams"],
         cornerImg: nextCorner(),
         decor: [
-            { src: RES("svg/music/music3.svg"), x: 6, y: 66, w: 15, rot: -10 },
-            { src: RES("svg/music/music4.svg"), x: 79, y: 20, w: 15, rot: -10 }
+            { src: RES("svg/music/music3.svg"), x: 6, y: 66, w: 11, rot: -10, o: 0.85 },
+            { src: RES("svg/music/music4.svg"), x: 79, y: 20, w: 11, rot: -10, o: 0.85 },
+            { src: RES("png/music/music note violet.png"), x: 82, y: 82, w: 7, rot: 12, o: 0.9 }
         ]
     },
 
