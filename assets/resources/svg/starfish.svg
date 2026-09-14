@@ -1,18 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <g fill="#ef8f6b">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-45.35433070866142 -45.35433070866142 190.70866141732284 190.70866141732284"><g id="offset-layer"><ellipse cx="50" cy="30" rx="9" ry="22" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="60.472440944881896" stroke-linejoin="round" stroke-linecap="round" style=""/><ellipse cx="50" cy="30" rx="9" ry="22" transform="rotate(72 50 52)" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="60.472440944881896" stroke-linejoin="round" stroke-linecap="round" style=""/><ellipse cx="50" cy="30" rx="9" ry="22" transform="rotate(144 50 52)" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="60.472440944881896" stroke-linejoin="round" stroke-linecap="round" style=""/><ellipse cx="50" cy="30" rx="9" ry="22" transform="rotate(216 50 52)" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="60.472440944881896" stroke-linejoin="round" stroke-linecap="round" style=""/><ellipse cx="50" cy="30" rx="9" ry="22" transform="rotate(288 50 52)" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="60.472440944881896" stroke-linejoin="round" stroke-linecap="round" style=""/><circle cx="50" cy="52" r="11" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="60.472440944881896" stroke-linejoin="round" stroke-linecap="round" style=""/><circle cx="50" cy="52" r="4" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="60.472440944881896" stroke-linejoin="round" stroke-linecap="round" style=""/><circle cx="50" cy="35" r="2.2" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="60.472440944881896" stroke-linejoin="round" stroke-linecap="round" style=""/><circle cx="50" cy="24" r="2.2" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="60.472440944881896" stroke-linejoin="round" stroke-linecap="round" style=""/><circle cx="66" cy="47" r="2.2" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="60.472440944881896" stroke-linejoin="round" stroke-linecap="round" style=""/><circle cx="77" cy="43" r="2.2" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="60.472440944881896" stroke-linejoin="round" stroke-linecap="round" style=""/><circle cx="60" cy="66" r="2.2" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="60.472440944881896" stroke-linejoin="round" stroke-linecap="round" style=""/><circle cx="66" cy="75" r="2.2" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="60.472440944881896" stroke-linejoin="round" stroke-linecap="round" style=""/><circle cx="40" cy="66" r="2.2" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="60.472440944881896" stroke-linejoin="round" stroke-linecap="round" style=""/><circle cx="34" cy="75" r="2.2" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="60.472440944881896" stroke-linejoin="round" stroke-linecap="round" style=""/><circle cx="34" cy="47" r="2.2" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="60.472440944881896" stroke-linejoin="round" stroke-linecap="round" style=""/><circle cx="23" cy="43" r="2.2" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="60.472440944881896" stroke-linejoin="round" stroke-linecap="round" style=""/></g><g id="original-layer"><g fill="#ef8f6b">
     <ellipse cx="50" cy="30" rx="9" ry="22"/>
     <ellipse cx="50" cy="30" rx="9" ry="22" transform="rotate(72 50 52)"/>
     <ellipse cx="50" cy="30" rx="9" ry="22" transform="rotate(144 50 52)"/>
     <ellipse cx="50" cy="30" rx="9" ry="22" transform="rotate(216 50 52)"/>
     <ellipse cx="50" cy="30" rx="9" ry="22" transform="rotate(288 50 52)"/>
     <circle cx="50" cy="52" r="11"/>
-  </g>
-  <g fill="#ffd9a8">
+  </g><g fill="#ffd9a8">
     <circle cx="50" cy="52" r="4"/>
     <circle cx="50" cy="35" r="2.2"/><circle cx="50" cy="24" r="2.2"/>
     <circle cx="66" cy="47" r="2.2"/><circle cx="77" cy="43" r="2.2"/>
     <circle cx="60" cy="66" r="2.2"/><circle cx="66" cy="75" r="2.2"/>
     <circle cx="40" cy="66" r="2.2"/><circle cx="34" cy="75" r="2.2"/>
     <circle cx="34" cy="47" r="2.2"/><circle cx="23" cy="43" r="2.2"/>
-  </g>
-</svg>
+  </g></g></svg>

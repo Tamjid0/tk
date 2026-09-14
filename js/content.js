@@ -170,9 +170,12 @@ const PAGES = [
         ],
         decor: [
             { src: RES("png/music/music note violet.png"), x: 68, y: 1, w: 8, rot: 15 },
-            { src: RES("png/music/karaoke mic.png"), x: -4, y: 30, w: 13, rot: -7, behind: true },
+            { src: RES("png/music/karaoke mic.png"), x: 12, y: 75, w: 19, rot: -7, behind: true },
             { src: RES("png/music/music note purple.png"), x: 86, y: 66, w: 9, rot: -10 },
-            { src: RES("png/music/headphone colorful.png"), x: 78, y: 30, w: 19, rot: 10, behind: true }
+            { src: RES("png/music/headphone colorful.png"), x: 55, y: 45, w: 28, rot: 10, behind: true },
+            { src: RES("svg/music/music5.svg"), x: 66, y: 35, w: 27, rot: 10 },
+            { src: RES("svg/music/music2.svg"), x: 33, y: 55, w: 18, rot: -10 },
+            { src: RES("svg/music/music3.svg"), x: 45, y: 53, w: 16, rot: -10 }
         ]
     },
     {
@@ -191,8 +194,8 @@ const PAGES = [
         tags: ["Playlists", "Karaoke", "Singing", "Daydreams"],
         cornerImg: nextCorner(),
         decor: [
-            { src: RES("svg/music/music.svg"), x: 83, y: 4, w: 10, rot: 10 },
-            { src: RES("png/music/music note purple.png"), x: 4, y: 88, w: 7, rot: -8 }
+            { src: RES("svg/music/music3.svg"), x: 6, y: 66, w: 15, rot: -10 },
+            { src: RES("svg/music/music4.svg"), x: 79, y: 20, w: 15, rot: -10 }
         ]
     },
 
@@ -201,11 +204,11 @@ const PAGES = [
         type: "gaming-left",
         texture: "confetti",
         images: [
-            { src: IMG("dolia singing on karoke heino sitting behind.png"), tag: "Karaoke Night" },
             { src: IMG("dolia doing karate.png"), tag: "Achievement" },
-            { src: IMG("dolia doing makeup day.png"), tag: "Screenshot" },
-            { src: IMG("dolia listening to music.png"), tag: "Milestone" },
-            { src: IMG("dolia doing makup.png"), tag: "Victory" },
+            { src: IMG("dolia cute dress.jpg"), tag: "Cute Dress" },
+            { src: IMG("dolia doing makeup day.png"), tag: "Makeup" },
+            { src: IMG("dolia lazying around.jpg"), tag: "Lazying around" },
+            { src: IMG("dolia eating delicious food.jpg"), tag: "Delicious food" },
             { src: RES("Dolia-celebrating.png"), tag: "Level Up" }
         ],
         decor: [
@@ -238,7 +241,7 @@ const PAGES = [
     {
         type: "cinematic-left",
         texture: "sparkles",
-        marquee: "MOVIE TIME",
+        marquee: "",
         ticket: "DolIa x Heino",
         images: [
             { src: IMG("dolia singing on karoke heino sitting behind.png") },
@@ -271,7 +274,7 @@ const PAGES = [
         texture: "wishes",
         art: { token: "WISHES", src: IMG("dolia x heino sitting on water dolia on marmaid form.jpg"), scale: 5 },
         decor: [
-            { src: RES("png/seaweed/long sea weed long pink.png"), x: 86, y: 20, w: 14, rot: -4 },
+            { src: RES("png/seaweed/long sea weed long pink.png"), x: 86, y: 5, w: 10, rot: -4 },
             { src: RES("anchor.png"), x: 2, y: 84, w: 13, rot: -10 }
         ]
     },
