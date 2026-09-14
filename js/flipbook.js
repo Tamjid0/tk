@@ -496,8 +496,9 @@
         const inner = el("div", "page-inner");
         const stage = el("div", "collage-stage");
 
-        // twinkle star layer (premade parallax-star technique) + torn edge highlight + torn lavender
+        // twinkle star layer (premade parallax-star technique) + micro glowing dots + torn edge + torn lavender
         stage.appendChild(el("div", "collage-twinkle"));
+        stage.appendChild(el("div", "collage-micro"));
         stage.appendChild(el("div", "collage-torn-edge"));
         stage.appendChild(el("div", "collage-torn"));
 
