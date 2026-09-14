@@ -193,23 +193,66 @@ const PAGES = [
         ]
     },
 
-    /* ═══ SPREAD 5: Mixed Hobbies — Little Things You Love ══ */
+    /* ═══ SPREAD 5 left = PAGE 10: Little-Things grid (reference: watercolor + kraft labels) ===
+       stickers[] per photo: {src, x, y, w, rot} in % of the cell; y can be negative to overlap the frame. */
     {
         type: "gaming-left",
         texture: "confetti",
         images: [
-            { src: IMG("dolia doing karate.png"), tag: "Achievement" },
-            { src: IMG("dolia cute dress.jpg"), tag: "Cute Dress" },
-            { src: IMG("dolia doing makeup day.png"), tag: "Makeup" },
-            { src: IMG("dolia lazying around.jpg"), tag: "Lazying around" },
-            { src: IMG("dolia eating delicious food.jpg"), tag: "Delicious food" },
-            { src: RES("Dolia-celebrating.png"), tag: "Level Up" }
+            {
+                src: IMG("dolia doing karate.png"), tag: "KARATE", burst: "POW!",
+                stickers: [
+                    { src: RES("png/cute/star.png"), x: 76, y: -9, w: 27, rot: 12 },
+                    { src: RES("png/level up/cheer.png"), x: -9, y: 60, w: 35, rot: -10 }
+                ]
+            },
+            {
+                src: IMG("dolia cute dress.jpg"), tag: "CUTE DRESS",
+                stickers: [
+                    { src: RES("png/cute/dress.png"), x: 66, y: 12, w: 36, rot: 6 },
+                    { src: RES("png/cute/clothes.png"), x: -11, y: 56, w: 39, rot: -8 },
+                    { src: RES("png/cute/rose.png"), x: 80, y: -13, w: 21, rot: 10 }
+                ]
+            },
+            {
+                src: IMG("dolia doing makeup day.png"), tag: "GLAMOUR", mini: "ZUP",
+                stickers: [
+                    { src: RES("png/makeup/makeup-brush.png"), x: 80, y: 26, w: 18, rot: 14 },
+                    { src: RES("png/makeup/mirror.png"), x: -5, y: -7, w: 25, rot: -8 },
+                    { src: RES("png/makeup/blush.png"), x: -5, y: 64, w: 31, rot: -10 }
+                ]
+            },
+            {
+                src: IMG("dolia lazying around.jpg"), tag: "SLEEPING",
+                stickers: [
+                    { src: RES("png/lazying around/moon.png"), x: 68, y: -13, w: 33 },
+                    { src: RES("png/lazying around/sleeping cat.png"), x: -7, y: 70, w: 35, rot: -6 },
+                    { src: RES("png/lazying around/sleeping penguine.png"), x: 72, y: 64, w: 33, rot: 8 }
+                ]
+            },
+            {
+                src: IMG("dolia eating delicious food.jpg"), tag: "DELICIOUS",
+                stickers: [
+                    { src: RES("png/food/cupcakes.png"), x: -9, y: -11, w: 35, rot: -8 },
+                    { src: RES("png/food/frappe-pie.png"), x: 73, y: 68, w: 31, rot: 8 },
+                    { src: RES("png/food/sushi-pair.png"), x: 68, y: -13, w: 31, rot: 8 }
+                ]
+            },
+            {
+                src: RES("Dolia-celebrating.png"), tag: "LEVEL UP!",
+                stickers: [
+                    { src: RES("png/gaming/new/controller 2.png"), x: 66, y: 66, w: 37, rot: -10 },
+                    { src: RES("png/level up/level-up.png"), x: 22, y: -14, w: 45, rot: -3 },
+                    { src: RES("png/cute/star.png"), x: -7, y: 28, w: 23, rot: -12 }
+                ]
+            }
         ],
         decor: [
-            { src: RES("svg/art/pencil.svg"), x: 0, y: 1, w: 9, rot: -12 },
-            { src: RES("svg/gaming/game heart.svg"), x: 90, y: 2, w: 8, rot: 10 },
-            { src: RES("png/music/music note purple.png"), x: 1, y: 90, w: 8, rot: -8 },
-            { src: RES("png/shell/spiral shell and normal shell.png"), x: 88, y: 89, w: 10, rot: 13 }
+            { src: RES("png/sea elements/pearl.png"), x: 1, y: 86, w: 13, rot: -6 },
+            { src: RES("png/sea elements/seaweed.png"), x: 87, y: 83, w: 11, rot: 8 },
+            { src: RES("png/random/flower.png"), x: 43, y: 0, w: 11, rot: 0 },
+            { src: RES("png/sea elements/single starfish.png"), x: 86, y: 1, w: 9, rot: 12 },
+            { src: RES("png/sea elements/plants.png"), x: -2, y: 62, w: 12, rot: -4 }
         ]
     },
     {

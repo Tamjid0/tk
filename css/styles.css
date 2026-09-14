@@ -4110,16 +4110,69 @@ figcaption::after {
     transform: rotate(-8deg);
 }
 
-/* ---- Spread 4: gaming logbook and achievement strip ---- */
+/* ---- PAGE 10: little-things grid (reference: periwinkle watercolor + kraft labels) ----
+   Elegant watercolor wash, gold center gutter, varied frames, washi tapes, kraft banners. */
+/* Page-8 recipe: every mark hand-scattered (core + halo circles), shapes vary
+   (dots / 4-point sparkles / plus marks / hollow rings), NOTHING tiles —
+   shape tiles are 300px+ so repetition is invisible at page scale. */
 .page--gaming-left {
     background:
-        repeating-linear-gradient(0deg, transparent 0 22px, rgba(26, 95, 138, .045) 23px 24px),
-        #f5f9f9;
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320"><path d="M52 34l5 24 24 5-24 5-5 24-5-24-24-5 24-5z" fill="%23ffffff" fill-opacity="0.55"/><path d="M228 190l3.5 17 17 3.5-17 3.5-3.5 17-3.5-17-17-3.5 17-3.5z" fill="%23ffd782" fill-opacity="0.55"/><circle cx="140" cy="120" r="2.2" fill="%23ffd782" fill-opacity="0.6"/><circle cx="284" cy="70" r="1.6" fill="%23ffffff" fill-opacity="0.55"/></svg>'),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="430" height="430"><path d="M90 60l4 20 20 4-20 4-4 20-4-20-20-4 20-4z" fill="%23ffd782" fill-opacity="0.5"/><path d="M330 300l3 15 15 3-15 3-3 15-3-15-15-3 15-3z" fill="%23ffffff" fill-opacity="0.5"/><circle cx="210" cy="200" r="2" fill="%23ffffff" fill-opacity="0.5"/></svg>'),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="360" height="360"><path d="M70 52v26M57 65h26" stroke="%23ffffff" stroke-opacity="0.5" stroke-width="3" stroke-linecap="round"/><circle cx="250" cy="120" r="10" fill="none" stroke="%23ffd782" stroke-opacity="0.5" stroke-width="2.5"/><path d="M150 260v20M140 270h20" stroke="%23ffd782" stroke-opacity="0.5" stroke-width="2.5" stroke-linecap="round"/><circle cx="300" cy="260" r="2" fill="%23ffffff" fill-opacity="0.5"/></svg>'),
+        radial-gradient(circle at 7% 4%, #fff 0 1.2px, rgba(255,255,255,.7) 2px, transparent 3.8px),
+        radial-gradient(circle at 16% 9%, #ffe9a8 0 1px, rgba(255,215,130,.7) 1.9px, transparent 3.6px),
+        radial-gradient(circle at 28% 3%, #fff 0 .8px, transparent 3px),
+        radial-gradient(circle at 38% 7%, #ffc8e0 0 1px, rgba(255,150,200,.65) 2px, transparent 3.8px),
+        radial-gradient(circle at 48% 2%, #fff 0 .7px, transparent 2.8px),
+        radial-gradient(circle at 59% 6%, #c8f0ff 0 1px, rgba(150,210,255,.7) 2px, transparent 3.8px),
+        radial-gradient(circle at 71% 3%, #fff 0 1.1px, transparent 3.4px),
+        radial-gradient(circle at 83% 6%, #ffe9a8 0 1.2px, rgba(255,210,110,.75) 2.2px, transparent 4px),
+        radial-gradient(circle at 93% 4%, #fff 0 .8px, transparent 3px),
+        radial-gradient(circle at 4% 18%, #ffe9a8 0 1px, transparent 3.4px),
+        radial-gradient(circle at 93% 22%, #fff 0 1px, rgba(255,255,255,.75) 1.8px, transparent 3.6px),
+        radial-gradient(circle at 5% 36%, #fff 0 .9px, transparent 3.2px),
+        radial-gradient(circle at 95% 40%, #ffc8e0 0 1px, transparent 3.4px),
+        radial-gradient(circle at 3% 52%, #c8f0ff 0 .9px, transparent 3.2px),
+        radial-gradient(circle at 96% 58%, #fff 0 1.1px, transparent 3.5px),
+        radial-gradient(circle at 4% 70%, #ffe9a8 0 1px, transparent 3.4px),
+        radial-gradient(circle at 95% 74%, #fff 0 .9px, transparent 3.2px),
+        radial-gradient(circle at 6% 88%, #fff 0 1px, transparent 3.4px),
+        radial-gradient(circle at 18% 95%, #ffc8e0 0 .9px, transparent 3.2px),
+        radial-gradient(circle at 36% 92%, #fff 0 .8px, transparent 3px),
+        radial-gradient(circle at 58% 96%, #ffe9a8 0 1px, transparent 3.4px),
+        radial-gradient(circle at 76% 93%, #fff 0 .9px, transparent 3.2px),
+        radial-gradient(circle at 93% 90%, #c8f0ff 0 1px, transparent 3.4px),
+        radial-gradient(ellipse 42% 30% at 18% 12%, rgba(190, 190, 255, .5), transparent 70%),
+        radial-gradient(ellipse 48% 34% at 84% 8%, rgba(150, 150, 240, .45), transparent 70%),
+        radial-gradient(ellipse 55% 38% at 72% 46%, rgba(140, 220, 235, .22), transparent 70%),
+        radial-gradient(ellipse 50% 34% at 12% 58%, rgba(200, 160, 250, .30), transparent 70%),
+        radial-gradient(ellipse 46% 30% at 88% 78%, rgba(120, 200, 220, .22), transparent 70%),
+        radial-gradient(ellipse 60% 36% at 30% 94%, rgba(90, 90, 180, .5), transparent 70%),
+        radial-gradient(ellipse 90% 60% at 50% 26%, rgba(178, 178, 252, .55), transparent 70%),
+        radial-gradient(ellipse 75% 45% at 50% 108%, rgba(52, 52, 120, .55), transparent 70%),
+        linear-gradient(165deg, #8d8df2 0%, #6f6fd8 45%, #4c4ca8 100%);
+    background-size:
+        320px 320px,
+        430px 430px,
+        360px 360px,
+        cover, cover, cover, cover, cover, cover, cover, cover, cover, cover,
+        cover, cover, cover, cover, cover, cover, cover, cover, cover, cover,
+        cover, cover, cover, cover, cover, cover, cover, cover, cover, cover,
+        cover, cover;
+    background-position:
+        8px 14px,
+        60px 40px,
+        24px 120px,
+        0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0,
+        0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0,
+        0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0, 0 0,
+        0 0, 0 0;
 }
 
 .page--gaming-left .page-inner {
     display: block;
-    padding: 8% 7%;
+    padding: 7% 6%;
     overflow: hidden;
 }
 
@@ -4128,41 +4181,247 @@ figcaption::after {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(3, 1fr);
-    gap: 10%;
+    gap: 7% 10%;
     height: 100%;
-    padding: 3% 2%;
+    padding: 2% 1%;
     overflow: visible;
 }
 
 .page--gaming-left .gaming-grid::before {
-    content: "";
-    position: absolute;
-    top: 3%;
-    bottom: 3%;
-    left: 50%;
-    border-left: 1px dashed rgba(26, 95, 138, .3);
-    transform: translateX(-50%);
+    display: none;
 }
 
+/* central gold gutter with stars, like the reference divider */
+.gaming-gutter {
+    position: absolute;
+    top: 1%;
+    bottom: 1%;
+    left: 50%;
+    width: 0;
+    border-left: 1.5px dashed rgba(255, 215, 130, .85);
+    transform: translateX(-50%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.gaming-gutter::before {
+    content: "★ ★ ★";
+    position: absolute;
+    top: 46%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    writing-mode: vertical-rl;
+    color: #ffd76b;
+    font-size: clamp(.55rem, 2cqi, .75rem);
+    letter-spacing: .3em;
+    text-shadow: 0 0 7px rgba(255, 200, 80, .9);
+    background: #6767cf;
+    padding: .35em 0;
+    border-radius: 6px;
+}
+
+/* polaroid base */
 .page--gaming-left .gaming-cell {
     background: #fff;
     border: 0;
+    padding: clamp(4px, 1.2cqi, 8px);
+    box-shadow:
+        2px 4px 10px rgba(20, 20, 60, .35),
+        0 1px 3px rgba(20, 20, 60, .25);
 }
 
-.page--gaming-left .gaming-cell:nth-child(odd) {
-    transform: rotate(-2deg);
+/* washi tape on every photo (pattern varies per frame below) */
+.page--gaming-left .gaming-cell::before {
+    content: '';
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    transform: translateX(-50%) rotate(var(--tape-rot, 1deg));
+    width: 36%;
+    height: clamp(10px, 2.8cqi, 16px);
+    border-radius: 1px;
+    box-shadow: 0 1px 3px rgba(20, 20, 60, .25);
+    opacity: .94;
+    z-index: 2;
 }
 
-.page--gaming-left .gaming-cell:nth-child(even) {
-    transform: rotate(2deg);
+/* frames: kraft mat + red pin / lace + gingham / gingham / gold scallop / gingham / gold tape */
+.page--gaming-left .gaming-cell:nth-child(1) {
+    transform: rotate(-1.5deg);
+    box-shadow:
+        0 0 0 4px #d9b98a,
+        2px 5px 12px rgba(20, 20, 60, .4);
+}
+
+.page--gaming-left .gaming-cell:nth-child(1)::after {
+    content: '';
+    position: absolute;
+    top: -9px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 32% 30%, #ff8a7a, #c0392b 70%);
+    box-shadow: 0 1px 3px rgba(20, 20, 60, .4);
+    z-index: 3;
+}
+
+.page--gaming-left .gaming-cell:nth-child(1)::before {
+    background:
+        repeating-linear-gradient(0deg, rgba(255, 255, 255, .5) 0 3px, transparent 3px 6px),
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, .5) 0 3px, transparent 3px 6px),
+        rgba(178, 132, 220, .8);
+}
+
+.page--gaming-left .gaming-cell:nth-child(2) {
+    transform: rotate(1.2deg);
+    outline: 2px dashed rgba(150, 130, 220, .9);
+    outline-offset: -7px;
+}
+
+.page--gaming-left .gaming-cell:nth-child(2)::before {
+    left: 18%;
+    background:
+        repeating-linear-gradient(0deg, rgba(255, 255, 255, .5) 0 3px, transparent 3px 6px),
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, .5) 0 3px, transparent 3px 6px),
+        rgba(178, 132, 220, .8);
 }
 
 .page--gaming-left .gaming-cell:nth-child(3) {
-    transform: translateX(-4%) rotate(2deg);
+    transform: rotate(1deg);
+}
+
+.page--gaming-left .gaming-cell:nth-child(3)::before {
+    background:
+        repeating-linear-gradient(0deg, rgba(255, 255, 255, .5) 0 3px, transparent 3px 6px),
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, .5) 0 3px, transparent 3px 6px),
+        rgba(178, 132, 220, .8);
+}
+
+.page--gaming-left .gaming-cell:nth-child(3)::before {
+    background:
+        repeating-linear-gradient(0deg, rgba(255, 255, 255, .5) 0 3px, transparent 3px 6px),
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, .5) 0 3px, transparent 3px 6px),
+        rgba(228, 96, 96, .8);
 }
 
 .page--gaming-left .gaming-cell:nth-child(4) {
-    transform: translateX(4%) rotate(-2deg);
+    transform: rotate(-1deg);
+    box-shadow:
+        0 0 0 2px #caa04e,
+        0 0 0 4px #fffdf4,
+        2px 5px 12px rgba(20, 20, 60, .4);
+}
+
+.page--gaming-left .gaming-cell:nth-child(4)::before {
+    background: linear-gradient(180deg, rgba(255, 225, 150, .9), rgba(215, 165, 70, .9));
+}
+
+.page--gaming-left .gaming-cell:nth-child(5) {
+    transform: rotate(-1.2deg);
+}
+
+.page--gaming-left .gaming-cell:nth-child(5)::before {
+    left: 20%;
+    background:
+        repeating-linear-gradient(0deg, rgba(255, 255, 255, .5) 0 3px, transparent 3px 6px),
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, .5) 0 3px, transparent 3px 6px),
+        rgba(228, 96, 96, .8);
+}
+
+.page--gaming-left .gaming-cell:nth-child(5)::before {
+    background:
+        repeating-linear-gradient(0deg, rgba(255, 255, 255, .5) 0 3px, transparent 3px 6px),
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, .5) 0 3px, transparent 3px 6px),
+        rgba(228, 96, 96, .8);
+}
+
+.page--gaming-left .gaming-cell:nth-child(6) {
+    transform: rotate(1.5deg);
+}
+
+.page--gaming-left .gaming-cell:nth-child(6)::before {
+    width: 44%;
+    background: linear-gradient(180deg, rgba(255, 225, 150, .9), rgba(215, 165, 70, .9));
+}
+
+/* kraft paper label banner overlapping the photo bottom, like the reference */
+.page--gaming-left .gaming-cell .gaming-tag {
+    top: auto;
+    bottom: 7px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%) rotate(-1deg);
+    background: linear-gradient(180deg, #f0ddb2, #e3c795);
+    border: 1px solid rgba(130, 95, 40, .4);
+    color: #5a431f;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(.52rem, 2cqi, .68rem);
+    letter-spacing: .14em;
+    padding: 3px 10px 2px;
+    white-space: nowrap;
+    border-radius: 1px;
+    box-shadow: 0 2px 4px rgba(20, 20, 60, .3);
+    z-index: 3;
+    text-transform: uppercase;
+}
+
+.page--gaming-left .gaming-cell:nth-child(even) .gaming-tag {
+    transform: translateX(-50%) rotate(1deg);
+}
+
+/* POW! starburst badge */
+.page--gaming-left .gaming-cell .pow-burst {
+    position: absolute;
+    top: -13px;
+    left: -11px;
+    z-index: 4;
+    background: #e23a3a;
+    color: #ffe27a;
+    font-family: var(--font-ui);
+    font-weight: 900;
+    font-size: clamp(.5rem, 1.9cqi, .62rem);
+    letter-spacing: .04em;
+    padding: 9px 7px;
+    transform: rotate(-12deg);
+    clip-path: polygon(50% 0%, 61% 12%, 75% 7%, 79% 21%, 93% 21%, 91% 35%, 100% 43%, 93% 53%, 100% 65%, 89% 69%, 90% 83%, 77% 82%, 72% 95%, 61% 87%, 50% 100%, 39% 87%, 28% 95%, 23% 82%, 10% 83%, 11% 69%, 0 65%, 7% 53%, 0 43%, 9% 35%, 7% 21%, 21% 21%, 25% 7%, 39% 12%);
+    text-shadow: 0 1px 0 rgba(120, 20, 20, .6);
+    pointer-events: none;
+}
+
+/* small teal caption chip (ZUP) */
+.page--gaming-left .gaming-cell .mini-tag {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    z-index: 3;
+    background: #7fd6c9;
+    color: #175f68;
+    font-family: var(--font-ui);
+    font-weight: 700;
+    font-size: clamp(.45rem, 1.6cqi, .55rem);
+    letter-spacing: .08em;
+    padding: 2px 7px;
+    border-radius: 8px 8px 8px 2px;
+    transform: rotate(-4deg);
+    box-shadow: 0 1px 3px rgba(20, 20, 60, .3);
+    pointer-events: none;
+}
+
+/* per-photo tag-matched stickers overlapping the frames */
+.page--gaming-left .gaming-cell .cell-sticker {
+    position: absolute;
+    z-index: 3;
+    pointer-events: none;
+    filter: drop-shadow(1px 2px 3px rgba(20, 20, 60, .3));
+}
+
+.page--gaming-left .gaming-cell .cell-sticker img {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 .page--gaming-right {
