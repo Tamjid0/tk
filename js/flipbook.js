@@ -507,10 +507,19 @@
         let _seed = 20260815;
         const _rnd = () => { _seed = (_seed * 1664525 + 1013904223) >>> 0; return _seed / 4294967296; };
         const _dotCols = ["#ffffff", "#ffffff", "#ffd76b", "#ff9ec8", "#8adcff", "#c8a8ff"];
+        // keep dust OFF the photos: negative space around each polaroid (shot1/shot2/shot3 rects + margin)
+        const _excl = [[53, 2, 98, 34], [3, 31, 59, 66], [48, 64, 94, 99]];
+        const _inExcl = (x, y) => _excl.some(r => x >= r[0] && x <= r[2] && y >= r[1] && y <= r[3]);
         for (let d = 0; d < 70; d++) {
             const dot = el("span", "collage-dot");
-            dot.style.left = (1.5 + _rnd() * 95).toFixed(1) + "%";
-            dot.style.top = (1.5 + _rnd() * 95).toFixed(1) + "%";
+            let dx = 0, dy = 0;
+            for (let tries = 0; tries < 8; tries++) {
+                dx = 1.5 + _rnd() * 95;
+                dy = 1.5 + _rnd() * 95;
+                if (!_inExcl(dx, dy)) break;
+            }
+            dot.style.left = dx.toFixed(1) + "%";
+            dot.style.top = dy.toFixed(1) + "%";
             dot.style.setProperty("--d", (2 + _rnd() * 3.6).toFixed(1) + "px");
             dot.style.setProperty("--c", _dotCols[Math.floor(_rnd() * _dotCols.length)]);
             dot.style.setProperty("--t", (1.8 + _rnd() * 3.2).toFixed(2) + "s");
@@ -520,12 +529,12 @@
 
         // script outline stars for the emptier middle band (positions hand-picked, style from .collage-star)
         const _starDefs = [
-            [8, 52, "#ffd76b", 15, "#ffc845"], [20, 58, "#ffffff", 12, "#9ecfff"],
-            [33, 64, "#8adcff", 13, "#5ab8ff"], [47, 60, "#ffd76b", 16, "#ffc845"],
+            [4, 69, "#ffd76b", 14, "#ffc845"], [24, 71, "#ffffff", 11, "#9ecfff"],
+            [40, 70, "#8adcff", 12, "#5ab8ff"], [62, 68, "#ffd76b", 13, "#ffc845"],
             [63, 62, "#ffb3d6", 12, "#ff7ab6"], [76, 52, "#ffffff", 14, "#9ecfff"],
-            [88, 58, "#ffd76b", 12, "#ffc845"], [15, 80, "#ffb3d6", 11, "#ff7ab6"],
-            [38, 86, "#8adcff", 12, "#5ab8ff"], [70, 88, "#ffd76b", 11, "#ffc845"],
-            [90, 84, "#ffffff", 12, "#9ecfff"], [55, 76, "#ffb3d6", 10, "#ff7ab6"]
+            [50, 14, "#ffd76b", 11, "#ffc845"], [15, 80, "#ffb3d6", 11, "#ff7ab6"],
+            [38, 86, "#8adcff", 12, "#5ab8ff"], [60, 97, "#ffd76b", 11, "#ffc845"],
+            [46, 94, "#ffffff", 12, "#9ecfff"], [76, 97, "#ffb3d6", 10, "#ff7ab6"]
         ];
         _starDefs.forEach((sd, idx) => {
             const st = el("span", "collage-star");
