@@ -696,8 +696,10 @@
     function buildGamingLeft(p) {
         const pg = el("div", "page page--gaming-left");
         const inner = el("div", "page-inner");
-        // torn scrap sheet peeking from behind the grid
-        inner.appendChild(el("div", "gaming-backsheet"));
+        // torn paper pieces layered behind the grid (irregular deckled scraps)
+        for (let s = 1; s <= 3; s++) {
+            inner.appendChild(el("div", "gaming-scrap s" + s));
+        }
         const grid = el("div", "gaming-grid");
         (p.images || []).forEach(img => grid.appendChild(imgCellTag(img.src, img.tag, "gaming-cell", img)));
         inner.appendChild(grid);
