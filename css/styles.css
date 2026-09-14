@@ -1485,6 +1485,18 @@ button {
     animation: collageTwinkle 4.1s ease-in-out infinite alternate-reverse;
 }
 
+/* film grain over the whole collage — kills the smooth digital look.
+   Fine fractal noise, barely visible, makes bg + paper feel printed/real. */
+.collage-grain {
+    position: absolute;
+    inset: 0;
+    z-index: 9;
+    pointer-events: none;
+    opacity: .09;
+    mix-blend-mode: overlay;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="4" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="160" height="160" filter="url(%23n)"/></svg>');
+}
+
 /* galaxy stars — dense field like reference */
 .collage-stage::before {
     content: "";
@@ -1493,35 +1505,56 @@ button {
     pointer-events: none;
     z-index: 0;
     background-image:
-        radial-gradient(1.2px 1.2px at 11% 8%, rgba(255, 255, 255, .95), transparent 60%),
-        radial-gradient(1.6px 1.6px at 18% 14%, rgba(255, 255, 255, .9), transparent 60%),
-        radial-gradient(1px 1px at 27% 6%, rgba(255, 240, 180, .85), transparent 60%),
-        radial-gradient(1.3px 1.3px at 34% 18%, rgba(255, 255, 255, .8), transparent 60%),
-        radial-gradient(1px 1px at 42% 11%, rgba(255, 255, 255, .75), transparent 60%),
-        radial-gradient(1.8px 1.8px at 51% 7%, rgba(255, 255, 255, .9), transparent 60%),
-        radial-gradient(1px 1px at 62% 13%, rgba(255, 220, 100, .8), transparent 60%),
-        radial-gradient(1.1px 1.1px at 71% 9%, rgba(255, 255, 255, .85), transparent 60%),
-        radial-gradient(1.4px 1.4px at 84% 12%, rgba(255, 255, 255, .9), transparent 60%),
-        radial-gradient(1px 1px at 91% 18%, rgba(255, 255, 255, .7), transparent 60%),
-        radial-gradient(.9px .9px at 7% 32%, rgba(255, 255, 255, .6), transparent 60%),
-        radial-gradient(1.2px 1.2px at 23% 28%, rgba(255, 255, 255, .75), transparent 60%),
-        radial-gradient(1px 1px at 38% 34%, rgba(255, 255, 255, .65), transparent 60%),
-        radial-gradient(1.5px 1.5px at 58% 29%, rgba(255, 255, 255, .85), transparent 60%),
-        radial-gradient(1px 1px at 77% 33%, rgba(255, 255, 255, .7), transparent 60%),
-        radial-gradient(1px 1px at 93% 28%, rgba(255, 255, 255, .6), transparent 60%),
-        radial-gradient(1.1px 1.1px at 14% 52%, rgba(255, 255, 255, .7), transparent 60%),
-        radial-gradient(1.3px 1.3px at 48% 48%, rgba(255, 230, 120, .9), transparent 60%),
-        radial-gradient(.9px .9px at 66% 51%, rgba(255, 255, 255, .6), transparent 60%),
-        radial-gradient(1px 1px at 88% 54%, rgba(255, 255, 255, .65), transparent 60%),
-        radial-gradient(1.2px 1.2px at 9% 72%, rgba(255, 255, 255, .7), transparent 60%),
-        radial-gradient(1px 1px at 31% 78%, rgba(255, 255, 255, .55), transparent 60%),
-        radial-gradient(1.4px 1.4px at 54% 74%, rgba(255, 255, 255, .8), transparent 60%),
-        radial-gradient(1px 1px at 73% 71%, rgba(255, 255, 255, .6), transparent 60%),
-        radial-gradient(1.1px 1.1px at 91% 76%, rgba(255, 255, 255, .65), transparent 60%),
-        radial-gradient(.9px .9px at 18% 92%, rgba(255, 255, 255, .55), transparent 60%),
-        radial-gradient(1px 1px at 42% 88%, rgba(255, 255, 255, .6), transparent 60%),
-        radial-gradient(1.2px 1.2px at 67% 92%, rgba(255, 255, 255, .7), transparent 60%),
-        radial-gradient(1px 1px at 84% 89%, rgba(255, 255, 255, .55), transparent 60%);
+        radial-gradient(circle at 10.5% 7.5%, #fff 0 1.3px, rgba(255,255,255,.85) 2px, rgba(160,190,255,.35) 3.2px, transparent 5px),
+        radial-gradient(circle at 17.5% 14.5%, #fff 0 .7px, rgba(255,255,255,.7) 1.2px, transparent 3.5px),
+        radial-gradient(circle at 26.5% 5.5%, #fff3cf 0 1px, rgba(255,230,150,.8) 1.8px, transparent 4.2px),
+        radial-gradient(circle at 30% 11%, #fff 0 .6px, transparent 3px),
+        radial-gradient(circle at 35.5% 18.5%, #fff 0 1.1px, rgba(255,255,255,.8) 1.8px, transparent 4px),
+        radial-gradient(circle at 41.5% 10.5%, #ffd6ec 0 .8px, rgba(255,160,210,.7) 1.6px, transparent 4px),
+        radial-gradient(circle at 47% 15%, #fff 0 .6px, transparent 2.8px),
+        radial-gradient(circle at 52.5% 6.5%, #fff 0 1.6px, rgba(255,255,255,.9) 2.4px, rgba(255,240,200,.4) 3.8px, transparent 6px),
+        radial-gradient(circle at 58% 12%, #fff 0 .7px, transparent 3px),
+        radial-gradient(circle at 63.5% 13.5%, #ffe9a0 0 1px, rgba(255,210,110,.8) 1.9px, transparent 4.4px),
+        radial-gradient(circle at 69% 8%, #fff 0 .6px, transparent 2.6px),
+        radial-gradient(circle at 74.5% 11%, #c8f0ff 0 1px, rgba(150,210,255,.75) 1.8px, transparent 4.2px),
+        radial-gradient(circle at 83.5% 12.5%, #fff 0 1.2px, rgba(255,255,255,.85) 2px, transparent 4.6px),
+        radial-gradient(circle at 88% 17%, #fff 0 .6px, transparent 2.8px),
+        radial-gradient(circle at 92.5% 18.5%, #ffd6f0 0 .9px, transparent 3.6px),
+        radial-gradient(circle at 6.5% 31.5%, #fff 0 .8px, transparent 3.2px),
+        radial-gradient(circle at 13% 27%, #ffe9a0 0 1px, transparent 3.8px),
+        radial-gradient(circle at 22.5% 28.5%, #fff 0 1px, rgba(255,255,255,.8) 1.7px, transparent 4px),
+        radial-gradient(circle at 29% 33%, #8ad8ff 0 .7px, transparent 3px),
+        radial-gradient(circle at 37.5% 33.5%, #fff 0 .9px, transparent 3.4px),
+        radial-gradient(circle at 44% 29%, #fff 0 .6px, transparent 2.6px),
+        radial-gradient(circle at 57.5% 28.5%, #fff 0 1.3px, rgba(255,255,255,.85) 2.1px, transparent 4.8px),
+        radial-gradient(circle at 66% 33%, #fff 0 .6px, transparent 2.8px),
+        radial-gradient(circle at 76.5% 32.5%, #ffd0e8 0 .9px, transparent 3.4px),
+        radial-gradient(circle at 84% 29%, #fff 0 .7px, transparent 3px),
+        radial-gradient(circle at 93.5% 27.5%, #fff 0 .9px, rgba(255,255,255,.75) 1.5px, transparent 3.8px),
+        radial-gradient(circle at 13.5% 52.5%, #fff 0 1px, transparent 3.6px),
+        radial-gradient(circle at 21% 47%, #8ad8ff 0 .7px, transparent 3px),
+        radial-gradient(circle at 47.5% 47.5%, #ffedb0 0 1.1px, rgba(255,220,130,.85) 2px, transparent 4.6px),
+        radial-gradient(circle at 55% 53%, #fff 0 .6px, transparent 2.6px),
+        radial-gradient(circle at 65.5% 50.5%, #fff 0 .8px, transparent 3.2px),
+        radial-gradient(circle at 73% 55%, #ffd0e8 0 .8px, transparent 3.2px),
+        radial-gradient(circle at 87.5% 53.5%, #fff 0 1px, transparent 3.6px),
+        radial-gradient(circle at 8.5% 71.5%, #fff 0 1px, rgba(255,255,255,.8) 1.7px, transparent 4px),
+        radial-gradient(circle at 16% 66%, #ff9ec8 0 .8px, transparent 3.2px),
+        radial-gradient(circle at 30.5% 77.5%, #fff 0 .9px, transparent 3.4px),
+        radial-gradient(circle at 38% 71%, #fff 0 .6px, transparent 2.6px),
+        radial-gradient(circle at 53.5% 73.5%, #fff 0 1.2px, rgba(255,255,255,.85) 2px, transparent 4.6px),
+        radial-gradient(circle at 61% 68%, #8ad8ff 0 .7px, transparent 3px),
+        radial-gradient(circle at 72.5% 70.5%, #fff 0 .9px, transparent 3.4px),
+        radial-gradient(circle at 80% 75%, #ffe9a0 0 .8px, transparent 3.2px),
+        radial-gradient(circle at 90.5% 75.5%, #fff 0 1px, transparent 3.6px),
+        radial-gradient(circle at 17.5% 91.5%, #fff 0 .8px, transparent 3px),
+        radial-gradient(circle at 27% 87%, #ff9ec8 0 .8px, transparent 3.2px),
+        radial-gradient(circle at 41.5% 87.5%, #fff 0 .9px, transparent 3.4px),
+        radial-gradient(circle at 52% 92%, #8ad8ff 0 .7px, transparent 3px),
+        radial-gradient(circle at 66.5% 91.5%, #fff 0 1px, transparent 3.6px),
+        radial-gradient(circle at 77% 88%, #ffe9a0 0 .8px, transparent 3.2px),
+        radial-gradient(circle at 84.5% 88.5%, #fff 0 .9px, transparent 3.4px),
+        radial-gradient(circle at 93% 93%, #ffd0e8 0 .7px, transparent 3px);
 }
 
 /* string lights top + bottom — warm bokeh with neon halo (premade glow: layered radial + box glow) */
@@ -1548,6 +1581,10 @@ button {
     filter: drop-shadow(0 0 6px rgba(255, 215, 110, .9)) drop-shadow(0 0 14px rgba(255, 190, 60, .45));
 }
 
+/* top edge + bottom fairy lights breathe with the wires (helper 3 glow pulse) */
+.collage-stage::after { animation: wireBreathe 2.9s ease-in-out infinite alternate; }
+.collage-lights-b { animation: wireBreathe 3.1s ease-in-out infinite alternate; animation-delay: -1.2s; }
+
 /* bottom fairy lights on torn paper */
 .collage-lights-b {
     position: absolute;
@@ -1567,28 +1604,99 @@ button {
     filter: drop-shadow(0 0 6px rgba(255, 215, 110, .95)) drop-shadow(0 0 12px rgba(255, 190, 60, .4));
 }
 
-/* torn lavender paper — premade scrapbook torn-edge (clip-path polygon layers white edge + lavender) */
+/* draped light wires — 3 diagonal strands like the reference (behind photos, over bg/paper) */
+.collage-wire {
+    position: absolute;
+    left: -6%;
+    right: -6%;
+    height: 22px;
+    z-index: 2;
+    pointer-events: none;
+    filter: drop-shadow(0 0 5px rgba(255, 215, 110, .9)) drop-shadow(0 0 10px rgba(255, 190, 60, .4));
+    animation: wireBreathe 2.6s ease-in-out infinite alternate;
+}
+
+.collage-wire.w2 { animation-delay: -.9s; }
+.collage-wire.w3 { animation-delay: -1.7s; }
+
+/* helper 3 adapted: whole-strand breathing glow (bulbs are baked into the strand bg) */
+@keyframes wireBreathe {
+    from { opacity: .72; }
+    to { opacity: 1; }
+}
+
+.collage-wire.w1 {
+    top: 29%;
+    transform: rotate(13deg);
+    background:
+        radial-gradient(5px 5px at 10% 58%, #fffbe0 0%, #ffe27a 42%, transparent 72%),
+        radial-gradient(4px 4px at 26% 62%, #fffbe0 0%, #ffe27a 42%, transparent 72%),
+        radial-gradient(5px 5px at 45% 56%, #fffbe0 0%, #ffe27a 42%, transparent 72%),
+        radial-gradient(4px 4px at 64% 60%, #fffbe0 0%, #ffe27a 42%, transparent 72%),
+        radial-gradient(5px 5px at 84% 55%, #fffbe0 0%, #ffe27a 42%, transparent 72%),
+        linear-gradient(to bottom, transparent 0 9px, rgba(255, 238, 200, .55) 9px 10px, transparent 11px);
+}
+
+.collage-wire.w2 {
+    top: 63%;
+    transform: rotate(-11deg);
+    background:
+        radial-gradient(4px 4px at 6% 60%, #fffbe0 0%, #ffe27a 42%, transparent 72%),
+        radial-gradient(5px 5px at 22% 55%, #fffbe0 0%, #ffe27a 42%, transparent 72%),
+        radial-gradient(4px 4px at 40% 60%, #fffbe0 0%, #ffe27a 42%, transparent 72%),
+        radial-gradient(5px 5px at 58% 55%, #fffbe0 0%, #ffe27a 42%, transparent 72%),
+        radial-gradient(4px 4px at 76% 60%, #fffbe0 0%, #ffe27a 42%, transparent 72%),
+        radial-gradient(5px 5px at 92% 56%, #fffbe0 0%, #ffe27a 42%, transparent 72%),
+        linear-gradient(to bottom, transparent 0 9px, rgba(255, 238, 200, .55) 9px 10px, transparent 11px);
+}
+
+/* kill all collage motion for reduced-motion users (flip engine already does fadeSwap) */
+@media (prefers-reduced-motion: reduce) {
+    .collage-balloon, .collage-balloon .balloon-string, .collage-bars span,
+    .collage-wire, .collage-lights-b, .collage-stage::after,
+    .collage-twinkle, .collage-micro, .collage-dot, .collage-star { animation: none !important; }
+}
+
+.collage-wire.w3 {
+    bottom: 9%;
+    transform: rotate(8deg);
+    background:
+        radial-gradient(5px 5px at 12% 56%, #fffbe0 0%, #ffe27a 42%, transparent 72%),
+        radial-gradient(4px 4px at 34% 60%, #fffbe0 0%, #ffe27a 42%, transparent 72%),
+        radial-gradient(5px 5px at 55% 55%, #fffbe0 0%, #ffe27a 42%, transparent 72%),
+        radial-gradient(4px 4px at 74% 60%, #fffbe0 0%, #ffe27a 42%, transparent 72%),
+        radial-gradient(5px 5px at 90% 56%, #fffbe0 0%, #ffe27a 42%, transparent 72%),
+        linear-gradient(to bottom, transparent 0 9px, rgba(255, 238, 200, .55) 9px 10px, transparent 11px);
+}
+
+/* torn paper — diagonal TRIANGLE tear like the reference (high on left, low on right),
+   not a straight horizontal strip. White underlay peeks 5px above the lavender. */
 .collage-torn-edge {
     position: absolute;
     inset: 0;
-    top: 42%;
+    top: 38%;
     z-index: 1;
     background: #fdfaff;
-    clip-path: polygon(0 19.5%, 3% 13.5%, 7% 17.5%, 11% 11.5%, 15% 15.5%, 19% 9.5%, 24% 14.5%, 28% 10.5%, 33% 16.5%, 38% 11.5%, 44% 17.5%, 50% 12.5%, 56% 18.5%, 62% 13.5%, 68% 19.5%, 74% 14.5%, 80% 18.5%, 87% 13.5%, 93% 17.5%, 97% 12.5%, 100% 16.5%, 100% 100%, 0 100%);
+    clip-path: polygon(0 4%, 4% 7%, 8% 5%, 12% 10%, 16% 8%, 20% 13%, 24% 12%, 28% 16%, 32% 15%, 36% 20%, 40% 19%, 44% 23%, 48% 22%, 52% 27%, 56% 25%, 60% 30%, 64% 29%, 68% 33%, 72% 32%, 76% 36%, 80% 35%, 84% 39%, 88% 38%, 92% 42%, 96% 40%, 100% 44%, 100% 100%, 0 100%);
     pointer-events: none;
 }
 
 .collage-torn {
     position: absolute;
     inset: 0;
-    top: calc(42% + 5px);
+    top: calc(38% + 6px);
     z-index: 1;
     background:
+        radial-gradient(ellipse 45% 22% at 22% 78%, rgba(150, 95, 190, .14), transparent 65%),
+        radial-gradient(ellipse 38% 20% at 74% 62%, rgba(255, 255, 255, .20), transparent 62%),
+        radial-gradient(ellipse 30% 16% at 52% 88%, rgba(120, 70, 160, .12), transparent 65%),
+        repeating-linear-gradient(177deg, transparent 0 3px, rgba(95, 55, 135, .045) 3px 4px),
+        repeating-linear-gradient(93deg, transparent 0 5px, rgba(255, 255, 255, .05) 5px 6px),
         radial-gradient(1.4px 1.4px at 12% 30%, rgba(255, 255, 255, .8), transparent 62%),
         radial-gradient(1px 1px at 30% 55%, rgba(122, 90, 200, .35), transparent 62%),
         radial-gradient(1.2px 1.2px at 68% 40%, rgba(255, 255, 255, .7), transparent 62%),
-        linear-gradient(180deg, #dcc8f2 0%, #cdb4ea 45%, #bfa2e2 75%, #b192d8 100%);
-    clip-path: polygon(0 18%, 3% 12%, 7% 16%, 11% 10%, 15% 14%, 19% 8%, 24% 13%, 28% 9%, 33% 15%, 38% 10%, 44% 16%, 50% 11%, 56% 17%, 62% 12%, 68% 18%, 74% 13%, 80% 17%, 87% 12%, 93% 16%, 97% 11%, 100% 15%, 100% 100%, 0 100%);
+        linear-gradient(180deg, #e4c9f2 0%, #d3b0e8 45%, #c09ade 75%, #ac82d2 100%);
+    clip-path: polygon(0 3.2%, 3% 6.8%, 6.5% 4.1%, 10% 8.6%, 13.5% 5.4%, 17% 10.2%, 20.5% 7.1%, 24% 12.8%, 27.5% 9.6%, 31% 14.4%, 34.5% 11.8%, 38% 17.2%, 41.5% 13.9%, 45% 19.6%, 48.5% 15.2%, 52% 21.8%, 55.5% 17.4%, 59% 23.6%, 62.5% 19.2%, 66% 25.4%, 69.5% 21.8%, 73% 27.6%, 76.5% 23.1%, 80% 29.4%, 83.5% 24.6%, 87% 31.2%, 90.5% 26.4%, 94% 33.1%, 97% 28.3%, 100% 34.5%, 100% 100%, 0 100%);
     filter: drop-shadow(0 -5px 10px rgba(8, 4, 22, .45));
     pointer-events: none;
 }
@@ -1603,13 +1711,14 @@ button {
     filter: blur(2px);
 }
 
-/* subtle paper grain on torn layer */
+/* paper tooth on torn layer — visible fiber grain so it reads as real paper, not a gradient */
 .collage-torn::after {
     content: "";
     position: absolute;
     inset: 0;
-    opacity: .07;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3"/></filter><rect width="200" height="200" filter="url(%23n)" opacity="0.4"/></svg>');
+    opacity: .16;
+    mix-blend-mode: multiply;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="5" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="140" height="140" filter="url(%23n)" opacity="0.55"/></svg>');
 }
 
 /* holographic polaroids — sticker style: white edge + foil shimmer (premade holo: layered conic+linear, 200% bg, shimmer anim) */
@@ -1708,7 +1817,7 @@ button {
 }
 
 .collage-shot.shot-2 {
-    top: 27%;
+    top: 33%;
     left: 5%;
     width: 52%;
     --rot: -1.5deg;
@@ -1782,30 +1891,37 @@ button {
     place-items: center;
     padding: 22% 14% 24% 14%;
     text-align: center;
-    border-radius: 50% / 58%;
+    border-radius: 50% 50% 50% 50% / 55% 55% 45% 45%;
     font-family: "Segoe Script", "Apple Chancery", cursive;
     font-size: clamp(.48rem, 1.8cqi, .64rem);
     line-height: 1.3;
     color: #fff;
     text-shadow: 0 0 3px #fff, 0 1px 5px rgba(60, 20, 90, .7), 0 0 12px rgba(255, 255, 255, .55);
-    border: 1.5px solid rgba(255, 255, 255, .65);
+    border: 2px solid rgba(255, 255, 255, .8);
     box-shadow:
-        inset -10px -12px 22px rgba(60, 20, 90, .30),
-        inset 8px 10px 18px rgba(255, 255, 255, .45),
-        inset 0 0 18px rgba(255, 255, 255, .28),
-        0 0 16px rgba(140, 200, 255, .55),
-        0 0 34px rgba(180, 130, 255, .35),
-        3px 7px 20px rgba(5, 5, 20, .4);
+        inset -10px -14px 24px rgba(20, 10, 60, .38),
+        inset 8px 10px 18px rgba(255, 255, 255, .5),
+        inset 0 0 16px rgba(255, 255, 255, .3),
+        0 0 18px rgba(120, 190, 255, .65),
+        0 0 38px rgba(150, 110, 255, .4),
+        3px 7px 20px rgba(5, 5, 20, .45);
     transform: rotate(var(--brot, -3deg));
     z-index: 5;
     overflow: visible;
+    animation: balloonFloat 4.5s ease-in-out infinite alternate;
+}
+
+/* helper 1 adapted: gentle float (keeps each balloon's own --brot tilt) */
+@keyframes balloonFloat {
+    from { transform: translateY(0) rotate(var(--brot, -3deg)); }
+    to { transform: translateY(-8px) rotate(var(--brot, -3deg)); }
 }
 
 .collage-balloon::before {
     content: "";
     position: absolute;
     inset: 6%;
-    border-radius: 50% / 58%;
+    border-radius: 50% 50% 50% 50% / 55% 55% 45% 45%;
     background-image:
         radial-gradient(circle at 18% 22%, #fff 0 1px, rgba(255,255,255,.9) 1.8px, transparent 3px),
         radial-gradient(circle at 32% 18%, #ffe98a 0 1.1px, rgba(255,220,120,.9) 2px, transparent 3.4px),
@@ -1833,8 +1949,8 @@ button {
     left: 18%;
     width: 28%;
     height: 32%;
-    background: radial-gradient(ellipse at 30% 30%, rgba(255, 255, 255, .85) 0%, rgba(255, 255, 255, .25) 45%, transparent 72%);
-    border-radius: 50% / 60%;
+    background: radial-gradient(ellipse at 30% 30%, rgba(255, 255, 255, .9) 0%, rgba(255, 255, 255, .3) 45%, transparent 72%);
+    border-radius: 50% 50% 50% 50% / 55% 55% 45% 45%;
     pointer-events: none;
     filter: blur(.3px);
 }
@@ -1884,18 +2000,25 @@ button {
     transform-origin: top center;
     border-radius: 2px;
     z-index: 1;
+    animation: stringSway 3s ease-in-out infinite alternate;
+}
+
+/* helper 1 adapted: string sways around its own --string-rot */
+@keyframes stringSway {
+    from { transform: translateX(-50%) rotate(calc(var(--string-rot, 4deg) - 5deg)); }
+    to { transform: translateX(-50%) rotate(calc(var(--string-rot, 4deg) + 5deg)); }
 }
 
 .collage-balloon.balloon-1 {
-    left: 3%;
-    top: 5%;
+    left: 2%;
+    top: 4%;
     background:
-        radial-gradient(ellipse 45% 38% at 24% 16%, rgba(255, 255, 255, .75), transparent 60%),
-        radial-gradient(ellipse at 30% 24%, #c8f2ff 0%, #7fd4ff 24%, #4aa8f0 48%, #2f7fd8 74%, #2a5fb0 100%);
+        radial-gradient(ellipse 28% 22% at 26% 14%, rgba(255, 255, 255, .6), transparent 58%),
+        radial-gradient(ellipse at 32% 26%, #7fd4ff 0%, #3aa5f0 30%, #1f6fd0 58%, #174fa8 80%, #123a92 100%);
     --brot: -4deg;
     --string-rot: 8deg;
-    width: clamp(72px, 19cqi, 102px);
-    height: clamp(98px, 25cqi, 132px);
+    width: clamp(70px, 18.5cqi, 98px);
+    height: clamp(80px, 20.5cqi, 106px);
     z-index: 5;
 }
 
@@ -1904,6 +2027,7 @@ button {
 }
 
 .collage-balloon.balloon-2 {
+    animation-delay: -2.2s;
     left: 27%;
     top: 8.5%;
     background:
@@ -1912,8 +2036,8 @@ button {
     --brot: 3deg;
     --string-rot: -5deg;
     z-index: 4;
-    width: clamp(68px, 17cqi, 96px);
-    height: clamp(92px, 23cqi, 124px);
+    width: clamp(58px, 15cqi, 84px);
+    height: clamp(80px, 20.5cqi, 108px);
     box-shadow:
         inset -10px -12px 22px rgba(60, 20, 90, .30),
         inset 8px 10px 18px rgba(255, 255, 255, .45),
@@ -1923,7 +2047,7 @@ button {
         3px 7px 20px rgba(5, 5, 20, .4);
 }
 
-/* holographic headphone — sticker style: thick white rim + neon halo + foil glow */
+/* headphone — SVG art, glow REMOVED per review (was a white blob). Soft depth shadow only. */
 .collage-headphone {
     position: absolute;
     left: 56%;
@@ -1933,42 +2057,29 @@ button {
     transform: rotate(12deg);
     z-index: 7;
     pointer-events: none;
-    filter:
-        drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff)
-        drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff)
-        drop-shadow(0 0 8px rgba(255, 255, 255, .85))
-        drop-shadow(0 0 16px rgba(255, 150, 240, .55))
-        drop-shadow(3px 5px 10px rgba(5, 5, 20, .45));
+    filter: drop-shadow(2px 3px 5px rgba(5, 5, 20, .35));
 }
 
 .collage-headphone img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    filter: saturate(1.5) hue-rotate(-8deg) brightness(1.12) contrast(1.05);
 }
 
 .collage-headphone::before {
-    content: "";
-    position: absolute;
-    inset: -4%;
-    background: conic-gradient(from 0deg, #ff6bfa, #6b8cff, #6bff8c, #ffd86b, #ff6bfa);
-    border-radius: 50%;
-    z-index: -1;
-    opacity: .28;
-    filter: blur(6px);
-    animation: holoShimmer 5s ease-in-out infinite;
+    display: none;
 }
 
-/* tight white halo behind headphone so it pops without the giant white blob */
+/* faint depth shadow only — the giant white blob is gone */
 .collage-headphone::after {
     content: "";
     position: absolute;
-    inset: -9%;
-    background: radial-gradient(circle, rgba(255,255,255,.85) 0 34%, rgba(255,255,255,.35) 46%, transparent 62%);
+    inset: 12% 8% -6% 8%;
+    background: radial-gradient(ellipse, rgba(8, 4, 22, .35), transparent 65%);
     border-radius: 50%;
     z-index: -2;
     pointer-events: none;
+    filter: blur(3px);
 }
 
 /* sound bars above headphone — gradient bars like reference */
@@ -1989,6 +2100,20 @@ button {
     border-radius: 4px;
     border: 1px solid rgba(255, 255, 255, .9);
     background: linear-gradient(to top, #7a4ad0, #ff6bfa 55%, #7af0ff);
+    transform-origin: bottom;
+    animation: eqBounce 1s ease-in-out infinite alternate;
+}
+
+/* helper 2 adapted: per-bar tempo like a real equalizer (heights stay, scaleY dances) */
+.collage-bars span:nth-child(1) { animation-duration: .8s; animation-delay: .1s; }
+.collage-bars span:nth-child(2) { animation-duration: 1.1s; animation-delay: .3s; }
+.collage-bars span:nth-child(3) { animation-duration: .7s; }
+.collage-bars span:nth-child(4) { animation-duration: 1.3s; animation-delay: .4s; }
+.collage-bars span:nth-child(5) { animation-duration: .9s; animation-delay: .2s; }
+
+@keyframes eqBounce {
+    from { transform: scaleY(.45); opacity: .55; }
+    to { transform: scaleY(1); opacity: 1; }
 }
 
 .collage-bars span:nth-child(1) { height: 22px; background: linear-gradient(to top, #7a4ad0, #ff6bfa, #ffd0f8); box-shadow: 0 0 4px #fff, 0 0 10px #ff6bfa, 0 0 22px #ff6bfa; }
@@ -1999,6 +2124,8 @@ button {
 
 /* scattered music notes — premade neon glow (csstools.io): white core + color halo layers.
    Sticker outline via paint-order stroke + drop-shadow white rim like reference. */
+/* neon-tube notes — premade neon-sign recipe (csstools.io): COLORED tube + same-hue halo.
+   No white fill, no white shadow stacking — that was the washed-out look. */
 .collage-note {
     position: absolute;
     font-family: "Segoe UI Symbol", "Noto Music", serif;
@@ -2006,28 +2133,46 @@ button {
     line-height: 1;
     pointer-events: none;
     z-index: 6;
-    color: #fff;
-    -webkit-text-stroke: 1px rgba(255, 255, 255, .95);
+    -webkit-text-stroke: .8px rgba(255, 255, 255, .95);
     paint-order: stroke fill;
     filter:
-        drop-shadow(1.5px 0 0 #fff) drop-shadow(-1.5px 0 0 #fff)
-        drop-shadow(0 1.5px 0 #fff) drop-shadow(0 -1.5px 0 #fff);
+        drop-shadow(1px 0 0 rgba(255,255,255,.9)) drop-shadow(-1px 0 0 rgba(255,255,255,.9))
+        drop-shadow(0 1px 0 rgba(255,255,255,.9)) drop-shadow(0 -1px 0 rgba(255,255,255,.9));
 }
 
-.collage-note.n1 { left: 47%; top: 32%; font-size: clamp(24px, 7cqi, 34px); color: #fff; transform: rotate(-8deg);
-    text-shadow: 0 0 2px #fff, 0 0 6px #fff, 0 0 10px #4ecdc4, 0 0 20px #4ecdc4, 0 0 42px #4ecdc4; --nc: #4ecdc4; }
-.collage-note.n2 { left: 40%; top: 50%; font-size: clamp(22px, 6.4cqi, 30px); transform: rotate(12deg);
-    text-shadow: 0 0 2px #fff, 0 0 6px #fff, 0 0 10px #ff4d88, 0 0 22px #ff4d88, 0 0 46px #ff4d88; }
-.collage-note.n3 { left: 51%; top: 54%; font-size: clamp(26px, 7.6cqi, 36px); transform: rotate(-6deg);
-    text-shadow: 0 0 2px #fff, 0 0 6px #fff, 0 0 10px #6a5bff, 0 0 22px #6a5bff, 0 0 48px #6a5bff; }
-.collage-note.n4 { left: 35%; top: 66%; font-size: clamp(18px, 5.2cqi, 24px); transform: rotate(8deg);
-    text-shadow: 0 0 2px #fff, 0 0 5px #fff, 0 0 9px #2fe8c8, 0 0 18px #2fe8c8, 0 0 36px #2fe8c8; }
-.collage-note.n5 { left: 43%; top: 80%; font-size: clamp(20px, 5.8cqi, 27px); transform: rotate(-10deg);
-    text-shadow: 0 0 2px #fff, 0 0 6px #fff, 0 0 10px #a04dff, 0 0 20px #a04dff, 0 0 42px #a04dff; }
-.collage-note.n6 { left: 80%; top: 70%; font-size: clamp(22px, 6.2cqi, 30px); transform: rotate(6deg);
-    text-shadow: 0 0 2px #fff, 0 0 6px #fff, 0 0 10px #8a4dff, 0 0 20px #8a4dff, 0 0 44px #8a4dff; }
-.collage-note.n7 { left: 60%; top: 76%; font-size: clamp(15px, 4.4cqi, 20px); transform: rotate(-4deg); opacity: .95;
-    text-shadow: 0 0 2px #fff, 0 0 5px #fff, 0 0 9px #ff7af0, 0 0 18px #ff7af0, 0 0 34px #ff7af0; }
+.collage-note.n1 { left: 47%; top: 32%; font-size: clamp(24px, 7cqi, 34px); color: #37e6c2; transform: rotate(-8deg);
+    text-shadow: 0 0 3px #37e6c2, 0 0 12px #37e6c2, 0 0 30px rgba(55, 230, 194, .65); }
+.collage-note.n2 { left: 40%; top: 50%; font-size: clamp(22px, 6.4cqi, 30px); color: #ff5b9a; transform: rotate(12deg);
+    text-shadow: 0 0 3px #ff5b9a, 0 0 12px #ff5b9a, 0 0 30px rgba(255, 91, 154, .65); }
+.collage-note.n3 { left: 51%; top: 54%; font-size: clamp(26px, 7.6cqi, 36px); color: #7a6bff; transform: rotate(-6deg);
+    text-shadow: 0 0 3px #7a6bff, 0 0 12px #7a6bff, 0 0 30px rgba(122, 107, 255, .65); }
+.collage-note.n4 { left: 35%; top: 66%; font-size: clamp(18px, 5.2cqi, 24px); color: #2fe8c8; transform: rotate(8deg);
+    text-shadow: 0 0 3px #2fe8c8, 0 0 11px #2fe8c8, 0 0 28px rgba(47, 232, 200, .6); }
+.collage-note.n5 { left: 43%; top: 80%; font-size: clamp(20px, 5.8cqi, 27px); color: #b06bff; transform: rotate(-10deg);
+    text-shadow: 0 0 3px #b06bff, 0 0 12px #b06bff, 0 0 30px rgba(176, 107, 255, .65); }
+.collage-note.n6 { left: 80%; top: 70%; font-size: clamp(22px, 6.2cqi, 30px); color: #6b8cff; transform: rotate(6deg);
+    text-shadow: 0 0 3px #6b8cff, 0 0 12px #6b8cff, 0 0 30px rgba(107, 140, 255, .65); }
+.collage-note.n7 { left: 60%; top: 76%; font-size: clamp(15px, 4.4cqi, 20px); color: #ff7af0; transform: rotate(-4deg); opacity: .95;
+    text-shadow: 0 0 3px #ff7af0, 0 0 11px #ff7af0, 0 0 28px rgba(255, 122, 240, .6); }
+
+/* script-scattered glow dust — one element per dot so they dominate the page.
+   White-hot core + colored halo + halo box-shadow; each pulses on its own clock. */
+.collage-dot {
+    position: absolute;
+    width: var(--d, 3px);
+    height: var(--d, 3px);
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff 0 26%, var(--c, #fff) 58%, transparent 74%);
+    box-shadow: 0 0 5px var(--c, #fff), 0 0 12px var(--c, #fff);
+    z-index: 2;
+    pointer-events: none;
+    animation: dotTwinkle var(--t, 3s) ease-in-out infinite alternate;
+}
+
+@keyframes dotTwinkle {
+    from { opacity: .2; }
+    to { opacity: 1; }
+}
 
 /* pink crystal mic — sticker + neon pink glow */
 .collage-mic {
@@ -2116,11 +2261,11 @@ button {
 }
 
 .collage-washi.w3 {
-    left: 30%;
-    top: 44%;
-    width: 30%;
+    left: 6%;
+    top: 28%;
+    width: 32%;
     background-position: 50% 59%;
-    transform: rotate(-3deg);
+    transform: rotate(-2deg);
     z-index: 6;
 }
 
@@ -2168,12 +2313,23 @@ button {
 }
 
 .collage-star.s1 { left: 5%; top: 25%; --sr: -12deg; }
-.collage-star.s2 { left: 1.5%; top: 43%; --sr: 18deg; -webkit-text-stroke-color: #fff; }
+.collage-star.s2 { left: 1.5%; top: 43%; --sr: 18deg; -webkit-text-stroke-color: #fff;
+    text-shadow: 0 0 2px #fff, 0 0 8px rgba(200,230,255,.9), 0 0 18px rgba(120,180,255,.7), 0 0 32px rgba(120,180,255,.45); }
 .collage-star.s3 { right: 7%; top: 46%; --sr: -6deg; }
 .collage-star.s4 { left: 21%; bottom: 27%; --sr: 10deg; font-size: clamp(11px, 3.2cqi, 15px); }
 .collage-star.s5 { right: 17%; bottom: 21%; --sr: -8deg; -webkit-text-stroke-color: #ffb3d6;
     text-shadow: 0 0 2px #fff, 0 0 8px #ff8ac0, 0 0 18px #ff6bb0, 0 0 32px rgba(255, 90, 170, .55); }
 .collage-star.s6 { left: 43%; top: 17%; --sr: 14deg; font-size: clamp(10px, 2.8cqi, 13px); opacity: .8; }
+.collage-star.s7 { left: 33%; top: 62%; --sr: 22deg; font-size: clamp(9px, 2.6cqi, 12px); opacity: .85;
+    -webkit-text-stroke-color: #c8f0ff;
+    text-shadow: 0 0 2px #fff, 0 0 7px rgba(140,220,255,.9), 0 0 16px rgba(90,170,255,.6); }
+.collage-star.s8 { right: 26%; top: 58%; --sr: -20deg; font-size: clamp(12px, 3.4cqi, 17px);
+    animation-delay: -.9s; }
+.collage-star.s9 { left: 12%; bottom: 12%; --sr: 6deg; font-size: clamp(9px, 2.6cqi, 12px); opacity: .8;
+    -webkit-text-stroke-color: #ffd0e8; animation-delay: -1.7s;
+    text-shadow: 0 0 2px #fff, 0 0 7px #ff8ac0, 0 0 16px rgba(255, 110, 180, .6); }
+.collage-star.s10 { left: 58%; top: 68%; --sr: -14deg; font-size: clamp(8px, 2.3cqi, 11px); opacity: .75;
+    animation-delay: -2.1s; }
 
 /* ticket stub — "Sing your heart out!" like reference */
 .collage-ticket {
