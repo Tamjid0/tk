@@ -310,13 +310,30 @@
         return cell;
     }
 
-    function imgCellTag(src, tag, cls) {
+    function imgCellTag(src, tag, cls, extra) {
+        extra = extra || {};
         const cell = el("div", cls);
         cell.style.setProperty("--rot", randRot() + "deg");
         cell.style.setProperty("--tape-rot", (Math.random() * 6 - 3).toFixed(1) + "deg");
         const im = document.createElement("img");
         im.src = src; im.alt = ""; im.loading = "lazy";
         cell.appendChild(im);
+        if (extra.mini) { const m = el("span", "mini-tag"); m.textContent = extra.mini; cell.appendChild(m); }
+        if (extra.burst) { const b = el("span", "pow-burst"); b.textContent = extra.burst; cell.appendChild(b); }
+        (extra.stickers || []).forEach((s) => {
+            if (!s || !s.src) return;
+            const w = el("div", "cell-sticker");
+            w.style.left = (s.x || 0) + "%";
+            w.style.top = (s.y || 0) + "%";
+            w.style.width = (s.w || 20) + "%";
+            if (s.rot) w.style.transform = "rotate(" + s.rot + "deg)";
+            if (s.z != null) w.style.zIndex = s.z;
+            const si = document.createElement("img");
+            si.src = s.src; si.alt = ""; si.loading = "lazy";
+            si.draggable = false;
+            w.appendChild(si);
+            cell.appendChild(w);
+        });
         if (tag) { const t = el("span", "gaming-tag"); t.textContent = tag; cell.appendChild(t); }
         return cell;
     }
@@ -679,9 +696,13 @@
     function buildGamingLeft(p) {
         const pg = el("div", "page page--gaming-left");
         const inner = el("div", "page-inner");
+        // torn scrap sheet peeking from behind the grid
+        inner.appendChild(el("div", "gaming-backsheet"));
         const grid = el("div", "gaming-grid");
-        (p.images || []).forEach(img => grid.appendChild(imgCellTag(img.src, img.tag, "gaming-cell")));
+        (p.images || []).forEach(img => grid.appendChild(imgCellTag(img.src, img.tag, "gaming-cell", img)));
         inner.appendChild(grid);
+        // central gold gutter with stars, like the reference divider
+        inner.appendChild(el("div", "gaming-gutter"));
         pg.appendChild(inner);
         return pg;
     }
