@@ -483,12 +483,79 @@
         return pg;
     }
 
+    /* PAGE 6 arcade collage, 5 layers (reference: gaming scrapbook):
+       L2 ink doodles / L3 photo cards / L4 gold clip / L5 dpad + pad + wire + badges */
     function buildEditorialLeft(p) {
         const pg = el("div", "page page--editorial-left");
         const inner = el("div", "page-inner");
-        const grid = el("div", "editorial-grid");
-        (p.images || []).forEach(img => grid.appendChild(imgCellSpan(img.src, img.span2, "editorial-cell")));
-        inner.appendChild(grid);
+        const stage = el("div", "arcade-stage");
+        // L2: thin hand-drawn ink music notes, tucked behind the photos
+        const _ink = [["♪", 44, 27, -8], ["♫", 59, 43, 6], ["♩", 16, 55, -6], ["♪", 64, 64, 8], ["♩", 26, 84, -10]];
+        _ink.forEach(([ch, x, y, r]) => {
+            const n = el("span", "arcade-ink");
+            n.textContent = ch;
+            n.style.left = x + "%"; n.style.top = y + "%";
+            n.style.setProperty("--r", r + "deg");
+            stage.appendChild(n);
+        });
+        // L3: photo cards with caption banners
+        (p.images || []).slice(0, 4).forEach((img, i) => {
+            const ph = el("div", "arcade-photo ap" + (i + 1));
+            const im = document.createElement("img");
+            im.src = img.src; im.alt = img.caption || ""; im.loading = "lazy";
+            ph.appendChild(im);
+            if (img.caption) { const c = el("span", "arcade-cap"); c.textContent = img.caption; ph.appendChild(c); }
+            stage.appendChild(ph);
+        });
+        // L4: gold paperclip on the anchor photo's left edge
+        const clip = el("div", "shot-clip c5");
+        const cim = document.createElement("img");
+        cim.src = assetPath("assets/resources/svg/random/paper-clip-svgrepo-com.svg");
+        cim.alt = ""; cim.loading = "lazy"; cim.draggable = false;
+        clip.appendChild(cim);
+        stage.appendChild(clip);
+        // L5: pixel text badges
+        const up = el("div", "arcade-badge up"); up.textContent = "+1UP"; stage.appendChild(up);
+        const st = el("div", "arcade-badge start"); st.textContent = "START"; stage.appendChild(st);
+        const lv = el("div", "arcade-level"); lv.textContent = "LEVEL UP!"; stage.appendChild(lv);
+        // L5: action button cluster (real 4-button art) bottom-left
+        const dp = el("div", "arcade-dpad");
+        const dpm = document.createElement("img");
+        dpm.src = assetPath("assets/resources/svg/gaming/game-controller-2.svg");
+        dpm.alt = ""; dpm.loading = "lazy"; dpm.draggable = false;
+        dp.appendChild(dpm);
+        stage.appendChild(dp);
+        // L5: retro controller + wire, bottom-center
+        const pad = el("div", "arcade-pad");
+        const pim = document.createElement("img");
+        pim.src = assetPath("assets/resources/png/gaming/new/controller 2.png");
+        pim.alt = ""; pim.loading = "lazy"; pim.draggable = false;
+        pad.appendChild(pim);
+        stage.appendChild(pad);
+        const wNS = "http://www.w3.org/2000/svg";
+        const wire = document.createElementNS(wNS, "svg");
+        wire.setAttribute("class", "arcade-wire");
+        wire.setAttribute("viewBox", "0 0 100 40");
+        const wp = document.createElementNS(wNS, "path");
+        wp.setAttribute("d", "M4 32 Q 50 2 96 26");
+        wp.setAttribute("fill", "none");
+        wp.setAttribute("stroke", "#3a3a5a");
+        wp.setAttribute("stroke-width", "3");
+        wp.setAttribute("stroke-linecap", "round");
+        wire.appendChild(wp);
+        stage.appendChild(wire);
+        // scattered sparkles
+        const _sp = [[3, 32, "#ffb3d6", 13], [47, 14, "#8adcff", 12], [68, 34, "#ffd76b", 12],
+                     [18, 68, "#c8a8ff", 11], [62, 58, "#ffffff", 11]];
+        _sp.forEach((sd, idx) => {
+            const s = el("span", "arcade-star");
+            s.textContent = "★";
+            s.style.left = sd[0] + "%"; s.style.top = sd[1] + "%";
+            s.style.color = sd[2]; s.style.fontSize = sd[3] + "px";
+            s.style.setProperty("--sr", ((idx * 53) % 30 - 15) + "deg");
+            stage.appendChild(s);
+        });
+        inner.appendChild(stage);
         pg.appendChild(inner);
         return pg;
     }
@@ -524,8 +591,8 @@
         let _seed = 20260815;
         const _rnd = () => { _seed = (_seed * 1664525 + 1013904223) >>> 0; return _seed / 4294967296; };
         const _dotCols = ["#ffffff", "#ffffff", "#ffd76b", "#ff9ec8", "#8adcff", "#c8a8ff"];
-        // keep dust OFF the photos: negative space around each polaroid (shot1/shot2/shot3 rects + margin)
-        const _excl = [[53, 2, 98, 34], [3, 31, 59, 66], [48, 64, 94, 99]];
+        // keep dust OFF the photos: negative space around each polaroid (shot rects + margin)
+        const _excl = [[53, 2, 98, 34], [3, 31, 59, 66], [48, 64, 94, 99], [1, 66, 45, 97]];
         const _inExcl = (x, y) => _excl.some(r => x >= r[0] && x <= r[2] && y >= r[1] && y <= r[3]);
         for (let d = 0; d < 70; d++) {
             const dot = el("span", "collage-dot");
@@ -546,11 +613,11 @@
 
         // script outline stars for the emptier middle band (positions hand-picked, style from .collage-star)
         const _starDefs = [
-            [4, 69, "#ffd76b", 14, "#ffc845"], [24, 71, "#ffffff", 11, "#9ecfff"],
-            [40, 70, "#8adcff", 12, "#5ab8ff"], [62, 68, "#ffd76b", 13, "#ffc845"],
+            [1, 64, "#ffd76b", 14, "#ffc845"], [30, 63, "#ffffff", 11, "#9ecfff"],
+            [50, 58, "#8adcff", 12, "#5ab8ff"], [62, 68, "#ffd76b", 13, "#ffc845"],
             [63, 62, "#ffb3d6", 12, "#ff7ab6"], [76, 52, "#ffffff", 14, "#9ecfff"],
-            [50, 14, "#ffd76b", 11, "#ffc845"], [15, 80, "#ffb3d6", 11, "#ff7ab6"],
-            [38, 86, "#8adcff", 12, "#5ab8ff"], [60, 97, "#ffd76b", 11, "#ffc845"],
+            [50, 14, "#ffd76b", 11, "#ffc845"], [8, 64, "#ffb3d6", 11, "#ff7ab6"],
+            [48, 70, "#8adcff", 12, "#5ab8ff"], [60, 97, "#ffd76b", 11, "#ffc845"],
             [46, 94, "#ffffff", 12, "#9ecfff"], [76, 97, "#ffb3d6", 10, "#ff7ab6"]
         ];
         _starDefs.forEach((sd, idx) => {
@@ -578,6 +645,14 @@
             stage.appendChild(balloon);
         });
 
+        // pastel watercolor frame behind the karaoke focal (shot-2)
+        const pfr = el("div", "collage-framebg");
+        const pfi = document.createElement("img");
+        pfi.src = assetPath("assets/resources/bg layer/pastel-frame.png");
+        pfi.alt = ""; pfi.loading = "lazy"; pfi.draggable = false;
+        pfr.appendChild(pfi);
+        stage.appendChild(pfr);
+
         // 3 holographic polaroids with clips
         (p.images || []).forEach((img, i) => {
             const cell = el("div", "collage-shot shot-" + (i + 1));
@@ -585,10 +660,14 @@
             im.src = img.src; im.alt = img.caption || ""; im.loading = "lazy";
             cell.appendChild(im);
             if (img.caption) { const c = el("span", "collage-cap"); c.textContent = img.caption; cell.appendChild(c); }
-            // paper clips like reference
-            if (i === 0) cell.appendChild(el("div", "shot-clip c1"));
-            if (i === 1) cell.appendChild(el("div", "shot-clip c2"));
-            if (i === 2) cell.appendChild(el("div", "shot-clip c3"));
+            // real paperclip art on the photo corners
+            const _clipCls = ["c1", "c2", "c3", "c1"][i] || "c1";
+            const _clip = el("div", "shot-clip " + _clipCls);
+            const _cim = document.createElement("img");
+            _cim.src = assetPath("assets/resources/svg/random/paper-clip-svgrepo-com.svg");
+            _cim.alt = ""; _cim.loading = "lazy"; _cim.draggable = false;
+            _clip.appendChild(_cim);
+            cell.appendChild(_clip);
             stage.appendChild(cell);
         });
 
@@ -633,10 +712,10 @@
         nb.appendChild(nbi);
         stage.appendChild(nb);
 
-        // starry washi tapes — 5 slices (w5 = bottom holo strip)
-        for (let w = 1; w <= 5; w++) {
+        // starry washi tapes — only corner anchors (strays removed)
+        [1, 2, 4].forEach((w) => {
             stage.appendChild(el("div", "collage-washi w" + w));
-        }
+        });
 
         // hollow glowing outline stars like reference (outlined ★ with neon halo)
         for (let s = 1; s <= 10; s++) {
@@ -662,9 +741,15 @@
             stage.appendChild(el("div", "collage-wire w" + w));
         }
 
-        // push pins
+        // real pushpin art (alternating pin styles)
+        const _pinSrc = ["pin-svgrepo-com.svg", "pin-02-svgrepo-com.svg", "pin-svgrepo-com.svg"];
         for (let pp = 1; pp <= 3; pp++) {
-            stage.appendChild(el("div", "collage-pin p" + pp));
+            const _pin = el("div", "collage-pin p" + pp);
+            const _pim = document.createElement("img");
+            _pim.src = assetPath("assets/resources/svg/random/" + _pinSrc[pp - 1]);
+            _pim.alt = ""; _pim.loading = "lazy"; _pim.draggable = false;
+            _pin.appendChild(_pim);
+            stage.appendChild(_pin);
         }
 
         inner.appendChild(stage);
@@ -730,6 +815,19 @@
         // watercolor galaxy blobs (bg layer 4, above dot + grid layers)
         pg.appendChild(el("div", "cine-blob tr"));
         pg.appendChild(el("div", "cine-blob bl"));
+        // bg-layer experiment: real gradient art as blended layers (corner/blob/shape)
+        const _bgl = [
+            ["can be used on corener partially or by croping  gradiant.png", "bgl-corner"],
+            ["Abstract Fluid Gradient Blob in Purple and Blue.png", "bgl-blob"],
+            ["gradiant color shape.png", "bgl-shape"]
+        ];
+        _bgl.forEach(([file, cls]) => {
+            const im = document.createElement("img");
+            im.src = assetPath("assets/resources/bg layer/" + file);
+            im.alt = ""; im.loading = "lazy"; im.draggable = false;
+            im.className = "bg-layer " + cls;
+            pg.appendChild(im);
+        });
         // backing paper stock: kraft / book page / dot memo / ledger (bg layers 5-8)
         const inner = el("div", "page-inner");
         const stage = el("div", "cinema-stage");
@@ -1365,7 +1463,7 @@
 
         /* Delegate click on any clickable image */
         document.addEventListener("click", (e) => {
-            const img = e.target.closest(".plate-media img, .hobby-cell img, .editorial-cell img, .gaming-cell img, .collage-shot img, .cinema-hero img, .cinema-frame img, .cinema-polaroid img, .cinema-game img, .cinema-sketch img");
+            const img = e.target.closest(".plate-media img, .hobby-cell img, .editorial-cell img, .gaming-cell img, .arcade-photo > img, .collage-shot img, .cinema-hero img, .cinema-frame img, .cinema-polaroid img, .cinema-game img, .cinema-sketch img");
             if (img && img.src) {
                 e.stopPropagation();
                 openLightbox(img.src, img.alt);

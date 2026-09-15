@@ -123,19 +123,23 @@ const PAGES = [
         ]
     },
 
-    /* ═══ SPREAD 3: GAMING — Your Player Two ═════════════════ */
+    /* ═══ SPREAD 3: GAMING — Your Player Two ═════════════════
+       PAGE 6 arcade collage, 5 layers: grid paper + washes / ink doodles /
+       4 photo cards / washi + gold clip / dpad + consoles + badges. */
     {
         type: "editorial-left",
-        texture: "diamonds",
+        texture: "",
         images: [
-            { src: IMG("dolia doing karate.png"), span2: false },
-            { src: IMG("dolia listening to music.png"), span2: true },
-            { src: IMG("dolia doing makup.png"), span2: false }
+            { src: IMG("dolia lazying around.jpg"), caption: "Sweet Dreams" },
+            { src: IMG("dolia listening to music.png"), caption: "In My Zone" },
+            { src: IMG("dolia doing karate.png"), caption: "Hi-yah! Karate Master!" },
+            { src: RES("png/gaming/dolia x heino gaming dolia crying.png"), caption: "Co-op Mode!" }
         ],
         decor: [
-            { src: RES("svg/gaming/game-controller-2.svg"), x: -2, y: 78, w: 24, rot: -9, behind: true },
-            { src: RES("svg/gaming/game heart.svg"), x: 86, y: 4, w: 10, rot: 12 },
-            { src: RES("png/gaming/dolia x heino gaming dolia crying.png"), x: 2, y: 3, w: 26, rot: -5, tape: true }
+            { src: RES("svg/gaming/game heart.svg"), x: 76, y: 1, w: 13, rot: -6 },
+            { src: RES("svg/gaming/game heart.svg"), x: 87, y: 5, w: 9, rot: 8 },
+            { src: RES("png/gaming/new/psv.png"), x: 70, y: 50, w: 25, rot: 5 },
+            { src: RES("png/gaming/new/game 3.png"), x: 31, y: 70, w: 19, rot: -5 }
         ]
     },
     {
@@ -162,14 +166,19 @@ const PAGES = [
         images: [
             { src: IMG("dolia listening to music.png"), caption: "Always listening ♡" },
             { src: IMG("dolia singing on karoke heino sitting behind.png"), caption: "Karaoke nights!" },
-            { src: IMG("little dolia.webp"), caption: "Lost in a melody ☆" }
+            { src: IMG("little dolia.webp"), caption: "Lost in a melody ☆" },
+            { src: IMG("dolia listening.jpg"), caption: "On repeat ♪" }
         ],
         notes: [
             "Always humming\na tune",
             "Karaoke\nnights!"
         ],
         // mic/headphone/washi/notebook are built inside buildCollageLeft itself (galaxy scrapbook), not via generic decor
-        decor: []
+        decor: [
+            { src: RES("png/music/new/mp3.png"), x: 44, y: 1, w: 10, rot: -6 },
+            { src: RES("png/music/new/notw.png"), x: 85,y: 25, w: 8, rot: -8 },
+            { src: RES("svg/random/featherpen.svg"), x: 37, y: 50, w: 8, rot: 30 }
+        ]
     },
     {
         type: "collage-right",
@@ -234,25 +243,23 @@ const PAGES = [
                 src: IMG("dolia eating delicious food.jpg"), tag: "DELICIOUS",
                 stickers: [
                     { src: RES("png/food/cupcakes.png"), x: -9, y: -11, w: 35, rot: -8 },
-                    { src: RES("png/food/frappe-pie.png"), x: 73, y: 68, w: 31, rot: 8 },
+                    { src: RES("png/food/sushi-roll.png"), x: 73, y: 68, w: 31, rot: 8 },
                     { src: RES("png/food/sushi-pair.png"), x: 68, y: -13, w: 31, rot: 8 }
                 ]
             },
             {
                 src: RES("Dolia-celebrating.png"), tag: "LEVEL UP!",
                 stickers: [
-                    { src: RES("png/gaming/new/controller 2.png"), x: 66, y: 66, w: 37, rot: -10 },
-                    { src: RES("png/level up/level-up.png"), x: 22, y: -14, w: 45, rot: -3 },
+                    { src: RES("png/gaming/new/controller 2.png"), x: 66, y: 66, w: 37, rot: -10,behind: false },
+                    { src: RES("png/gaming/new/game 3.png"), x:-5, y: -30, w: 45, rot: -3 },
                     { src: RES("png/cute/star.png"), x: -7, y: 28, w: 23, rot: -12 }
                 ]
             }
         ],
         decor: [
             { src: RES("png/sea elements/pearl.png"), x: 1, y: 86, w: 13, rot: -6 },
-            { src: RES("png/sea elements/seaweed.png"), x: 87, y: 83, w: 11, rot: 8 },
             { src: RES("png/random/flower.png"), x: 43, y: 0, w: 11, rot: 0 },
             { src: RES("png/sea elements/single starfish.png"), x: 86, y: 1, w: 9, rot: 12 },
-            { src: RES("png/sea elements/plants.png"), x: -2, y: 62, w: 12, rot: -4 }
         ]
     },
     {
