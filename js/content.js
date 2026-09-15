@@ -274,20 +274,29 @@ const PAGES = [
         ]
     },
 
-    /* ═══ SPREAD 6: Favorite Shared Moments ══════════════════ */
+    /* ═══ SPREAD 6 left = PAGE 12: dense memory board (reference layout).
+       karaoke hero + film strip + distressed ticket + game polaroid + sketch stamp. */
     {
         type: "cinematic-left",
-        texture: "sparkles",
+        texture: "",
         marquee: "",
         ticket: "DolIa x Heino",
         images: [
-            { src: IMG("dolia singing on karoke heino sitting behind.png") },
+            { src: IMG("dolia singing on karoke heino sitting behind.png"), caption: "KARAOKE NIGHTS" },
             { src: RES("Dolia-celebrating.png") },
-            { src: RES("dolia resisting.png") }
+            { src: RES("dolia resisting.png") },
+            { src: IMG("dolia drawing heino.jpg") },
+            { src: RES("png/gaming/dolia x heino gaming dolia crying.png"), caption: "GAME TIME" }
         ],
         decor: [
-            { src: RES("png/fish.png"), x: 2, y: 1, w: 10, rot: -12 },
-            { src: RES("sea shell.png"), x: 85, y: 86, w: 11, rot: 10 }
+            { src: RES("svg/music/music2.svg"), x: 57, y: 7, w: 6, rot: -8 },
+            { src: RES("svg/music/music3.svg"), x: 61, y: 13, w: 5, rot: 10 },
+            { src: RES("png/cute/star.png"), x: 79, y: 1, w: 8, rot: 12 },
+            { src: RES("png/sea elements/pearl.png"), x: 47, y: 1, w: 9, rot: -6 },
+            { src: RES("sea shell.png"), x: 45, y: 89, w: 9, rot: -8 },
+            { src: RES("png/random/discord sticker.png"), x: 69, y: 62, w: 9, rot: 6 },
+            { src: RES("png/random/christmas.png"), x: 50, y: -2, w: 14, rot: 8 },
+            { src: RES("png/random/leaf-insect.png"), x: 0, y: 12, w: 7, rot: -10 }
         ]
     },
     {

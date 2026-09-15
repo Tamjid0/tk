@@ -727,16 +727,27 @@
 
     function buildCinematicLeft(p) {
         const pg = el("div", "page page--cinematic-left");
+        // watercolor galaxy blobs (bg layer 4, above dot + grid layers)
+        pg.appendChild(el("div", "cine-blob tr"));
+        pg.appendChild(el("div", "cine-blob bl"));
+        // backing paper stock: kraft / book page / dot memo / ledger (bg layers 5-8)
         const inner = el("div", "page-inner");
         const stage = el("div", "cinema-stage");
         const imgs = p.images || [];
 
-        /* torn hero photo (top-left) */
+        for (let s = 1; s <= 4; s++) {
+            stage.appendChild(el("div", "cine-paper p" + s));
+        }
+
+        /* torn hero photo (top-left) with taped corners + handwritten title */
         if (imgs[0]) {
             const hero = el("div", "cinema-hero");
             const him = document.createElement("img");
             him.src = imgs[0].src; him.alt = imgs[0].caption || ""; him.loading = "lazy";
             hero.appendChild(him);
+            if (imgs[0].caption) { const hc = el("span", "cinema-hero-cap"); hc.textContent = imgs[0].caption; hero.appendChild(hc); }
+            const mic = el("span", "cinema-micdoodle"); mic.textContent = "♪";
+            hero.appendChild(mic);
             stage.appendChild(hero);
         }
 
@@ -797,22 +808,66 @@
         flSvg.appendChild(stamen);
         stage.appendChild(flSvg);
 
-        /* cinema ticket stub (bottom-left) */
-        const ticket = el("div", "cinema-ticket");
-        const t1 = el("span", "ticket-big"); t1.textContent = "ADMIT ONE";
-        const t2 = el("span", "ticket-small"); t2.textContent = p.ticket || "DolIa x Heino";
-        ticket.appendChild(t1); ticket.appendChild(t2);
-        stage.appendChild(ticket);
-
-        /* bottom-right polaroid */
+        /* bottom-right polaroid with pin + hearts (reference) */
         if (imgs[2] || imgs[0]) {
             const pol = el("div", "cinema-polaroid");
             const pim = document.createElement("img");
             const psrc = imgs[2] ? imgs[2].src : imgs[0].src;
             pim.src = psrc; pim.alt = ""; pim.loading = "lazy";
             pol.appendChild(pim);
+            pol.appendChild(el("div", "shot-clip c3"));
+            const hearts = el("div", "cinema-hearts");
+            ["#ff6b8a", "#4db8ff", "#b06bff"].forEach((hc) => {
+                const h = el("span", "cinema-heart");
+                h.textContent = "♥";
+                h.style.color = hc;
+                hearts.appendChild(h);
+            });
+            pol.appendChild(hearts);
             if (imgs[2] && imgs[2].caption) { const c = el("span", "cinema-cap"); c.textContent = imgs[2].caption; pol.appendChild(c); }
+            else { const c = el("span", "cinema-cap"); c.textContent = "Memories with you ✦"; pol.appendChild(c); }
             stage.appendChild(pol);
+        }
+
+        /* cinema ticket stub (mid-left, distressed) */
+        const ticket = el("div", "cinema-ticket");
+        const t1 = el("span", "ticket-big"); t1.textContent = "ADMIT ONE";
+        const t2 = el("span", "ticket-small"); t2.textContent = p.ticket || "DolIa x Heino";
+        ticket.appendChild(t1); ticket.appendChild(t2);
+        stage.appendChild(ticket);
+
+        /* handwritten SHARED MEMORIES note (mid-right) */
+        const shared = el("div", "cinema-shared");
+        const sh1 = el("span", "shared-l1"); sh1.textContent = "SHARED";
+        const sh2 = el("span", "shared-l2"); sh2.textContent = "MEMORIES";
+        const sh3 = el("span", "shared-l3"); sh3.textContent = "GG WP!";
+        const pad = document.createElement("img");
+        pad.src = assetPath("assets/resources/svg/gaming/game-controller-svgrepo-com.svg");
+        pad.alt = ""; pad.loading = "lazy"; pad.className = "shared-pad";
+        shared.append(sh1, sh2, sh3, pad);
+        stage.appendChild(shared);
+
+        /* added drawing: photo-stamp tucked on the ticket's edge */
+        if (imgs[3]) {
+            const sk = el("div", "cinema-sketch");
+            const sim = document.createElement("img");
+            sim.src = imgs[3].src; sim.alt = ""; sim.loading = "lazy";
+            sk.appendChild(sim);
+            stage.appendChild(sk);
+        }
+
+        /* bottom-left game polaroid */
+        if (imgs[4]) {
+            const gm = el("div", "cinema-game");
+            const gim = document.createElement("img");
+            gim.src = imgs[4].src; gim.alt = imgs[4].caption || ""; gim.loading = "lazy";
+            gm.appendChild(gim);
+            if (imgs[4].caption) { const c = el("span", "cinema-cap"); c.textContent = imgs[4].caption; gm.appendChild(c); }
+            const gp = document.createElement("img");
+            gp.src = assetPath("assets/resources/svg/gaming/game-controller-svgrepo-com.svg");
+            gp.alt = ""; gp.loading = "lazy"; gp.className = "game-pad";
+            gm.appendChild(gp);
+            stage.appendChild(gm);
         }
 
         inner.appendChild(stage);
@@ -1310,7 +1365,7 @@
 
         /* Delegate click on any clickable image */
         document.addEventListener("click", (e) => {
-            const img = e.target.closest(".plate-media img, .hobby-cell img, .editorial-cell img, .gaming-cell img, .collage-shot img, .cinema-hero img, .cinema-frame img, .cinema-polaroid img");
+            const img = e.target.closest(".plate-media img, .hobby-cell img, .editorial-cell img, .gaming-cell img, .collage-shot img, .cinema-hero img, .cinema-frame img, .cinema-polaroid img, .cinema-game img, .cinema-sketch img");
             if (img && img.src) {
                 e.stopPropagation();
                 openLightbox(img.src, img.alt);

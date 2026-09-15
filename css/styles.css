@@ -2472,11 +2472,139 @@ button {
     letter-spacing: .05em;
 }
 
-/* ---- Spread 5: Favorite Shared Moments (cinematic) ---- */
+/* ---- PAGE 12: cinema board — scrapbook bg per provided CSS, layer by layer:
+   1) warm cream base + vintage inset edge shadow
+   2) subtle dot paper texture (8px)
+   3) light blue graph grid (24px)
+   4) watercolor galaxy blobs, blurred (divs below)
+   5) stage content  6) global grain */
+.page--cinematic-left {
+    background-color: #f5eedc;
+    background-image:
+        radial-gradient(rgba(80, 60, 40, .5) 1px, transparent 1.3px),
+        linear-gradient(to right, rgba(90, 130, 180, .15) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(90, 130, 180, .15) 1px, transparent 1px);
+    background-size:
+        8px 8px,
+        24px 24px,
+        24px 24px;
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, .22),
+        inset 0 0 100px rgba(100, 70, 40, .15);
+}
+
+.cine-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: .75;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.cine-blob.tr {
+    top: -32%;
+    right: -34%;
+    width: 78%;
+    aspect-ratio: 1;
+    background: radial-gradient(circle, #7b2cbf 0%, #4895ef 50%, #72efdd 80%, transparent 100%);
+}
+
+.cine-blob.bl {
+    bottom: -34%;
+    left: -36%;
+    width: 84%;
+    aspect-ratio: 1;
+    background: radial-gradient(circle, #4361ee 0%, #7209b7 40%, #4cc9f0 75%, transparent 100%);
+}
+
+/* backing paper stock — 4 torn cuts with different designs (layers 5-8).
+   z0 under all stage content; each peeks out around the photos. */
+.cine-paper {
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+    box-shadow: 2px 3px 9px rgba(100, 70, 40, .22);
+}
+
+/* p1: kraft torn sheet behind the hero (top-left) */
+.cine-paper.p1 {
+    left: -2%;
+    top: -1%;
+    width: 62%;
+    height: 42%;
+    transform: rotate(-3deg);
+    background:
+        repeating-linear-gradient(174deg, transparent 0 4px, rgba(120, 85, 40, .06) 4px 5px),
+        radial-gradient(ellipse 40% 26% at 30% 30%, rgba(255, 255, 255, .45), transparent 70%),
+        linear-gradient(168deg, #efdcb2 0%, #e3c795 55%, #d4b47e 100%);
+    clip-path: polygon(2% 0%, 12% 2%, 22% 0%, 32% 1.6%, 42% 0%, 52% 2%, 62% 0%, 72% 1.8%, 82% 0%, 92% 1.5%, 99% 3%, 100% 14%, 98% 26%, 100% 38%, 98% 50%, 100% 62%, 98% 74%, 100% 86%, 98% 95%, 90% 100%, 80% 98%, 70% 100%, 60% 98.2%, 50% 100%, 40% 98%, 30% 100%, 20% 98.4%, 10% 100%, 2% 98.5%, 0 90%, 1.6% 80%, 0 70%, 1.2% 60%, 0 50%, 1.5% 40%, 0 30%, 1.3% 20%, 0 10%);
+}
+
+/* p2: vintage book page (faux text lines + red margin) behind ticket + game */
+.cine-paper.p2 {
+    left: 0%;
+    bottom: -1%;
+    width: 52%;
+    height: 47%;
+    transform: rotate(2deg);
+    background:
+        linear-gradient(90deg, transparent 0 11%, rgba(200, 80, 80, .45) 11% 12%, transparent 12.5%),
+        repeating-linear-gradient(0deg, transparent 0 6px, rgba(70, 60, 50, .38) 6px 7px),
+        radial-gradient(ellipse 46% 30% at 60% 40%, rgba(255, 255, 255, .5), transparent 70%),
+        linear-gradient(170deg, #f7f2e4 0%, #efe6d0 60%, #e2d4b4 100%);
+    clip-path: polygon(4% 2%, 14% 0%, 24% 2.2%, 34% 0%, 44% 1.8%, 54% 0%, 64% 2%, 74% 0%, 84% 1.6%, 94% 1%, 99% 6%, 97.6% 16%, 99% 26%, 97.8% 36%, 99% 46%, 97.5% 56%, 99% 66%, 97.7% 76%, 98.6% 86%, 96% 94%, 88% 100%, 78% 98.4%, 68% 100%, 58% 98.2%, 48% 100%, 38% 98.4%, 28% 100%, 18% 98.2%, 8% 100%, 1% 95%, 2.4% 85%, 0 75%, 1.8% 65%, 0 55%, 2% 45%, 0 35%, 1.6% 25%, 0 15%, 2% 6%);
+}
+
+/* p3: pale dot-grid memo behind the shared note (mid-right) */
+.cine-paper.p3 {
+    right: -1%;
+    top: 41%;
+    width: 47%;
+    height: 33%;
+    transform: rotate(1deg);
+    background:
+        radial-gradient(rgba(120, 110, 180, .35) 1px, transparent 1.4px),
+        radial-gradient(ellipse 50% 34% at 50% 30%, rgba(255, 255, 255, .5), transparent 70%),
+        linear-gradient(160deg, #e6ddf7 0%, #d5c8ee 55%, #bfaee2 100%);
+    background-size:
+        9px 9px,
+        cover, cover;
+    clip-path: polygon(3% 4%, 13% 0%, 23% 3%, 33% 0%, 43% 2.6%, 53% 0%, 63% 3%, 73% 0%, 83% 2.4%, 93% 1%, 99% 5%, 97.8% 18%, 99% 32%, 97.6% 46%, 99% 60%, 97.8% 74%, 98.6% 88%, 92% 98%, 82% 100%, 72% 97.6%, 62% 100%, 52% 98%, 42% 100%, 32% 97.8%, 22% 100%, 12% 98%, 3% 100%, 0 90%, 1.8% 78%, 0 66%, 1.5% 54%, 0 42%, 2% 30%, 0 18%, 1.6% 8%);
+}
+
+/* p4: pale ledger mount peeking from behind the film strip */
+.cine-paper.p4 {
+    right: 1%;
+    top: 0%;
+    width: 36%;
+    height: 46%;
+    transform: rotate(1.5deg);
+    background:
+        repeating-linear-gradient(0deg, transparent 0 7px, rgba(90, 130, 180, .35) 7px 8px),
+        linear-gradient(90deg, transparent 0 14%, rgba(200, 80, 80, .4) 14% 15%, transparent 15.5%),
+        linear-gradient(170deg, #eef4fa 0%, #dfe9f4 60%, #cbd9ec 100%);
+    clip-path: polygon(5% 1%, 15% 3%, 25% 0%, 35% 2.4%, 45% 0%, 55% 2%, 65% 0%, 75% 2.6%, 85% 0%, 95% 2%, 99% 8%, 97.5% 20%, 99% 32%, 97.7% 44%, 99% 56%, 97.5% 68%, 98.6% 80%, 96% 92%, 88% 99%, 78% 100%, 68% 98%, 58% 100%, 48% 98.4%, 38% 100%, 28% 98%, 18% 100%, 8% 98.2%, 1% 94%, 2.4% 82%, 0 70%, 1.6% 58%, 0 46%, 2% 34%, 0 22%, 1.8% 10%);
+}
+
 .page--cinematic-left .page-inner {
     padding: 0;
     overflow: hidden;
     display: block;
+}
+
+/* paper tooth over the cinema board — grain + fibers so cream reads printed, not flat */
+.page--cinematic-left .page-inner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    pointer-events: none;
+    opacity: .1;
+    mix-blend-mode: multiply;
+    background:
+        repeating-linear-gradient(173deg, transparent 0 4px, rgba(90, 60, 120, .06) 4px 5px),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="5" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="140" height="140" filter="url(%23n)" opacity="0.55"/></svg>');
 }
 
 .cinema-stage {
@@ -2492,6 +2620,7 @@ button {
     width: 52%;
     background: #fff;
     padding: clamp(5px, 1.4cqi, 9px);
+    padding-bottom: clamp(20px, 5.4cqi, 28px);
     transform: rotate(-2.5deg);
     box-shadow: 2px 4px 12px rgba(7, 20, 34, .2);
     clip-path: polygon(0% 3%, 4% 0%, 9% 2%, 15% 0%, 22% 2%, 30% 0%, 38% 2%, 46% 0%, 54% 2%, 62% 0%, 70% 2%, 78% 0%, 86% 2%, 93% 0%, 98% 2%, 100% 8%, 98% 15%, 100% 24%, 98% 33%, 100% 42%, 98% 51%, 100% 60%, 98% 69%, 100% 78%, 98% 87%, 100% 95%, 94% 98%, 87% 100%, 79% 98%, 70% 100%, 61% 98%, 52% 100%, 43% 98%, 34% 100%, 25% 98%, 16% 100%, 8% 98%, 2% 100%, 0% 93%, 2% 85%, 0% 76%, 2% 67%, 0% 58%, 2% 49%, 0% 40%, 2% 31%, 0% 22%, 2% 13%);
@@ -2619,25 +2748,43 @@ button {
     z-index: 4;
 }
 
-/* cinema ticket stub, bottom-left */
+/* distressed ADMIT ONE ticket, mid-left (reference: burnt aged edges, star rows) */
 .cinema-ticket {
     position: absolute;
-    left: 4%;
-    bottom: 7%;
-    width: 34%;
-    background: linear-gradient(160deg, #fdf6ec, #f5e6d0);
-    border-radius: 4px;
-    padding: clamp(6px, 2cqi, 12px) clamp(8px, 2.6cqi, 14px);
+    left: 3%;
+    top: 47%;
+    width: 37%;
+    background:
+        radial-gradient(ellipse 30% 22% at 22% 30%, rgba(150, 95, 35, .28), transparent 65%),
+        radial-gradient(ellipse 26% 20% at 78% 72%, rgba(150, 95, 35, .25), transparent 65%),
+        radial-gradient(ellipse 18% 14% at 60% 50%, rgba(120, 75, 30, .20), transparent 65%),
+        linear-gradient(160deg, #f2dfba, #e8cd9c 60%, #d9b982);
+    padding: clamp(14px, 4.4cqi, 22px) clamp(8px, 2.6cqi, 14px) clamp(14px, 4.4cqi, 22px);
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2px;
     transform: rotate(-4deg);
-    box-shadow: 2px 3px 8px rgba(7, 20, 34, .2);
-    border-left: 2px dashed rgba(180, 120, 60, .5);
-    border-right: 2px dashed rgba(180, 120, 60, .5);
+    box-shadow: 2px 3px 8px rgba(100, 70, 40, .3);
+    clip-path: polygon(3% 0%, 9% 2%, 15% 0%, 22% 2.5%, 29% 0%, 36% 2%, 43% 0%, 50% 2.2%, 57% 0%, 64% 2%, 71% 0%, 78% 2.4%, 85% 0%, 92% 2%, 97% 1%, 99% 8%, 97.5% 15%, 99% 24%, 97.6% 33%, 99% 42%, 97.4% 51%, 99% 60%, 97.6% 69%, 99% 78%, 97.5% 87%, 98.6% 94%, 93% 100%, 86% 98%, 79% 100%, 72% 98.2%, 65% 100%, 58% 98%, 51% 100%, 44% 98.1%, 37% 100%, 30% 98%, 23% 100%, 16% 98.2%, 9% 100%, 4% 98.6%, 0 95%, 1.6% 87%, 0 79%, 1.4% 70%, 0 61%, 1.8% 52%, 0 43%, 1.5% 34%, 0 25%, 1.7% 16%, 0 8%);
     z-index: 2;
 }
+
+.cinema-ticket::before,
+.cinema-ticket::after {
+    position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: rgba(138, 90, 43, .8);
+    font-size: clamp(.5rem, 1.8cqi, .7rem);
+    letter-spacing: .5em;
+    text-indent: .5em;
+    pointer-events: none;
+}
+
+.cinema-ticket::before { content: "★★★★★"; top: 4px; }
+.cinema-ticket::after { content: "★★★★★"; bottom: 4px; }
 
 .ticket-big {
     font-family: "Arial Black", Impact, sans-serif;
@@ -2654,7 +2801,7 @@ button {
     color: rgba(138, 90, 43, .75);
 }
 
-/* bottom-right polaroid */
+/* bottom-right polaroid with kraft mat peeking behind + gold tape */
 .cinema-polaroid {
     position: absolute;
     right: 4%;
@@ -2663,10 +2810,34 @@ button {
     background: #fff;
     padding: clamp(4px, 1.1cqi, 8px);
     padding-bottom: clamp(14px, 4cqi, 24px);
-    box-shadow: 2px 4px 12px rgba(7, 20, 34, .2);
+    box-shadow: 2px 4px 12px rgba(100, 70, 40, .28);
     transform: rotate(3deg);
     transition: transform .2s ease;
     z-index: 2;
+}
+
+.cinema-polaroid::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%) rotate(4deg);
+    width: 34%;
+    height: clamp(10px, 2.8cqi, 15px);
+    background: linear-gradient(180deg, rgba(255, 225, 150, .9), rgba(215, 165, 70, .9));
+    border-radius: 1px;
+    box-shadow: 0 1px 3px rgba(100, 70, 40, .25);
+    z-index: 3;
+}
+
+.cinema-polaroid::after {
+    content: '';
+    position: absolute;
+    inset: 7px -7px -7px 7px;
+    background: linear-gradient(165deg, #e8d3a8, #d9bd8a);
+    transform: rotate(2.5deg);
+    box-shadow: 2px 3px 8px rgba(100, 70, 40, .25);
+    z-index: -1;
 }
 
 .cinema-polaroid:hover {
@@ -2693,6 +2864,203 @@ button {
     font-style: italic;
     font-size: clamp(.5rem, 1.8cqi, .7rem);
     color: var(--ink-soft);
+}
+
+/* drawing photo as a small photo-stamp tucked on the ticket's edge */
+.cinema-sketch {
+    position: absolute;
+    left: 34%;
+    top: 54%;
+    width: 21%;
+    background: #fff;
+    padding: 3px;
+    padding-bottom: 4px;
+    transform: rotate(8deg);
+    box-shadow:
+        2px 3px 8px rgba(100, 70, 40, .3),
+        0 0 0 1px rgba(255, 255, 255, .9),
+        0 0 10px rgba(190, 150, 255, .3);
+    z-index: 4;
+}
+
+.cinema-sketch img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+    border-radius: 1px;
+    cursor: pointer;
+}
+
+/* bottom-left game polaroid */
+.cinema-game {
+    position: absolute;
+    left: 4%;
+    bottom: 4%;
+    width: 42%;
+    background: #fff;
+    padding: clamp(4px, 1.1cqi, 8px);
+    padding-bottom: clamp(14px, 4cqi, 22px);
+    transform: rotate(-2deg);
+    box-shadow:
+        2px 4px 12px rgba(100, 70, 40, .28),
+        0 1px 3px rgba(100, 70, 40, .2);
+    z-index: 2;
+}
+
+.cinema-game::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 12%;
+    transform: rotate(-14deg);
+    width: 30%;
+    height: clamp(10px, 2.8cqi, 15px);
+    background:
+        repeating-linear-gradient(0deg, rgba(255, 255, 255, .5) 0 3px, transparent 3px 6px),
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, .5) 0 3px, transparent 3px 6px),
+        rgba(228, 96, 96, .8);
+    border-radius: 1px;
+    box-shadow: 0 1px 3px rgba(100, 70, 40, .25);
+    z-index: 3;
+}
+
+.cinema-game::after {
+    content: '';
+    position: absolute;
+    inset: 6px -6px -6px 6px;
+    background: linear-gradient(165deg, #d9c8e8, #bfa8d8);
+    transform: rotate(-2deg);
+    box-shadow: 2px 3px 8px rgba(100, 70, 40, .25);
+    z-index: -1;
+}
+
+.cinema-game img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+    border-radius: 1px;
+    cursor: pointer;
+}
+
+.cinema-game .game-pad {
+    position: absolute;
+    right: -9px;
+    bottom: -11px;
+    width: 30%;
+    transform: rotate(12deg);
+    filter: drop-shadow(1px 2px 3px rgba(100, 70, 40, .35));
+    z-index: 4;
+    pointer-events: none;
+}
+
+/* handwritten SHARED MEMORIES note, mid-right */
+.cinema-shared {
+    position: absolute;
+    right: 3%;
+    top: 45%;
+    width: 42%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0;
+    transform: rotate(2deg);
+    z-index: 3;
+    pointer-events: none;
+}
+
+.cinema-shared span {
+    font-family: "Segoe Script", "Apple Chancery", cursive;
+    color: #3a3a5e;
+    line-height: 1.25;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, .7);
+}
+
+.shared-l1 { font-size: clamp(.8rem, 3cqi, 1.1rem); font-weight: 700; }
+.shared-l2 { font-size: clamp(.8rem, 3cqi, 1.1rem); font-weight: 700; }
+.shared-l3 { font-size: clamp(.7rem, 2.6cqi, .95rem); color: #6a5a9e; margin-top: 2px; }
+
+.cinema-shared .shared-pad {
+    width: clamp(22px, 7cqi, 32px);
+    margin-top: 4px;
+    transform: rotate(-10deg);
+    opacity: .9;
+}
+
+/* hero handwritten title + note doodle */
+.cinema-hero-cap {
+    display: block;
+    text-align: center;
+    font-family: "Segoe Script", "Apple Chancery", cursive;
+    font-weight: 700;
+    font-size: clamp(.65rem, 2.6cqi, .9rem);
+    color: #3a3a5e;
+    letter-spacing: .06em;
+    margin-top: 3px;
+}
+
+.cinema-micdoodle {
+    position: absolute;
+    right: 6%;
+    bottom: 12%;
+    font-size: clamp(.8rem, 3cqi, 1.1rem);
+    color: #b06bff;
+    text-shadow:
+        0 0 2px #fff, 0 0 6px #fff,
+        0 0 10px #b06bff, 0 0 20px rgba(176, 107, 255, .7);
+    transform: rotate(10deg);
+    pointer-events: none;
+}
+
+/* holographic corner tapes on the hero */
+.cinema-hero::before,
+.cinema-hero::after {
+    content: '';
+    position: absolute;
+    top: -9px;
+    width: 26%;
+    height: clamp(11px, 3cqi, 17px);
+    background: linear-gradient(135deg, #ff9ef0, #8ad8ff 45%, #d8b8ff 70%, #fff3b0);
+    border-radius: 1px;
+    box-shadow: 0 1px 3px rgba(100, 70, 40, .25);
+    opacity: .92;
+    z-index: 3;
+}
+
+.cinema-hero::before { left: 4%; transform: rotate(-18deg); }
+.cinema-hero::after { right: 4%; transform: rotate(14deg); }
+
+/* heart stickers column on the memories polaroid */
+.cinema-hearts {
+    position: absolute;
+    right: -8px;
+    top: 18%;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    z-index: 4;
+    pointer-events: none;
+    filter: drop-shadow(0 1px 1px rgba(255, 255, 255, .9)) drop-shadow(1px 2px 2px rgba(100, 70, 40, .3));
+}
+
+.cinema-heart {
+    font-size: clamp(.8rem, 3cqi, 1.1rem);
+    line-height: 1.1;
+}
+
+/* warm the cinema shadows to sit on cream paper */
+.cinema-hero,
+.cinema-polaroid {
+    box-shadow:
+        2px 4px 12px rgba(100, 70, 40, .28),
+        0 1px 3px rgba(100, 70, 40, .2);
+}
+
+.cinema-ticket {
+    box-shadow:
+        2px 3px 8px rgba(100, 70, 40, .25),
+        0 0 12px rgba(255, 220, 150, .35);
 }
 
 /* ---- Spread 6: Wishes for the Year Ahead ---- */
