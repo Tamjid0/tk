@@ -5038,6 +5038,65 @@ figcaption::after {
     background-repeat: repeat, no-repeat;
 }
 
+/* L2b: cropped night-sky card peeking from behind the co-op photo */
+.arcade-skycard {
+    position: absolute;
+    left: 60%;
+    top: 47%;
+    width: 36%;
+    height: 16%;
+    z-index: 1;
+    transform: rotate(2deg);
+    border-radius: 6px;
+    background-image: url('../assets/resources/png/gaming/BG/8bit-pixel-art-night-sky-game-space-landscape-vector.jpg');
+    background-size: cover;
+    background-position: center 78%;
+    box-shadow: 0 4px 12px rgba(40, 40, 90, .3);
+    pointer-events: none;
+}
+
+/* L2d: second night-sky crop (upper star field), layered above the cloud card */
+.arcade-skycard.top {
+    left: 64%;
+    top: 62%;
+    width: 30%;
+    height: 10%;
+    transform: rotate(-2deg);
+    background-position: center 12%;
+}
+
+/* L2c: platformer ground strip along the page bottom */
+.arcade-ground {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 9%;
+    z-index: 0;
+    background-image: url('../assets/resources/png/gaming/BG/360_F_88981880_YjJManMJ6hJmKr5CZteFJAkEzXIh8mxW.jpg');
+    background-size: cover;
+    background-position: center bottom;
+    opacity: .95;
+    pointer-events: none;
+}
+
+/* L5b: headset hanging on the anchor photo's top-right corner */
+.arcade-headset {
+    position: absolute;
+    left: 45%;
+    top: 16%;
+    width: 17%;
+    z-index: 6;
+    transform: rotate(12deg);
+    filter: drop-shadow(0 2px 4px rgba(60, 40, 20, .35));
+    pointer-events: none;
+}
+
+.arcade-headset img {
+    width: 100%;
+    display: block;
+}
+
 /* L4: gold paperclip on the anchor photo's left edge */
 .shot-clip.c5 {
     left: 2%;

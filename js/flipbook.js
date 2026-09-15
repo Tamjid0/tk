@@ -507,6 +507,19 @@
             if (img.caption) { const c = el("span", "arcade-cap"); c.textContent = img.caption; ph.appendChild(c); }
             stage.appendChild(ph);
         });
+        // L2b: cropped sky-card peeking from behind the co-op photo (night-sky BG, clouds crop)
+        stage.appendChild(el("div", "arcade-skycard"));
+        // L2c: platformer ground strip along the bottom (grass + tiles crop)
+        stage.appendChild(el("div", "arcade-ground"));
+        // L2d: second night-sky crop (upper star field), layered above the cloud card
+        stage.appendChild(el("div", "arcade-skycard top"));
+        // L5b: headset hanging on the anchor photo's top-right corner
+        const hs = el("div", "arcade-headset");
+        const him = document.createElement("img");
+        him.src = assetPath("assets/resources/png/gaming/new/headset.png");
+        him.alt = ""; him.loading = "lazy"; him.draggable = false;
+        hs.appendChild(him);
+        stage.appendChild(hs);
         // L4: gold paperclip on the anchor photo's left edge
         const clip = el("div", "shot-clip c5");
         const cim = document.createElement("img");

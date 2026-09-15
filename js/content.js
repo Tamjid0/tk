@@ -139,7 +139,11 @@ const PAGES = [
             { src: RES("svg/gaming/game heart.svg"), x: 76, y: 1, w: 13, rot: -6 },
             { src: RES("svg/gaming/game heart.svg"), x: 87, y: 5, w: 9, rot: 8 },
             { src: RES("png/gaming/new/psv.png"), x: 70, y: 50, w: 25, rot: 5 },
-            { src: RES("png/gaming/new/game 3.png"), x: 31, y: 70, w: 19, rot: -5 }
+            { src: RES("png/gaming/new/game 3.png"), x: 31, y: 70, w: 19, rot: -5 },
+            { src: RES("png/gaming/grandmaster must use.png"), x: 44, y: 1, w: 14, rot: 4 },
+            { src: RES("png/gaming/new/rpg-game.png"), x: 44, y:44, w: 13, rot: -8 },
+            { src: RES("png/gaming/new/videogame.png"), x: 44, y: 77, w: 13, rot: 5 },
+            { src: RES("png/gaming/new/buttons.png"), x: 3, y: 67, w: 17, rot: -4 }
         ]
     },
     {
