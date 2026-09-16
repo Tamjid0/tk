@@ -95,16 +95,16 @@ const PAGES = [
         type: "hobbies-left",
         texture: "",
         images: [
-            { src: IMG("dolia doing makeup day.png"), caption: "Painting Art" },
+            { src: IMG("dolia cute dress.jpg"), caption: "Dress-Up Art" },
             { src: IMG("dolia doing makup.png"), caption: "Creative Makeup" },
             { src: IMG("dolia drawing heino.jpg"), caption: "Digital Sketching!" }
         ],
         decor: [
-            { src: RES("png/art/color-palette.png"), x: 34, y: 40, w: 22, rot: -8 },
-            { src: RES("png/art/paint-tube.png"), x: -4, y: 44, w: 24, rot: -12 },
-            { src: RES("png/art/paint-brush.png"), x: 63, y: 76, w: 26, rot: 24 },
-            { src: RES("png/art/paint-tube.png"), x: 74, y: 82, w: 22, rot: 130, flip: true },
-            { src: RES("png/art/crayons.png"), x: 2, y: 78, w: 13, rot: 8 }
+            { src: RES("png/art/color-palette.png"), x: 40, y: 30, w: 19, rot: -8 },
+            { src: RES("png/art/paint-tube.png"), x: -2, y: 10, w: 20, rot: -28 },
+            { src: RES("png/art/paint-brush.png"), x: 44, y: 52, w: 18, rot: 28 },
+            { src: RES("png/art/paint-tube.png"), x: 52, y: 82, w: 17, rot: 24 },
+            { src: RES("png/art/crayons.png"), x: 1, y: 70, w: 12, rot: 8 }
         ]
     },
     {

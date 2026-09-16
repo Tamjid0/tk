@@ -4457,20 +4457,20 @@ figcaption::after {
 }
 
 .art-staff.st1 {
-    left: 44%;
-    top: 8%;
-    width: 52%;
-    height: 34%;
-    transform: rotate(2deg);
+    left: 54%;
+    top: 27%;
+    width: 40%;
+    height: 11%;
+    transform: rotate(3deg);
     clip-path: polygon(0% 6%, 10% 0%, 40% 3%, 70% 0%, 100% 4%, 98% 40%, 100% 75%, 96% 100%, 60% 97%, 30% 100%, 4% 97%, 0% 60%);
 }
 
 .art-staff.st2 {
-    left: 30%;
-    top: 56%;
-    width: 44%;
-    height: 30%;
-    transform: rotate(-1.5deg);
+    left: 58%;
+    top: 60%;
+    width: 39%;
+    height: 32%;
+    transform: rotate(2.5deg);
     clip-path: polygon(2% 3%, 25% 0%, 60% 2%, 90% 0%, 100% 8%, 98% 50%, 100% 90%, 90% 100%, 55% 98%, 25% 100%, 3% 97%, 0% 55%);
 }
 
@@ -4539,20 +4539,33 @@ figcaption::after {
     pointer-events: none;
 }
 
-/* L4: galaxy star-washi strips (real star washi art) across photo tops */
+/* L4: single washi strips cropped from the pastel set (washi 8: 2 cols x 5
+   rows, transparent gaps so crops are forgiving) + transparent pink strip.
+   Real transparency — no blend tricks, colors stay true on white borders. */
 .art-washi {
     position: absolute;
-    top: -11px;
-    width: 46%;
+    overflow: hidden;
+    aspect-ratio: 3.1 / 1;
     z-index: 4;
     filter: drop-shadow(0 1px 2px rgba(20, 10, 40, .4));
     pointer-events: none;
 }
 
-.art-washi img { width: 100%; display: block; }
-.art-washi.w1 { left: -6%; transform: rotate(-32deg); width: 40%; }
-.art-washi.w2 { right: -8%; transform: rotate(28deg); width: 42%; }
-.art-washi.w3 { left: -7%; transform: rotate(-24deg); width: 38%; }
+.art-washi img {
+    width: 200%;
+    max-width: none;
+    display: block;
+}
+
+.art-washi.pink { aspect-ratio: 3.6 / 1; }
+.art-washi.pink img { width: 100%; }
+
+.art-washi.w1a { left: -10%; top: -4%; width: 56%; transform: rotate(-32deg); }
+.art-washi.w1b { right: -6%; top: -3%; width: 44%; transform: rotate(14deg); }
+.art-washi.w2a { left: -10%; top: -4%; width: 52%; transform: rotate(-27deg); }
+.art-washi.w2b { right: -13%; top: 32%; width: 40%; transform: rotate(62deg); }
+.art-washi.w3a { left: -9%; top: -4%; width: 50%; transform: rotate(-29deg); }
+.art-washi.w3b { right: -9%; bottom: -3%; width: 46%; transform: rotate(28deg); }
 
 /* L4: pushpins on the makeup photo */
 .art-pin {
@@ -4581,10 +4594,10 @@ figcaption::after {
 }
 
 .art-rainbow .rb { display: inline-block; }
-.art-rainbow.r1 { right: 3%; top: 4.5%; transform: rotate(1deg); }
-.art-rainbow.r2 { right: 6%; top: 10.5%; transform: rotate(1deg); }
-.art-rainbow.r3 { left: 3%; top: 41%; transform: rotate(-2deg); }
-.art-rainbow.r4 { left: 5%; top: 47%; transform: rotate(-2deg); }
+.art-rainbow.r1 { right: 5%; top: 4.5%; transform: rotate(1deg); }
+.art-rainbow.r2 { right: 5%; top: 10.5%; transform: rotate(1deg); }
+.art-rainbow.r3 { left: 2.5%; top: 39.5%; transform: rotate(-2deg); }
+.art-rainbow.r4 { left: 4%; top: 44.5%; transform: rotate(-2deg); }
 
 /* L5: script Inspire! accents */
 .art-inspire {
@@ -4599,8 +4612,8 @@ figcaption::after {
     pointer-events: none;
 }
 
-.art-inspire.i1 { right: 3%; top: 24%; transform: rotate(3deg); }
-.art-inspire.i2 { left: 44%; top: 62%; transform: rotate(-3deg); }
+.art-inspire.i1 { right: 5%; top: 19%; transform: rotate(3deg); }
+.art-inspire.i2 { left: 33%; top: 50%; transform: rotate(-3deg); }
 
 /* L5: dotted DODIE header giggle */
 .art-dodie {
@@ -4657,23 +4670,45 @@ figcaption::after {
 .art-margin.m1 { left: 1%; top: 26%; transform: rotate(180deg); }
 .art-margin.m2 { right: 1%; top: 44%; letter-spacing: .12em; }
 
-/* L5: Dotes checklist, bottom-right */
-.art-dotes {
+/* L5: Dotes journaling card — ruled lines + handwritten bullets, fills the
+   lined pad so no notepad sits blank */
+.art-journal {
     position: absolute;
-    right: 3%;
-    bottom: 2%;
-    width: 34%;
-    z-index: 1;
-    font-family: "Segoe Script", "Apple Chancery", cursive;
-    color: #3a352c;
-    font-size: clamp(.5rem, 2.1cqi, .72rem);
-    line-height: 1.35;
+    right: 5%;
+    top: 63%;
+    width: 33%;
+    z-index: 3;
+    transform: rotate(1deg);
+    background-color: #f6ecd2;
+    background-image: repeating-linear-gradient(to bottom, transparent 0 8px, rgba(120, 90, 60, .4) 8px 9px);
+    padding: clamp(6px, 1.6cqi, 10px) clamp(7px, 1.8cqi, 11px);
+    box-shadow: 0 1px 2px rgba(60, 40, 20, .25), 0 8px 20px rgba(60, 40, 20, .3);
+    clip-path: polygon(1% 4%, 15% 0%, 45% 2%, 75% 0%, 99% 3%, 100% 40%, 98% 75%, 100% 97%, 80% 100%, 50% 98%, 20% 100%, 2% 98%, 0% 60%);
     pointer-events: none;
 }
 
-.art-dotes::first-line {
+.art-journal .jh {
+    font-family: "Segoe Script", "Apple Chancery", cursive;
     font-weight: 700;
-    font-size: 1.15em;
+    color: #3a352c;
+    font-size: clamp(.6rem, 2.5cqi, .85rem);
+    margin-bottom: 2px;
+}
+
+.art-journal .jb {
+    font-family: "Segoe Script", "Apple Chancery", cursive;
+    color: #3a352c;
+    font-size: clamp(.46rem, 1.9cqi, .64rem);
+    line-height: 1.65;
+}
+
+/* L5: art stickers stay raw transparent PNGs (their bounds are wide — any
+   backing card becomes a white rectangle). Lift comes from a physical
+   double shadow only. */
+.page--hobbies-left .page-decor {
+    background: transparent;
+    filter: drop-shadow(0 1px 1px rgba(60, 40, 20, .4)) drop-shadow(0 7px 14px rgba(60, 40, 20, .35));
+    z-index: 6;
 }
 
 /* L5: filled margin stars */
@@ -4687,10 +4722,10 @@ figcaption::after {
 
 .art-star.s1 { left: 2%; top: 38%; color: #e8c53a; }
 .art-star.s2 { left: 30%; top: 37%; color: #58b368; }
-.art-star.s3 { right: 2%; top: 27%; color: #e8c53a; }
-.art-star.s4 { right: 4%; top: 56%; color: #9b6dd6; }
-.art-star.s5 { left: 4%; bottom: 22%; color: #e8c53a; }
-.art-star.s6 { right: 30%; bottom: 5%; color: #4a9de0; }
+.art-star.s3 { right: 2.5%; top: 14%; color: #e8c53a; }
+.art-star.s4 { right: 2.5%; top: 56%; color: #9b6dd6; }
+.art-star.s5 { left: 3%; bottom: 24%; color: #e8c53a; }
+.art-star.s6 { left: 40%; bottom: 3%; color: #4a9de0; }
 
 .page--hobbies-right {
     background:
@@ -5244,7 +5279,8 @@ figcaption::after {
     cursor: pointer;
 }
 
-/* star washi strip across the top of each photo */
+/* moon/cloud strip (washi 4, row 3 of 4) across the top of each photo —
+   5000px sheet, strip at y 2716-3550: window math 5000/834 = 599.5% */
 .arcade-photo::before {
     content: '';
     position: absolute;
@@ -5253,8 +5289,9 @@ figcaption::after {
     transform: translateX(-50%) rotate(-2deg);
     width: 44%;
     height: clamp(12px, 3cqi, 18px);
-    background-image: url('../assets/resources/png/music/star washi.png');
-    background-size: 100% auto;
+    background-image: url('../assets/resources/png/washi/washi 4.png');
+    background-size: 100% 600%;
+    background-position: 50% 65.2%;
     background-repeat: no-repeat;
     box-shadow: 0 1px 3px rgba(60, 40, 20, .25);
     z-index: 3;

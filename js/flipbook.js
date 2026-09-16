@@ -503,8 +503,11 @@
         [["Creative note!", "m1"], ["PALIST STAJES", "m2"]].forEach(([txt, c]) => {
             const s = el("div", "art-margin " + c); s.textContent = txt; stage.appendChild(s);
         });
-        const dotes = el("div", "art-dotes");
-        dotes.textContent = "Dotes • kink and notes • civilated ink dirot sketching or orals";
+        const dotes = el("div", "art-journal");
+        const dh = el("div", "jh"); dh.textContent = "Dotes"; dotes.appendChild(dh);
+        ["kink and notes", "civilated ink", "dirot sketching or orals"].forEach((t) => {
+            const li = el("div", "jb"); li.textContent = "• " + t; dotes.appendChild(li);
+        });
         stage.appendChild(dotes);
         // L3: 3 polaroids with handwritten captions
         (p.images || []).slice(0, 3).forEach((img, i) => {
@@ -513,13 +516,25 @@
             im.src = img.src; im.alt = img.caption || ""; im.loading = "lazy";
             ph.appendChild(im);
             if (img.caption) { const c = el("span", "art-cap"); c.textContent = img.caption; ph.appendChild(c); }
-            // L4: galaxy washi strip across the top of each photo (real star-washi art)
-            const w = el("div", "art-washi w" + (i + 1));
-            const wi = document.createElement("img");
-            wi.src = assetPath("assets/resources/png/music/star washi.png");
-            wi.alt = ""; wi.loading = "lazy"; wi.draggable = false;
-            w.appendChild(wi);
-            ph.appendChild(w);
+            // L4: single washi strips pinned across the frame corners — pastel
+            // set (washi 8) + transparent pink strip, no two pieces alike.
+            const WPIECES = [
+                [{ c: "a", sheet: "8", row: "-15%", col: "0" }, { c: "b", sheet: "P" }],
+                [{ c: "a", sheet: "8", row: "-86%", col: "0" }, { c: "b", sheet: "8", row: "-46%", col: "-100%" }],
+                [{ c: "a", sheet: "8", row: "-46%", col: "0" }, { c: "b", sheet: "8", row: "-160%", col: "-100%" }]
+            ];
+            (WPIECES[i] || []).forEach((sp) => {
+                const w = el("div", "art-washi w" + (i + 1) + sp.c + (sp.sheet === "P" ? " pink" : ""));
+                const wi = document.createElement("img");
+                wi.src = assetPath(sp.sheet === "P"
+                    ? "assets/resources/png/washi/washi pink.png"
+                    : "assets/resources/png/washi/washi 8.png");
+                wi.alt = ""; wi.loading = "lazy"; wi.draggable = false;
+                if (sp.sheet === "P") { wi.style.marginTop = "-11%"; }
+                else { wi.style.marginTop = sp.row; wi.style.marginLeft = sp.col; }
+                w.appendChild(wi);
+                ph.appendChild(w);
+            });
             // L4: paperclip on painting photo, pushpins on makeup photo
             if (i === 0) {
                 const clip = el("div", "shot-clip c1");
