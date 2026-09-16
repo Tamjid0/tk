@@ -84,7 +84,10 @@ const PAGES = [
         cornerImg: nextCorner(),
         decor: [
             { src: RES("png/shell/normal single shell.png"), x: 80, y: 82, w: 12, rot: 14 },
-            { src: RES("png/paste color sea squid.png"), x: 4, y: 6, w: 10, rot: -10 }
+            { src: RES("png/paste color sea squid.png"), x: 4, y: 6, w: 10, rot: -10 },
+            { src: RES("png/sea elements/pearl.png"), x: 88, y: 12, w: 9, rot: 8 },
+            { src: RES("png/sea elements/seahorse.png"), x: 2, y: 40, w: 11, rot: -8, behind: true },
+            { src: RES("png/cute/star.png"), x: 12, y: 76, w: 8, rot: 12 }
         ]
     },
 
@@ -121,7 +124,10 @@ const PAGES = [
         cornerImg: nextCorner(),
         decor: [
             { src: RES("svg/art/art-brush-general-svgrepo-com.svg"), x: 84, y: 3, w: 9, rot: 12 },
-            { src: RES("svg/art/art-palette-svgrepo-com.svg"), x: 2, y: 88, w: 8, rot: -6 }
+            { src: RES("svg/art/art-palette-svgrepo-com.svg"), x: 2, y: 88, w: 8, rot: -6 },
+            { src: RES("svg/art/colors.svg"), x: 5, y: 32, w: 10, rot: -10, behind: true },
+            { src: RES("svg/art/pencil3.svg"), x: 88, y: 32, w: 8, rot: 14 },
+            { src: RES("png/art/paint-brush.png"), x: 8, y: 70, w: 12, rot: -14 }
         ]
     },
 
@@ -161,7 +167,10 @@ const PAGES = [
         cornerImg: nextCorner(),
         decor: [
             { src: RES("svg/gaming/game-controller-svgrepo-com.svg"), x: 82, y: 68, w: 12, rot: 8 },
-            { src: RES("svg/gaming/game heart.svg"), x: 5, y: 5, w: 7, rot: -10 }
+            { src: RES("svg/gaming/game heart.svg"), x: 5, y: 5, w: 7, rot: -10 },
+            { src: RES("svg/gaming/game.svg"), x: 6, y: 30, w: 10, rot: -8, behind: true },
+            { src: RES("png/level up/level-up.png"), x: 88, y: 8, w: 12, rot: 8 },
+            { src: RES("png/level up/cheer.png"), x: 8, y: 80, w: 11, rot: -10 }
         ]
     },
 
@@ -204,7 +213,10 @@ const PAGES = [
         decor: [
             { src: RES("svg/music/music3.svg"), x: 6, y: 66, w: 11, rot: -10, o: 0.85 },
             { src: RES("svg/music/music4.svg"), x: 79, y: 20, w: 11, rot: -10, o: 0.85 },
-            { src: RES("png/music/music note violet.png"), x: 82, y: 82, w: 7, rot: 12, o: 0.9 }
+            { src: RES("png/music/music note violet.png"), x: 82, y: 82, w: 7, rot: 12, o: 0.9 },
+            { src: RES("png/music/new/violen.png"), x: 3, y: 12, w: 9, rot: -10 },
+            { src: RES("png/music/new/mp3.png"), x: 87, y: 48, w: 9, rot: 8 },
+            { src: RES("svg/music/music1.svg"), x: 46, y: 88, w: 8, rot: 6, o: 0.85 }
         ]
     },
 
@@ -283,7 +295,10 @@ const PAGES = [
         cornerImg: nextCorner(),
         decor: [
             { src: RES("png/music/music note violet.png"), x: 84, y: 4, w: 8, rot: 12 },
-            { src: RES("svg/gaming/game heart.svg"), x: 3, y: 87, w: 9, rot: -8 }
+            { src: RES("svg/gaming/game heart.svg"), x: 3, y: 87, w: 9, rot: -8 },
+            { src: RES("png/food/cupcakes.png"), x: 4, y: 28, w: 11, rot: -8 },
+            { src: RES("png/cute/star.png"), x: 88, y: 28, w: 8, rot: 12 },
+            { src: RES("png/lazying around/sleeping cat.png"), x: 80, y: 66, w: 12, rot: 8 }
         ]
     },
 
@@ -323,7 +338,10 @@ const PAGES = [
         ],
         cornerImg: nextCorner(),
         decor: [
-            { src: RES("png/seaweed/green sea weed.png"), x: 85, y: 90, w: 12, rot: 4 }
+            { src: RES("png/seaweed/green sea weed.png"), x: 85, y: 90, w: 12, rot: 4 },
+            { src: RES("png/music/new/notw.png"), x: 5, y: 8, w: 9, rot: -8 },
+            { src: RES("png/cute/star.png"), x: 88, y: 12, w: 8, rot: 10 },
+            { src: RES("svg/random/featherpen.svg"), x: 6, y: 80, w: 9, rot: 24 }
         ]
     },
 
@@ -350,7 +368,10 @@ const PAGES = [
         cornerImg: nextCorner(),
         decor: [
             { src: RES("png/coral/blue coral.png"), x: 84, y: 50, w: 15, rot: 5 },
-            { src: RES("svg/starfish.svg"), x: 6, y: 29, w: 10, rot: -12 }
+            { src: RES("svg/starfish.svg"), x: 6, y: 29, w: 10, rot: -12 },
+            { src: RES("png/sea elements/octopus.png"), x: 4, y: 8, w: 11, rot: -8 },
+            { src: RES("png/sea elements/pearl.png"), x: 88, y: 8, w: 9, rot: 10 },
+            { src: RES("svg/turtule.svg"), x: 10, y: 60, w: 13, rot: -6, behind: true }
         ]
     },
 

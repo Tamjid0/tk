@@ -938,13 +938,8 @@ button {
     background-repeat: repeat;
 }
 
-/* mirror + re-phase the pattern on right-side pages so spreads never look identical side by side.
-   (class is set on the .page element itself — NOT via .slot-right ancestor —
-   because flip sheets live outside the slots mid-animation) */
-.page[class*="tex-"].tex-side-r::before {
-    transform: scaleX(-1);
-    background-position: 37px 91px;
-}
+/* right-side pages intentionally share the exact same pattern phase as the
+   left — no mirror, no re-phase, no movement before or during flips. */
 
 .tex-dots::before {
     background-image: radial-gradient(rgba(26, 95, 138, .10) 1.2px, transparent 1.3px);

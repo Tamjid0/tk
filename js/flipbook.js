@@ -1273,9 +1273,7 @@
         const v = views[idx];
         if (mode === "single") {
             slotLeft.replaceChildren();
-            const sp = makePage(pageModel(v[0]));
-            sp.classList.add("tex-side-r");
-            slotRight.replaceChildren(sp);
+            slotRight.replaceChildren(makePage(pageModel(v[0])));
             anchor = v[0];
         } else {
             if (v[0] === null) {
@@ -1284,9 +1282,7 @@
             } else {
                 slotLeft.replaceChildren(makePage(pageModel(v[0])));
             }
-            const rp = makePage(pageModel(v[1]));
-            rp.classList.add("tex-side-r");
-            slotRight.replaceChildren(rp);
+            slotRight.replaceChildren(makePage(pageModel(v[1])));
             anchor = v[0] !== null ? v[0] : v[1];
         }
         book.classList.toggle("is-closed", mode === "double" && v[0] === null);
@@ -1342,12 +1338,6 @@
         const sheet = el("div", "sheet " + (dir > 0 ? "dir-fwd" : "dir-bwd"));
         const frontPg = makePage(pageModel(frontIdx));
         const backPg = makePage(pageModel(backIdx));
-        /* keep right-side texture phase stable mid-flip: the sheet lives
-           outside .slot-right, so the side must ride on the page itself */
-        const frontIsRight = mode === "single" || (mode === "double" && dir > 0);
-        const backIsRight = mode === "single" || (mode === "double" && dir < 0);
-        if (frontIsRight) frontPg.classList.add("tex-side-r");
-        if (backIsRight) backPg.classList.add("tex-side-r");
         const front = el("div", "face face--front"); front.appendChild(frontPg);
         const back = el("div", "face face--back"); back.appendChild(backPg);
         sheet.append(front, back);
