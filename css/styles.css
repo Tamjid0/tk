@@ -4389,53 +4389,308 @@ figcaption::after {
    These intentionally use different geometry instead of one grid.
    ================================================================ */
 
-/* ---- Spread 2: interests as scattered memory prints ---- */
+/* ---- Spread 2: CREATIVE ARTS scrapbook (reference: painting/makeup/sketch collage) ----
+   L1: kraft desk base + cream graph sheet with torn deckled edge + watercolor
+   washes + paper grain (premade layered-gradient paper technique: stacked
+   repeating-linear grid, radial-gradient washes, dotted grain). */
 .page--hobbies-left {
     background:
-        radial-gradient(ellipse 80% 45% at 15% 8%, rgba(240, 214, 138, .12), transparent 70%),
-        linear-gradient(145deg, #f8f5ff 0%, #edf5f6 100%);
+        radial-gradient(circle at 20% 30%, rgba(120, 80, 40, .25), transparent 55%),
+        linear-gradient(145deg, #d9b98c, #c9a06e);
 }
 
 .page--hobbies-left .page-inner {
     display: block;
-    padding: 7%;
+    padding: 0;
     overflow: hidden;
 }
 
-.page--hobbies-left .hobby-grid {
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 100%;
-    min-height: 0;
-    overflow: visible;
-}
-
-.page--hobbies-left .hobby-cell {
+.art-stage {
     position: absolute;
-    width: 43%;
-    height: 37%;
+    inset: 2.5% 3% 2.5% 3%;
+    background-color: #f6f1e2;
+    background-image:
+        radial-gradient(ellipse 34% 20% at 8% 6%, rgba(64, 170, 170, .5), transparent 70%),
+        radial-gradient(ellipse 30% 18% at 92% 4%, rgba(150, 110, 220, .45), transparent 70%),
+        radial-gradient(ellipse 40% 24% at 8% 96%, rgba(64, 180, 180, .45), transparent 70%),
+        radial-gradient(ellipse 44% 26% at 90% 94%, rgba(240, 200, 90, .5), transparent 70%),
+        radial-gradient(ellipse 26% 16% at 50% 100%, rgba(230, 120, 180, .35), transparent 70%),
+        radial-gradient(rgba(120, 95, 60, .28) .8px, transparent 1.2px),
+        linear-gradient(to right, rgba(150, 130, 110, .28) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(150, 130, 110, .28) 1px, transparent 1px),
+        linear-gradient(to right, rgba(150, 130, 110, .4) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(150, 130, 110, .4) 1px, transparent 1px);
+    background-size:
+        cover, cover, cover, cover, cover,
+        7px 7px,
+        20px 20px, 20px 20px,
+        100px 100px, 100px 100px;
+    box-shadow: 0 4px 18px rgba(60, 35, 10, .4);
+    clip-path: polygon(0% 1%, 3% 0%, 12% .8%, 25% 0%, 40% .7%, 55% 0%, 70% .8%, 85% 0%, 97% .6%, 100% 2%, 99.4% 12%, 100% 25%, 99.3% 40%, 100% 55%, 99.4% 70%, 100% 85%, 99.2% 97%, 96% 100%, 85% 99.3%, 70% 100%, 55% 99.4%, 40% 100%, 25% 99.3%, 10% 100%, 2% 99.4%, 0% 97%, .6% 85%, 0% 70%, .5% 55%, 0% 40%, .6% 25%, 0% 12%);
 }
 
-.page--hobbies-left .hobby-cell:nth-child(1) {
-    top: 5%;
-    left: 3%;
+/* L2: torn kraft sheet behind the top photos */
+.art-kraft {
+    position: absolute;
+    left: 2%;
+    top: 2%;
+    width: 62%;
+    height: 44%;
+    z-index: 1;
+    transform: rotate(-2deg);
+    background: linear-gradient(150deg, #d9b98c, #c8a172);
+    box-shadow: 0 3px 10px rgba(60, 35, 10, .3);
+    clip-path: polygon(1% 4%, 8% 0%, 30% 2%, 55% 0%, 80% 3%, 99% 1%, 100% 30%, 98% 55%, 100% 80%, 97% 99%, 70% 100%, 45% 98%, 20% 100%, 2% 98%, 0% 70%, 2% 45%, 0% 20%);
+    pointer-events: none;
 }
 
-.page--hobbies-left .hobby-cell:nth-child(2) {
+/* L2: aged staff-paper scraps with printed stave lines */
+.art-staff {
+    position: absolute;
+    z-index: 1;
+    background-color: #efe2c2;
+    background-image: repeating-linear-gradient(to bottom, transparent 0 7px, rgba(70, 55, 40, .6) 7px 8px);
+    background-size: 100% 48px;
+    background-repeat: repeat;
+    box-shadow: 0 3px 8px rgba(60, 35, 10, .3);
+    pointer-events: none;
+}
+
+.art-staff.st1 {
+    left: 44%;
+    top: 8%;
+    width: 52%;
+    height: 34%;
+    transform: rotate(2deg);
+    clip-path: polygon(0% 6%, 10% 0%, 40% 3%, 70% 0%, 100% 4%, 98% 40%, 100% 75%, 96% 100%, 60% 97%, 30% 100%, 4% 97%, 0% 60%);
+}
+
+.art-staff.st2 {
+    left: 30%;
+    top: 56%;
+    width: 44%;
+    height: 30%;
+    transform: rotate(-1.5deg);
+    clip-path: polygon(2% 3%, 25% 0%, 60% 2%, 90% 0%, 100% 8%, 98% 50%, 100% 90%, 90% 100%, 55% 98%, 25% 100%, 3% 97%, 0% 55%);
+}
+
+/* L2: small check-grid scrap, top-right */
+.art-check {
+    position: absolute;
+    right: 3%;
+    top: 30%;
+    width: 16%;
+    height: 9%;
+    z-index: 1;
+    transform: rotate(14deg);
+    background-color: rgba(255, 253, 246, .9);
+    background-image:
+        linear-gradient(to right, rgba(120, 150, 190, .5) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(120, 150, 190, .5) 1px, transparent 1px);
+    background-size: 8px 8px;
+    box-shadow: 0 2px 6px rgba(60, 35, 10, .3);
+    pointer-events: none;
+}
+
+/* L2: ink music notes scattered on the scraps */
+.art-note {
+    position: absolute;
+    z-index: 1;
+    font-family: "Segoe Script", "Apple Chancery", cursive;
+    color: #2e2e3a;
+    font-size: clamp(.85rem, 3.2cqi, 1.1rem);
+    transform: rotate(var(--r, 0deg));
+    opacity: .8;
+    pointer-events: none;
+}
+
+/* L3: polaroids with soft realistic paper shadows */
+.art-photo {
+    position: absolute;
+    background: #fff;
+    padding: clamp(5px, 1.2cqi, 8px);
+    padding-bottom: clamp(24px, 6cqi, 34px);
+    box-shadow: 0 1px 2px rgba(60, 40, 20, .25), 0 12px 30px rgba(60, 40, 20, .32);
+    transform: rotate(var(--rot, 0deg));
+    z-index: 3;
+}
+
+.art-photo > img {
+    width: 100%;
+    display: block;
+    cursor: pointer;
+}
+
+.art-photo.ap1 { left: 5%; top: 3%; width: 54%; --rot: -3deg; }
+.art-photo.ap2 { right: 3%; top: 31%; width: 47%; --rot: 2deg; }
+.art-photo.ap3 { left: 7%; bottom: 2%; width: 51%; --rot: -2deg; }
+
+/* handwritten captions inside the polaroid borders */
+.art-cap {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: clamp(4px, 1.2cqi, 8px);
+    text-align: center;
+    font-family: "Segoe Script", "Apple Chancery", cursive;
+    font-style: italic;
+    color: #33302a;
+    font-size: clamp(.62rem, 2.5cqi, .92rem);
+    pointer-events: none;
+}
+
+/* L4: galaxy star-washi strips (real star washi art) across photo tops */
+.art-washi {
+    position: absolute;
+    top: -11px;
+    width: 46%;
+    z-index: 4;
+    filter: drop-shadow(0 1px 2px rgba(20, 10, 40, .4));
+    pointer-events: none;
+}
+
+.art-washi img { width: 100%; display: block; }
+.art-washi.w1 { left: -6%; transform: rotate(-32deg); width: 40%; }
+.art-washi.w2 { right: -8%; transform: rotate(28deg); width: 42%; }
+.art-washi.w3 { left: -7%; transform: rotate(-24deg); width: 38%; }
+
+/* L4: pushpins on the makeup photo */
+.art-pin {
+    position: absolute;
+    z-index: 5;
+    width: clamp(13px, 3.8cqi, 20px);
+    pointer-events: none;
+    filter: drop-shadow(0 1px 2px rgba(5, 5, 20, .4));
+}
+
+.art-pin img { width: 100%; display: block; }
+.art-pin.p1 { top: -9px; left: 44%; transform: rotate(-8deg); }
+.art-pin.p2 { top: -7px; right: 8%; transform: rotate(10deg); }
+
+/* L5: rainbow CREATIVE ARTS! titles */
+.art-rainbow {
+    position: absolute;
+    z-index: 1;
+    font-family: "Comic Sans MS", "Chalkboard SE", "Segoe Print", cursive;
+    font-weight: 900;
+    font-size: clamp(.95rem, 4.4cqi, 1.5rem);
+    letter-spacing: .04em;
+    white-space: nowrap;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, .7), 2px 2px 0 rgba(90, 60, 40, .18);
+    pointer-events: none;
+}
+
+.art-rainbow .rb { display: inline-block; }
+.art-rainbow.r1 { right: 3%; top: 4.5%; transform: rotate(1deg); }
+.art-rainbow.r2 { right: 6%; top: 10.5%; transform: rotate(1deg); }
+.art-rainbow.r3 { left: 3%; top: 41%; transform: rotate(-2deg); }
+.art-rainbow.r4 { left: 5%; top: 47%; transform: rotate(-2deg); }
+
+/* L5: script Inspire! accents */
+.art-inspire {
+    position: absolute;
+    z-index: 1;
+    font-family: "Segoe Script", "Apple Chancery", cursive;
+    font-style: italic;
+    font-weight: 700;
+    color: #2e2a24;
+    font-size: clamp(.8rem, 3.6cqi, 1.2rem);
+    text-shadow: 1px 2px 0 rgba(240, 150, 200, .55);
+    pointer-events: none;
+}
+
+.art-inspire.i1 { right: 3%; top: 24%; transform: rotate(3deg); }
+.art-inspire.i2 { left: 44%; top: 62%; transform: rotate(-3deg); }
+
+/* L5: dotted DODIE header giggle */
+.art-dodie {
+    position: absolute;
+    left: 40%;
     top: 1%;
+    z-index: 1;
+    font-family: "Comic Sans MS", "Chalkboard SE", cursive;
+    font-weight: 700;
+    letter-spacing: .18em;
+    color: #6a5a48;
+    font-size: clamp(.55rem, 2.4cqi, .8rem);
+    pointer-events: none;
+}
+
+.art-dodie::before,
+.art-dodie::after {
+    content: "﹒﹒";
+    letter-spacing: .1em;
+}
+
+/* L5: INK splatter badge */
+.art-ink {
+    position: absolute;
     right: 4%;
+    top: 1.5%;
+    z-index: 5;
+    width: clamp(30px, 9cqi, 48px);
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: "Comic Sans MS", "Chalkboard SE", cursive;
+    font-weight: 900;
+    font-size: clamp(.55rem, 2.2cqi, .75rem);
+    background: radial-gradient(circle at 50% 45%, #222 62%, transparent 64%), radial-gradient(circle at 18% 20%, #222 8%, transparent 9%), radial-gradient(circle at 85% 25%, #222 6%, transparent 7%), radial-gradient(circle at 90% 80%, #222 7%, transparent 8%), radial-gradient(circle at 12% 75%, #222 5%, transparent 6%);
+    border-radius: 48% 52% 50% 50%;
+    transform: rotate(8deg);
+    pointer-events: none;
 }
 
-.page--hobbies-left .hobby-cell:nth-child(3) {
-    bottom: 4%;
-    left: 8%;
+/* L5: vertical margin doodles */
+.art-margin {
+    position: absolute;
+    z-index: 1;
+    font-family: "Segoe Script", "Apple Chancery", cursive;
+    font-style: italic;
+    color: #3a352c;
+    font-size: clamp(.55rem, 2.3cqi, .78rem);
+    writing-mode: vertical-rl;
+    pointer-events: none;
 }
 
-.page--hobbies-left .hobby-cell:nth-child(4) {
-    right: 1%;
-    bottom: 1%;
+.art-margin.m1 { left: 1%; top: 26%; transform: rotate(180deg); }
+.art-margin.m2 { right: 1%; top: 44%; letter-spacing: .12em; }
+
+/* L5: Dotes checklist, bottom-right */
+.art-dotes {
+    position: absolute;
+    right: 3%;
+    bottom: 2%;
+    width: 34%;
+    z-index: 1;
+    font-family: "Segoe Script", "Apple Chancery", cursive;
+    color: #3a352c;
+    font-size: clamp(.5rem, 2.1cqi, .72rem);
+    line-height: 1.35;
+    pointer-events: none;
 }
+
+.art-dotes::first-line {
+    font-weight: 700;
+    font-size: 1.15em;
+}
+
+/* L5: filled margin stars */
+.art-star {
+    position: absolute;
+    z-index: 5;
+    font-size: clamp(.7rem, 2.8cqi, 1rem);
+    text-shadow: 0 0 6px currentColor;
+    pointer-events: none;
+}
+
+.art-star.s1 { left: 2%; top: 38%; color: #e8c53a; }
+.art-star.s2 { left: 30%; top: 37%; color: #58b368; }
+.art-star.s3 { right: 2%; top: 27%; color: #e8c53a; }
+.art-star.s4 { right: 4%; top: 56%; color: #9b6dd6; }
+.art-star.s5 { left: 4%; bottom: 22%; color: #e8c53a; }
+.art-star.s6 { right: 30%; bottom: 5%; color: #4a9de0; }
 
 .page--hobbies-right {
     background:

@@ -88,21 +88,23 @@ const PAGES = [
         ]
     },
 
-    /* ═══ SPREAD 2: ART — The Artist In You ══════════════════ */
+    /* ═══ SPREAD 2: ART — Creative Arts scrapbook (reference: painting/makeup/sketch collage) ===
+       PAGE 4 art-stage, 5 layers: graph paper + watercolor washes / kraft + staff-paper
+       scraps / 3 polaroids / galaxy washi + clip + pins / rainbow titles + art stickers. */
     {
         type: "hobbies-left",
-        texture: "stars",
-        gridClass: "cols-2",
+        texture: "",
         images: [
-            { src: IMG("dolia doing karate.png"), caption: "Karate" },
-            { src: IMG("dolia doing makup.png"), caption: "Makeup" },
-            { src: IMG("dolia doing makeup day.png"), caption: "Makeup Day" },
-            { src: IMG("dolia listening to music.png"), caption: "Music" }
+            { src: IMG("dolia doing makeup day.png"), caption: "Painting Art" },
+            { src: IMG("dolia doing makup.png"), caption: "Creative Makeup" },
+            { src: IMG("dolia drawing heino.jpg"), caption: "Digital Sketching!" }
         ],
         decor: [
-            { src: RES("svg/art/art-brush-general-svgrepo-com.svg"), x: -3, y: 2, w: 14, rot: -16, behind: true },
-            { src: RES("svg/art/art-palette-svgrepo-com.svg"), x: 60, y: 40, w: 35, rot: -9 },
-            { src: RES("svg/art/pencil.svg"), x: 75, y: 90, w: 17, rot: 24 }
+            { src: RES("png/art/color-palette.png"), x: 34, y: 40, w: 22, rot: -8 },
+            { src: RES("png/art/paint-tube.png"), x: -4, y: 44, w: 24, rot: -12 },
+            { src: RES("png/art/paint-brush.png"), x: 63, y: 76, w: 26, rot: 24 },
+            { src: RES("png/art/paint-tube.png"), x: 74, y: 82, w: 22, rot: 130, flip: true },
+            { src: RES("png/art/crayons.png"), x: 2, y: 78, w: 13, rot: 8 }
         ]
     },
     {

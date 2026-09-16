@@ -458,12 +458,96 @@
         return pg;
     }
 
+    /* PAGE 4 creative-arts scrapbook, 5 layers (reference: painting/makeup/sketch collage):
+       L1 graph paper + watercolor washes (CSS) / L2 kraft + staff-paper scraps /
+       L3 3 polaroids / L4 galaxy washi + clip + pins / L5 rainbow titles + doodles */
     function buildHobbiesLeft(p) {
         const pg = el("div", "page page--hobbies-left");
         const inner = el("div", "page-inner");
-        const grid = el("div", "hobby-grid " + (p.gridClass || "cols-2"));
-        (p.images || []).forEach(img => grid.appendChild(imgCell(img.src, img.caption, "hobby-cell")));
-        inner.appendChild(grid);
+        const stage = el("div", "art-stage");
+        // L2: torn kraft sheet + staff-paper scraps + check-grid scrap (behind photos)
+        stage.appendChild(el("div", "art-kraft"));
+        stage.appendChild(el("div", "art-staff st1"));
+        stage.appendChild(el("div", "art-staff st2"));
+        stage.appendChild(el("div", "art-check"));
+        // L2: scattered staff notes on the scraps
+        [["♪", 56, 30, -8], ["♫", 66, 62, 6], ["♩", 48, 70, -6]].forEach(([ch, x, y, r]) => {
+            const n = el("span", "art-note");
+            n.textContent = ch;
+            n.style.left = x + "%"; n.style.top = y + "%";
+            n.style.setProperty("--r", r + "deg");
+            stage.appendChild(n);
+        });
+        // L5: rainbow titles + script accents (behind photos so cards overlap them)
+        const rainbow = (txt, cls) => {
+            const t = el("div", cls);
+            const cols = ["#e8546d", "#f0903a", "#e8c53a", "#58b368", "#4a9de0", "#9b6dd6", "#e8546d", "#f0903a", "#e8c53a", "#58b368", "#4a9de0", "#9b6dd6", "#e8546d"];
+            [...txt].forEach((ch, i) => {
+                if (ch === " ") { t.appendChild(document.createTextNode(" ")); return; }
+                const s = el("span", "rb");
+                s.textContent = ch;
+                s.style.color = cols[i % cols.length];
+                t.appendChild(s);
+            });
+            return t;
+        };
+        stage.appendChild(rainbow("CREATIVE", "art-rainbow r1"));
+        stage.appendChild(rainbow("ARTS!", "art-rainbow r2"));
+        stage.appendChild(rainbow("CREATIVE", "art-rainbow r3"));
+        stage.appendChild(rainbow("ARTS!", "art-rainbow r4"));
+        [["Inspire!", "i1"], ["Inspire!", "i2"]].forEach(([txt, c]) => {
+            const s = el("div", "art-inspire " + c); s.textContent = txt; stage.appendChild(s);
+        });
+        const dodie = el("div", "art-dodie"); dodie.textContent = "DODIE"; stage.appendChild(dodie);
+        const ink = el("div", "art-ink"); ink.textContent = "INK"; stage.appendChild(ink);
+        [["Creative note!", "m1"], ["PALIST STAJES", "m2"]].forEach(([txt, c]) => {
+            const s = el("div", "art-margin " + c); s.textContent = txt; stage.appendChild(s);
+        });
+        const dotes = el("div", "art-dotes");
+        dotes.textContent = "Dotes • kink and notes • civilated ink dirot sketching or orals";
+        stage.appendChild(dotes);
+        // L3: 3 polaroids with handwritten captions
+        (p.images || []).slice(0, 3).forEach((img, i) => {
+            const ph = el("div", "art-photo ap" + (i + 1));
+            const im = document.createElement("img");
+            im.src = img.src; im.alt = img.caption || ""; im.loading = "lazy";
+            ph.appendChild(im);
+            if (img.caption) { const c = el("span", "art-cap"); c.textContent = img.caption; ph.appendChild(c); }
+            // L4: galaxy washi strip across the top of each photo (real star-washi art)
+            const w = el("div", "art-washi w" + (i + 1));
+            const wi = document.createElement("img");
+            wi.src = assetPath("assets/resources/png/music/star washi.png");
+            wi.alt = ""; wi.loading = "lazy"; wi.draggable = false;
+            w.appendChild(wi);
+            ph.appendChild(w);
+            // L4: paperclip on painting photo, pushpins on makeup photo
+            if (i === 0) {
+                const clip = el("div", "shot-clip c1");
+                const ci = document.createElement("img");
+                ci.src = assetPath("assets/resources/svg/random/paper-clip-svgrepo-com.svg");
+                ci.alt = ""; ci.loading = "lazy"; ci.draggable = false;
+                clip.appendChild(ci);
+                ph.appendChild(clip);
+            }
+            if (i === 1) {
+                ["pin-svgrepo-com.svg", "pin-02-svgrepo-com.svg"].forEach((ps, k) => {
+                    const pin = el("div", "art-pin p" + (k + 1));
+                    const pi = document.createElement("img");
+                    pi.src = assetPath("assets/resources/svg/random/" + ps);
+                    pi.alt = ""; pi.loading = "lazy"; pi.draggable = false;
+                    pin.appendChild(pi);
+                    ph.appendChild(pin);
+                });
+            }
+            stage.appendChild(ph);
+        });
+        // L5: hollow outline stars like the reference margins
+        for (let s = 1; s <= 6; s++) {
+            const star = el("span", "art-star s" + s);
+            star.textContent = "★";
+            stage.appendChild(star);
+        }
+        inner.appendChild(stage);
         pg.appendChild(inner);
         return pg;
     }
@@ -1476,7 +1560,7 @@
 
         /* Delegate click on any clickable image */
         document.addEventListener("click", (e) => {
-            const img = e.target.closest(".plate-media img, .hobby-cell img, .editorial-cell img, .gaming-cell img, .arcade-photo > img, .collage-shot img, .cinema-hero img, .cinema-frame img, .cinema-polaroid img, .cinema-game img, .cinema-sketch img");
+            const img = e.target.closest(".plate-media img, .hobby-cell img, .art-photo > img, .editorial-cell img, .gaming-cell img, .arcade-photo > img, .collage-shot img, .cinema-hero img, .cinema-frame img, .cinema-polaroid img, .cinema-game img, .cinema-sketch img");
             if (img && img.src) {
                 e.stopPropagation();
                 openLightbox(img.src, img.alt);
