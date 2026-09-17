@@ -139,8 +139,8 @@ const PAGES = [
         texture: "",
         images: [
             { src: IMG("dolia lazying around.jpg"), caption: "Sweet Dreams" },
-            { src: IMG("dolia listening to music.png"), caption: "In My Zone" },
-            { src: IMG("dolia doing karate.png"), caption: "Hi-yah! Karate Master!" },
+            { src: IMG("dolia playing pve.jpg"), caption: "In My Zone" },
+            { src: IMG("Dolia-determined.png"), caption: "Hi-yah! Karate Master!" },
             { src: RES("png/gaming/dolia x heino gaming dolia crying.png"), caption: "Co-op Mode!" }
         ],
         decor: [
@@ -310,9 +310,9 @@ const PAGES = [
         marquee: "",
         ticket: "DolIa x Heino",
         images: [
-            { src: IMG("dolia singing on karoke heino sitting behind.png"), caption: "KARAOKE NIGHTS" },
-            { src: RES("Dolia-celebrating.png") },
-            { src: RES("dolia resisting.png") },
+            { src: IMG("shared/Screenshot_20260810-151956_1.webp"), caption: "KARAOKE NIGHTS" },
+            { src: IMG("shared/Screenshot 2026-09-17 104357.png") },
+            { src: IMG("shared/IMG_9543.webp") },
             { src: IMG("dolia drawing heino.jpg") },
             { src: RES("png/gaming/dolia x heino gaming dolia crying.png"), caption: "GAME TIME" }
         ],
