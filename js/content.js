@@ -395,6 +395,16 @@ const PAGES = [
     {
         type: "back-cover",
         mark: "DOLIA",
-        secret: "You are the ocean's favorite princess. Happy Birthday, Dolia."
+        secret: "You are the ocean's favorite princess. Happy Birthday, Dolia.",
+        final: [
+            "If this little book made you smile even once,",
+            "then it did everything I hoped it would.",
+            "",
+            "You are my favorite artist, my player two,",
+            "my karaoke partner, and my calmest sea.",
+            "",
+            "Wherever this year takes you, take all of it —",
+            "happily, loudly, and entirely as yourself."
+        ]
     },
 ];

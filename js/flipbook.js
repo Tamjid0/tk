@@ -526,9 +526,9 @@
             (WPIECES[i] || []).forEach((sp) => {
                 const w = el("div", "art-washi w" + (i + 1) + sp.c + (sp.sheet === "P" ? " pink" : ""));
                 const wi = document.createElement("img");
-                wi.src = assetPath(sp.sheet === "P"
-                    ? "assets/resources/png/washi/washi pink.png"
-                    : "assets/resources/png/washi/washi 8.png");
+                wi.src = sp.sheet === "P"
+                    ? assetPath("assets/resources/png/washi/washi pink.png")
+                    : assetPath("assets/resources/png/washi/washi 8.png");
                 wi.alt = ""; wi.loading = "lazy"; wi.draggable = false;
                 if (sp.sheet === "P") { wi.style.marginTop = "-11%"; }
                 else { wi.style.marginTop = sp.row; wi.style.marginLeft = sp.col; }
@@ -1164,6 +1164,14 @@
         const mark = el("div", "back-cover-mark");
         mark.textContent = p.mark || "";
         inner.appendChild(mark);
+        if (p.final && p.final.length) {
+            const fin = el("div", "back-cover-final");
+            const ft = el("div", "bf-title"); ft.textContent = "Final Thoughts"; fin.appendChild(ft);
+            const fb = el("div", "bf-body");
+            p.final.forEach(line => { const para = el("p"); para.appendChild(tok(line)); fb.appendChild(para); });
+            fin.appendChild(fb);
+            inner.appendChild(fin);
+        }
         const bottle = el("div", "bottle-wrap");
         const bottleImg = document.createElement("img");
         bottleImg.src = assetPath("assets/resources/bottle message.png");
