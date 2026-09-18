@@ -1151,6 +1151,14 @@
         if (p.cornerImg) { const c = cornerImg(p.cornerImg); if (c) pg.appendChild(c); }
         const inner = el("div", "page-inner");
         inner.appendChild(use("crest", "end-crest"));
+        if (p.final && p.final.length) {
+            const fin = el("div", "end-final");
+            const ft = el("div", "ef-title"); ft.textContent = "Final Thoughts"; fin.appendChild(ft);
+            const fb = el("div", "ef-body");
+            p.final.forEach(line => { const para = el("p"); para.appendChild(tok(line)); fb.appendChild(para); });
+            fin.appendChild(fb);
+            inner.appendChild(fin);
+        }
         const note = el("p", "end-note"); note.appendChild(tok(p.note)); inner.appendChild(note);
         const mark = el("span", "end-mark"); mark.textContent = "\u2726"; inner.appendChild(mark);
         const sig = el("p", "end-sig"); sig.textContent = "From Heino"; inner.appendChild(sig);
@@ -1164,14 +1172,6 @@
         const mark = el("div", "back-cover-mark");
         mark.textContent = p.mark || "";
         inner.appendChild(mark);
-        if (p.final && p.final.length) {
-            const fin = el("div", "back-cover-final");
-            const ft = el("div", "bf-title"); ft.textContent = "Final Thoughts"; fin.appendChild(ft);
-            const fb = el("div", "bf-body");
-            p.final.forEach(line => { const para = el("p"); para.appendChild(tok(line)); fb.appendChild(para); });
-            fin.appendChild(fb);
-            inner.appendChild(fin);
-        }
         const bottle = el("div", "bottle-wrap");
         const bottleImg = document.createElement("img");
         bottleImg.src = assetPath("assets/resources/bottle message.png");

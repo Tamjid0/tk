@@ -3995,6 +3995,55 @@ figcaption::after {
     opacity: .75;
 }
 
+/* Finale letter on page 17: cream paper, ink text, gold tape on top */
+.end-final {
+    position: relative;
+    width: min(92%, 54ch);
+    padding: clamp(16px, 4.5cqi, 28px) clamp(14px, 5cqi, 30px);
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, .5), transparent 30%),
+        radial-gradient(120% 100% at 50% 0%, #fffdf6 0%, #fdf8ec 60%, #f7ecd9 100%);
+    border: 1px solid rgba(26, 95, 138, .14);
+    border-radius: 3px;
+    box-shadow:
+        0 1px 2px rgba(7, 20, 34, .08),
+        0 6px 18px rgba(7, 20, 34, .1);
+    transform: rotate(-.5deg);
+    text-align: center;
+}
+
+.end-final::before {
+    content: "";
+    position: absolute;
+    top: -9px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+    width: clamp(52px, 16cqi, 96px);
+    height: clamp(14px, 3.6cqi, 22px);
+    background: linear-gradient(180deg, rgba(240, 214, 138, .9), rgba(201, 168, 76, .75));
+    border-radius: 1px;
+    box-shadow: 0 1px 2px rgba(7, 20, 34, .12);
+}
+
+.end-final .ef-title {
+    font-family: var(--font-display);
+    color: var(--ink);
+    font-size: clamp(.95rem, 3.8cqi, 1.4rem);
+    margin-bottom: clamp(6px, 2cqi, 10px);
+}
+
+.end-final .ef-body {
+    color: var(--ink-soft);
+    font-size: clamp(.76rem, 3cqi, .95rem);
+    line-height: 1.7;
+}
+
+.end-final .ef-body p:empty::before {
+    content: "";
+    display: block;
+    height: .5em;
+}
+
 /* ---------------- Blank leaf ---------------- */
 .page--blank {
     display: grid;
@@ -5716,49 +5765,6 @@ figcaption::after {
     font-size: clamp(.55rem, 2cqi, .8rem);
     letter-spacing: .42em;
     text-indent: .42em;
-}
-
-/* Final-thoughts letter: the big closing note, glass card with gold trim */
-.back-cover-final {
-    position: relative;
-    width: min(88%, 52ch);
-    margin-top: clamp(10px, 3cqi, 20px);
-    padding: clamp(14px, 4cqi, 26px) clamp(14px, 5cqi, 30px);
-    background: linear-gradient(170deg, rgba(20, 48, 80, .88), rgba(10, 26, 46, .92));
-    border: 1px solid rgba(240, 214, 138, .45);
-    border-radius: 6px;
-    box-shadow: 0 6px 24px rgba(0, 0, 0, .45), inset 0 0 24px rgba(91, 181, 224, .08);
-    text-align: center;
-}
-
-.back-cover-final::before {
-    content: "";
-    position: absolute;
-    inset: 5px;
-    border: 1px solid rgba(240, 214, 138, .22);
-    border-radius: 4px;
-    pointer-events: none;
-}
-
-.back-cover-final .bf-title {
-    font-family: var(--font-display);
-    color: rgba(240, 214, 138, .92);
-    font-size: clamp(.95rem, 3.8cqi, 1.4rem);
-    letter-spacing: .06em;
-    margin-bottom: clamp(6px, 2cqi, 12px);
-}
-
-.back-cover-final .bf-body {
-    font-family: var(--font-body);
-    color: rgba(240, 235, 220, .92);
-    font-size: clamp(.72rem, 2.7cqi, .95rem);
-    line-height: 1.7;
-}
-
-.back-cover-final .bf-body p:empty::before {
-    content: "";
-    display: block;
-    height: .5em;
 }
 
 .bottle-wrap {

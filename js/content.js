@@ -381,21 +381,13 @@ const PAGES = [
         ]
     },
 
-    /* ═══ END PAGE — signature ═══════════════════════════════ */
+    /* ═══ PAGE 16 — quiet breather facing the wishes ═══════════ */
+    { type: "empty" },
+
+    /* ═══ PAGE 17 — finale: final thoughts + signature ═══════ */
     {
         type: "end",
         texture: "dots",
-        note: "This book was made with love, just for you."
-    },
-
-    /* Empty right page — add a photo here later */
-    { type: "empty" },
-
-    /* ═══ BACK COVER ═════════════════════════════════════════ */
-    {
-        type: "back-cover",
-        mark: "DOLIA",
-        secret: "You are the ocean's favorite princess. Happy Birthday, Dolia.",
         final: [
             "If this little book made you smile even once,",
             "then it did everything I hoped it would.",
@@ -405,6 +397,14 @@ const PAGES = [
             "",
             "Wherever this year takes you, take all of it —",
             "happily, loudly, and entirely as yourself."
-        ]
+        ],
+        note: "This book was made with love, just for you."
+    },
+
+    /* ═══ BACK COVER ═════════════════════════════════════════ */
+    {
+        type: "back-cover",
+        mark: "DOLIA",
+        secret: "You are the ocean's favorite princess. Happy Birthday, Dolia."
     },
 ];
