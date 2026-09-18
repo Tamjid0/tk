@@ -63,10 +63,12 @@ const PAGES = [
     {
         type: "intro-left",
         texture: "dots",
-        art: { token: "BIRTHDAY", src: RES("Dolia-celebrating.png"), scale: 5, fit: "contain" },
+        art: { token: "BIRTHDAY", src: RES("bday.jpg"), scale: 5, fit: "contain" },
         decor: [
-            { src: RES("png/fish.png"), x: 82, y: 5, w: 12, rot: 12 },
-            { src: RES("png/seaweed/yello coral.png"), x: 2, y: 82, w: 13, rot: -8 }
+            { src: RES("png/birthday/garland.png"), x: -4, y: -3, w: 34, rot: 0 },
+            { src: RES("png/birthday/balloon.png"), x: 74, y: 2, w: 22, rot: 6 },
+            { src: RES("png/birthday/birthday-cake.png"), x: 72, y: 78, w: 22, rot: -6 },
+            { src: RES("png/birthday/party-hat.png"), x: 4, y: 76, w: 18, rot: -14 }
         ]
     },
     {
@@ -98,15 +100,17 @@ const PAGES = [
         type: "hobbies-left",
         texture: "",
         images: [
-            { src: IMG("dolia cute dress.jpg"), caption: "Dress-Up Art" },
-            { src: IMG("dolia doing makup.png"), caption: "Creative Makeup" },
+            { src: IMG("dolia sketching.jpg"), caption: "Dress-Up Art" },
+            { src: IMG("dolia lazying around.jpg"), caption: "Creative Makeup" },
             { src: IMG("dolia drawing heino.jpg"), caption: "Digital Sketching!" }
         ],
         decor: [
-            { src: RES("png/art/color-palette.png"), x: 40, y: 30, w: 19, rot: -8 },
+            { src: RES("png/art/color-palette.png"), x: 15, y: 45, w: 19, rot: -8 },
             { src: RES("png/art/paint-tube.png"), x: -2, y: 10, w: 20, rot: -28 },
             { src: RES("png/art/paint-brush.png"), x: 44, y: 52, w: 18, rot: 28 },
-            { src: RES("png/art/paint-tube.png"), x: 52, y: 82, w: 17, rot: 24 },
+            { src: RES("png/art/drawing.png"), x: 67, y: 76, w: 18, rot: -8 },
+            { src: RES("png/art/pencil-case.png"), x: 24, y: 0, w: 14, rot: -10 },
+            { src: RES("svg/art/pencil.svg"), x: 80, y: 68, w: 9, rot: 32 },
             { src: RES("png/art/crayons.png"), x: 1, y: 70, w: 12, rot: 8 }
         ]
     },
@@ -139,7 +143,7 @@ const PAGES = [
         type: "editorial-left",
         texture: "",
         images: [
-            { src: IMG("dolia lazying around.jpg"), caption: "Sweet Dreams" },
+            { src: IMG("crying.png"), caption: "Sweet Dreams" },
             { src: IMG("dolia playing pve.jpg"), caption: "In My Zone" },
             { src: IMG("Dolia-determined.png"), caption: "Hi-yah! Karate Master!" },
             { src: RES("png/gaming/dolia x heino gaming dolia crying.png"), caption: "Co-op Mode!" }
@@ -317,8 +321,8 @@ const PAGES = [
             { src: IMG("shared/Screenshot_20260810-151956_1.webp"), caption: "KARAOKE NIGHTS" },
             { src: IMG("shared/Screenshot 2026-09-17 104357.png") },
             { src: IMG("shared/IMG_9543.webp") },
-            { src: IMG("dolia drawing heino.jpg") },
-            { src: RES("png/gaming/dolia x heino gaming dolia crying.png"), caption: "GAME TIME" }
+            { src: IMG("shared/gift.webp") },
+            { src: IMG("shared/deeper.webp"), caption: "GAME TIME" }
         ],
         decor: [
             { src: RES("svg/music/music2.svg"), x: 57, y: 7, w: 6, rot: -8 },
@@ -328,7 +332,9 @@ const PAGES = [
             { src: RES("sea shell.png"), x: 45, y: 89, w: 9, rot: -8 },
             { src: RES("png/random/discord sticker.png"), x: 69, y: 62, w: 9, rot: 6 },
             { src: RES("png/random/christmas.png"), x: 50, y: -2, w: 14, rot: 8 },
-            { src: RES("png/random/leaf-insect.png"), x: 0, y: 12, w: 7, rot: -10 }
+            { src: RES("png/random/leaf-insect.png"), x: 0, y: 12, w: 7, rot: -10 },
+            { src: RES("png/random/discord.png"), x: 45, y: 62, w: 15, rot: 6 },
+            { src: RES("png/random/cicada.png"), x: 5, y: 62, w: 9, rot: 15 }
         ]
     },
     {

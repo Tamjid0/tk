@@ -167,7 +167,7 @@
 }
 
 .splash-chest img {
-    width: clamp(600px, 80vw, 900px);
+    width: clamp(150cqi, 80vw, 225cqi);
     height: auto;
     filter: drop-shadow(0 8px 30px rgba(0, 0, 0, .5));
     position: relative;
@@ -188,7 +188,7 @@
     z-index: 2;
     font-family: var(--font-display);
     color: rgba(232, 238, 248, .85);
-    font-size: clamp(.85rem, 3.5cqi, 1.2rem);
+    font-size: clamp(3.4cqi, 3.5cqi, 4.8cqi);
     letter-spacing: .08em;
     text-shadow: 0 2px 12px rgba(0, 0, 0, .6);
     animation: hintFade 2.5s ease-in-out infinite;
@@ -974,13 +974,13 @@ button {
     position: absolute;
     inset: 0;
     z-index: 2;
-    padding: clamp(16px, 6.5cqi, 38px);
+    padding: clamp(4cqi, 6.5cqi, 9.5cqi);
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: clamp(8px, 2.6cqi, 16px);
-    overflow: hidden auto;
+    gap: clamp(2cqi, 2.6cqi, 4cqi);
+    overflow: hidden;
     scrollbar-width: thin;
 }
 
@@ -1003,12 +1003,12 @@ button {
 }
 
 .page--framed .page-inner::before {
-    inset: clamp(8px, 2.6cqi, 16px);
+    inset: clamp(2cqi, 2.6cqi, 4cqi);
     border: 1px solid rgba(26, 95, 138, .42);
 }
 
 .page--framed .page-inner::after {
-    inset: calc(clamp(8px, 2.6cqi, 16px) + 3px);
+    inset: calc(clamp(2cqi, 2.6cqi, 4cqi) + 3px);
     border: 1px solid rgba(26, 95, 138, .18);
 }
 
@@ -1019,8 +1019,8 @@ button {
     position: absolute;
     top: 2%;
     right: 3%;
-    width: clamp(60px, 15cqi, 110px);
-    height: clamp(60px, 15cqi, 110px);
+    width: clamp(15cqi, 15cqi, 27.5cqi);
+    height: clamp(15cqi, 15cqi, 27.5cqi);
     pointer-events: none;
     z-index: 5;
     overflow: hidden;
@@ -1036,10 +1036,10 @@ button {
 
 .page-accent-sticker {
     position: absolute;
-    bottom: clamp(8px, 3cqi, 18px);
-    right: clamp(8px, 3cqi, 18px);
-    width: clamp(50px, 14cqi, 90px);
-    height: clamp(50px, 14cqi, 90px);
+    bottom: clamp(2cqi, 3cqi, 4.5cqi);
+    right: clamp(2cqi, 3cqi, 4.5cqi);
+    width: clamp(12.5cqi, 14cqi, 22.5cqi);
+    height: clamp(12.5cqi, 14cqi, 22.5cqi);
     pointer-events: none;
     z-index: 5;
     transform: rotate(8deg);
@@ -1080,21 +1080,21 @@ button {
 /* ---- Shared: text page (right side) ---- */
 .page--text-page .page-inner {
     justify-content: center;
-    gap: clamp(10px, 3cqi, 20px);
-    padding: clamp(14px, 4.5cqi, 30px);
+    gap: clamp(2.5cqi, 3cqi, 5cqi);
+    padding: clamp(3.5cqi, 4.5cqi, 7.5cqi);
 }
 
 .text-title {
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: clamp(1rem, 4cqi, 1.6rem);
+    font-size: clamp(4cqi, 4cqi, 6.4cqi);
     color: var(--ink);
     line-height: 1.3;
 }
 
 .text-subtitle {
     font-family: var(--font-ui);
-    font-size: clamp(.6rem, 2cqi, .8rem);
+    font-size: clamp(2.4cqi, 2cqi, 3.2cqi);
     letter-spacing: .15em;
     text-transform: uppercase;
     color: var(--aqua-ink);
@@ -1102,7 +1102,7 @@ button {
 }
 
 .text-body {
-    font-size: clamp(.8rem, 2.8cqi, 1rem);
+    font-size: clamp(3.2cqi, 2.8cqi, 4cqi);
     line-height: 1.65;
     color: var(--ink-soft);
     max-width: 100%;
@@ -1114,7 +1114,7 @@ button {
 
 .text-large {
     font-family: var(--font-display);
-    font-size: clamp(1rem, 3.5cqi, 1.4rem);
+    font-size: clamp(4cqi, 3.5cqi, 5.6cqi);
     line-height: 1.5;
     color: var(--ink);
     font-style: italic;
@@ -1135,23 +1135,23 @@ button {
     box-shadow:
         0 1px 2px rgba(7, 20, 34, .08),
         0 6px 18px rgba(7, 20, 34, .1);
-    padding: clamp(14px, 4.5cqi, 30px) clamp(14px, 5cqi, 32px);
+    padding: clamp(3.5cqi, 4.5cqi, 7.5cqi) clamp(3.5cqi, 5cqi, 8cqi);
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: clamp(8px, 2.4cqi, 14px);
+    gap: clamp(2cqi, 2.4cqi, 3.5cqi);
     transform: rotate(-.5deg);
 }
 
 .paper-card::before {
     content: "";
     position: absolute;
-    top: -9px;
+    top: -2.25cqi;
     left: 50%;
     transform: translateX(-50%) rotate(-2deg);
-    width: clamp(52px, 16cqi, 96px);
-    height: clamp(14px, 3.6cqi, 22px);
+    width: clamp(13cqi, 16cqi, 24cqi);
+    height: clamp(3.5cqi, 3.6cqi, 5.5cqi);
     background: linear-gradient(180deg, rgba(255, 236, 170, .85), rgba(255, 222, 130, .75));
     border-left: 1px dashed rgba(160, 120, 40, .25);
     border-right: 1px dashed rgba(160, 120, 40, .25);
@@ -1194,7 +1194,7 @@ button {
 .page--editorial-right .paper-card { transform: rotate(.8deg); width: 94%; margin-left: 0; }
 .page--editorial-right .paper-card::before {
     transform: translateX(-50%) rotate(0deg);
-    width: clamp(64px, 20cqi, 116px);
+    width: clamp(16cqi, 20cqi, 29cqi);
     background: repeating-linear-gradient(90deg, rgba(91, 181, 224, .75) 0 6px, rgba(255, 255, 255, .5) 6px 12px);
 }
 
@@ -1208,7 +1208,7 @@ button {
 
 .page--gaming-right .paper-card { transform: rotate(1.1deg); }
 .page--gaming-right .paper-card::before {
-    width: clamp(64px, 20cqi, 116px);
+    width: clamp(16cqi, 20cqi, 29cqi);
     transform: translateX(-50%) rotate(-3deg);
     background: linear-gradient(180deg, rgba(255, 236, 170, .9), rgba(232, 197, 58, .75));
 }
@@ -1219,7 +1219,7 @@ button {
     background: linear-gradient(180deg, #2b2350, #171233);
     color: #ffe27a;
     border-radius: 3px;
-    padding: 2px 10px 3px;
+    padding: .5cqi 2.5cqi .75cqi;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, .6);
 }
 
@@ -1271,13 +1271,13 @@ button {
 .page-decor.taped::before {
     content: "";
     position: absolute;
-    top: -6px;
+    top: -1.5cqi;
     left: 50%;
     transform: translateX(-50%) rotate(-4deg);
     width: 56%;
     height: 22%;
-    min-height: 8px;
-    max-height: 16px;
+    min-height: 2cqi;
+    max-height: 4cqi;
     background: rgba(255, 230, 150, .6);
     border-radius: 1px;
     z-index: 2;
@@ -1305,21 +1305,21 @@ button {
 
 .page--intro-right .page-inner {
     justify-content: center;
-    gap: clamp(14px, 4cqi, 24px);
-    padding: clamp(24px, 7cqi, 48px);
+    gap: clamp(3.5cqi, 4cqi, 6cqi);
+    padding: clamp(6cqi, 7cqi, 12cqi);
 }
 
 /* ---- Spread 2: Hobbies Grid ---- */
 .page--hobbies-left .page-inner {
-    padding: clamp(10px, 3cqi, 20px);
+    padding: clamp(2.5cqi, 3cqi, 5cqi);
     display: grid;
-    gap: clamp(6px, 1.5cqi, 12px);
+    gap: clamp(1.5cqi, 1.5cqi, 3cqi);
     align-content: center;
 }
 
 .page--hobbies-left .hobby-grid {
     display: grid;
-    gap: clamp(6px, 1.5cqi, 12px);
+    gap: clamp(1.5cqi, 1.5cqi, 3cqi);
     width: 100%;
     height: 100%;
 }
@@ -1339,8 +1339,8 @@ button {
     overflow: visible;
     border-radius: 2px;
     background: #fff;
-    padding: clamp(3px, .8cqi, 6px);
-    padding-bottom: clamp(12px, 3cqi, 22px);
+    padding: clamp(0.75cqi, .8cqi, 1.5cqi);
+    padding-bottom: clamp(3cqi, 3cqi, 5.5cqi);
     box-shadow:
         2px 3px 8px rgba(0, 0, 0, .15),
         0 1px 3px rgba(0, 0, 0, .1);
@@ -1358,11 +1358,11 @@ button {
 .page--hobbies-left .hobby-cell::before {
     content: '';
     position: absolute;
-    top: -4px;
+    top: -1cqi;
     left: 50%;
     transform: translateX(-50%) rotate(var(--tape-rot, 2deg));
-    width: clamp(20px, 6cqi, 36px);
-    height: clamp(8px, 2cqi, 14px);
+    width: clamp(5cqi, 6cqi, 9cqi);
+    height: clamp(2cqi, 2cqi, 3.5cqi);
     background: rgba(255, 230, 150, .55);
     border-radius: 1px;
     z-index: 2;
@@ -1379,27 +1379,27 @@ button {
 
 .page--hobbies-left .hobby-cell .hobby-caption {
     position: absolute;
-    bottom: clamp(3px, .8cqi, 6px);
-    left: clamp(3px, .8cqi, 6px);
-    right: clamp(3px, .8cqi, 6px);
+    bottom: clamp(0.75cqi, .8cqi, 1.5cqi);
+    left: clamp(0.75cqi, .8cqi, 1.5cqi);
+    right: clamp(0.75cqi, .8cqi, 1.5cqi);
     text-align: center;
     color: var(--ink-soft);
-    font-size: clamp(.5rem, 1.8cqi, .7rem);
+    font-size: clamp(2cqi, 1.8cqi, 2.8cqi);
     font-family: var(--font-ui);
     font-style: italic;
 }
 
 .page--hobbies-right .page-inner {
     justify-content: center;
-    gap: clamp(10px, 3cqi, 20px);
-    padding: clamp(20px, 6cqi, 40px);
+    gap: clamp(2.5cqi, 3cqi, 5cqi);
+    padding: clamp(5cqi, 6cqi, 10cqi);
 }
 
 /* ---- Spread 3: More of Her World (editorial) ---- */
 .page--editorial-left .page-inner {
-    padding: clamp(10px, 3cqi, 18px);
+    padding: clamp(2.5cqi, 3cqi, 4.5cqi);
     display: grid;
-    gap: clamp(6px, 1.5cqi, 10px);
+    gap: clamp(1.5cqi, 1.5cqi, 2.5cqi);
     align-content: center;
 }
 
@@ -1407,7 +1407,7 @@ button {
     display: grid;
     grid-template-columns: 1.2fr 0.8fr;
     grid-template-rows: 1fr 1fr;
-    gap: clamp(6px, 1.5cqi, 10px);
+    gap: clamp(1.5cqi, 1.5cqi, 2.5cqi);
     width: 100%;
     height: 100%;
 }
@@ -1421,7 +1421,7 @@ button {
     overflow: visible;
     border-radius: 2px;
     background: #fff;
-    padding: clamp(3px, .8cqi, 6px);
+    padding: clamp(0.75cqi, .8cqi, 1.5cqi);
     box-shadow:
         2px 3px 8px rgba(0, 0, 0, .15),
         0 1px 3px rgba(0, 0, 0, .1);
@@ -1439,11 +1439,11 @@ button {
 .page--editorial-left .editorial-cell::before {
     content: '';
     position: absolute;
-    top: -4px;
+    top: -1cqi;
     left: 50%;
     transform: translateX(-50%) rotate(var(--tape-rot, -3deg));
-    width: clamp(20px, 6cqi, 36px);
-    height: clamp(8px, 2cqi, 14px);
+    width: clamp(5cqi, 6cqi, 9cqi);
+    height: clamp(2cqi, 2cqi, 3.5cqi);
     background: rgba(255, 230, 150, .55);
     border-radius: 1px;
     z-index: 2;
@@ -1757,7 +1757,7 @@ button {
 .collage-torn {
     position: absolute;
     inset: 0;
-    top: calc(38% + 6px);
+    top: calc(38% + 1.5cqi);
     z-index: 1;
     background:
         radial-gradient(ellipse 45% 22% at 22% 78%, rgba(150, 95, 190, .14), transparent 65%),
@@ -1778,8 +1778,8 @@ button {
     content: "";
     position: absolute;
     inset: 0;
-    top: -2px;
-    height: 14px;
+    top: -.5cqi;
+    height: 3.5cqi;
     background: linear-gradient(to bottom, rgba(30, 10, 50, .22), transparent);
     filter: blur(2px);
 }
@@ -1817,8 +1817,8 @@ button {
 .collage-shot {
     position: absolute;
     background: #fff;
-    padding: clamp(4px, 1.1cqi, 7px);
-    padding-bottom: clamp(14px, 3.8cqi, 22px);
+    padding: clamp(1cqi, 1.1cqi, 1.75cqi);
+    padding-bottom: clamp(3.5cqi, 3.8cqi, 5.5cqi);
     transform: rotate(var(--rot, 0deg));
     transition: transform .2s ease, box-shadow .2s ease;
     z-index: 3;
@@ -1833,9 +1833,9 @@ button {
 .collage-shot::before {
     content: "";
     position: absolute;
-    inset: -2.5px;
+    inset: -.625cqi;
     border-radius: 5px;
-    padding: 2.5px;
+    padding: .625cqi;
     background:
         linear-gradient(115deg, transparent 20%, rgba(255, 255, 255, .75) 42%, rgba(255, 150, 250, .7) 52%, transparent 72%),
         conic-gradient(from 45deg, #ff8af2, #8ad8ff, #8affc0, #ffe98a, #c09aff, #ff8af2);
@@ -1857,10 +1857,10 @@ button {
 .collage-shot::after {
     content: "";
     position: absolute;
-    left: 2px;
-    right: 2px;
-    top: -7px;
-    height: 9px;
+    left: .5cqi;
+    right: .5cqi;
+    top: -1.75cqi;
+    height: 2.25cqi;
     background: radial-gradient(6.5px 6.5px at 6.5px 50%, #fff 97%, transparent 100%) 0 0 / 13px 9px repeat-x;
     filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .12));
     pointer-events: none;
@@ -1883,13 +1883,13 @@ button {
 
 .collage-cap {
     position: absolute;
-    bottom: clamp(3px, .8cqi, 6px);
+    bottom: clamp(0.75cqi, .8cqi, 1.5cqi);
     left: 0;
     right: 0;
     text-align: center;
     font-family: "Segoe Script", "Apple Chancery", cursive;
     font-style: italic;
-    font-size: clamp(.48rem, 1.7cqi, .62rem);
+    font-size: clamp(1.92cqi, 1.7cqi, 2.48cqi);
     color: #3a2a4a;
     letter-spacing: .02em;
 }
@@ -1904,7 +1904,7 @@ button {
 }
 
 .collage-shot.shot-1 .collage-cap {
-    font-size: clamp(.45rem, 1.6cqi, .58rem);
+    font-size: clamp(1.8cqi, 1.6cqi, 2.32cqi);
 }
 
 .collage-shot.shot-2 {
@@ -1912,8 +1912,8 @@ button {
     left: 5%;
     width: 52%;
     --rot: -1.5deg;
-    padding: clamp(5px, 1.3cqi, 8px);
-    padding-bottom: clamp(16px, 4.2cqi, 22px);
+    padding: clamp(1.25cqi, 1.3cqi, 2cqi);
+    padding-bottom: clamp(4cqi, 4.2cqi, 5.5cqi);
     z-index: 5;
 }
 
@@ -1944,8 +1944,8 @@ button {
     top: -5px;
     left: 50%;
     transform: translateX(-50%) rotate(-3deg);
-    width: clamp(22px, 6.5cqi, 38px);
-    height: clamp(9px, 2.2cqi, 15px);
+    width: clamp(5.5cqi, 6.5cqi, 9.5cqi);
+    height: clamp(2.25cqi, 2.2cqi, 3.75cqi);
     background: linear-gradient(180deg, rgba(200, 170, 255, .85), rgba(150, 110, 230, .85));
     border-radius: 1px;
     box-shadow: 0 1px 3px rgba(5, 5, 20, .25);
@@ -1960,7 +1960,7 @@ button {
 /* real paperclip art, recolored from black via filter into metal finishes */
 .shot-clip {
     position: absolute;
-    width: clamp(16px, 4.6cqi, 24px);
+    width: clamp(4cqi, 4.6cqi, 6cqi);
     z-index: 6;
     pointer-events: none;
     filter: drop-shadow(0 1px 2px rgba(5, 5, 20, .4));
@@ -1996,15 +1996,15 @@ button {
 /* jelly balloons — translucent candy with neon rim + glow (premade glass: layered radial sheen + outer glow) */
 .collage-balloon {
     position: absolute;
-    width: clamp(68px, 18cqi, 98px);
-    height: clamp(92px, 24cqi, 128px);
+    width: clamp(17cqi, 18cqi, 24.5cqi);
+    height: clamp(23cqi, 24cqi, 32cqi);
     display: grid;
     place-items: center;
     padding: 20% 14% 22% 14%;
     text-align: center;
     border-radius: 50%;
     font-family: "Segoe Script", "Apple Chancery", cursive;
-    font-size: clamp(.48rem, 1.8cqi, .64rem);
+    font-size: clamp(1.92cqi, 1.8cqi, 2.56cqi);
     line-height: 1.3;
     color: #fff;
     text-shadow: 0 0 3px #fff, 0 1px 5px rgba(60, 20, 90, .7), 0 0 12px rgba(255, 255, 255, .55);
@@ -2071,8 +2071,8 @@ button {
     bottom: -10px;
     left: 50%;
     transform: translateX(-50%);
-    width: clamp(22px, 6.5cqi, 32px);
-    height: clamp(14px, 4cqi, 18px);
+    width: clamp(5.5cqi, 6.5cqi, 8cqi);
+    height: clamp(3.5cqi, 4cqi, 4.5cqi);
     background: linear-gradient(180deg, #ffb3d6 0%, #ff7ab6 50%, #e85a9a 100%);
     border-radius: 2px 2px 6px 6px;
     box-shadow: 0 2px 6px rgba(60, 20, 70, .35);
@@ -2105,7 +2105,7 @@ button {
     top: calc(100% + 8px);
     left: 50%;
     width: 1.8px;
-    height: clamp(28px, 8cqi, 56px);
+    height: clamp(7cqi, 8cqi, 14cqi);
     background: linear-gradient(to bottom, rgba(255, 180, 220, .7), rgba(255, 255, 255, 0) 85%);
     transform: translateX(-50%) rotate(var(--string-rot, 4deg));
     transform-origin: top center;
@@ -2128,8 +2128,8 @@ button {
         radial-gradient(ellipse at 32% 26%, #7fd4ff 0%, #3aa5f0 30%, #1f6fd0 58%, #174fa8 80%, #123a92 100%);
     --brot: -4deg;
     --string-rot: 8deg;
-    width: clamp(70px, 18cqi, 96px);
-    height: clamp(70px, 18cqi, 96px);
+    width: clamp(17.5cqi, 18cqi, 24cqi);
+    height: clamp(17.5cqi, 18cqi, 24cqi);
     z-index: 5;
 }
 
@@ -2148,8 +2148,8 @@ button {
     --string-rot: -5deg;
     z-index: 4;
     top: 11%;
-    width: clamp(60px, 16cqi, 86px);
-    height: clamp(60px, 16cqi, 86px);
+    width: clamp(15cqi, 16cqi, 21.5cqi);
+    height: clamp(15cqi, 16cqi, 21.5cqi);
     box-shadow:
         inset -10px -12px 22px rgba(60, 20, 90, .30),
         inset 8px 10px 18px rgba(255, 255, 255, .45),
@@ -2164,8 +2164,8 @@ button {
     position: absolute;
     left: 56%;
     top: 40%;
-    width: clamp(88px, 24cqi, 118px);
-    height: clamp(88px, 24cqi, 118px);
+    width: clamp(22cqi, 24cqi, 29.5cqi);
+    height: clamp(22cqi, 24cqi, 29.5cqi);
     transform: rotate(12deg);
     z-index: 7;
     pointer-events: none;
@@ -2252,19 +2252,19 @@ button {
         drop-shadow(0 1px 0 rgba(255,255,255,.9)) drop-shadow(0 -1px 0 rgba(255,255,255,.9));
 }
 
-.collage-note.n1 { left: 47%; top: 32%; font-size: clamp(24px, 7cqi, 34px); color: #37e6c2; transform: rotate(-8deg);
+.collage-note.n1 { left: 47%; top: 32%; font-size: clamp(6cqi, 7cqi, 8.5cqi); color: #37e6c2; transform: rotate(-8deg);
     text-shadow: 0 0 3px #37e6c2, 0 0 12px #37e6c2, 0 0 30px rgba(55, 230, 194, .65); }
-.collage-note.n2 { left: 58%; top: 62%; font-size: clamp(22px, 6.4cqi, 30px); color: #ff5b9a; transform: rotate(12deg);
+.collage-note.n2 { left: 58%; top: 62%; font-size: clamp(5.5cqi, 6.4cqi, 7.5cqi); color: #ff5b9a; transform: rotate(12deg);
     text-shadow: 0 0 3px #ff5b9a, 0 0 12px #ff5b9a, 0 0 30px rgba(255, 91, 154, .65); }
-.collage-note.n3 { left: 3%; top: 47%; font-size: clamp(26px, 7.6cqi, 36px); color: #7a6bff; transform: rotate(-6deg);
+.collage-note.n3 { left: 3%; top: 47%; font-size: clamp(6.5cqi, 7.6cqi, 9cqi); color: #7a6bff; transform: rotate(-6deg);
     text-shadow: 0 0 3px #7a6bff, 0 0 12px #7a6bff, 0 0 30px rgba(122, 107, 255, .65); }
-.collage-note.n4 { left: 35%; top: 66%; font-size: clamp(18px, 5.2cqi, 24px); color: #2fe8c8; transform: rotate(8deg);
+.collage-note.n4 { left: 35%; top: 66%; font-size: clamp(4.5cqi, 5.2cqi, 6cqi); color: #2fe8c8; transform: rotate(8deg);
     text-shadow: 0 0 3px #2fe8c8, 0 0 11px #2fe8c8, 0 0 28px rgba(47, 232, 200, .6); }
-.collage-note.n5 { left: 48%; top: 63%; font-size: clamp(20px, 5.8cqi, 27px); color: #b06bff; transform: rotate(-10deg);
+.collage-note.n5 { left: 48%; top: 63%; font-size: clamp(5cqi, 5.8cqi, 6.75cqi); color: #b06bff; transform: rotate(-10deg);
     text-shadow: 0 0 3px #b06bff, 0 0 12px #b06bff, 0 0 30px rgba(176, 107, 255, .65); }
-.collage-note.n6 { left: 79%; top: 70%; font-size: clamp(22px, 6.2cqi, 30px); color: #6b8cff; transform: rotate(6deg);
+.collage-note.n6 { left: 79%; top: 70%; font-size: clamp(5.5cqi, 6.2cqi, 7.5cqi); color: #6b8cff; transform: rotate(6deg);
     text-shadow: 0 0 3px #6b8cff, 0 0 12px #6b8cff, 0 0 30px rgba(107, 140, 255, .65); }
-.collage-note.n7 { left: 60%; top: 76%; font-size: clamp(15px, 4.4cqi, 20px); color: #ff7af0; transform: rotate(-4deg); opacity: .95;
+.collage-note.n7 { left: 60%; top: 76%; font-size: clamp(3.75cqi, 4.4cqi, 5cqi); color: #ff7af0; transform: rotate(-4deg); opacity: .95;
     text-shadow: 0 0 3px #ff7af0, 0 0 11px #ff7af0, 0 0 28px rgba(255, 122, 240, .6); }
 
 /* script-scattered glow dust — one element per dot so they dominate the page.
@@ -2291,8 +2291,8 @@ button {
     position: absolute;
     left: 42%;
     bottom: 8%;
-    width: clamp(66px, 18cqi, 92px);
-    height: clamp(100px, 27cqi, 130px);
+    width: clamp(16.5cqi, 18cqi, 23cqi);
+    height: clamp(25cqi, 27cqi, 32.5cqi);
     transform: rotate(-6deg);
     z-index: 7;
     pointer-events: none;
@@ -2337,25 +2337,27 @@ button {
     object-position: center top;
 }
 
-/* washi tapes — star washi.png is SQUARE 1200x1200, so `background-size: 100% auto`
-   scales the whole sheet to element width (bg height == element width). A 22px-tall
-   window then shows ~15% of the sheet == exactly one tape. Centers: 9/34/59/84%.
-   (Previous 680% Y-zoom showed only blurred solid color — that was the muddy-bar bug.) */
+/* washi tapes — single-strip <img> windows (exact crop, never gap mud).
+   Star sheet: square, strips at y 71-279 / 356-568 / 921-1129 (margins
+   -5.9% / -29.7% / -76.75%). Moon sheet: 6:1 strip at y 2716-3550. */
 .collage-washi {
     position: absolute;
-    height: clamp(20px, 5.4cqi, 26px);
-    background-image: url('../assets/resources/png/music/star washi.png');
-    background-size: 100% auto;
-    background-repeat: no-repeat;
+    height: clamp(5cqi, 5.4cqi, 6.5cqi);
+    overflow: hidden;
     box-shadow: 0 1px 5px rgba(5, 5, 20, .3);
     z-index: 2;
     pointer-events: none;
     border-radius: 1px;
-    overflow: hidden;
     opacity: 1;
     /* torn ends */
     -webkit-mask: linear-gradient(105deg, transparent 4px, #000 5px, #000 calc(100% - 5px), transparent calc(100% - 4px));
     mask: linear-gradient(105deg, transparent 4px, #000 5px, #000 calc(100% - 5px), transparent calc(100% - 4px));
+}
+
+.collage-washi img {
+    width: 100%;
+    max-width: none;
+    display: block;
 }
 
 /* all tapes anchor photo corners (holding pictures down); strays deleted */
@@ -2363,7 +2365,6 @@ button {
     left: 4%;
     top: 31%;
     width: 30%;
-    background-position: 50% 9%;
     transform: rotate(-3deg);
     z-index: 6;
 }
@@ -2372,7 +2373,6 @@ button {
     right: 5%;
     top: 3%;
     width: 32%;
-    background-position: 50% 34%;
     transform: rotate(3deg);
     z-index: 6;
 }
@@ -2381,7 +2381,6 @@ button {
     right: 10%;
     top: 68%;
     width: 30%;
-    background-position: 50% 84%;
     transform: rotate(2deg);
     z-index: 6;
 }
@@ -2391,7 +2390,7 @@ button {
     position: absolute;
     pointer-events: none;
     z-index: 6;
-    font-size: clamp(13px, 3.8cqi, 19px);
+    font-size: clamp(3.25cqi, 3.8cqi, 4.75cqi);
     line-height: 1;
     color: transparent;
     -webkit-text-stroke: 1.6px #ffd76b;
@@ -2414,19 +2413,19 @@ button {
 .collage-star.s2 { left: 1.5%; top: 43%; --sr: 18deg; -webkit-text-stroke-color: #fff;
     text-shadow: 0 0 2px #fff, 0 0 8px rgba(200,230,255,.9), 0 0 18px rgba(120,180,255,.7), 0 0 32px rgba(120,180,255,.45); }
 .collage-star.s3 { right: 24%; top: 46%; --sr: -6deg; }
-.collage-star.s4 { left: 47%; bottom: 31%; --sr: 10deg; font-size: clamp(11px, 3.2cqi, 15px); }
+.collage-star.s4 { left: 47%; bottom: 31%; --sr: 10deg; font-size: clamp(2.75cqi, 3.2cqi, 3.75cqi); }
 .collage-star.s5 { left: 48%; bottom: 2.5%; --sr: -8deg; -webkit-text-stroke-color: #ffb3d6;
     text-shadow: 0 0 2px #fff, 0 0 8px #ff8ac0, 0 0 18px #ff6bb0, 0 0 32px rgba(255, 90, 170, .55); }
-.collage-star.s6 { left: 52%; top: 5%; --sr: 14deg; font-size: clamp(10px, 2.8cqi, 13px); opacity: .8; }
-.collage-star.s7 { left: 36%; top: 68%; --sr: 22deg; font-size: clamp(9px, 2.6cqi, 12px); opacity: .85;
+.collage-star.s6 { left: 52%; top: 5%; --sr: 14deg; font-size: clamp(2.5cqi, 2.8cqi, 3.25cqi); opacity: .8; }
+.collage-star.s7 { left: 36%; top: 68%; --sr: 22deg; font-size: clamp(2.25cqi, 2.6cqi, 3cqi); opacity: .85;
     -webkit-text-stroke-color: #c8f0ff;
     text-shadow: 0 0 2px #fff, 0 0 7px rgba(140,220,255,.9), 0 0 16px rgba(90,170,255,.6); }
-.collage-star.s8 { right: 26%; top: 58%; --sr: -20deg; font-size: clamp(12px, 3.4cqi, 17px);
+.collage-star.s8 { right: 26%; top: 58%; --sr: -20deg; font-size: clamp(3cqi, 3.4cqi, 4.25cqi);
     animation-delay: -.9s; }
-.collage-star.s9 { left: 13%; top: 60%; --sr: 6deg; font-size: clamp(9px, 2.6cqi, 12px); opacity: .8;
+.collage-star.s9 { left: 13%; top: 60%; --sr: 6deg; font-size: clamp(2.25cqi, 2.6cqi, 3cqi); opacity: .8;
     -webkit-text-stroke-color: #ffd0e8; animation-delay: -1.7s;
     text-shadow: 0 0 2px #fff, 0 0 7px #ff8ac0, 0 0 16px rgba(255, 110, 180, .6); }
-.collage-star.s10 { left: 58%; top: 68%; --sr: -14deg; font-size: clamp(8px, 2.3cqi, 11px); opacity: .75;
+.collage-star.s10 { left: 58%; top: 68%; --sr: -14deg; font-size: clamp(2cqi, 2.3cqi, 2.75cqi); opacity: .75;
     animation-delay: -2.1s; }
 
 /* ticket stub — "Sing your heart out!" like reference */
@@ -2443,7 +2442,7 @@ button {
     transform: rotate(-4deg);
     z-index: 7;
     font-family: "Segoe UI", sans-serif;
-    font-size: clamp(.42rem, 1.5cqi, .56rem);
+    font-size: clamp(1.68cqi, 1.5cqi, 2.24cqi);
     font-weight: 700;
     color: #7a4a1a;
     text-align: center;
@@ -2455,8 +2454,8 @@ button {
     position: absolute;
     right: 5%;
     top: 12%;
-    width: clamp(30px, 9cqi, 44px);
-    height: clamp(22px, 6.5cqi, 30px);
+    width: clamp(7.5cqi, 9cqi, 11cqi);
+    height: clamp(5.5cqi, 6.5cqi, 7.5cqi);
     z-index: 7;
     pointer-events: none;
     background:
@@ -2472,7 +2471,7 @@ button {
 /* real pushpin art, recolored from black outline into enamel finishes */
 .collage-pin {
     position: absolute;
-    width: clamp(18px, 5cqi, 28px);
+    width: clamp(4.5cqi, 5cqi, 7cqi);
     z-index: 7;
     pointer-events: none;
 }
@@ -2486,7 +2485,7 @@ button {
     filter: brightness(0) invert(78%) sepia(62%) saturate(1200%) hue-rotate(1deg) brightness(1.02) drop-shadow(0 1px 2px rgba(5, 5, 20, .4)); }
 .collage-pin.p2 { left: 52%; bottom: 6%; transform: rotate(8deg);
     filter: brightness(0) invert(62%) sepia(85%) saturate(500%) hue-rotate(295deg) drop-shadow(0 1px 2px rgba(5, 5, 20, .4)); }
-.collage-pin.p3 { left: 42%; top: 68%; width: clamp(15px, 4.2cqi, 22px); transform: rotate(-6deg);
+.collage-pin.p3 { left: 42%; top: 68%; width: clamp(3.75cqi, 4.2cqi, 5.5cqi); transform: rotate(-6deg);
     filter: brightness(0) invert(70%) sepia(35%) saturate(350%) hue-rotate(185deg) drop-shadow(0 1px 2px rgba(5, 5, 20, .4)); }
 
 /* legacy — hide old generic tapebits/sparks */
@@ -2495,9 +2494,9 @@ button {
 
 /* ---- Spread 4: Gaming Memories (scrapbook) ---- */
 .page--gaming-left .page-inner {
-    padding: clamp(10px, 3cqi, 18px);
+    padding: clamp(2.5cqi, 3cqi, 4.5cqi);
     display: grid;
-    gap: clamp(6px, 1.5cqi, 10px);
+    gap: clamp(1.5cqi, 1.5cqi, 2.5cqi);
     align-content: center;
     overflow: hidden;
 }
@@ -2506,7 +2505,7 @@ button {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    gap: clamp(6px, 1.5cqi, 10px);
+    gap: clamp(1.5cqi, 1.5cqi, 2.5cqi);
     width: 100%;
     height: 100%;
     min-height: 0;
@@ -2518,7 +2517,7 @@ button {
     overflow: visible;
     border-radius: 2px;
     background: #fff;
-    padding: clamp(3px, .8cqi, 6px);
+    padding: clamp(0.75cqi, .8cqi, 1.5cqi);
     box-shadow:
         2px 3px 8px rgba(0, 0, 0, .15),
         0 1px 3px rgba(0, 0, 0, .1);
@@ -2537,11 +2536,11 @@ button {
 .page--gaming-left .gaming-cell::before {
     content: '';
     position: absolute;
-    top: -4px;
+    top: -1cqi;
     left: 50%;
     transform: translateX(-50%) rotate(var(--tape-rot, 1deg));
-    width: clamp(20px, 6cqi, 36px);
-    height: clamp(8px, 2cqi, 14px);
+    width: clamp(5cqi, 6cqi, 9cqi);
+    height: clamp(2cqi, 2cqi, 3.5cqi);
     background: rgba(255, 230, 150, .55);
     border-radius: 1px;
     z-index: 2;
@@ -2563,7 +2562,7 @@ button {
     padding: 2px 6px;
     background: rgba(78, 205, 196, .85);
     color: #fff;
-    font-size: clamp(.4rem, 1.4cqi, .55rem);
+    font-size: clamp(1.6cqi, 1.4cqi, 2.2cqi);
     font-family: var(--font-ui);
     border-radius: 3px;
     text-transform: uppercase;
@@ -2749,8 +2748,8 @@ button {
     left: 4%;
     width: 52%;
     background: #fff;
-    padding: clamp(5px, 1.4cqi, 9px);
-    padding-bottom: clamp(20px, 5.4cqi, 28px);
+    padding: clamp(1.25cqi, 1.4cqi, 2.25cqi);
+    padding-bottom: clamp(5cqi, 5.4cqi, 7cqi);
     transform: rotate(-2.5deg);
     box-shadow: 2px 4px 12px rgba(7, 20, 34, .2);
     clip-path: polygon(0% 3%, 4% 0%, 9% 2%, 15% 0%, 22% 2%, 30% 0%, 38% 2%, 46% 0%, 54% 2%, 62% 0%, 70% 2%, 78% 0%, 86% 2%, 93% 0%, 98% 2%, 100% 8%, 98% 15%, 100% 24%, 98% 33%, 100% 42%, 98% 51%, 100% 60%, 98% 69%, 100% 78%, 98% 87%, 100% 95%, 94% 98%, 87% 100%, 79% 98%, 70% 100%, 61% 98%, 52% 100%, 43% 98%, 34% 100%, 25% 98%, 16% 100%, 8% 98%, 2% 100%, 0% 93%, 2% 85%, 0% 76%, 2% 67%, 0% 58%, 2% 49%, 0% 40%, 2% 31%, 0% 22%, 2% 13%);
@@ -2779,7 +2778,7 @@ button {
     width: 30%;
     background: #141414;
     border-radius: 3px;
-    padding: clamp(16px, 5cqi, 30px) clamp(4px, 1.2cqi, 8px);
+    padding: clamp(4cqi, 5cqi, 7.5cqi) clamp(1cqi, 1.2cqi, 2cqi);
     transform: rotate(2deg);
     box-shadow: 2px 4px 12px rgba(7, 20, 34, .25);
     z-index: 2;
@@ -2791,9 +2790,9 @@ button {
     position: absolute;
     top: 4px;
     bottom: 4px;
-    width: clamp(5px, 1.6cqi, 9px);
+    width: clamp(1.25cqi, 1.6cqi, 2.25cqi);
     background-image: radial-gradient(circle, #e8e8e8 2.2px, transparent 2.8px);
-    background-size: 100% clamp(10px, 3cqi, 16px);
+    background-size: 100% clamp(2.5cqi, 3cqi, 4cqi);
     background-repeat: repeat-y;
     background-position: center top;
 }
@@ -2803,7 +2802,7 @@ button {
 
 .cinema-frame {
     border: 1px solid rgba(255, 255, 255, .25);
-    margin: clamp(3px, 1cqi, 6px) clamp(8px, 2.6cqi, 14px);
+    margin: clamp(0.75cqi, 1cqi, 1.5cqi) clamp(2cqi, 2.6cqi, 3.5cqi);
 }
 
 .cinema-frame img {
@@ -2831,7 +2830,7 @@ button {
 .cinema-letter {
     font-family: "Arial Black", "Archivo Black", Impact, sans-serif;
     font-weight: 900;
-    font-size: clamp(1.3rem, 8cqi, 2.6rem);
+    font-size: clamp(5.2cqi, 8cqi, 10.4cqi);
     line-height: 1;
     -webkit-text-stroke: 1px rgba(255, 255, 255, .9);
     paint-order: stroke fill;
@@ -2856,8 +2855,8 @@ button {
     position: absolute;
     left: 30%;
     top: 37%;
-    width: clamp(34px, 11cqi, 62px);
-    height: clamp(34px, 11cqi, 62px);
+    width: clamp(8.5cqi, 11cqi, 15.5cqi);
+    height: clamp(8.5cqi, 11cqi, 15.5cqi);
     fill: #ffd94d;
     stroke: #c98f1b;
     stroke-width: 3;
@@ -2871,8 +2870,8 @@ button {
     position: absolute;
     left: 37%;
     top: 56%;
-    width: clamp(52px, 17cqi, 96px);
-    height: clamp(52px, 17cqi, 96px);
+    width: clamp(13cqi, 17cqi, 24cqi);
+    height: clamp(13cqi, 17cqi, 24cqi);
     filter: drop-shadow(1px 3px 5px rgba(7, 20, 34, .25));
     transform: rotate(-10deg);
     z-index: 4;
@@ -2889,7 +2888,7 @@ button {
         radial-gradient(ellipse 26% 20% at 78% 72%, rgba(150, 95, 35, .25), transparent 65%),
         radial-gradient(ellipse 18% 14% at 60% 50%, rgba(120, 75, 30, .20), transparent 65%),
         linear-gradient(160deg, #f2dfba, #e8cd9c 60%, #d9b982);
-    padding: clamp(14px, 4.4cqi, 22px) clamp(8px, 2.6cqi, 14px) clamp(14px, 4.4cqi, 22px);
+    padding: clamp(3.5cqi, 4.4cqi, 5.5cqi) clamp(2cqi, 2.6cqi, 3.5cqi) clamp(3.5cqi, 4.4cqi, 5.5cqi);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -2907,7 +2906,7 @@ button {
     right: 0;
     text-align: center;
     color: rgba(138, 90, 43, .8);
-    font-size: clamp(.5rem, 1.8cqi, .7rem);
+    font-size: clamp(2cqi, 1.8cqi, 2.8cqi);
     letter-spacing: .5em;
     text-indent: .5em;
     pointer-events: none;
@@ -2919,14 +2918,14 @@ button {
 .ticket-big {
     font-family: "Arial Black", Impact, sans-serif;
     font-weight: 900;
-    font-size: clamp(.55rem, 2.4cqi, .85rem);
+    font-size: clamp(2.2cqi, 2.4cqi, 3.4cqi);
     letter-spacing: .12em;
     color: #8a5a2b;
 }
 
 .ticket-small {
     font-family: var(--font-ui);
-    font-size: clamp(.42rem, 1.6cqi, .6rem);
+    font-size: clamp(1.68cqi, 1.6cqi, 2.4cqi);
     letter-spacing: .08em;
     color: rgba(138, 90, 43, .75);
 }
@@ -2938,8 +2937,8 @@ button {
     bottom: 4%;
     width: 44%;
     background: #fff;
-    padding: clamp(4px, 1.1cqi, 8px);
-    padding-bottom: clamp(14px, 4cqi, 24px);
+    padding: clamp(1cqi, 1.1cqi, 2cqi);
+    padding-bottom: clamp(3.5cqi, 4cqi, 6cqi);
     box-shadow: 2px 4px 12px rgba(100, 70, 40, .28);
     transform: rotate(3deg);
     transition: transform .2s ease;
@@ -2953,7 +2952,7 @@ button {
     left: 50%;
     transform: translateX(-50%) rotate(4deg);
     width: 34%;
-    height: clamp(10px, 2.8cqi, 15px);
+    height: clamp(2.5cqi, 2.8cqi, 3.75cqi);
     background: linear-gradient(180deg, rgba(255, 225, 150, .9), rgba(215, 165, 70, .9));
     border-radius: 1px;
     box-shadow: 0 1px 3px rgba(100, 70, 40, .25);
@@ -2986,13 +2985,13 @@ button {
 
 .cinema-cap {
     position: absolute;
-    bottom: clamp(3px, .8cqi, 6px);
+    bottom: clamp(0.75cqi, .8cqi, 1.5cqi);
     left: 0;
     right: 0;
     text-align: center;
     font-family: var(--font-ui);
     font-style: italic;
-    font-size: clamp(.5rem, 1.8cqi, .7rem);
+    font-size: clamp(2cqi, 1.8cqi, 2.8cqi);
     color: var(--ink-soft);
 }
 
@@ -3029,8 +3028,8 @@ button {
     bottom: 4%;
     width: 42%;
     background: #fff;
-    padding: clamp(4px, 1.1cqi, 8px);
-    padding-bottom: clamp(14px, 4cqi, 22px);
+    padding: clamp(1cqi, 1.1cqi, 2cqi);
+    padding-bottom: clamp(3.5cqi, 4cqi, 5.5cqi);
     transform: rotate(-2deg);
     box-shadow:
         2px 4px 12px rgba(100, 70, 40, .28),
@@ -3045,7 +3044,7 @@ button {
     left: 12%;
     transform: rotate(-14deg);
     width: 30%;
-    height: clamp(10px, 2.8cqi, 15px);
+    height: clamp(2.5cqi, 2.8cqi, 3.75cqi);
     background:
         repeating-linear-gradient(0deg, rgba(255, 255, 255, .5) 0 3px, transparent 3px 6px),
         repeating-linear-gradient(90deg, rgba(255, 255, 255, .5) 0 3px, transparent 3px 6px),
@@ -3107,12 +3106,12 @@ button {
     text-shadow: 0 1px 0 rgba(255, 255, 255, .7);
 }
 
-.shared-l1 { font-size: clamp(.8rem, 3cqi, 1.1rem); font-weight: 700; }
-.shared-l2 { font-size: clamp(.8rem, 3cqi, 1.1rem); font-weight: 700; }
-.shared-l3 { font-size: clamp(.7rem, 2.6cqi, .95rem); color: #6a5a9e; margin-top: 2px; }
+.shared-l1 { font-size: clamp(3.2cqi, 3cqi, 4.4cqi); font-weight: 700; }
+.shared-l2 { font-size: clamp(3.2cqi, 3cqi, 4.4cqi); font-weight: 700; }
+.shared-l3 { font-size: clamp(2.8cqi, 2.6cqi, 3.8cqi); color: #6a5a9e; margin-top: 2px; }
 
 .cinema-shared .shared-pad {
-    width: clamp(22px, 7cqi, 32px);
+    width: clamp(5.5cqi, 7cqi, 8cqi);
     margin-top: 4px;
     transform: rotate(-10deg);
     opacity: .9;
@@ -3124,7 +3123,7 @@ button {
     text-align: center;
     font-family: "Segoe Script", "Apple Chancery", cursive;
     font-weight: 700;
-    font-size: clamp(.65rem, 2.6cqi, .9rem);
+    font-size: clamp(2.6cqi, 2.6cqi, 3.6cqi);
     color: #3a3a5e;
     letter-spacing: .06em;
     margin-top: 3px;
@@ -3134,7 +3133,7 @@ button {
     position: absolute;
     right: 6%;
     bottom: 12%;
-    font-size: clamp(.8rem, 3cqi, 1.1rem);
+    font-size: clamp(3.2cqi, 3cqi, 4.4cqi);
     color: #b06bff;
     text-shadow:
         0 0 2px #fff, 0 0 6px #fff,
@@ -3150,7 +3149,7 @@ button {
     position: absolute;
     top: -9px;
     width: 26%;
-    height: clamp(11px, 3cqi, 17px);
+    height: clamp(2.75cqi, 3cqi, 4.25cqi);
     background: linear-gradient(135deg, #ff9ef0, #8ad8ff 45%, #d8b8ff 70%, #fff3b0);
     border-radius: 1px;
     box-shadow: 0 1px 3px rgba(100, 70, 40, .25);
@@ -3175,7 +3174,7 @@ button {
 }
 
 .cinema-heart {
-    font-size: clamp(.8rem, 3cqi, 1.1rem);
+    font-size: clamp(3.2cqi, 3cqi, 4.4cqi);
     line-height: 1.1;
 }
 
@@ -3215,23 +3214,23 @@ button {
 
 .page--wishes-right .page-inner {
     justify-content: center;
-    gap: clamp(12px, 3.5cqi, 22px);
-    padding: clamp(20px, 6cqi, 40px);
+    gap: clamp(3cqi, 3.5cqi, 5.5cqi);
+    padding: clamp(5cqi, 6cqi, 10cqi);
 }
 
 .wish-categories {
     display: flex;
     flex-wrap: wrap;
-    gap: clamp(6px, 1.5cqi, 10px);
+    gap: clamp(1.5cqi, 1.5cqi, 2.5cqi);
     justify-content: center;
-    margin-top: clamp(4px, 1cqi, 8px);
+    margin-top: clamp(1cqi, 1cqi, 2cqi);
 }
 
 .wish-tag {
-    padding: clamp(3px, .8cqi, 6px) clamp(8px, 2cqi, 14px);
+    padding: clamp(0.75cqi, .8cqi, 1.5cqi) clamp(2cqi, 2cqi, 3.5cqi);
     border: 1px solid rgba(26, 95, 138, .25);
     border-radius: 20px;
-    font-size: clamp(.55rem, 1.8cqi, .75rem);
+    font-size: clamp(2.2cqi, 1.8cqi, 3cqi);
     font-family: var(--font-ui);
     color: var(--ink-soft);
     background: rgba(78, 205, 196, .06);
@@ -3242,8 +3241,8 @@ button {
     position: absolute;
     top: 0;
     right: 0;
-    width: clamp(70px, 18cqi, 130px);
-    height: clamp(70px, 18cqi, 130px);
+    width: clamp(17.5cqi, 18cqi, 32.5cqi);
+    height: clamp(17.5cqi, 18cqi, 32.5cqi);
     pointer-events: none;
     z-index: 5;
     overflow: hidden;
@@ -3259,7 +3258,7 @@ button {
 /* ---- Date tag (scrapbook accent) ---- */
 .date-tag {
     font-family: var(--font-ui);
-    font-size: clamp(.5rem, 1.6cqi, .65rem);
+    font-size: clamp(2cqi, 1.6cqi, 2.6cqi);
     color: var(--aqua-ink);
     opacity: .6;
     letter-spacing: .08em;
@@ -3300,7 +3299,7 @@ button {
     font-family: var(--font-ui);
     text-transform: uppercase;
     font-size: .6rem;
-    font-size: clamp(.55rem, 2.4cqi, .7rem);
+    font-size: clamp(2.2cqi, 2.4cqi, 2.8cqi);
     letter-spacing: .34em;
     color: var(--gold-deep);
 }
@@ -3330,7 +3329,7 @@ button {
     border-radius: 4px;
     line-height: 1;
     font-size: .62rem;
-    font-size: clamp(.58rem, 2.3cqi, .8rem);
+    font-size: clamp(2.32cqi, 2.3cqi, 3.2cqi);
     letter-spacing: .18em;
     transform: rotate(-2deg);
     opacity: .92;
@@ -3343,7 +3342,7 @@ button {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: clamp(6px, 2.2cqi, 14px);
+    gap: clamp(1.5cqi, 2.2cqi, 3.5cqi);
     min-height: 0;
     width: 100%;
 }
@@ -3387,7 +3386,7 @@ figcaption {
     color: var(--ink-soft);
     line-height: 1.6;
     font-size: .78rem;
-    font-size: clamp(.72rem, 3cqi, .95rem);
+    font-size: clamp(2.88cqi, 3cqi, 3.8cqi);
     max-width: 34ch;
 }
 
@@ -3409,7 +3408,7 @@ figcaption::after {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: clamp(6px, 2cqi, 12px);
+    gap: clamp(1.5cqi, 2cqi, 3cqi);
     padding: 8%;
     text-align: center;
 }
@@ -3445,7 +3444,7 @@ figcaption::after {
     letter-spacing: .28em;
     text-transform: uppercase;
     font-size: .58rem;
-    font-size: clamp(.54rem, 2.2cqi, .72rem);
+    font-size: clamp(2.16cqi, 2.2cqi, 2.88cqi);
     color: var(--ink-soft);
 }
 
@@ -3475,12 +3474,12 @@ figcaption::after {
 .page--cover .page-inner {
     justify-content: center;
     z-index: 3;
-    gap: clamp(6px, 2cqi, 14px);
+    gap: clamp(1.5cqi, 2cqi, 3.5cqi);
 }
 
 .cover-frame {
     position: absolute;
-    inset: clamp(9px, 3cqi, 20px);
+    inset: clamp(2.25cqi, 3cqi, 5cqi);
     border: 1px solid rgba(91, 181, 224, .2);
     border-radius: 8px;
     pointer-events: none;
@@ -3496,8 +3495,8 @@ figcaption::after {
 
 .cover-corner {
     position: absolute;
-    width: clamp(24px, 8cqi, 48px);
-    height: clamp(24px, 8cqi, 48px);
+    width: clamp(6cqi, 8cqi, 12cqi);
+    height: clamp(6cqi, 8cqi, 12cqi);
     color: rgba(91, 181, 224, .35);
     z-index: 3;
 }
@@ -3508,25 +3507,25 @@ figcaption::after {
 }
 
 .cover-corner.tl {
-    top: clamp(13px, 4cqi, 26px);
-    left: clamp(13px, 4cqi, 26px);
+    top: clamp(3.25cqi, 4cqi, 6.5cqi);
+    left: clamp(3.25cqi, 4cqi, 6.5cqi);
 }
 
 .cover-corner.tr {
-    top: clamp(13px, 4cqi, 26px);
-    right: clamp(13px, 4cqi, 26px);
+    top: clamp(3.25cqi, 4cqi, 6.5cqi);
+    right: clamp(3.25cqi, 4cqi, 6.5cqi);
     transform: rotate(90deg);
 }
 
 .cover-corner.bl {
-    bottom: clamp(13px, 4cqi, 26px);
-    left: clamp(13px, 4cqi, 26px);
+    bottom: clamp(3.25cqi, 4cqi, 6.5cqi);
+    left: clamp(3.25cqi, 4cqi, 6.5cqi);
     transform: rotate(-90deg);
 }
 
 .cover-corner.br {
-    bottom: clamp(13px, 4cqi, 26px);
-    right: clamp(13px, 4cqi, 26px);
+    bottom: clamp(3.25cqi, 4cqi, 6.5cqi);
+    right: clamp(3.25cqi, 4cqi, 6.5cqi);
     transform: rotate(180deg);
 }
 
@@ -3546,8 +3545,8 @@ figcaption::after {
 }
 
 .cover-crest {
-    width: clamp(36px, 12cqi, 70px);
-    height: clamp(36px, 12cqi, 70px);
+    width: clamp(9cqi, 12cqi, 17.5cqi);
+    height: clamp(9cqi, 12cqi, 17.5cqi);
     flex: none;
     --sy-sun: var(--gold-soft);
     --sy-water: var(--aqua);
@@ -3581,7 +3580,7 @@ figcaption::after {
     font-weight: 700;
     line-height: 1.15;
     letter-spacing: .04em;
-    font-size: clamp(1.5rem, 9cqi, 3rem);
+    font-size: clamp(6cqi, 9cqi, 12cqi);
     color: transparent;
     background: linear-gradient(135deg,
             #c9a84c 0%,
@@ -3613,12 +3612,12 @@ figcaption::after {
 
 .cover-name .label {
     color: rgba(91, 181, 224, .6);
-    font-size: clamp(.5rem, 1.8cqi, .65rem);
+    font-size: clamp(2cqi, 1.8cqi, 2.6cqi);
 }
 
 .cover-name .tok {
     font-family: var(--font-display);
-    font-size: clamp(1rem, 5cqi, 1.6rem);
+    font-size: clamp(4cqi, 5cqi, 6.4cqi);
     letter-spacing: .12em;
     color: var(--aqua);
     text-shadow: 0 1px 8px rgba(78, 205, 196, .2);
@@ -3628,9 +3627,9 @@ figcaption::after {
     font-family: var(--font-ui);
     letter-spacing: .3em;
     text-transform: uppercase;
-    font-size: clamp(.5rem, 2cqi, .65rem);
+    font-size: clamp(2cqi, 2cqi, 2.6cqi);
     color: rgba(232, 238, 248, .35);
-    margin-top: clamp(2px, .5cqi, 6px);
+    margin-top: clamp(0.5cqi, .5cqi, 1.5cqi);
 }
 
 .cover-title.tok,
@@ -3650,14 +3649,14 @@ figcaption::after {
     font-weight: 600;
     line-height: 1.25;
     font-size: 1.25rem;
-    font-size: clamp(1.15rem, 6.6cqi, 2rem);
+    font-size: clamp(4.6cqi, 6.6cqi, 8cqi);
 }
 
 .body {
     max-width: 56ch;
     line-height: 1.95;
     font-size: .85rem;
-    font-size: clamp(.8rem, 3.5cqi, 1rem);
+    font-size: clamp(3.2cqi, 3.5cqi, 4cqi);
 }
 
 .body p+p {
@@ -3682,8 +3681,8 @@ figcaption::after {
 }
 
 .sigil-pair svg {
-    width: clamp(16px, 5cqi, 24px);
-    height: clamp(16px, 5cqi, 24px);
+    width: clamp(4cqi, 5cqi, 6cqi);
+    height: clamp(4cqi, 5cqi, 6cqi);
 }
 
 .sigil-pair .s-sun {
@@ -3753,8 +3752,8 @@ figcaption::after {
 }
 
 .duo-head svg {
-    width: clamp(22px, 7cqi, 34px);
-    height: clamp(22px, 7cqi, 34px);
+    width: clamp(5.5cqi, 7cqi, 8.5cqi);
+    height: clamp(5.5cqi, 7cqi, 8.5cqi);
 }
 
 .side-water .duo-head svg {
@@ -3768,7 +3767,7 @@ figcaption::after {
 .duo-name {
     font-family: var(--font-display);
     font-size: .9rem;
-    font-size: clamp(.85rem, 4cqi, 1.15rem);
+    font-size: clamp(3.4cqi, 4cqi, 4.6cqi);
     letter-spacing: .3em;
     text-transform: uppercase;
     color: var(--ink);
@@ -3806,11 +3805,11 @@ figcaption::after {
 }
 
 .side-water .edge-lace {
-    right: clamp(6px, 2cqi, 12px);
+    right: clamp(1.5cqi, 2cqi, 3cqi);
 }
 
 .side-light .edge-lace {
-    left: clamp(6px, 2cqi, 12px);
+    left: clamp(1.5cqi, 2cqi, 3cqi);
 }
 
 .edge-lace::before,
@@ -3825,11 +3824,11 @@ figcaption::after {
 }
 
 .edge-lace::before {
-    top: -2px;
+    top: -.5cqi;
 }
 
 .edge-lace::after {
-    bottom: -2px;
+    bottom: -.5cqi;
 }
 
 /* ---------------- Full-bleed page ---------------- */
@@ -3858,7 +3857,7 @@ figcaption::after {
     bottom: 0;
     z-index: 3;
     max-width: none;
-    padding: clamp(28px, 14cqi, 70px) clamp(16px, 6cqi, 34px) clamp(14px, 5cqi, 26px);
+    padding: clamp(7cqi, 14cqi, 17.5cqi) clamp(4cqi, 6cqi, 8.5cqi) clamp(3.5cqi, 5cqi, 6.5cqi);
     color: #efe8d6;
     background: linear-gradient(transparent, rgba(7, 12, 24, .72));
 }
@@ -3866,7 +3865,7 @@ figcaption::after {
 .page--full::after {
     content: "";
     position: absolute;
-    inset: clamp(8px, 2.6cqi, 15px);
+    inset: clamp(2cqi, 2.6cqi, 3.75cqi);
     border: 1px solid rgba(232, 238, 248, .32);
     pointer-events: none;
     z-index: 4;
@@ -3879,8 +3878,8 @@ figcaption::after {
 }
 
 .message-crest {
-    width: clamp(28px, 9cqi, 46px);
-    height: clamp(28px, 9cqi, 46px);
+    width: clamp(7cqi, 9cqi, 11.5cqi);
+    height: clamp(7cqi, 9cqi, 11.5cqi);
     flex: none;
     --sy-sun: var(--gold-deep);
     --sy-water: var(--aqua-ink);
@@ -3893,7 +3892,7 @@ figcaption::after {
     line-height: 1.75;
     text-wrap: balance;
     font-size: 1.15rem;
-    font-size: clamp(1.05rem, 6.2cqi, 1.8rem);
+    font-size: clamp(4.2cqi, 6.2cqi, 7.2cqi);
     max-width: 26ch;
     color: var(--ink);
 }
@@ -3948,7 +3947,7 @@ figcaption::after {
     line-height: 1.9;
     font-style: italic;
     font-size: .88rem;
-    font-size: clamp(.82rem, 3.6cqi, 1.05rem);
+    font-size: clamp(3.28cqi, 3.6cqi, 4.2cqi);
 }
 
 .closing-row {
@@ -3963,8 +3962,8 @@ figcaption::after {
 }
 
 .end-crest {
-    width: clamp(70px, 32cqi, 160px);
-    height: clamp(70px, 32cqi, 160px);
+    width: clamp(17.5cqi, 32cqi, 40cqi);
+    height: clamp(17.5cqi, 32cqi, 40cqi);
     flex: none;
     --sy-sun: var(--gold-deep);
     --sy-water: var(--aqua-ink);
@@ -3977,7 +3976,7 @@ figcaption::after {
     max-width: 30ch;
     line-height: 1.8;
     font-size: .8rem;
-    font-size: clamp(.76rem, 3.2cqi, .95rem);
+    font-size: clamp(3.04cqi, 3.2cqi, 3.8cqi);
 }
 
 .end-mark {
@@ -3989,7 +3988,7 @@ figcaption::after {
 
 .end-sig {
     font-family: "Segoe Script", "Apple Chancery", "Comic Sans MS", cursive;
-    font-size: clamp(.9rem, 4cqi, 1.4rem);
+    font-size: clamp(3.6cqi, 4cqi, 5.6cqi);
     color: var(--ink-soft);
     margin-top: .6em;
     opacity: .75;
@@ -3999,7 +3998,7 @@ figcaption::after {
 .end-final {
     position: relative;
     width: min(92%, 54ch);
-    padding: clamp(16px, 4.5cqi, 28px) clamp(14px, 5cqi, 30px);
+    padding: clamp(4cqi, 4.5cqi, 7cqi) clamp(3.5cqi, 5cqi, 7.5cqi);
     background:
         linear-gradient(180deg, rgba(255, 255, 255, .5), transparent 30%),
         radial-gradient(120% 100% at 50% 0%, #fffdf6 0%, #fdf8ec 60%, #f7ecd9 100%);
@@ -4018,8 +4017,8 @@ figcaption::after {
     top: -9px;
     left: 50%;
     transform: translateX(-50%) rotate(-2deg);
-    width: clamp(52px, 16cqi, 96px);
-    height: clamp(14px, 3.6cqi, 22px);
+    width: clamp(13cqi, 16cqi, 24cqi);
+    height: clamp(3.5cqi, 3.6cqi, 5.5cqi);
     background: linear-gradient(180deg, rgba(240, 214, 138, .9), rgba(201, 168, 76, .75));
     border-radius: 1px;
     box-shadow: 0 1px 2px rgba(7, 20, 34, .12);
@@ -4028,13 +4027,13 @@ figcaption::after {
 .end-final .ef-title {
     font-family: var(--font-display);
     color: var(--ink);
-    font-size: clamp(.95rem, 3.8cqi, 1.4rem);
-    margin-bottom: clamp(6px, 2cqi, 10px);
+    font-size: clamp(3.8cqi, 3.8cqi, 5.6cqi);
+    margin-bottom: clamp(1.5cqi, 2cqi, 2.5cqi);
 }
 
 .end-final .ef-body {
     color: var(--ink-soft);
-    font-size: clamp(.76rem, 3cqi, .95rem);
+    font-size: clamp(3.04cqi, 3cqi, 3.8cqi);
     line-height: 1.7;
 }
 
@@ -4062,7 +4061,7 @@ figcaption::after {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: clamp(20px, 6vw, 40px);
+    gap: clamp(5cqi, 6vw, 10cqi);
 }
 
 .ctrl-btn {
@@ -4318,8 +4317,8 @@ figcaption::after {
 .cover-sticker {
     top: 7%;
     right: 8%;
-    width: clamp(48px, 17cqi, 92px);
-    height: clamp(48px, 17cqi, 92px);
+    width: clamp(12cqi, 17cqi, 23cqi);
+    height: clamp(12cqi, 17cqi, 23cqi);
     transform: rotate(8deg);
 }
 
@@ -4342,19 +4341,19 @@ figcaption::after {
 
 .page--cover .page-inner {
     padding: 9% 10%;
-    gap: clamp(7px, 2.2cqi, 14px);
+    gap: clamp(1.75cqi, 2.2cqi, 3.5cqi);
 }
 
 .page--cover .cover-crest {
-    width: clamp(30px, 10cqi, 56px);
-    height: clamp(30px, 10cqi, 56px);
+    width: clamp(7.5cqi, 10cqi, 14cqi);
+    height: clamp(7.5cqi, 10cqi, 14cqi);
     opacity: .55;
 }
 
 .page--cover .cover-art {
     position: relative;
     width: min(76%, 280px);
-    padding: clamp(5px, 1.5cqi, 9px) clamp(5px, 1.5cqi, 9px) clamp(15px, 4cqi, 24px);
+    padding: clamp(1.25cqi, 1.5cqi, 2.25cqi) clamp(1.25cqi, 1.5cqi, 2.25cqi) clamp(3.75cqi, 4cqi, 6cqi);
     background: #f8fbff;
     border-radius: 3px;
     transform: rotate(-2.5deg);
@@ -4367,8 +4366,8 @@ figcaption::after {
     position: absolute;
     top: -7px;
     left: 50%;
-    width: clamp(34px, 11cqi, 62px);
-    height: clamp(10px, 3cqi, 17px);
+    width: clamp(8.5cqi, 11cqi, 15.5cqi);
+    height: clamp(2.5cqi, 3cqi, 4.25cqi);
     background: rgba(255, 231, 159, .72);
     transform: translateX(-50%) rotate(-3deg);
     box-shadow: 0 1px 2px rgba(0, 0, 0, .08);
@@ -4389,7 +4388,7 @@ figcaption::after {
 }
 
 .page--cover .cover-title {
-    font-size: clamp(1.35rem, 8cqi, 2.5rem);
+    font-size: clamp(5.4cqi, 8cqi, 10cqi);
     letter-spacing: .06em;
     color: #f8fbff;
     text-shadow: 0 2px 14px rgba(0, 0, 0, .28);
@@ -4424,7 +4423,7 @@ figcaption::after {
     position: relative;
     width: min(88%, 330px);
     height: auto;
-    padding: clamp(6px, 1.8cqi, 11px) clamp(6px, 1.8cqi, 11px) clamp(8px, 2.4cqi, 15px);
+    padding: clamp(1.5cqi, 1.8cqi, 2.75cqi) clamp(1.5cqi, 1.8cqi, 2.75cqi) clamp(2cqi, 2.4cqi, 3.75cqi);
     background: #fff;
     border-radius: 3px;
     transform: rotate(-2deg);
@@ -4453,8 +4452,8 @@ figcaption::after {
 .page--pilot-message .page-corner-img {
     top: 4%;
     right: 4%;
-    width: clamp(74px, 22cqi, 132px);
-    height: clamp(74px, 22cqi, 132px);
+    width: clamp(18.5cqi, 22cqi, 33cqi);
+    height: clamp(18.5cqi, 22cqi, 33cqi);
     transform: rotate(6deg);
     filter: drop-shadow(2px 4px 4px rgba(7, 20, 34, .18));
 }
@@ -4466,7 +4465,7 @@ figcaption::after {
 .intro-message-card {
     position: relative;
     width: min(94%, 360px);
-    padding: clamp(24px, 9cqi, 52px) clamp(14px, 6cqi, 32px);
+    padding: clamp(6cqi, 9cqi, 13cqi) clamp(3.5cqi, 6cqi, 8cqi);
     background: rgba(255, 255, 255, .74);
     border: 1px solid rgba(26, 95, 138, .16);
     border-radius: 3px;
@@ -4479,15 +4478,15 @@ figcaption::after {
     position: absolute;
     top: -7px;
     left: 17%;
-    width: clamp(42px, 14cqi, 78px);
-    height: clamp(11px, 3.5cqi, 20px);
+    width: clamp(10.5cqi, 14cqi, 19.5cqi);
+    height: clamp(2.75cqi, 3.5cqi, 5cqi);
     background: rgba(255, 231, 159, .62);
     transform: rotate(-4deg);
 }
 
 .intro-message-card .text-title {
     color: var(--ink);
-    font-size: clamp(1.15rem, 5cqi, 2rem);
+    font-size: clamp(4.6cqi, 5cqi, 8cqi);
 }
 
 .intro-message-card .text-subtitle {
@@ -4619,7 +4618,7 @@ figcaption::after {
     z-index: 1;
     font-family: "Segoe Script", "Apple Chancery", cursive;
     color: #2e2e3a;
-    font-size: clamp(.85rem, 3.2cqi, 1.1rem);
+    font-size: clamp(3.4cqi, 3.2cqi, 4.4cqi);
     transform: rotate(var(--r, 0deg));
     opacity: .8;
     pointer-events: none;
@@ -4629,8 +4628,8 @@ figcaption::after {
 .art-photo {
     position: absolute;
     background: #fff;
-    padding: clamp(5px, 1.2cqi, 8px);
-    padding-bottom: clamp(24px, 6cqi, 34px);
+    padding: clamp(1.25cqi, 1.2cqi, 2cqi);
+    padding-bottom: clamp(6cqi, 6cqi, 8.5cqi);
     box-shadow: 0 1px 2px rgba(60, 40, 20, .25), 0 12px 30px rgba(60, 40, 20, .32);
     transform: rotate(var(--rot, 0deg));
     z-index: 3;
@@ -4651,12 +4650,12 @@ figcaption::after {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: clamp(4px, 1.2cqi, 8px);
+    bottom: clamp(1cqi, 1.2cqi, 2cqi);
     text-align: center;
     font-family: "Segoe Script", "Apple Chancery", cursive;
     font-style: italic;
     color: #33302a;
-    font-size: clamp(.62rem, 2.5cqi, .92rem);
+    font-size: clamp(2.48cqi, 2.5cqi, 3.68cqi);
     pointer-events: none;
 }
 
@@ -4692,7 +4691,7 @@ figcaption::after {
 .art-pin {
     position: absolute;
     z-index: 5;
-    width: clamp(13px, 3.8cqi, 20px);
+    width: clamp(3.25cqi, 3.8cqi, 5cqi);
     pointer-events: none;
     filter: drop-shadow(0 1px 2px rgba(5, 5, 20, .4));
 }
@@ -4707,7 +4706,7 @@ figcaption::after {
     z-index: 1;
     font-family: "Comic Sans MS", "Chalkboard SE", "Segoe Print", cursive;
     font-weight: 900;
-    font-size: clamp(.95rem, 4.4cqi, 1.5rem);
+    font-size: clamp(3.8cqi, 4.4cqi, 6cqi);
     letter-spacing: .04em;
     white-space: nowrap;
     text-shadow: 1px 1px 0 rgba(255, 255, 255, .7), 2px 2px 0 rgba(90, 60, 40, .18);
@@ -4728,7 +4727,7 @@ figcaption::after {
     font-style: italic;
     font-weight: 700;
     color: #2e2a24;
-    font-size: clamp(.8rem, 3.6cqi, 1.2rem);
+    font-size: clamp(3.2cqi, 3.6cqi, 4.8cqi);
     text-shadow: 1px 2px 0 rgba(240, 150, 200, .55);
     pointer-events: none;
 }
@@ -4746,7 +4745,7 @@ figcaption::after {
     font-weight: 700;
     letter-spacing: .18em;
     color: #6a5a48;
-    font-size: clamp(.55rem, 2.4cqi, .8rem);
+    font-size: clamp(2.2cqi, 2.4cqi, 3.2cqi);
     pointer-events: none;
 }
 
@@ -4762,14 +4761,14 @@ figcaption::after {
     right: 4%;
     top: 1.5%;
     z-index: 5;
-    width: clamp(30px, 9cqi, 48px);
+    width: clamp(7.5cqi, 9cqi, 12cqi);
     aspect-ratio: 1;
     display: grid;
     place-items: center;
     color: #fff;
     font-family: "Comic Sans MS", "Chalkboard SE", cursive;
     font-weight: 900;
-    font-size: clamp(.55rem, 2.2cqi, .75rem);
+    font-size: clamp(2.2cqi, 2.2cqi, 3cqi);
     background: radial-gradient(circle at 50% 45%, #222 62%, transparent 64%), radial-gradient(circle at 18% 20%, #222 8%, transparent 9%), radial-gradient(circle at 85% 25%, #222 6%, transparent 7%), radial-gradient(circle at 90% 80%, #222 7%, transparent 8%), radial-gradient(circle at 12% 75%, #222 5%, transparent 6%);
     border-radius: 48% 52% 50% 50%;
     transform: rotate(8deg);
@@ -4783,7 +4782,7 @@ figcaption::after {
     font-family: "Segoe Script", "Apple Chancery", cursive;
     font-style: italic;
     color: #3a352c;
-    font-size: clamp(.55rem, 2.3cqi, .78rem);
+    font-size: clamp(2.2cqi, 2.3cqi, 3.12cqi);
     writing-mode: vertical-rl;
     pointer-events: none;
 }
@@ -4802,7 +4801,7 @@ figcaption::after {
     transform: rotate(1deg);
     background-color: #f6ecd2;
     background-image: repeating-linear-gradient(to bottom, transparent 0 8px, rgba(120, 90, 60, .4) 8px 9px);
-    padding: clamp(6px, 1.6cqi, 10px) clamp(7px, 1.8cqi, 11px);
+    padding: clamp(1.5cqi, 1.6cqi, 2.5cqi) clamp(1.75cqi, 1.8cqi, 2.75cqi);
     box-shadow: 0 1px 2px rgba(60, 40, 20, .25), 0 8px 20px rgba(60, 40, 20, .3);
     clip-path: polygon(1% 4%, 15% 0%, 45% 2%, 75% 0%, 99% 3%, 100% 40%, 98% 75%, 100% 97%, 80% 100%, 50% 98%, 20% 100%, 2% 98%, 0% 60%);
     pointer-events: none;
@@ -4812,14 +4811,14 @@ figcaption::after {
     font-family: "Segoe Script", "Apple Chancery", cursive;
     font-weight: 700;
     color: #3a352c;
-    font-size: clamp(.6rem, 2.5cqi, .85rem);
+    font-size: clamp(2.4cqi, 2.5cqi, 3.4cqi);
     margin-bottom: 2px;
 }
 
 .art-journal .jb {
     font-family: "Segoe Script", "Apple Chancery", cursive;
     color: #3a352c;
-    font-size: clamp(.46rem, 1.9cqi, .64rem);
+    font-size: clamp(1.84cqi, 1.9cqi, 2.56cqi);
     line-height: 1.65;
 }
 
@@ -4836,7 +4835,7 @@ figcaption::after {
 .art-star {
     position: absolute;
     z-index: 5;
-    font-size: clamp(.7rem, 2.8cqi, 1rem);
+    font-size: clamp(2.8cqi, 2.8cqi, 4cqi);
     text-shadow: 0 0 6px currentColor;
     pointer-events: none;
 }
@@ -4860,7 +4859,7 @@ figcaption::after {
 
 .page--hobbies-right .text-title {
     max-width: 8ch;
-    font-size: clamp(1.3rem, 6cqi, 2.25rem);
+    font-size: clamp(5.2cqi, 6cqi, 9cqi);
 }
 
 .page--hobbies-right .text-body {
@@ -5108,7 +5107,7 @@ figcaption::after {
     transform: translate(-50%, -50%);
     writing-mode: vertical-rl;
     color: #ffd76b;
-    font-size: clamp(.55rem, 2cqi, .75rem);
+    font-size: clamp(2.2cqi, 2cqi, 3cqi);
     letter-spacing: .3em;
     text-shadow: 0 0 7px rgba(255, 200, 80, .9);
     background: #6767cf;
@@ -5120,7 +5119,7 @@ figcaption::after {
 .page--gaming-left .gaming-cell {
     background: #fff;
     border: 0;
-    padding: clamp(4px, 1.2cqi, 8px);
+    padding: clamp(1cqi, 1.2cqi, 2cqi);
     box-shadow:
         2px 4px 10px rgba(20, 20, 60, .35),
         0 1px 3px rgba(20, 20, 60, .25);
@@ -5134,7 +5133,7 @@ figcaption::after {
     left: 50%;
     transform: translateX(-50%) rotate(var(--tape-rot, 1deg));
     width: 36%;
-    height: clamp(10px, 2.8cqi, 16px);
+    height: clamp(2.5cqi, 2.8cqi, 4cqi);
     border-radius: 1px;
     box-shadow: 0 1px 3px rgba(20, 20, 60, .25);
     opacity: .94;
@@ -5254,7 +5253,7 @@ figcaption::after {
     color: #5a431f;
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: clamp(.52rem, 2cqi, .68rem);
+    font-size: clamp(2.08cqi, 2cqi, 2.72cqi);
     letter-spacing: .14em;
     padding: 3px 10px 2px;
     white-space: nowrap;
@@ -5278,7 +5277,7 @@ figcaption::after {
     color: #ffe27a;
     font-family: var(--font-ui);
     font-weight: 900;
-    font-size: clamp(.5rem, 1.9cqi, .62rem);
+    font-size: clamp(2cqi, 1.9cqi, 2.48cqi);
     letter-spacing: .04em;
     padding: 9px 7px;
     transform: rotate(-12deg);
@@ -5297,7 +5296,7 @@ figcaption::after {
     color: #175f68;
     font-family: var(--font-ui);
     font-weight: 700;
-    font-size: clamp(.45rem, 1.6cqi, .55rem);
+    font-size: clamp(1.8cqi, 1.6cqi, 2.2cqi);
     letter-spacing: .08em;
     padding: 2px 7px;
     border-radius: 8px 8px 8px 2px;
@@ -5378,7 +5377,7 @@ figcaption::after {
     z-index: 1;
     font-family: "Segoe Script", "Apple Chancery", cursive;
     color: #2e2e3a;
-    font-size: clamp(.9rem, 3.4cqi, 1.2rem);
+    font-size: clamp(3.6cqi, 3.4cqi, 4.8cqi);
     transform: rotate(var(--r, 0deg));
     opacity: .85;
     pointer-events: none;
@@ -5388,7 +5387,7 @@ figcaption::after {
 .arcade-photo {
     position: absolute;
     background: #fff;
-    padding: clamp(4px, 1cqi, 6px);
+    padding: clamp(1cqi, 1cqi, 1.5cqi);
     box-shadow: 0 1px 2px rgba(60, 40, 20, .25), 0 10px 28px rgba(60, 40, 20, .3);
     transform: rotate(var(--rot, 0deg));
     z-index: 2;
@@ -5405,11 +5404,11 @@ figcaption::after {
 .arcade-photo::before {
     content: '';
     position: absolute;
-    top: -9px;
+    top: -2.25cqi;
     left: 50%;
     transform: translateX(-50%) rotate(-2deg);
     width: 44%;
-    height: clamp(12px, 3cqi, 18px);
+    height: clamp(3cqi, 3cqi, 4.5cqi);
     background-image: url('../assets/resources/png/washi/washi 4.png');
     background-size: 100% 600%;
     background-position: 50% 65.2%;
@@ -5514,7 +5513,7 @@ figcaption::after {
 .shot-clip.c5 {
     left: 2%;
     top: 38%;
-    width: clamp(18px, 5.2cqi, 27px);
+    width: clamp(4.5cqi, 5.2cqi, 6.75cqi);
     transform: rotate(-72deg);
     filter: brightness(0) invert(78%) sepia(62%) saturate(1200%) hue-rotate(1deg) brightness(1.03) drop-shadow(0 1px 2px rgba(5, 5, 20, .4));
 }
@@ -5536,7 +5535,7 @@ figcaption::after {
     background: #fffdf6;
     color: #3a2c18;
     font-family: "Segoe Script", "Apple Chancery", cursive;
-    font-size: clamp(.52rem, 1.9cqi, .68rem);
+    font-size: clamp(2.08cqi, 1.9cqi, 2.72cqi);
     white-space: nowrap;
     padding: 2px 12px 3px;
     box-shadow: 0 2px 5px rgba(60, 40, 20, .3);
@@ -5551,7 +5550,7 @@ figcaption::after {
     transform: rotate(1.5deg);
 }
 
-.arcade-photo.ap4 .arcade-cap { font-size: clamp(.56rem, 2.1cqi, .74rem); }
+.arcade-photo.ap4 .arcade-cap { font-size: clamp(2.24cqi, 2.1cqi, 2.96cqi); }
 
 /* pixel text badges */
 .arcade-badge {
@@ -5567,7 +5566,7 @@ figcaption::after {
     left: 62%;
     top: 2.5%;
     color: #2fbf4a;
-    font-size: clamp(.8rem, 3cqi, 1.05rem);
+    font-size: clamp(3.2cqi, 3cqi, 4.2cqi);
     text-shadow: 2px 2px 0 #0d5a22, -1px -1px 0 #0d5a22, 1px -1px 0 #0d5a22, -1px 1px 0 #0d5a22;
     transform: rotate(-2deg);
 }
@@ -5576,7 +5575,7 @@ figcaption::after {
     right: 2%;
     top: 43%;
     color: #fff;
-    font-size: clamp(.62rem, 2.4cqi, .85rem);
+    font-size: clamp(2.48cqi, 2.4cqi, 3.4cqi);
     text-shadow: 1.5px 1.5px 0 #4a6cf7, -1.5px -1.5px 0 #4a6cf7, 1.5px -1.5px 0 #4a6cf7, -1.5px 1.5px 0 #4a6cf7, 0 0 10px rgba(74, 108, 247, .8);
     transform: rotate(3deg);
 }
@@ -5634,7 +5633,7 @@ figcaption::after {
     color: #ffe27a;
     font-family: "Courier New", Courier, monospace;
     font-weight: 900;
-    font-size: clamp(.6rem, 2.3cqi, .8rem);
+    font-size: clamp(2.4cqi, 2.3cqi, 3.2cqi);
     letter-spacing: .05em;
     padding: 5px 12px 6px;
     transform: rotate(-3deg);
@@ -5762,7 +5761,7 @@ figcaption::after {
 .page--back-cover .back-cover-mark {
     color: rgba(240, 214, 138, .76);
     font-family: var(--font-ui);
-    font-size: clamp(.55rem, 2cqi, .8rem);
+    font-size: clamp(2.2cqi, 2cqi, 3.2cqi);
     letter-spacing: .42em;
     text-indent: .42em;
 }
@@ -5770,7 +5769,7 @@ figcaption::after {
 .bottle-wrap {
     position: relative;
     cursor: pointer;
-    margin-top: clamp(8px, 2cqi, 16px);
+    margin-top: clamp(2cqi, 2cqi, 4cqi);
     transition: transform .3s ease;
 }
 
@@ -5779,7 +5778,7 @@ figcaption::after {
 }
 
 .bottle-wrap img {
-    width: clamp(40px, 12cqi, 70px);
+    width: clamp(10cqi, 12cqi, 17.5cqi);
     height: auto;
     filter: drop-shadow(0 2px 8px rgba(91, 181, 224, .3));
     transition: filter .3s ease;
@@ -5797,13 +5796,13 @@ figcaption::after {
     background: rgba(14, 37, 64, .95);
     border: 1px solid rgba(91, 181, 224, .3);
     border-radius: 8px;
-    padding: clamp(8px, 2cqi, 14px);
+    padding: clamp(2cqi, 2cqi, 3.5cqi);
     color: var(--pearl);
     font-family: var(--font-body);
-    font-size: clamp(.65rem, 2.5cqi, .85rem);
+    font-size: clamp(2.6cqi, 2.5cqi, 3.4cqi);
     font-style: italic;
     line-height: 1.6;
-    max-width: clamp(180px, 50cqi, 280px);
+    max-width: clamp(45cqi, 50cqi, 70cqi);
     text-align: center;
     opacity: 0;
     pointer-events: none;
@@ -5818,10 +5817,10 @@ figcaption::after {
 }
 
 .back-cover-link {
-    margin-top: clamp(12px, 4cqi, 24px);
+    margin-top: clamp(3cqi, 4cqi, 6cqi);
     color: rgba(200, 230, 255, .5);
     font-family: var(--font-ui);
-    font-size: clamp(.5rem, 1.8cqi, .72rem);
+    font-size: clamp(2cqi, 1.8cqi, 2.88cqi);
     letter-spacing: .15em;
     text-transform: uppercase;
     cursor: pointer;
@@ -5888,8 +5887,8 @@ figcaption::after {
     position: absolute;
     top: -7px;
     left: 50%;
-    width: clamp(38px, 12cqi, 70px);
-    height: clamp(10px, 3cqi, 17px);
+    width: clamp(9.5cqi, 12cqi, 17.5cqi);
+    height: clamp(2.5cqi, 3cqi, 4.25cqi);
     background: rgba(255, 231, 159, .72);
     transform: translateX(-50%) rotate(-4deg);
     z-index: 4;
@@ -5918,7 +5917,7 @@ figcaption::after {
 
 .page--wishes-right .text-title {
     max-width: 12ch;
-    font-size: clamp(1.2rem, 5.5cqi, 2rem);
+    font-size: clamp(4.8cqi, 5.5cqi, 8cqi);
 }
 
 .page--wishes-right .text-body {

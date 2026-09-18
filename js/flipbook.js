@@ -663,7 +663,7 @@
             const s = el("span", "arcade-star");
             s.textContent = "★";
             s.style.left = sd[0] + "%"; s.style.top = sd[1] + "%";
-            s.style.color = sd[2]; s.style.fontSize = sd[3] + "px";
+            s.style.color = sd[2]; s.style.fontSize = (sd[3] / 4).toFixed(2) + "cqi";
             s.style.setProperty("--sr", ((idx * 53) % 30 - 15) + "deg");
             stage.appendChild(s);
         });
@@ -824,9 +824,25 @@
         nb.appendChild(nbi);
         stage.appendChild(nb);
 
-        // starry washi tapes — only corner anchors (strays removed)
+        // starry washi tapes — exact single-strip windows (no gap mud).
+        // w1/w2 stay galaxy (they sit on the dark sky); w4 becomes the blue
+        // moon strip (opaque, reads as real tape on the white notebook).
+        // (literals stay directly inside assetPath() so the gift build embeds them)
+        const _washiStar = assetPath("assets/resources/png/music/star washi.png");
+        const _washiMoon = assetPath("assets/resources/png/washi/washi 4.png");
+        const _wash = {
+            1: [_washiStar, "-5.9%"],
+            2: [_washiStar, "-29.7%"],
+            4: [_washiMoon, "-54.3%"]
+        };
         [1, 2, 4].forEach((w) => {
-            stage.appendChild(el("div", "collage-washi w" + w));
+            const t = el("div", "collage-washi w" + w);
+            const ti = document.createElement("img");
+            ti.src = assetPath(_wash[w][0]);
+            ti.alt = ""; ti.loading = "lazy"; ti.draggable = false;
+            ti.style.marginTop = _wash[w][1];
+            t.appendChild(ti);
+            stage.appendChild(t);
         });
 
         // hollow glowing outline stars like reference (outlined ★ with neon halo)
