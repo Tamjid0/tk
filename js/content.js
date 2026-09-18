@@ -349,7 +349,7 @@ const PAGES = [
     {
         type: "wishes-left",
         texture: "wishes",
-        art: { token: "WISHES", src: IMG("dolia x heino sitting on water dolia on marmaid form.jpg"), scale: 5 },
+        art: { token: "WISHES", src: IMG("dolia-black hair.jpg"), scale: 5 },
         decor: [
             { src: RES("png/seaweed/long sea weed long pink.png"), x: 86, y: 5, w: 10, rot: -4 },
             { src: RES("anchor.png"), x: 2, y: 84, w: 13, rot: -10 }
