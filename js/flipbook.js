@@ -365,7 +365,7 @@
                 d.style.setProperty("--sx", (Math.random() * 80 - 40).toFixed(0) + "px");
                 d.style.setProperty("--dur", (1.6 + Math.random() * 1.6).toFixed(2) + "s");
                 document.body.appendChild(d);
-                setTimeout(function (el) { el.remove(); }, 3600);
+                setTimeout(() => d.remove(), 3600);
             }
         }
 
