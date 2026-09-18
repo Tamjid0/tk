@@ -26,6 +26,47 @@
         /* fallback: show anyway after 1.2s */
         setTimeout(function () { if (scene && !scene.classList.contains("ready")) scene.classList.add("ready"); }, 1200);
 
+        /* ── Preloader: fetch every book asset up front so pages never pop in.
+           Progress shows on the hint; the chest arms at 100% (15s failsafe). */
+        (function initPreloader() {
+            const hint = splash ? splash.querySelector(".splash-hint") : null;
+            const urls = new Set();
+            const add = (s) => { if (typeof s === "string" && s) urls.add(s); };
+            try {
+                const _P = (typeof PAGES !== "undefined" && Array.isArray(PAGES)) ? PAGES : [];
+                _P.forEach((pg) => {
+                    if (!pg) return;
+                    add(pg.art && pg.art.src); add(pg.sticker); add(pg.cornerImg);
+                    (pg.images || []).forEach((im) => { add(im.src); ((im.stickers) || []).forEach((st) => add(st && st.src)); });
+                    (pg.decor || []).forEach((d) => add(d && d.src));
+                });
+            } catch (_) {}
+            /* chrome + CSS-only art (each referenced elsewhere too — listed so first paint is warm) */
+            ["assets/images/ocean-bg.jpg", "assets/resources/chest.png", "assets/resources/bottle message.png",
+             "assets/resources/png/music/star washi.png", "assets/resources/png/washi/washi 4.png",
+             "assets/resources/png/washi/washi 8.png", "assets/resources/png/washi/washi pink.png",
+             "assets/resources/png/gaming/BG/8bit-pixel-art-night-sky-game-space-landscape-vector.jpg",
+             "assets/resources/png/gaming/BG/360_F_88981880_YjJManMJ6hJmKr5CZteFJAkEzXIh8mxW.jpg"
+            ].forEach(add);
+            /* warm the audio fetch too (playback still starts on chest tap) */
+            try { const mu = document.getElementById("bgMusic"); if (mu) mu.load(); } catch (_) {}
+            const list = [...urls];
+            chest.style.pointerEvents = "none";
+            chest.style.opacity = ".55";
+            const paint = (n) => { if (hint) hint.textContent = "Loading your gift… " + Math.round((n / (list.length || 1)) * 100) + "%"; };
+            let finished = false;
+            const finish = () => {
+                if (finished) return; finished = true;
+                chest.style.pointerEvents = ""; chest.style.opacity = "";
+                if (hint) hint.textContent = "Tap the chest to open your gift";
+            };
+            if (!list.length) { finish(); return; }
+            let done = 0; paint(0);
+            const one = () => { done++; if (done >= list.length) finish(); else paint(done); };
+            setTimeout(finish, 15000);
+            list.forEach((u) => { const im = new Image(); im.onload = one; im.onerror = one; im.src = u; });
+        })();
+
         /* Ambient rising bubbles on the splash scene too */
         const splashBubbles = document.getElementById("splashBubbles");
         if (splashBubbles) {
@@ -145,59 +186,8 @@
     let anchor = 0;          // page index we try to keep visible across resizes
     let lock = false;
 
-    /* ── DEV PERSIST: keep book on last viewed page across reloads ──
-       Revertable: delete this block or `git revert` the commit that adds it.
-       Usage: reload stays on same page. Disable with `?nopersist` in URL.
-       Clear stored page: run `clearFlipbookPersist()` in console or add `?clearPersist`. */
-    const DEV_PERSIST_KEY = "dev:flipbook:anchor";
-    const _devParams = new URLSearchParams(location.search);
-    const _persistEnabled = !_devParams.has("nopersist");
-    if (_devParams.has("clearPersist")) { try { localStorage.removeItem(DEV_PERSIST_KEY); } catch (_) {} }
-    function _savePersist() {
-        if (!_persistEnabled) return;
-        try { localStorage.setItem(DEV_PERSIST_KEY, String(anchor)); } catch (_) {}
-        try { history.replaceState(null, "", location.pathname + location.search + "#p" + anchor); } catch (_) {}
-    }
-    function _loadPersist() {
-        if (!_persistEnabled) return null;
-        try {
-            const qp = _devParams.get("page");
-            if (qp !== null) { const n = parseInt(qp, 10); if (!isNaN(n)) return n; }
-            const hs = (location.hash.match(/#p(\d+)/) || [])[1];
-            if (hs != null) { const n = parseInt(hs, 10); if (!isNaN(n)) return n; }
-            const ls = localStorage.getItem(DEV_PERSIST_KEY);
-            if (ls !== null) { const n = parseInt(ls, 10); if (!isNaN(n)) return n; }
-        } catch (_) {}
-        return null;
-    }
-    // expose for console: clearFlipbookPersist()
-    try { window.clearFlipbookPersist = () => { try { localStorage.removeItem(DEV_PERSIST_KEY); } catch (_) {} location.hash = ""; console.log("[flipbook] persist cleared"); }; } catch (_) {}
-    try { window._flipbookDevPersist = { key: DEV_PERSIST_KEY, load: _loadPersist, save: _savePersist }; } catch (_) {}
-
-    /* DEV PERSIST: auto-bypass chest/splash when reloading on a persisted page (revertable).
-       Without this, reload always shows the chest even though the book underneath is already
-       at the correct page. Enabled only when a non-zero page is persisted; disable with ?nopersist. */
-    try {
-        const _persistedForSplash = _loadPersist();
-        const _shouldBypass = _persistEnabled && _persistedForSplash !== null && _persistedForSplash !== 0;
-        if (_shouldBypass) {
-            const _bypassSplash = () => {
-                const sp = document.getElementById("splash");
-                if (sp) sp.classList.add("hidden");
-                // also ensure splash scene is marked ready so it doesn't flash later
-                const sc = sp && sp.querySelector(".splash-scene");
-                if (sc) sc.classList.add("ready");
-            };
-            if (document.readyState === "loading") {
-                document.addEventListener("DOMContentLoaded", () => setTimeout(_bypassSplash, 50), { once: true });
-            } else {
-                // DOM already ready (script at end of body) — hide on next tick
-                setTimeout(_bypassSplash, 50);
-            }
-            // fallback: hide again after bg decode timeout in case splash re-shows
-            setTimeout(() => { const sp = document.getElementById("splash"); if (sp && _loadPersist() !== null) sp.classList.add("hidden"); }, 1300);
-        }
-    } catch (_) {}
+    /* Reloads always start fresh at the cover with the chest splash:
+       the tap is what unlocks the music (browsers block non-gesture audio). */
 
     /* ---------- tiny DOM helpers ---------- */
     const el = (tag, cls) => { const n = document.createElement(tag); if (cls) n.className = cls; return n; };
@@ -1310,7 +1300,6 @@
             anchor = v[0] !== null ? v[0] : v[1];
         }
         book.classList.toggle("is-closed", mode === "double" && v[0] === null);
-        _savePersist(); // DEV PERSIST: remember page after render (revertable) — saved here, not in updateUI
     }
 
     function updateUI() {
@@ -1327,9 +1316,6 @@
     function layout() {
         mode = mqDouble.matches ? "double" : "single";
         buildViews();
-        // DEV PERSIST: restore last page on reload (revertable block)
-        const _persisted = _loadPersist();
-        if (_persisted !== null && _persisted >= 0 && _persisted < PAGES.length) anchor = _persisted;
         let idx = views.findIndex(v => v[0] === anchor || v[1] === anchor);
         cursor = idx < 0 ? 0 : idx;
         book.classList.toggle("mode-double", mode === "double");
