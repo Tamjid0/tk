@@ -1012,17 +1012,20 @@ button {
     border: 1px solid rgba(26, 95, 138, .18);
 }
 
-/* ---- Page corner image (set via content.js cornerImg) ---- */
+/* ---- Page corner image (set via content.js cornerImg) ----
+   Seated inside the frame margin with a soft shadow: it kisses the card's
+   top-right corner like a taped photo instead of covering text. */
 .page-corner-img {
     position: absolute;
-    top: 0;
-    right: 0;
-    width: clamp(70px, 18cqi, 130px);
-    height: clamp(70px, 18cqi, 130px);
+    top: 2%;
+    right: 3%;
+    width: clamp(60px, 15cqi, 110px);
+    height: clamp(60px, 15cqi, 110px);
     pointer-events: none;
     z-index: 5;
     overflow: hidden;
     border-radius: 0 8px 0 0;
+    filter: drop-shadow(2px 3px 4px rgba(7, 20, 34, .22));
 }
 
 .page-corner-img img {
@@ -1166,6 +1169,80 @@ button {
     transform: rotate(1.1deg) translate(3px, 4px);
     z-index: -1;
     box-shadow: 0 4px 12px rgba(7, 20, 34, .1);
+}
+
+/* ---- Right-page card themes: one light-touch identity per spread ----
+   Same text fits everywhere — only tape, tilt, tint and edge vary. */
+.page--intro-right .paper-card { transform: rotate(.4deg); }
+.page--intro-right .paper-card::before {
+    left: 12%;
+    transform: translateX(0) rotate(3deg);
+    background: linear-gradient(180deg, rgba(255, 217, 224, .9), rgba(255, 194, 209, .8));
+}
+
+.page--hobbies-right .paper-card { transform: rotate(-1.2deg); }
+.page--hobbies-right .paper-card::before {
+    left: 8%;
+    transform: translateX(0) rotate(-6deg);
+    background:
+        linear-gradient(to right, rgba(78, 205, 196, .4) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(78, 205, 196, .4) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(255, 251, 240, .92), rgba(240, 230, 205, .9));
+    background-size: 7px 7px, 7px 7px, cover;
+}
+
+.page--editorial-right .paper-card { transform: rotate(.8deg); width: 94%; margin-left: 0; }
+.page--editorial-right .paper-card::before {
+    transform: translateX(-50%) rotate(0deg);
+    width: clamp(64px, 20cqi, 116px);
+    background: repeating-linear-gradient(90deg, rgba(91, 181, 224, .75) 0 6px, rgba(255, 255, 255, .5) 6px 12px);
+}
+
+.page--collage-right .paper-card { transform: rotate(-.8deg); width: 94%; margin-right: 0; }
+.page--collage-right .paper-card::before {
+    left: auto;
+    right: 10%;
+    transform: translateX(0) rotate(5deg);
+    background: linear-gradient(180deg, rgba(200, 168, 255, .85), rgba(155, 109, 214, .7));
+}
+
+.page--gaming-right .paper-card { transform: rotate(1.1deg); }
+.page--gaming-right .paper-card::before {
+    width: clamp(64px, 20cqi, 116px);
+    transform: translateX(-50%) rotate(-3deg);
+    background: linear-gradient(180deg, rgba(255, 236, 170, .9), rgba(232, 197, 58, .75));
+}
+.page--gaming-right .date-tag {
+    font-family: "Courier New", Courier, monospace;
+    font-weight: 900;
+    letter-spacing: .08em;
+    background: linear-gradient(180deg, #2b2350, #171233);
+    color: #ffe27a;
+    border-radius: 3px;
+    padding: 2px 10px 3px;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, .6);
+}
+
+.page--cinematic-right .paper-card {
+    transform: rotate(-.4deg);
+    border-left: 3px dashed rgba(201, 168, 76, .65);
+}
+.page--cinematic-right .paper-card::before {
+    transform: translateX(-50%) rotate(2deg);
+    background: linear-gradient(180deg, rgba(240, 214, 138, .9), rgba(201, 168, 76, .7));
+}
+
+.page--wishes-right .paper-card {
+    transform: rotate(.9deg);
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, .5), transparent 30%),
+        radial-gradient(120% 100% at 50% 0%, #fdf6ec 0%, #f3ecec 60%, #eadfe4 100%);
+}
+.page--wishes-right .paper-card::before {
+    left: auto;
+    right: 14%;
+    transform: translateX(0) rotate(-5deg);
+    background: linear-gradient(180deg, rgba(178, 224, 214, .9), rgba(78, 205, 196, .7));
 }
 
 /* ---- Floating scrapbook decorations ---- */
