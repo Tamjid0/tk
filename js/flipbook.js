@@ -1,4 +1,4 @@
-﻿/* ================================================================
+/* ================================================================
    Flipbook engine â€” vanilla JS, no dependencies, no network.
    You should not need to edit this file.
 ================================================================ */
@@ -147,6 +147,7 @@
             /* Hide splash after animation */
             setTimeout(function () {
                 splash.classList.add("hidden");
+                autoFitAllText(book);
             }, 800);
         });
     })();
@@ -433,17 +434,17 @@
     }
 
     function buildIntroRight(p) {
-        const pg = el("div", "page page--intro-right page--text-page page--framed page--pilot-message");
+        const pg = el("div", "page page--intro-right page--text-page page--framed");
         if (p.cornerImg) { const c = cornerImg(p.cornerImg); if (c) pg.appendChild(c); }
-        const inner = el("div", "page-inner intro-message-inner");
-        const note = el("div", "intro-message-card");
-        if (p.kicker) { const k = el("span", "text-subtitle"); k.textContent = p.kicker; note.appendChild(k); }
-        if (p.title) { const h2 = el("h2", "text-title"); h2.appendChild(tok(p.title)); note.appendChild(h2); }
-        note.appendChild(accentDivider());
+        const inner = el("div", "page-inner");
+        const card = el("div", "paper-card");
+        if (p.kicker) { const k = el("span", "text-subtitle"); k.textContent = p.kicker; card.appendChild(k); }
+        if (p.title) { const h2 = el("h2", "text-title"); h2.appendChild(tok(p.title)); card.appendChild(h2); }
+        card.appendChild(accentDivider());
         const body = el("div", "text-body");
         (p.body || []).forEach(line => { const para = el("p"); para.appendChild(tok(line)); body.appendChild(para); });
-        note.appendChild(body);
-        inner.appendChild(note);
+        card.appendChild(body);
+        inner.appendChild(card);
         pg.appendChild(inner);
         return pg;
     }
@@ -1283,6 +1284,67 @@
         }
     }
 
+
+                    /* ---------- Dynamic Text Auto-Fitting ----------
+       Targeted fix specifically for pages with long text (Pages 5, 7, 13)
+       so they smoothly scale down to fit without ever being cut off,
+       while all other pages remain at their crisp standard font size. */
+    function autoFitAllText(root) {
+        requestAnimationFrame(() => {
+            const host = root || book;
+            if (!host) return;
+            // Target all text-heavy right pages so they scale down gracefully when content overflows
+            const targetPages = host.querySelectorAll(".page--intro-right, .page--hobbies-right, .page--editorial-right, .page--cinematic-right, .page--wishes-right");
+            targetPages.forEach(pg => {
+                const card = pg.querySelector(".paper-card");
+                if (!card || !card.clientHeight || card.clientHeight < 50) return;
+                const bodyEl = card.querySelector(".text-body, .text-large");
+                if (!bodyEl) return;
+
+                bodyEl.style.fontSize = "";
+                bodyEl.style.lineHeight = "";
+
+                const titleEl = card.querySelector(".text-title");
+                const divEl = card.querySelector(".divider-accent, .accent-divider");
+                let topH = 0;
+                if (titleEl) topH += titleEl.offsetHeight;
+                if (divEl) topH += divEl.offsetHeight + 10;
+
+                const compCard = window.getComputedStyle(card);
+                const pad = (parseFloat(compCard.paddingTop) || 16) + (parseFloat(compCard.paddingBottom) || 16);
+                const maxBodyH = card.clientHeight - pad - topH;
+
+                if (bodyEl.scrollHeight <= maxBodyH + 2) {
+                    return; // Fits natively!
+                }
+
+                // If overflowing, scale down font-size smoothly
+                const baseSize = parseFloat(window.getComputedStyle(bodyEl).fontSize) || 16;
+                let low = 9;
+                let high = baseSize;
+                let best = low;
+
+                for (let i = 0; i < 12; i++) {
+                    const mid = (low + high) / 2;
+                    bodyEl.style.fontSize = mid.toFixed(2) + "px";
+                    const lh = mid < 12 ? 1.45 : (mid < 15 ? 1.58 : 1.68);
+                    bodyEl.style.lineHeight = lh.toString();
+
+                    if (bodyEl.scrollHeight <= maxBodyH + 2) {
+                        best = mid;
+                        low = mid + 0.15;
+                    } else {
+                        high = mid - 0.15;
+                    }
+                }
+
+                bodyEl.style.fontSize = best.toFixed(2) + "px";
+                const finalLh = best < 12 ? 1.45 : (best < 15 ? 1.58 : 1.68);
+                bodyEl.style.lineHeight = finalLh.toString();
+            });
+        });
+    }
+
     function renderView(idx) {
         const v = views[idx];
         if (mode === "single") {
@@ -1300,6 +1362,7 @@
             anchor = v[0] !== null ? v[0] : v[1];
         }
         book.classList.toggle("is-closed", mode === "double" && v[0] === null);
+        autoFitAllText(book);
     }
 
     function updateUI() {
@@ -1322,6 +1385,7 @@
         book.classList.toggle("mode-single", mode === "single");
         renderView(cursor);
         updateUI();
+        autoFitAllText(book);
     }
 
     /* ---------- page turning ---------- */
@@ -1351,6 +1415,7 @@
         const front = el("div", "face face--front"); front.appendChild(frontPg);
         const back = el("div", "face face--back"); back.appendChild(backPg);
         sheet.append(front, back);
+        autoFitAllText(sheet);
         return sheet;
     }
 
@@ -1599,5 +1664,10 @@
             im.src = String(p.art.src).replace(/\\/g, "/");
         }
     });
+    if (typeof ResizeObserver !== "undefined" && book) {
+        try {
+            new ResizeObserver(() => { autoFitAllText(book); }).observe(book);
+        } catch (_) {}
+    }
     layout();
 })();

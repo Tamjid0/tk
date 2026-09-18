@@ -50,6 +50,7 @@
 }
 
 /* ── Splash Screen ── */
+/* ── Splash Screen ── */
 .splash {
     position: fixed;
     inset: 0;
@@ -60,7 +61,7 @@
     justify-content: flex-end;
     overflow: hidden;
     transition: opacity .8s ease, visibility .8s ease;
-    padding-bottom: 12vh;
+    padding-bottom: 2.5vh;
 }
 
 .splash.hidden {
@@ -167,9 +168,10 @@
 }
 
 .splash-chest img {
-    width: clamp(150cqi, 80vw, 225cqi);
+    width: clamp(340px, 58vw, 650px);
+    max-width: 88vw;
     height: auto;
-    filter: drop-shadow(0 8px 30px rgba(0, 0, 0, .5));
+    filter: drop-shadow(0 10px 40px rgba(0, 0, 0, .55));
     position: relative;
     z-index: 2;
 }
@@ -187,12 +189,12 @@
     position: relative;
     z-index: 2;
     font-family: var(--font-display);
-    color: rgba(232, 238, 248, .85);
-    font-size: clamp(3.4cqi, 3.5cqi, 4.8cqi);
+    color: rgba(232, 238, 248, .92);
+    font-size: clamp(16px, 3.2vw, 24px);
     letter-spacing: .08em;
-    text-shadow: 0 2px 12px rgba(0, 0, 0, .6);
+    text-shadow: 0 2px 14px rgba(0, 0, 0, .7);
     animation: hintFade 2.5s ease-in-out infinite;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
 }
 
 @keyframes chestFloat {
@@ -1080,21 +1082,25 @@ button {
 /* ---- Shared: text page (right side) ---- */
 .page--text-page .page-inner {
     justify-content: center;
-    gap: clamp(2.5cqi, 3cqi, 5cqi);
-    padding: clamp(3.5cqi, 4.5cqi, 7.5cqi);
+    align-items: center;
+    padding: clamp(2.5cqi, 3.5cqi, 4.8cqi) clamp(3cqi, 4cqi, 5.5cqi);
+    height: 100%;
+    box-sizing: border-box;
 }
 
 .text-title {
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: clamp(4cqi, 4cqi, 6.4cqi);
+    font-size: clamp(13px, 2.7cqi, 3.8cqi);
     color: var(--ink);
-    line-height: 1.3;
+    line-height: 1.25;
+    flex-shrink: 0;
+    margin-bottom: 0.15em;
 }
 
 .text-subtitle {
     font-family: var(--font-ui);
-    font-size: clamp(2.4cqi, 2cqi, 3.2cqi);
+    font-size: clamp(11px, 2cqi, 3.2cqi);
     letter-spacing: .15em;
     text-transform: uppercase;
     color: var(--aqua-ink);
@@ -1102,30 +1108,45 @@ button {
 }
 
 .text-body {
-    font-size: clamp(3.2cqi, 2.8cqi, 4cqi);
-    line-height: 1.65;
+    font-size: clamp(13px, 3.1cqi, 4cqi);
+    line-height: 1.7;
     color: var(--ink-soft);
     max-width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
-.text-body p+p {
-    margin-top: .6em;
+.text-body p:empty,
+.text-large p:empty {
+    display: block;
+    height: 0.5em;
+    margin: 0;
+}
+
+.text-body p+p,
+.text-large p+p {
+    margin-top: clamp(0.3em, 0.45em, 0.7em);
 }
 
 .text-large {
-    font-family: var(--font-display);
-    font-size: clamp(4cqi, 3.5cqi, 5.6cqi);
-    line-height: 1.5;
+    font-family: var(--font-body);
+    font-size: clamp(13px, 3.1cqi, 4cqi);
+    line-height: 1.7;
     color: var(--ink);
-    font-style: italic;
+    font-style: normal;
     max-width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 /* ---- Scrapbook paper card: text sits on a taped-down sheet ---- */
 .paper-card {
     position: relative;
-    width: 100%;
-    max-width: 58ch;
+    width: 93%;
+    height: 95%;
+    max-width: 100%;
+    max-height: 95%;
+    box-sizing: border-box;
     margin: 0 auto;
     background:
         linear-gradient(180deg, rgba(255, 255, 255, .5), transparent 30%),
@@ -1135,13 +1156,15 @@ button {
     box-shadow:
         0 1px 2px rgba(7, 20, 34, .08),
         0 6px 18px rgba(7, 20, 34, .1);
-    padding: clamp(3.5cqi, 4.5cqi, 7.5cqi) clamp(3.5cqi, 5cqi, 8cqi);
+    padding: clamp(2.5cqi, 3.2cqi, 4.5cqi) clamp(3cqi, 4cqi, 5.2cqi);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: clamp(2cqi, 2.4cqi, 3.5cqi);
+    justify-content: flex-start;
+    align-items: stretch;
+    text-align: left;
+    gap: 0;
     transform: rotate(-.5deg);
+    overflow: hidden;
 }
 
 .paper-card::before {
@@ -1180,7 +1203,21 @@ button {
     background: linear-gradient(180deg, rgba(255, 217, 224, .9), rgba(255, 194, 209, .8));
 }
 
-.page--hobbies-right .paper-card { transform: rotate(-1.2deg); }
+.page--hobbies-right .paper-card {
+    transform: rotate(-1.2deg);
+    width: 93%;
+    height: 95%;
+    max-height: 95%;
+    margin: 0 auto;
+    padding: clamp(2.5cqi, 3.2cqi, 4.5cqi) clamp(3cqi, 4cqi, 5.2cqi);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    box-sizing: border-box;
+    overflow: hidden;
+    gap: 0;
+}
 .page--hobbies-right .paper-card::before {
     left: 8%;
     transform: translateX(0) rotate(-6deg);
@@ -1198,7 +1235,21 @@ button {
     background: repeating-linear-gradient(90deg, rgba(91, 181, 224, .75) 0 6px, rgba(255, 255, 255, .5) 6px 12px);
 }
 
-.page--collage-right .paper-card { transform: rotate(-.8deg); width: 94%; margin-right: 0; }
+.page--collage-right .paper-card {
+    transform: rotate(-.8deg);
+    width: 93%;
+    height: 95%;
+    max-height: 95%;
+    margin: 0 auto;
+    padding: clamp(2.5cqi, 3.2cqi, 4.5cqi) clamp(3cqi, 4cqi, 5.2cqi);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    box-sizing: border-box;
+    overflow: hidden;
+    gap: 0;
+}
 .page--collage-right .paper-card::before {
     left: auto;
     right: 10%;
@@ -1206,7 +1257,21 @@ button {
     background: linear-gradient(180deg, rgba(200, 168, 255, .85), rgba(155, 109, 214, .7));
 }
 
-.page--gaming-right .paper-card { transform: rotate(1.1deg); }
+.page--gaming-right .paper-card {
+    transform: rotate(1.1deg);
+    width: 93%;
+    height: 95%;
+    max-height: 95%;
+    margin: 0 auto;
+    padding: clamp(2.5cqi, 3.2cqi, 4.5cqi) clamp(3cqi, 4cqi, 5.2cqi);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    box-sizing: border-box;
+    overflow: hidden;
+    gap: 0;
+}
 .page--gaming-right .paper-card::before {
     width: clamp(16cqi, 20cqi, 29cqi);
     transform: translateX(-50%) rotate(-3deg);
@@ -1234,6 +1299,18 @@ button {
 
 .page--wishes-right .paper-card {
     transform: rotate(.9deg);
+    width: 93%;
+    height: 95%;
+    max-height: 95%;
+    margin: 0 auto;
+    padding: clamp(2.5cqi, 3.2cqi, 4.5cqi) clamp(3cqi, 4cqi, 5.2cqi);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    box-sizing: border-box;
+    overflow: hidden;
+    gap: 0;
     background:
         linear-gradient(180deg, rgba(255, 255, 255, .5), transparent 30%),
         radial-gradient(120% 100% at 50% 0%, #fdf6ec 0%, #f3ecec 60%, #eadfe4 100%);
@@ -1304,9 +1381,50 @@ button {
 }
 
 .page--intro-right .page-inner {
+    padding: clamp(2.5cqi, 3.5cqi, 4.8cqi) clamp(3cqi, 4cqi, 5.5cqi);
     justify-content: center;
-    gap: clamp(3.5cqi, 4cqi, 6cqi);
-    padding: clamp(6cqi, 7cqi, 12cqi);
+    align-items: center;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.page--intro-right .paper-card {
+    transform: rotate(.4deg);
+    width: 93%;
+    height: 95%;
+    max-height: 95%;
+    margin: 0 auto;
+    padding: clamp(2.5cqi, 3.2cqi, 4.5cqi) clamp(3cqi, 4cqi, 5.2cqi);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    box-sizing: border-box;
+    overflow: hidden;
+    gap: 0;
+}
+
+.page--intro-right .text-subtitle {
+    margin-bottom: 0.1em;
+    flex-shrink: 0;
+}
+
+.page--intro-right .text-title {
+    margin-bottom: 0.15em;
+    flex-shrink: 0;
+}
+
+.page--intro-right .divider-accent {
+    margin-bottom: 0.5em;
+    flex-shrink: 0;
+}
+
+.page--intro-right .text-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+    font-size: clamp(13px, 3.1cqi, 4cqi);
+    line-height: 1.7;
 }
 
 /* ---- Spread 2: Hobbies Grid ---- */
@@ -1390,9 +1508,46 @@ button {
 }
 
 .page--hobbies-right .page-inner {
+    padding: clamp(2.5cqi, 3.5cqi, 4.8cqi) clamp(3cqi, 4cqi, 5.5cqi);
     justify-content: center;
-    gap: clamp(2.5cqi, 3cqi, 5cqi);
-    padding: clamp(5cqi, 6cqi, 10cqi);
+    align-items: center;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.page--hobbies-right .paper-card {
+    transform: rotate(-1.2deg);
+    width: 93%;
+    height: 95%;
+    max-height: 95%;
+    margin: 0 auto;
+    padding: clamp(2.2cqi, 3cqi, 4.2cqi) clamp(2.8cqi, 3.8cqi, 4.8cqi);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    box-sizing: border-box;
+    overflow: hidden;
+    gap: 0;
+}
+
+.page--hobbies-right .text-title {
+    font-size: clamp(2.2cqi, 2.8cqi, 3.8cqi);
+    flex-shrink: 0;
+    margin-bottom: 0.12em;
+}
+
+.page--hobbies-right .divider-accent {
+    flex-shrink: 0;
+    margin-bottom: 0.45em;
+}
+
+.page--hobbies-right .text-body {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow: hidden;
+    font-size: clamp(2.6cqi, 2.9cqi, 3.8cqi);
+    line-height: 1.68;
 }
 
 /* ---- Spread 3: More of Her World (editorial) ---- */
@@ -4925,24 +5080,64 @@ figcaption::after {
 }
 
 .page--editorial-right .page-inner {
-    padding: 15% 13%;
-    align-items: flex-start;
+    padding: clamp(2.5cqi, 3.5cqi, 4.8cqi) clamp(3cqi, 4cqi, 5.5cqi);
+    justify-content: center;
+    align-items: center;
     text-align: left;
+    box-sizing: border-box;
+    height: 100%;
 }
 
-.page--editorial-right .text-title,
-.page--editorial-right .text-large {
-    max-width: 15ch;
+.page--editorial-right .paper-card {
+    transform: rotate(.8deg);
+    width: 93%;
+    height: 95%;
+    max-height: 95%;
+    margin: 0 auto;
+    padding: clamp(2.2cqi, 3cqi, 4.2cqi) clamp(2.8cqi, 3.8cqi, 4.8cqi);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    box-sizing: border-box;
+    overflow: hidden;
+    gap: 0;
+}
+
+.page--editorial-right .text-title {
+    max-width: 24ch;
+    font-size: clamp(13px, 2.8cqi, 3.8cqi);
+    flex-shrink: 0;
+    margin-bottom: 0.12em;
 }
 
 .page--editorial-right .divider-accent {
-    width: 70%;
+    width: 60%;
     margin-left: 0;
+    flex-shrink: 0;
+    margin-bottom: 0.45em;
+}
+
+.page--editorial-right .text-large {
+    max-width: 100%;
+    flex: 1 1 auto;
+    min-height: 0;
+    display: block;
+    font-style: normal;
+    font-size: clamp(13px, 2.9cqi, 3.8cqi);
+    line-height: 1.68;
+    overflow: hidden;
+    text-align: left;
+}
+
+.page--editorial-right .text-large p {
+    margin: 0;
+    line-height: inherit;
 }
 
 .page--editorial-right .page-corner-img {
-    top: 5%;
-    right: 5%;
+    top: 4%;
+    right: 4%;
     transform: rotate(-8deg);
 }
 
@@ -5696,27 +5891,67 @@ figcaption::after {
 }
 
 .page--cinematic-right .page-inner {
-    padding: 12% 12%;
+    padding: clamp(2.5cqi, 3.5cqi, 4.8cqi) clamp(3cqi, 4cqi, 5.5cqi);
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.page--cinematic-right .paper-card {
+    transform: rotate(-.4deg);
+    border-left: 3px dashed rgba(201, 168, 76, .65);
+    width: 93%;
+    height: 95%;
+    max-height: 95%;
+    margin: 0 auto;
+    padding: clamp(2.2cqi, 3cqi, 4.2cqi) clamp(2.8cqi, 3.8cqi, 4.8cqi);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    box-sizing: border-box;
+    overflow: hidden;
+    gap: 0;
+}
+
+.page--cinematic-right .text-title {
+    font-size: clamp(13px, 2.8cqi, 3.8cqi);
+    flex-shrink: 0;
+    margin-bottom: 0.12em;
+}
+
+.page--cinematic-right .divider-accent {
+    flex-shrink: 0;
+    margin-bottom: 0.45em;
 }
 
 .page--cinematic-right .text-body {
     width: 100%;
+    flex: 1 1 auto;
+    min-height: 0;
+    display: block;
+    font-size: clamp(13px, 2.9cqi, 3.8cqi);
+    line-height: 1.68;
+    overflow: hidden;
 }
 
 .page--cinematic-right .text-body p {
-    padding: 10px 12px;
+    padding: clamp(6px, 1.2cqi, 10px) clamp(8px, 1.6cqi, 12px);
     background: rgba(255, 255, 255, .62);
     border-left: 2px solid var(--coral);
     box-shadow: 2px 3px 8px rgba(7, 20, 34, .06);
     text-align: left;
+    margin: 0;
+    line-height: inherit;
 }
 
 .page--cinematic-right .text-body p:nth-child(2) {
-    transform: translateX(7px) rotate(1deg);
+    transform: translateX(4px) rotate(0.6deg);
 }
 
 .page--cinematic-right .text-body p:nth-child(3) {
-    transform: translateX(-4px) rotate(-1deg);
+    transform: translateX(-3px) rotate(-0.6deg);
 }
 
 .page--cinematic-right .page-corner-img {
