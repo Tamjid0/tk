@@ -174,6 +174,7 @@
     const stage = $("#stage");
     const btnPrev = $("#btnPrev");
     const btnNext = $("#btnNext");
+    const sideArrow = $("#sideArrow");
     const counterEl = $("#counter");
     const progressEl = $("#progressFill");
     const hint = $("#hint");
@@ -1374,6 +1375,13 @@
         progressEl.style.width = (views.length > 1 ? (cursor / (views.length - 1)) * 100 : 0) + "%";
         btnPrev.disabled = cursor === 0;
         btnNext.disabled = cursor === views.length - 1;
+        /* smart arrow: right while a next page exists, left on the final page */
+        if (sideArrow) {
+            const atEnd = btnNext.disabled;
+            sideArrow.classList.toggle("on-left", atEnd);
+            sideArrow.setAttribute("aria-label", atEnd ? "Previous page" : "Next page");
+            if (cursor > 0) sideArrow.classList.remove("virgin");
+        }
     }
 
     function layout() {
@@ -1508,6 +1516,7 @@
     /* ---------- input: buttons, keyboard, swipe/tap ---------- */
     btnPrev.addEventListener("click", () => flip(-1));
     btnNext.addEventListener("click", () => flip(1));
+    if (sideArrow) sideArrow.addEventListener("click", () => flip(sideArrow.classList.contains("on-left") ? -1 : 1));
 
     /* ---------- music toggle ---------- */
     (function initMusicToggle() {

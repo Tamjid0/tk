@@ -4257,6 +4257,85 @@ figcaption::after {
     cursor: default;
 }
 
+/* Smart page-turn arrow: docks right while a next page exists, travels to
+   the left edge on the final page (where only "back" is possible). */
+.side-arrow {
+    position: absolute;
+    top: 50%;
+    left: 88%;
+    transform: translateY(-50%);
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    color: rgba(240, 214, 138, .92);
+    background: rgba(10, 26, 46, .55);
+    border: 1px solid rgba(240, 214, 138, .4);
+    box-shadow: 0 0 18px rgba(240, 214, 138, .18), 0 4px 14px rgba(0, 0, 0, .4);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 6;
+    touch-action: manipulation;
+    transition: left .45s ease, background .3s ease, box-shadow .3s ease;
+}
+
+.side-arrow svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    transition: transform .45s ease;
+}
+
+.side-arrow.on-left {
+    left: 4%;
+}
+
+.side-arrow.on-left svg {
+    transform: rotate(180deg);
+}
+
+.side-arrow:hover {
+    background: rgba(20, 48, 80, .72);
+    box-shadow: 0 0 26px rgba(240, 214, 138, .35), 0 4px 14px rgba(0, 0, 0, .4);
+}
+
+.side-arrow:active {
+    transform: translateY(-50%) scale(.92);
+}
+
+/* inviting nudge until the first page turn */
+.side-arrow.virgin {
+    animation: nudgeR 2.4s ease-in-out infinite;
+}
+
+@keyframes nudgeR {
+    0%, 100% { translate: 0 0; }
+    50% { translate: 7px 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .side-arrow {
+        transition: none;
+    }
+    .side-arrow.virgin {
+        animation: none;
+    }
+}
+
+@media (max-width: 560px) {
+    .side-arrow {
+        width: 40px;
+        height: 40px;
+    }
+    .side-arrow svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
 .counter-wrap {
     display: flex;
     flex-direction: column;
